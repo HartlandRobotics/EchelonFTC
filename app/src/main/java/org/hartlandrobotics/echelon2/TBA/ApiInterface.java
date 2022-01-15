@@ -2,6 +2,7 @@ package org.hartlandrobotics.echelon2.TBA;
 
 import org.hartlandrobotics.echelon2.TBA.models.SyncDistrict;
 import org.hartlandrobotics.echelon2.TBA.models.SyncStatus;
+import org.hartlandrobotics.echelon2.TBA.models.SyncTeam;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface ApiInterface {
     @GET("districts/{year}")
     Call<List<SyncDistrict>> getDistrictsByYear(@Path("year") int year);
 
+    @GET("event/{event_key}/teams")
+    Call<List<SyncTeam>> getTeamsByEvent(@Path("event_key") String eventKey);
 
 }
