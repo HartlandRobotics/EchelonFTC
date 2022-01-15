@@ -50,7 +50,7 @@ public class AdminSettingsProvider {
             settings = jsonReader.readValue(configFile, AdminSettings.class);
         }
         catch( JsonParseException parseException ){
-            Log.e(LOG_TAG, "Invalid Config File");
+            Log.e(LOG_TAG, "Invalid Config File " + parseException.getMessage());
             Toast.makeText(appContext, "Invalid Config File", Toast.LENGTH_LONG).show();
         } catch (JsonMappingException e) {
             Log.e(LOG_TAG, "Could not map config File");

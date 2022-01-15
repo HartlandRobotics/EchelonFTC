@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MaterialButton startScouting;
     private MaterialButton adminSettings;
+    private MaterialButton tbaStatus;
 
     public static void launch(Context context){
         Intent intent = new Intent(context, MainActivity.class);
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         setupStartScoutingButton();
         setupAdminSettingsButton();
+        setupTbaStatusButton();
     }
 
     private void setupStartScoutingButton(){
@@ -32,5 +34,10 @@ public class MainActivity extends AppCompatActivity {
     private void setupAdminSettingsButton(){
         adminSettings = this.findViewById(R.id.main_admin_settings);
         adminSettings.setOnClickListener( view -> AdminSettingsActivity.launch( MainActivity.this ) );
+    }
+
+    private void setupTbaStatusButton(){
+        tbaStatus = this.findViewById(R.id.status);
+        tbaStatus.setOnClickListener(view -> BlueAllianceActivity.launch(MainActivity.this));
     }
 }
