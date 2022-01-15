@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
         District.class,
         Team.class
 
-}, version = 1,
+}, version = 2,
         exportSchema = false
 )
 public abstract class EchelonDatabase extends RoomDatabase {

@@ -2,6 +2,8 @@ package org.hartlandrobotics.echelon2.TBA.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import org.hartlandrobotics.echelon2.database.entities.Team;
+
 public class SyncTeam {
     @JsonProperty("key")
     private String teamKey;
@@ -38,6 +40,12 @@ public class SyncTeam {
     public String getSchoolName() {
         return schoolName;
     }
-    
 
+    public Team toTeam(){
+        Team team = new Team(
+            getTeamKey(), getTeamNumber(), getNickname(), getName(), getSchoolName());
+        return team;
+    }
 }
+
+

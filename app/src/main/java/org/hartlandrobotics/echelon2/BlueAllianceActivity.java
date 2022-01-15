@@ -14,6 +14,7 @@ import org.hartlandrobotics.echelon2.TBA.models.SyncDistrict;
 import org.hartlandrobotics.echelon2.TBA.models.SyncStatus;
 import org.hartlandrobotics.echelon2.TBA.models.SyncTeam;
 import org.hartlandrobotics.echelon2.database.repositories.DistrictRepo;
+import org.hartlandrobotics.echelon2.database.repositories.TeamRepo;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class BlueAllianceActivity extends AppCompatActivity {
     private TextView errorTextDistrict;
 
     private DistrictRepo districtRepo;
+    private TeamRepo teamRepo;
 
     private Button teamButton;
     private TextView errorTextTeam;
@@ -45,6 +47,7 @@ public class BlueAllianceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_blue_alliance);
 
         districtRepo = new DistrictRepo(this.getApplication());
+        teamRepo = new TeamRepo(this.getApplication());
 
 
         errorTextDistrict = findViewById(R.id.errorTextDistricts);
@@ -144,6 +147,9 @@ public class BlueAllianceActivity extends AppCompatActivity {
                             else{
                                 List<SyncTeam> teams = response.body();
                                 errorTextTeam.setText("Got teams " + teams.size());
+                                teams.stream()
+                                        .map(team -> team.toTeam())
+                                        .forEach(team -> teamRepo.upsert(team));
                             }
                         }
                         catch(Exception e){
