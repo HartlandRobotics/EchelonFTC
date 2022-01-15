@@ -12,7 +12,17 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Button"
+        android:text="Blue Alliance Status"
+        tools:layout_editor_absoluteX="239dp"
+        tools:layout_editor_absoluteY="118dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/syncDistricts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/syncButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Blue Alliance Districts"
         tools:layout_editor_absoluteX="239dp"
         tools:layout_editor_absoluteY="118dp" />
 
@@ -22,6 +32,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/errorTextDistricts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/errorText"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

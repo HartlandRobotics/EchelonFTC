@@ -10,7 +10,11 @@ import android.widget.TextView;
 
 import org.hartlandrobotics.echelon2.TBA.Api;
 import org.hartlandrobotics.echelon2.TBA.ApiInterface;
+import org.hartlandrobotics.echelon2.TBA.models.SyncDistrict;
 import org.hartlandrobotics.echelon2.TBA.models.SyncStatus;
+import org.hartlandrobotics.echelon2.database.repositories.DistrictRepo;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,6 +24,11 @@ public class BlueAllianceActivity extends AppCompatActivity {
 
     private Button statusButton;
     private TextView errorTextDisplay;
+
+    private Button districtButton;
+    private TextView errorTextDistrict;
+
+    private DistrictRepo districtRepo;
 
     public static void launch(Context context){
         Intent intent = new Intent(context, BlueAllianceActivity.class);
@@ -31,7 +40,12 @@ public class BlueAllianceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blue_alliance);
 
+        districtRepo = new DistrictRepo(this.getApplication());
+
+
+        errorTextDistrict = findViewById(R.id.errorTextDistricts);
         errorTextDisplay = findViewById(R.id.errorText);
+
 
         statusButton = findViewById(R.id.syncButton);
         statusButton.setOnClickListener((view) -> {
@@ -68,6 +82,44 @@ public class BlueAllianceActivity extends AppCompatActivity {
             }
             catch(Exception ex){
                 errorTextDisplay.setText("Error: " + ex.getMessage());
+            }
+        });
+
+
+        districtButton = findViewById(R.id.syncDistricts);
+        districtButton.setOnClickListener((view) -> {
+            ApiInterface newApi = Api.getApiClient(getApplicationContext());
+
+            try{
+                Call<List<SyncDistrict>> newCall = newApi.getDistrictsByYear(2022);
+                newCall.enqueue(new Callback<List<SyncDistrict>>() {
+                    @Override
+                    public void onResponse(Call<List<SyncDistrict>> call, Response<List<SyncDistrict>> response) {
+                        try{
+                            if(!response.isSuccessful()){
+                                errorTextDistrict.setText("Couldn't pull districts");
+                            }
+                            else{
+                                List<SyncDistrict> districts = response.body();
+                                districts.stream()
+                                        .map(district -> district.toDistrict())
+                                        .forEach(district -> districtRepo.upsert(district));
+                                errorTextDistrict.setText("Got districts " + districts.size());
+                            }
+                        }
+                        catch(Exception e){
+                            errorTextDistrict.setText("Error " + e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<SyncDistrict>> call, Throwable t) {
+                        errorTextDistrict.setText("Couldn't pull districts");
+                    }
+                });
+            }
+            catch(Exception e){
+                errorTextDistrict.setText("Error second catch " + e.getMessage());
             }
         });
 
