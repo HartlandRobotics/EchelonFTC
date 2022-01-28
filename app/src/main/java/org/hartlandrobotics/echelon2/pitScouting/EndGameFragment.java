@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.hartlandrobotics.echelon2.R;
-import org.hartlandrobotics.echelon2.database.entities.PSData;
+import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,10 +32,10 @@ public class EndGameFragment extends Fragment {
         // Required empty public constructor
     }
 
-    PSData data;
+    PitScout data;
 
-    public void setData( PSData data) { this.data = data; }
-    public PSData getData() { return data; }
+    public void setData( PitScout data) { this.data = data; }
+    public PitScout getData() { return data; }
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -70,7 +70,7 @@ public class EndGameFragment extends Fragment {
         // Inflate the layout for this fragment
         View endGameView =  inflater.inflate(R.layout.fragment_end_game, container, false);
         tv = endGameView.findViewById(R.id.ps_end_text);
-        tv.setText(data.getSomeString());
+        //tv.setText(data.getSomeString());
 
         return endGameView;
     }

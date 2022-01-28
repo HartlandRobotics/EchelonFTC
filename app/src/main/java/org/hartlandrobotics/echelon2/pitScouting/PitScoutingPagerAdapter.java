@@ -9,17 +9,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import org.hartlandrobotics.echelon2.database.entities.PSData;
+import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class PitScoutingPagerAdapter extends FragmentStateAdapter {
 
-    private PSData data;
+    private PitScout data;
 
     public PitScoutingPagerAdapter(
-            @NonNull FragmentManager fragmentManager, Lifecycle lifecycle, PSData data)
+            @NonNull FragmentManager fragmentManager, Lifecycle lifecycle, PitScout data)
     {
         super(fragmentManager, lifecycle);
         this.data = data;

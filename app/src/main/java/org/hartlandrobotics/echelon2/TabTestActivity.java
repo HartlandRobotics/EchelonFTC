@@ -11,7 +11,7 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import org.hartlandrobotics.echelon2.database.entities.PSData;
+import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.pitScouting.PitScoutingPagerAdapter;
 
 import java.util.HashMap;
@@ -27,7 +27,7 @@ public class TabTestActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
-    private PSData data;
+    private PitScout data;
 
 
     @Override
@@ -35,7 +35,7 @@ public class TabTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab_test);
 
-        data = new PSData("starting string", 42, false);
+        data = new PitScout();
 
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);

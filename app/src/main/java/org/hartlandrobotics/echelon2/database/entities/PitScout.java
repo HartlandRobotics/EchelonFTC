@@ -3,6 +3,7 @@ package org.hartlandrobotics.echelon2.database.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
@@ -100,6 +101,11 @@ public class PitScout {
     @NonNull
     @ColumnInfo(name = "extra_notes")
     private String extraNotes;
+    
+    @Ignore
+    public PitScout(){
+
+    }
 
     public PitScout(@NonNull String pitScoutKey, @NonNull String eventKey, @NonNull String teamKey, boolean hasBeenSynced, boolean hasAutonomous, boolean helpCreatingAuto, @NonNull String codingLanguage, boolean shootsInAuto, double percentAutoShots, int ballsPickedOrShotInAuto, boolean canShoot, double shootingAccuracy, @NonNull String preferredGoal, boolean canPlayDefense, boolean canRobotHang, int highestHangBar, int hangTime, @NonNull String preferredHangingSpot, int sideSwing, int driverExperience, int operatorExperience, @NonNull String extraNotes) {
         if(StringUtils.isBlank(pitScoutKey)){

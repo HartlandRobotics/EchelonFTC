@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.hartlandrobotics.echelon2.R;
-import org.hartlandrobotics.echelon2.database.entities.PSData;
+import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,10 +22,10 @@ import org.hartlandrobotics.echelon2.database.entities.PSData;
  */
 public class AutoFragment extends Fragment {
 
-    PSData data;
+    PitScout data;
 
-    public void setData( PSData data) { this.data = data; }
-    public PSData getData() { return data; }
+    public void setData( PitScout data) { this.data = data; }
+    public PitScout getData() { return data; }
 
 
     public AutoFragment() {
@@ -54,7 +54,7 @@ public class AutoFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                data.setSomeString( s.toString() );
+                //data.setSomeString( s.toString() );
             }
 
             @Override

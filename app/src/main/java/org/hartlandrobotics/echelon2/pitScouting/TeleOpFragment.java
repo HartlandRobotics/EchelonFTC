@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.hartlandrobotics.echelon2.R;
-import org.hartlandrobotics.echelon2.database.entities.PSData;
+import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,10 +18,10 @@ import org.hartlandrobotics.echelon2.database.entities.PSData;
  */
 public class TeleOpFragment extends Fragment {
 
-    PSData data;
+    PitScout data;
 
-    public void setData( PSData data) { this.data = data; }
-    public PSData getData() { return data; }
+    public void setData( PitScout data) { this.data = data; }
+    public PitScout getData() { return data; }
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
