@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PitScoutEndgameActivity">
+
+    <LinearLayout
+        android:layout_width="599dp"
+        android:layout_height="960dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="End Game"
+            android:textColor="#000000"
+            android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Can your robot hang?"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/radioButton6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Which bars can your robot get to?"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Low"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/radioButton17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Medium" />
+
+        <RadioButton
+            android:id="@+id/radioButton18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="High" />
+
+        <RadioButton
+            android:id="@+id/radioButton19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Traversal" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="How long does it take for your robot to hang on average?"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editTextTextMultiLine5"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#787878"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Which side do you prefer to hang on?"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Left" />
+
+        <RadioButton
+            android:id="@+id/radioButton21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Middle" />
+
+        <RadioButton
+            android:id="@+id/radioButton22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Right" />
+
+        <RadioButton
+            android:id="@+id/radioButton23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Preferance" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="How much does your robot swing side-to-side?"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editTextTextMultiLine7"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="#979696"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Previous Page" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="151dp"
+            android:layout_height="wrap_content"
+            android:text="Next Page" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="3"
+            android:textColor="#000000" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Echelon2</string>
-
+    <string-array name="programming_languages">
+        <item>LabView</item>
+        <item>Java</item>
+        <item>C++</item>
+    </string-array>
     <string-array name ="scouting_years">
         <item>2022</item>
         <item>2023</item>
