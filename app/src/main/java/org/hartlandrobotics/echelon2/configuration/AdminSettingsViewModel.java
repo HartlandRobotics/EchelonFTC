@@ -16,8 +16,8 @@ public class AdminSettingsViewModel extends AdminSettings {
         String prefBlueAllianceApiKey = prefSettings.getBlueAllianceApiKey();
         this.setBlueAllianceApiKey(StringUtils.defaultIfBlank(prefBlueAllianceApiKey, fileSettings.getBlueAllianceApiKey()));
 
-        String prefScoutingYear = prefSettings.getScoutingYear();
-        this.setScoutingYear( StringUtils.isEmpty(prefScoutingYear) ? fileSettings.getScoutingYear() : prefScoutingYear );
+        String prefScoutingSeason = prefSettings.getScoutingSeason();
+        this.setScoutingSeason( StringUtils.isEmpty(prefScoutingSeason) ? fileSettings.getScoutingSeason() : prefScoutingSeason );
     }
 
     public boolean isBlueAllianceApikeySynced(){
@@ -28,10 +28,10 @@ public class AdminSettingsViewModel extends AdminSettings {
         return fileSetting.equals( prefSetting );
     }
 
-    public boolean isScoutingYearSynced(){
+    public boolean isScoutingSeasonSynced(){
         if( fileSettings == null  && prefSettings == null ){ return true; }
-        String fileSetting = fileSettings == null ? StringUtils.EMPTY : fileSettings.getScoutingYear();
-        String prefSetting = prefSettings == null ? StringUtils.EMPTY : prefSettings.getScoutingYear();
+        String fileSetting = fileSettings == null ? StringUtils.EMPTY : fileSettings.getScoutingSeason();
+        String prefSetting = prefSettings == null ? StringUtils.EMPTY : prefSettings.getScoutingSeason();
 
         return fileSetting.equals( prefSetting );
     }

@@ -4,14 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import org.hartlandrobotics.echelon2.configuration.AdminSettings;
 import org.hartlandrobotics.echelon2.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelon2.configuration.AdminSettingsViewModel;
 
@@ -19,8 +19,9 @@ public class AdminSettingsActivity extends AppCompatActivity {
     private static final String LOG_TAG = AdminSettingsActivity.class.getSimpleName();
 
     private TextInputLayout blueAllianceText;
-    private TextInputLayout scoutingYearText;
+    private TextInputLayout scoutingSeasonText;
     private TextInputLayout errorText;
+    private AutoCompleteTextView scoutingSeasonsAutoComplete;
 
     public static void launch(Context context){
         Intent intent = new Intent( context, AdminSettingsActivity.class );
@@ -33,6 +34,7 @@ public class AdminSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_settings);
 
         errorText = this.findViewById(R.id.errorText);
+        scoutingSeasonsAutoComplete = findViewById(R.id.scoutingSeasonDropDown);
 
         AdminSettingsViewModel viewModel = AdminSettingsProvider.getAdminSettings(getApplicationContext());
         if( viewModel == null ){
@@ -41,11 +43,17 @@ public class AdminSettingsActivity extends AppCompatActivity {
             return;
         }
 
+        setupScoutingSeasonDropDown();
         initializeBlueAllianceKey(viewModel);
-        initializeScoutingYear(viewModel);
+        initializeScoutingSeason(viewModel);
 
     }
 
+    public void setupScoutingSeasonDropDown(){
+        String[] scoutingSeasons = getResources().getStringArray(R.array.scouting_years);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.season_dropdown_item, scoutingSeasons);
+        scoutingSeasonsAutoComplete.setAdapter(adapter);
+    }
     public void initializeBlueAllianceKey(AdminSettingsViewModel vm){
         blueAllianceText = this.findViewById(R.id.blueAllianceApiText);
         setDisplayText( blueAllianceText, vm.getBlueAllianceApiKey() );
@@ -54,11 +62,11 @@ public class AdminSettingsActivity extends AppCompatActivity {
         }
     }
 
-    public void initializeScoutingYear(AdminSettingsViewModel vm){
-        scoutingYearText = this.findViewById(R.id.scoutingYearText);
-        setDisplayText( scoutingYearText, vm.getScoutingYear() );
-        if( !vm.isScoutingYearSynced() ){
-            setOutOfSync(scoutingYearText, vm.getFileSettings().getScoutingYear());
+    public void initializeScoutingSeason(AdminSettingsViewModel vm){
+        scoutingSeasonText = this.findViewById(R.id.scoutingSeasonText);
+        setDisplayText( scoutingSeasonText, vm.getScoutingSeason() );
+        if( !vm.isScoutingSeasonSynced() ){
+            setOutOfSync(scoutingSeasonText, vm.getFileSettings().getScoutingSeason());
         }
     }
 

@@ -4,12 +4,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class AdminSettings {
     private String blueAllianceApiKey;
-    private String scoutingYear;
+    private String scoutingSeason;
 
     public AdminSettings(){};
-    public AdminSettings(String blueAllianceApiKey, String scoutingYear) {
+    public AdminSettings(String blueAllianceApiKey, String scoutingSeason) {
         this.blueAllianceApiKey = defaultString(blueAllianceApiKey);
-        this.scoutingYear = defaultString(scoutingYear);
+        this.scoutingSeason = defaultString(scoutingSeason);
     }
 
     public String getBlueAllianceApiKey() { return defaultString(blueAllianceApiKey); }
@@ -17,9 +17,9 @@ public class AdminSettings {
         this.blueAllianceApiKey = defaultString(blueAllianceApiKey);
     }
 
-    public String getScoutingYear(){ return scoutingYear; }
-    public void setScoutingYear(String scoutingYear){
-        this.scoutingYear = defaultString( scoutingYear );
+    public String getScoutingSeason(){ return scoutingSeason; }
+    public void setScoutingSeason(String scoutingSeason){
+        this.scoutingSeason = defaultString(scoutingSeason);
     }
 
     private String defaultString( String source ){

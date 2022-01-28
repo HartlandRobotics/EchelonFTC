@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Echelon2</string>
+
+    <string-array name ="scouting_years">
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+    </string-array>
 </resources>

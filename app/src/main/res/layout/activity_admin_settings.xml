@@ -24,22 +24,28 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/scoutingYearText"
+        android:id="@+id/scoutingSeasonText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:hint="Scouting Year"
+        android:hint="Scouting Season"
         app:layout_constraintTop_toBottomOf="@id/blueAllianceApiText"
 
         >
+        <AutoCompleteTextView
+            android:id="@+id/scoutingSeasonDropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            />
 
-        <com.google.android.material.textfield.TextInputEditText
+       <!-- <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
 
             android:text="2022"
-            />
+            />-->
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
