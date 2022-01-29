@@ -4,7 +4,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -41,21 +40,21 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
         Fragment fragment = null;
         if (position == 0) {
             Log.e(TAG,"creating new Auto Fragment");
-            AutoFragment autoFragment = new AutoFragment();
-            autoFragment.setData(data);
-            fragment = autoFragment;
+            PitScoutAutoFragment pitScoutAutoFragment = new PitScoutAutoFragment();
+            pitScoutAutoFragment.setData(data);
+            fragment = pitScoutAutoFragment;
         }
         else if (position == 1) {
             Log.e(TAG,"creating new TeleOp Fragment");
-            TeleOpFragment teleOpFragment = new TeleOpFragment();
-            teleOpFragment.setData(data);
-            fragment = teleOpFragment;
+            PitScoutTeleOpFragment pitScoutTeleOpFragment = new PitScoutTeleOpFragment();
+            pitScoutTeleOpFragment.setData(data);
+            fragment = pitScoutTeleOpFragment;
         }
         else if (position == 2) {
             Log.e(TAG,"creating new EndGame Fragment");
-            EndGameFragment endGameFragment = new EndGameFragment();
-            endGameFragment.setData(data);
-            fragment = endGameFragment;
+            PitScoutEndGameFragment pitScoutEndGameFragment = new PitScoutEndGameFragment();
+            pitScoutEndGameFragment.setData(data);
+            fragment = pitScoutEndGameFragment;
         }
 
         return fragment;

@@ -14,10 +14,10 @@ import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link EndGameFragment#newInstance} factory method to
+ * Use the {@link PitScoutEndGameFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EndGameFragment extends Fragment {
+public class PitScoutEndGameFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +28,7 @@ public class EndGameFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public EndGameFragment() {
+    public PitScoutEndGameFragment() {
         // Required empty public constructor
     }
 
@@ -45,8 +45,8 @@ public class EndGameFragment extends Fragment {
      * @return A new instance of fragment EndGameFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EndGameFragment newInstance(String param1, String param2) {
-        EndGameFragment fragment = new EndGameFragment();
+    public static PitScoutEndGameFragment newInstance(String param1, String param2) {
+        PitScoutEndGameFragment fragment = new PitScoutEndGameFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,7 +68,7 @@ public class EndGameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View endGameView =  inflater.inflate(R.layout.fragment_end_game, container, false);
+        View endGameView =  inflater.inflate(R.layout.fragment_pitscout_end_game, container, false);
         tv = endGameView.findViewById(R.id.ps_end_text);
         //tv.setText(data.getSomeString());
 
