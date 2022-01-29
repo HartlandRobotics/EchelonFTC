@@ -20,7 +20,7 @@
                 android:id="@+id/hasAutoGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checkedButton="@id/hasAutoYes"
+                android:checkedButton="@id/hasAutoNo"
                 android:orientation="horizontal">
 
                 <com.google.android.material.textview.MaterialTextView
@@ -116,18 +116,21 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/shootingPercentage"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="What percent of the time does your robot make a shot?"
-            />
+            android:hint="What percent of the time does your robot make a shot?"
+            >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0%"
+            android:text="0"
             android:inputType="number"
             />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
     </LinearLayout>

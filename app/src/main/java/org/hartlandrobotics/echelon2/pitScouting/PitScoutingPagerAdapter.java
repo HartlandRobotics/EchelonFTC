@@ -31,6 +31,7 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
             titleByPosition.put(0,"Auto");
             titleByPosition.put(1,"Tele Op");
             titleByPosition.put(2, "End  Game");
+            titleByPosition.put(3, "Team");
         }
         return titleByPosition.get(position);
     }
@@ -56,12 +57,18 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
             pitScoutEndGameFragment.setData(data);
             fragment = pitScoutEndGameFragment;
         }
+        else if (position == 3) {
+            Log.e(TAG, "creating new Team Fragment");
+            PitScoutTeam pitScoutTeam = new PitScoutTeam();
+            pitScoutTeam.setData(data);
+            fragment = pitScoutTeam;
+        }
 
         return fragment;
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }

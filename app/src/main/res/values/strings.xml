@@ -5,10 +5,12 @@
         <item>Java</item>
         <item>C++</item>
     </string-array>
-    <string-array name ="scouting_years">
+    <string-array name="scouting_years">
         <item>2022</item>
         <item>2023</item>
         <item>2024</item>
         <item>2025</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

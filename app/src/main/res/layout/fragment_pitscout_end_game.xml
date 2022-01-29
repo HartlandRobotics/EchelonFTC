@@ -3,19 +3,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context=".pitScouting.PitScoutEndGameFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/ps_end_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="End Game Stuff here" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/hangTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="How many seconds does it take to hang?">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/hangPreference"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/hangPreferenceNo"
+            android:orientation="horizontal">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hanging preference?"
+            />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/hangPreferenceLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Left" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/hangPreferenceRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Right" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/hangPreferenceCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Center" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/hangPreferenceNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="None" />
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/robotSwing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="How many inches does your robot swing side to side?">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 </LinearLayout>
