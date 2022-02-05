@@ -9,8 +9,11 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.hartlandrobotics.echelon2.TBA.TBAActivity;
+import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
 public class MainActivity extends AppCompatActivity {
+
+    private BlueAllianceStatus status;
 
     private MaterialButton startScouting;
     private MaterialButton pitScouting;
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        status= new BlueAllianceStatus(getApplicationContext());
 
         setupStartScoutingButton();
         setupPitScoutingButton();
@@ -64,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
         TextInputLayout eventLayout = findViewById(R.id.event_status_layout);
         eventLayout.getEditText().setText(status.getEventKey());
+
+    }
+
+    private void setupStatus(){
 
     }
 }
