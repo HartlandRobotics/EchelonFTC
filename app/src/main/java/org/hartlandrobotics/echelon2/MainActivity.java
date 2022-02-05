@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.hartlandrobotics.echelon2.TBA.TBAActivity;
 
@@ -31,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setupPitScoutingButton();
         setupAdminSettingsButton();
         setupTbaStatusButton();
-        setupTabTestButton();
+
+        setupStatus();
     }
 
     private void setupStartScoutingButton(){
@@ -39,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupPitScoutingButton(){
-        pitScouting = findViewById(R.id.pitScoutingButton);
-        pitScouting.setOnClickListener( v -> PitScoutAutoActivity.launch(MainActivity.this ));
+        pitScouting = findViewById(R.id.pit_scout_button);
+        pitScouting.setOnClickListener( v -> TabTestActivity.launch(MainActivity.this ));
     }
 
     private void setupAdminSettingsButton(){
@@ -53,8 +55,15 @@ public class MainActivity extends AppCompatActivity {
         tbaStatus.setOnClickListener(view -> TBAActivity.launch(MainActivity.this));
     }
 
-    private void setupTabTestButton(){
-        tabTest = this.findViewById(R.id.tabtest);
-        tabTest.setOnClickListener(view -> TabTestActivity.launch(MainActivity.this) );
+    private void setupStatus(){
+        TextInputLayout seasonLayout = findViewById(R.id.season_status_layout);
+        seasonLayout.getEditText().setText(status.getSeason());
+
+        TextInputLayout districtLayout = findViewById(R.id.district_status_layout);
+        districtLayout.getEditText().setText(status.getDistrictKey());
+
+        TextInputLayout eventLayout = findViewById(R.id.event_status_layout);
+        eventLayout.getEditText().setText(status.getEventKey());
+
     }
 }
