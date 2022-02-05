@@ -8,8 +8,11 @@ import android.os.Bundle;
 import com.google.android.material.button.MaterialButton;
 
 import org.hartlandrobotics.echelon2.TBA.TBAActivity;
+import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
 public class MainActivity extends AppCompatActivity {
+
+    private BlueAllianceStatus status;
 
     private MaterialButton startScouting;
     private MaterialButton pitScouting;
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        status= new BlueAllianceStatus(getApplicationContext());
 
         setupStartScoutingButton();
         setupPitScoutingButton();
@@ -56,5 +61,9 @@ public class MainActivity extends AppCompatActivity {
     private void setupTabTestButton(){
         tabTest = this.findViewById(R.id.tabtest);
         tabTest.setOnClickListener(view -> TabTestActivity.launch(MainActivity.this) );
+    }
+
+    private void setupStatus(){
+
     }
 }

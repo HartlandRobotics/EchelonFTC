@@ -12,23 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Scouting"
-        app:layout_constraintBottom_toTopOf="@id/pitScoutingButton"
+        app:layout_constraintBottom_toTopOf="@id/main_admin_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
         />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/pitScoutingButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pit Scouting"
 
-        app:layout_constraintTop_toBottomOf="@id/main_admin_start_scouting"
-        app:layout_constraintBottom_toTopOf="@id/main_admin_settings"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/main_admin_settings"
@@ -36,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="Admin Settings"
 
-        app:layout_constraintTop_toBottomOf="@id/pitScoutingButton"
+        app:layout_constraintTop_toBottomOf="@id/main_admin_start_scouting"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tba_button"
@@ -50,18 +40,75 @@
         app:layout_constraintTop_toBottomOf="@id/main_admin_settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tabtest"
+        app:layout_constraintBottom_toTopOf="@id/pit_scout_button"
         />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tabtest"
+        android:id="@+id/pit_scout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tab Test"
+        android:text="Pit Scouting"
         app:layout_constraintTop_toBottomOf="@id/tba_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/status"
         />
+
+    <LinearLayout
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/season_status_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".25"
+            android:hint="Season"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/districtStatusLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".25"
+            android:hint="District">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               >
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/event_status_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".25"
+            android:hint="Event">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

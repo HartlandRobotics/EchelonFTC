@@ -1,5 +1,6 @@
 package org.hartlandrobotics.echelon2.TBA.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.TBA.Api;
 import org.hartlandrobotics.echelon2.TBA.ApiInterface;
+import org.hartlandrobotics.echelon2.TBA.TBAActivity;
 import org.hartlandrobotics.echelon2.TBA.models.SyncDistrict;
 import org.hartlandrobotics.echelon2.database.entities.District;
 import org.hartlandrobotics.echelon2.database.repositories.DistrictRepo;
@@ -132,6 +134,9 @@ public class DistrictsFragment extends Fragment {
             districtNameLayout.setEndIconOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    TBAActivity a = (TBAActivity)getActivity();
+                    a.setDistrictKey(district.getDistrictKey());
+
                     isChecked = !isChecked;
                     if(isChecked){
                         districtNameLayout.setEndIconDrawable(android.R.drawable.checkbox_on_background);
