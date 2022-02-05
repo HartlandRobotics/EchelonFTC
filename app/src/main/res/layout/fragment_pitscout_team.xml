@@ -15,7 +15,8 @@
             android:id="@+id/seasonNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How many seasons have your team been apart of?">
+            android:hint="How many seasons have your team been apart of?"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -29,7 +30,8 @@
             android:id="@+id/competitionsThisSeason"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="What competitions have you been in this season?">
+            android:hint="What competitions have you been in this season?"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -43,7 +45,8 @@
             android:id="@+id/driverSeasonNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How many seasons has your driver been in?">
+            android:hint="How many seasons has your driver been in?"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -57,7 +60,8 @@
             android:id="@+id/operatorSeasonNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How many seasons has your operator been in?">
+            android:hint="How many seasons has your operator been in?"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -71,7 +75,8 @@
             android:id="@+id/humanShotAccuracy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How accurate is your human player at making shots?">
+            android:hint="How accurate is your human player at making shots?"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

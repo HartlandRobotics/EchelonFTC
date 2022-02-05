@@ -2,7 +2,6 @@ package org.hartlandrobotics.echelon2;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
@@ -15,16 +14,13 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
-import org.hartlandrobotics.echelon2.database.entities.Team;
 import org.hartlandrobotics.echelon2.models.TeamViewModel;
 import org.hartlandrobotics.echelon2.pitScouting.PitScoutingPagerAdapter;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-public class TabTestActivity extends AppCompatActivity {
+public class PitScoutActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager;
     PitScoutingPagerAdapter viewPagerAdapter;
@@ -34,7 +30,7 @@ public class TabTestActivity extends AppCompatActivity {
     List<String> teamNumbers;
 
     public static void launch(Context context){
-        Intent intent = new Intent( context, TabTestActivity.class );
+        Intent intent = new Intent( context, PitScoutActivity.class );
         context.startActivity(intent);
     }
 
@@ -44,7 +40,7 @@ public class TabTestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tab_test);
+        setContentView(R.layout.activity_pit_scout);
 
         teamNumberAutoComplete = findViewById(R.id.teamSelectionAutoComplete);
 

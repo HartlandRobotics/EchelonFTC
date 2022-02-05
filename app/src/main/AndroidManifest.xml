@@ -19,7 +19,7 @@
         android:theme="@style/Theme.Echelon2">
         <activity
             android:screenOrientation="landscape"
-            android:name=".TabTestActivity"
+            android:name=".PitScoutActivity"
             android:exported="false" />
         <activity
             android:screenOrientation="landscape"
@@ -33,18 +33,6 @@
             android:screenOrientation="landscape"
             android:name=".TBA.TBAActivity"
             android:exported="true"/>
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".PitScoutEndgameActivity"
-            android:exported="false" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".PitScoutTeleopActivity"
-            android:exported="false" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".PitScoutAutoActivity"
-            android:exported="false" />
         <activity
             android:screenOrientation="landscape"
             android:name=".BlueAllianceActivity"

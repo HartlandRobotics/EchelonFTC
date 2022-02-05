@@ -15,7 +15,8 @@
             android:id="@+id/hangTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How many seconds does it take to hang?">
+            android:hint="How many seconds does it take to hang?"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -68,7 +69,8 @@
             android:id="@+id/robotSwing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How many inches does your robot swing side to side?">
+            android:hint="How many inches does your robot swing side to side?"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

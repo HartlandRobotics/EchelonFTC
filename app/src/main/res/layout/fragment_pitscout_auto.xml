@@ -104,7 +104,9 @@
             android:id="@+id/autoBallCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How much cargo do you shoot?">
+            android:hint="How much cargo do you shoot?"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -121,6 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="What percent of the time does your robot make a shot?"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
 
         <com.google.android.material.textfield.TextInputEditText

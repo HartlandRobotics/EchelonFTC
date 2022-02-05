@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupPitScoutingButton(){
         pitScouting = findViewById(R.id.pit_scout_button);
-        pitScouting.setOnClickListener( v -> TabTestActivity.launch(MainActivity.this ));
+        pitScouting.setOnClickListener( v -> PitScoutActivity.launch(MainActivity.this ));
     }
 
     private void setupAdminSettingsButton(){

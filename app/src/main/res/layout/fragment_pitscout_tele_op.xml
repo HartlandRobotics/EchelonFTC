@@ -41,7 +41,8 @@
             android:id="@+id/shootingAccuracy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How many shots do you make out of 10?">
+            android:hint="How many shots do you make out of 10?"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
