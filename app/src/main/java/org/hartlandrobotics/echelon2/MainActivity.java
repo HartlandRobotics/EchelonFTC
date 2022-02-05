@@ -71,8 +71,4 @@ public class MainActivity extends AppCompatActivity {
         eventLayout.getEditText().setText(status.getEventKey());
 
     }
-
-    private void setupStatus(){
-
-    }
 }
