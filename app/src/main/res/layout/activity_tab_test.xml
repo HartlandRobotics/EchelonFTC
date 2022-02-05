@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".TabTestActivity">
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/teamSelection"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select Team"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingTop="2dp"
+        >
+
+        <AutoCompleteTextView
+            android:id="@+id/teamSelectionAutoComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
@@ -16,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/teamSelection"
         app:layout_constraintVertical_bias="0.0"
         app:tabIndicatorColor="@color/primaryTextColor"
         app:tabTextColor="@color/primaryTextColor"></com.google.android.material.tabs.TabLayout>

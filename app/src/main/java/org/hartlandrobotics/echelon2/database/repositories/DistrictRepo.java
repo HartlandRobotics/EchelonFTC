@@ -26,4 +26,10 @@ public class DistrictRepo {
             districtDao.upsert(district);
         });
     }
+
+    public void upsert(List<District> districts){
+        for( District d : districts){
+            upsert(d);
+        }
+    }
 }

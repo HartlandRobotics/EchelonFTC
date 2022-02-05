@@ -31,4 +31,10 @@ public abstract class DistrictDao {
             update(district);
         }
     }
+
+    public void upsert(List<District> districts){
+        for( District d : districts ){
+            upsert(d);
+        }
+    }
 }

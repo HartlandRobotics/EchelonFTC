@@ -17,14 +17,21 @@ public class TeamRepo {
     public TeamRepo(Application application){
         EchelonDatabase db = EchelonDatabase.getDatabase(application);
         teamDao = db.teamDao();
-        allTeams = teamDao.getTeams();
     }
 
-    public LiveData<List<Team>> getAllTeams(){return allTeams;}
+    public LiveData<List<Team>> getAllTeams(){
+        return teamDao.getTeams();
+    }
 
     public void upsert(Team team){
         EchelonDatabase.databaseWriteExecutor.execute(() ->{
             teamDao.upsert(team);
         });
+    }
+
+    public void upsert(List<Team> teams){
+        for(Team team : teams){
+            upsert(team);
+        }
     }
 }

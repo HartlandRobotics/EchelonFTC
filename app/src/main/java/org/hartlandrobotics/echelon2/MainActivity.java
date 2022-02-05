@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.android.material.button.MaterialButton;
+
+import org.hartlandrobotics.echelon2.TBA.TBAActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupTbaStatusButton(){
-        tbaStatus = this.findViewById(R.id.status);
-        tbaStatus.setOnClickListener(view -> BlueAllianceActivity.launch(MainActivity.this));
+        tbaStatus = this.findViewById(R.id.tba_button);
+        tbaStatus.setOnClickListener(view -> TBAActivity.launch(MainActivity.this));
     }
 
     private void setupTabTestButton(){

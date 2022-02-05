@@ -28,7 +28,7 @@ import java.util.concurrent.Executors;
         PitScout.class,
         Season.class
 
-}, version = 3,
+}, version = 4,
         exportSchema = false
 )
 public abstract class EchelonDatabase extends RoomDatabase {
@@ -65,11 +65,13 @@ public abstract class EchelonDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
 
-            Season s1 = new Season("Rapid React", 2022 );
-            Season s2 = new Season("Infinite Recharge", 2020);
-            SeasonDao sd = _instance.seasonDao();
-            sd.insert(s1);
-            sd.insert(s2);
+            databaseWriteExecutor.execute(() -> {
+                Season s1 = new Season("Rapid React", 2022);
+                Season s2 = new Season("Infinite Recharge", 2020);
+                SeasonDao sd = _instance.seasonDao();
+                sd.insert(s1);
+                sd.insert(s2);
+            });
         }
 
         @Override
