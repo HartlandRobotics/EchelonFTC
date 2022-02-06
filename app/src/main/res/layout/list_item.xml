@@ -11,7 +11,7 @@
         android:id="@+id/textview_specific"
         android:layout_height="wrap_content"
         android:layout_width = "match_parent"
-        android:enabled="false"
+        android:inputType="none"
         android:text="TextView"
         xmlns:android="http://schemas.android.com/apk/res/android" />
 </com.google.android.material.textfield.TextInputLayout>

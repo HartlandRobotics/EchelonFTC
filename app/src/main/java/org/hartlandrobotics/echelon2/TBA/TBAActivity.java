@@ -23,15 +23,12 @@ import java.util.List;
 
 public class TBAActivity extends AppCompatActivity {
     BlueAllianceStatus tbaStatus;
+
     TabLayout tabLayout;
     ViewPager2 viewPager;
     TBAPagerAdapter tbaPagerAdapter;
 
     TextInputLayout districtStatusLayout;
-
-
-    DistrictRepo districtRepo;
-
 
     public static void launch(Context context){
         Intent intent = new Intent(context, TBAActivity.class);
@@ -57,6 +54,10 @@ public class TBAActivity extends AppCompatActivity {
         districtStatusLayout = findViewById(R.id.districtStatusLayout);
         setDistrictStatus( tbaStatus.getDistrictKey() );
 
+    }
+
+    private void checkOnlineStatus(){
+        ApiInterface newApi = Api.getApiClient(getApplication());
     }
     private void setDistrictStatus( String districtKey ){
         districtStatusLayout.getEditText().setText(districtKey);

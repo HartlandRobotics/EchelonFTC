@@ -11,12 +11,14 @@ public class BlueAllianceStatus {
     private final static String TAG = "BlueAllianceStatus";
 
     private final static String SEASON_KEY = "SeasonKey";
+    private final static String YEAR_KEY = "YearKey";
     private final static String DISTRICT_KEY = "DistrictKey";
     private final static String EVENT_KEY = "EventKey";
 
     private Context appContext;
     private boolean online;
     private String season;
+    private String year;
     private String districtKey;
     private String eventKey;
 
@@ -24,8 +26,10 @@ public class BlueAllianceStatus {
             Context appContext
     ){
         if( appContext == null){
-
+            Log.e(TAG, "appContext must be provided to BlueAllianceStatus");
+            throw new IllegalArgumentException("appContext cannot be null");
         }
+
         this.appContext = appContext;
         this.online = false;
         loadSettingsFromPrefs();
@@ -40,6 +44,12 @@ public class BlueAllianceStatus {
     public void setSeason(String season){
         this.season = season;
         setPreferenceValue(SEASON_KEY, season);
+    }
+
+    public String getYear(){ return year; };
+    public void setYear(String year){
+        this.year = year;
+        setPreferenceValue(YEAR_KEY, year);
     }
 
     public String getDistrictKey() { return districtKey; }
@@ -58,6 +68,7 @@ public class BlueAllianceStatus {
         Log.i(TAG, "Loading BlueAllianceStatus from preferences");
 
         this.season = getSharedPreferences().getString(SEASON_KEY, StringUtils.EMPTY);
+        this.year = getSharedPreferences().getString( YEAR_KEY, StringUtils.EMPTY);
         this.districtKey = getSharedPreferences().getString(DISTRICT_KEY, StringUtils.EMPTY);
         this.eventKey = getSharedPreferences().getString(EVENT_KEY, StringUtils.EMPTY );
     }
