@@ -29,16 +29,13 @@ import retrofit2.Response;
 
 public class TBAActivity extends AppCompatActivity {
     BlueAllianceStatus tbaStatus;
+
     TabLayout tabLayout;
     ViewPager2 viewPager;
     TBAPagerAdapter tbaPagerAdapter;
 
     TextInputLayout onlineStatusLayout;
     TextInputLayout districtStatusLayout;
-
-
-    DistrictRepo districtRepo;
-
 
     public static void launch(Context context){
         Intent intent = new Intent(context, TBAActivity.class);
@@ -93,6 +90,10 @@ public class TBAActivity extends AppCompatActivity {
     private void setOnlineStatus( boolean isOnline ){
         onlineStatusLayout.getEditText().setText( String.valueOf(isOnline) );
         tbaStatus.setOnline(isOnline);
+    }
+
+    private void checkOnlineStatus(){
+        ApiInterface newApi = Api.getApiClient(getApplication());
     }
 
     private void setDistrictStatus( String districtKey ){
