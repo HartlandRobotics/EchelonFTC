@@ -11,14 +11,20 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.R;
 
 import org.hartlandrobotics.echelon2.TBA.fragments.DistrictsFragment;
+import org.hartlandrobotics.echelon2.TBA.models.SyncStatus;
 import org.hartlandrobotics.echelon2.database.entities.District;
 import org.hartlandrobotics.echelon2.database.repositories.DistrictRepo;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class TBAActivity extends AppCompatActivity {
@@ -27,6 +33,7 @@ public class TBAActivity extends AppCompatActivity {
     ViewPager2 viewPager;
     TBAPagerAdapter tbaPagerAdapter;
 
+    TextInputLayout onlineStatusLayout;
     TextInputLayout districtStatusLayout;
 
 
@@ -57,7 +64,37 @@ public class TBAActivity extends AppCompatActivity {
         districtStatusLayout = findViewById(R.id.districtStatusLayout);
         setDistrictStatus( tbaStatus.getDistrictKey() );
 
+        onlineStatusLayout = findViewById(R.id.onlineStatusLayout);
+        onlineStatusLayout.getEditText().setText(StringUtils.EMPTY);
+        checkOnlineStatus();
     }
+
+    private void checkOnlineStatus(){
+        ApiInterface newApi = Api.getApiClient(getApplication());
+        try {
+            Call<SyncStatus> statusCall = newApi.getStatus();
+            statusCall.enqueue(new Callback<SyncStatus>() {
+                @Override
+                public void onResponse(Call<SyncStatus> call, Response<SyncStatus> response) {
+                    setOnlineStatus(response.isSuccessful());
+                }
+
+                @Override
+                public void onFailure(Call<SyncStatus> call, Throwable t) {
+                    setOnlineStatus(false);
+                }
+            });
+        }
+        catch( Exception e){
+            setOnlineStatus(false);
+        }
+    }
+
+    private void setOnlineStatus( boolean isOnline ){
+        onlineStatusLayout.getEditText().setText( String.valueOf(isOnline) );
+        tbaStatus.setOnline(isOnline);
+    }
+
     private void setDistrictStatus( String districtKey ){
         districtStatusLayout.getEditText().setText(districtKey);
     }
