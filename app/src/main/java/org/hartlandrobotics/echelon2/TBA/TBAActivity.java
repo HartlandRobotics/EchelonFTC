@@ -92,10 +92,6 @@ public class TBAActivity extends AppCompatActivity {
         tbaStatus.setOnline(isOnline);
     }
 
-    private void checkOnlineStatus(){
-        ApiInterface newApi = Api.getApiClient(getApplication());
-    }
-
     private void setDistrictStatus( String districtKey ){
         districtStatusLayout.getEditText().setText(districtKey);
     }
