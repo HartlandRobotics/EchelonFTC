@@ -100,7 +100,4 @@ public class TBAActivity extends AppCompatActivity {
         setDistrictStatus( districtKey );
         tbaStatus.setDistrictKey(districtKey);
     }
-    public String getDistrictKey(){
-        return tbaStatus.getDistrictKey();
-    }
 }

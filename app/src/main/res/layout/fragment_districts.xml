@@ -15,6 +15,7 @@
         android:text="Fetch Districts"
          />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/district_recycler"
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
         app:layout_constraintBottom_toTopOf="@id/errorTextDisplay"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/list_item" />
+        tools:listitem="@layout/list_item_district" />
 
     <TextView
         android:id="@+id/errorTextDisplay"

@@ -33,7 +33,10 @@ public class DistrictListViewModel {
         return year;
     }
 
-    public boolean isSelected() {
+    public boolean getIsSelected() {
         return isSelected;
+    }
+    public void setIsSelected( boolean isSelected ){
+        this.isSelected = isSelected;
     }
 }
