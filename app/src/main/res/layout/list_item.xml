@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:text="TextView"
     app:endIconMode="custom"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.google.android.material.textfield.TextInputEditText
