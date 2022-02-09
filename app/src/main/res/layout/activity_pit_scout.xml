@@ -41,10 +41,19 @@
         app:tabIndicatorColor="@color/primaryTextColor"
         app:tabTextColor="@color/primaryTextColor"></com.google.android.material.tabs.TabLayout>
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/select_team_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        android:text="Select a team to continue"/>
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="500dp"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 

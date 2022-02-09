@@ -7,15 +7,27 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.adapter.FragmentViewHolder;
 
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PitScoutingPagerAdapter extends FragmentStateAdapter {
 
     private PitScout data;
+
+    private static final int AUTO_POSITION = 0;
+    private static final int TELEOP_POSITION = 1;
+    private static final int ENDGAME_POSITION = 2;
+    private static final int TEAM_POSITION = 3;
+
+    private PitScoutAutoFragment autoFragment;
+    private PitScoutTeleOpFragment teleOpFragment;
+    private PitScoutEndGameFragment endGameFragment;
+    private PitScoutTeamFragment teamFragment;
 
     public PitScoutingPagerAdapter(
             @NonNull FragmentManager fragmentManager, Lifecycle lifecycle, PitScout data)
@@ -35,36 +47,40 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
         }
         return titleByPosition.get(position);
     }
+
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        Fragment fragment = null;
-        if (position == 0) {
-            Log.e(TAG,"creating new Auto Fragment");
-            PitScoutAutoFragment pitScoutAutoFragment = new PitScoutAutoFragment();
-            pitScoutAutoFragment.setData(data);
-            fragment = pitScoutAutoFragment;
+        switch (position){
+            case AUTO_POSITION:
+                Log.i(TAG,"creating new Auto Fragment");
+                autoFragment = new PitScoutAutoFragment();
+                autoFragment.setData(data);
+                return autoFragment;
+            case TELEOP_POSITION:
+                Log.i(TAG,"creating new TeleOp Fragment");
+                teleOpFragment = new PitScoutTeleOpFragment();
+                teleOpFragment.setData(data);
+                return teleOpFragment;
+            case ENDGAME_POSITION:
+                Log.i(TAG,"creating new EndGame Fragment");
+                endGameFragment = new PitScoutEndGameFragment();
+                endGameFragment.setData(data);
+                return endGameFragment;
+            case TEAM_POSITION:
+                Log.i(TAG, "creating new Team Fragment");
+                teamFragment = new PitScoutTeamFragment();
+                teamFragment.setData(data);
+                return teamFragment;
+            default:
+                Log.e(TAG, "Invalid tab selected for pit scout tab layout");
+                return null;
         }
-        else if (position == 1) {
-            Log.e(TAG,"creating new TeleOp Fragment");
-            PitScoutTeleOpFragment pitScoutTeleOpFragment = new PitScoutTeleOpFragment();
-            pitScoutTeleOpFragment.setData(data);
-            fragment = pitScoutTeleOpFragment;
-        }
-        else if (position == 2) {
-            Log.e(TAG,"creating new EndGame Fragment");
-            PitScoutEndGameFragment pitScoutEndGameFragment = new PitScoutEndGameFragment();
-            pitScoutEndGameFragment.setData(data);
-            fragment = pitScoutEndGameFragment;
-        }
-        else if (position == 3) {
-            Log.e(TAG, "creating new Team Fragment");
-            PitScoutTeam pitScoutTeam = new PitScoutTeam();
-            pitScoutTeam.setData(data);
-            fragment = pitScoutTeam;
-        }
+    }
 
-        return fragment;
+    @Override
+    public void onBindViewHolder(@NonNull FragmentViewHolder holder, int position, @NonNull List<Object> payloads) {
+        super.onBindViewHolder(holder, position, payloads);
     }
 
     @Override

@@ -14,10 +14,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textview.MaterialTextView;
 
+import org.hartlandrobotics.echelon2.PitScoutActivity;
 import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
@@ -60,6 +63,8 @@ public class PitScoutAutoFragment extends Fragment {
         setupHasAuto( view );
         setupNoAuto( view );
 
+        // some comment for a commit
+
         setVisibility();
 
         return view;
@@ -79,44 +84,27 @@ public class PitScoutAutoFragment extends Fragment {
         });
 
         shotCount.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 int ballCount = Integer.parseInt(s.toString());
                 data.setBallsPickedOrShotInAuto(ballCount);
-
             }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            @Override public void afterTextChanged(Editable s) { }
         });
 
         shootingPercentage.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-            }
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 int shootingPercentage = Integer.parseInt(s.toString());
                 data.setPercentAutoShots(shootingPercentage);
-
             }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            @Override public void afterTextChanged(Editable s) { }
         });
 
     }
@@ -140,23 +128,16 @@ public class PitScoutAutoFragment extends Fragment {
 
         programmingLanguageAutoComplete.addTextChangedListener(
                 new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
+                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         data.setCodingLanguage(s.toString());
                     }
 
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-                    }
+                    @Override public void afterTextChanged(Editable s) { }
                 }
         );
-
     }
 
     public void setVisibility(){

@@ -13,10 +13,10 @@ import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link PitScoutTeam#newInstance} factory method to
+ * Use the {@link PitScoutTeamFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PitScoutTeam extends Fragment {
+public class PitScoutTeamFragment extends Fragment {
 
     PitScout data;
 
@@ -32,7 +32,7 @@ public class PitScoutTeam extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public PitScoutTeam() {
+    public PitScoutTeamFragment() {
         // Required empty public constructor
     }
 
@@ -45,8 +45,8 @@ public class PitScoutTeam extends Fragment {
      * @return A new instance of fragment PitScoutTeam.
      */
     // TODO: Rename and change types and number of parameters
-    public static PitScoutTeam newInstance(String param1, String param2) {
-        PitScoutTeam fragment = new PitScoutTeam();
+    public static PitScoutTeamFragment newInstance(String param1, String param2) {
+        PitScoutTeamFragment fragment = new PitScoutTeamFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
