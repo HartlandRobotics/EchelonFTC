@@ -17,8 +17,9 @@ public class PitScoutRepo {
         pitScoutDao = db.pitScoutDao();
     }
 
-    public LiveData<PitScout> getPitScout(){
-       return pitScoutDao.getPitScout();
+    public LiveData<PitScout> getPitScout(String eventKey, String teamKey){
+
+        return pitScoutDao.getPitScout(eventKey, teamKey);
     }
 
     public void upsert(PitScout pitScout){

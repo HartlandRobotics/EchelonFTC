@@ -81,14 +81,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Programming Language"
-            android:checkedButton="@id/helpAutoNo">
+            >
 
             <AutoCompleteTextView
                 android:id="@+id/autoLanguageAutoComplete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                android:checkedButton="@id/helpAutoNo"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 

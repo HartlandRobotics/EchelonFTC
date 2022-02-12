@@ -36,6 +36,21 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
         this.data = data;
     }
 
+    public void setData(PitScout data){
+        this.data = data;
+        if( data == null ) return;
+
+        if( autoFragment != null ){
+            autoFragment.setData(data);
+        }
+        if( teleOpFragment != null ){
+            teleOpFragment.setData(data);
+        }
+        if( endGameFragment != null ){
+            endGameFragment.setData(data);
+        }
+    }
+
     public static final String TAG = "PitScoutPagerAdapter";
     private Map<Integer, String> titleByPosition = new HashMap<>();
     public String getTabTitle(int position){
@@ -46,6 +61,21 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
             titleByPosition.put(3, "Team");
         }
         return titleByPosition.get(position);
+    }
+
+    public void updatePitScoutData(){
+        if( autoFragment != null ){
+            Log.i(TAG, "populating auto fragment data");
+            autoFragment.populateDataFromControls();
+        }
+        if( teleOpFragment != null ){
+            Log.i(TAG, "populating telop fragment data");
+            //teamFragment.populateDataFromControls();
+        }
+        if( endGameFragment != null ){
+            Log.i(TAG, "populate end game fragment data");
+            //endGameFragment.populateDataFromControls();
+        }
     }
 
     @NonNull
@@ -81,6 +111,12 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
     @Override
     public void onBindViewHolder(@NonNull FragmentViewHolder holder, int position, @NonNull List<Object> payloads) {
         super.onBindViewHolder(holder, position, payloads);
+
+        // call each fragment to update controls based on current data
+        if( autoFragment != null ){
+            autoFragment.populateControlsFromData();
+        }
+
     }
 
     @Override

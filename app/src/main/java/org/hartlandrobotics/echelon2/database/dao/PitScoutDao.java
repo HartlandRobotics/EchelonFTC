@@ -27,7 +27,7 @@ public abstract class PitScoutDao {
     }
 
     @Transaction
-    @Query("SELECT * FROM pit_scout")
-    public abstract LiveData<PitScout> getPitScout();
+    @Query("SELECT * FROM pit_scout WHERE event_key = :eventKey AND team_key = :teamKey")
+    public abstract LiveData<PitScout> getPitScout(String eventKey, String teamKey);
 
 }

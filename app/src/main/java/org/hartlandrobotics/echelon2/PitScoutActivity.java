@@ -14,30 +14,37 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.database.entities.Team;
+import org.hartlandrobotics.echelon2.models.PitScoutViewModel;
 import org.hartlandrobotics.echelon2.models.TeamViewModel;
 import org.hartlandrobotics.echelon2.pitScouting.PitScoutingPagerAdapter;
+import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 import org.hartlandrobotics.echelon2.utilities.TabLayoutUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PitScoutActivity extends AppCompatActivity {
+    private static final String TAG = "PitScoutActivity";
+    private BlueAllianceStatus status;
     TabLayout tabLayout;
     MaterialTextView selectTextPrompt;
     ViewPager2 viewPager;
     PitScoutingPagerAdapter viewPagerAdapter;
     AutoCompleteTextView teamNumberAutoComplete;
-
+    MaterialButton saveButton;
     TeamViewModel teamViewModel;
     List<Team> teams;
     List<String> teamNames;
     Team currentTeam;
+
+    PitScoutViewModel pitScoutViewModel;
     private PitScout data;
 
     public static void launch(Context context) {
@@ -50,12 +57,27 @@ public class PitScoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_scout);
 
+        status = new BlueAllianceStatus(getApplicationContext());
+
+        saveButton = findViewById(R.id.ps_save_button);
         teamNumberAutoComplete = findViewById(R.id.teamSelectionAutoComplete);
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
         selectTextPrompt = findViewById(R.id.select_team_text);
 
+        pitScoutViewModel = new ViewModelProvider(this).get(PitScoutViewModel.class);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {
+                                              if (data == null) {
+                                                  Log.e(TAG, "no pit scout data to save");
+                                                  return;
+                                              }
 
+                                              viewPagerAdapter.updatePitScoutData();
+                                              pitScoutViewModel.upsert(data);
+                                          }
+                                      });
         teamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
         teamViewModel.getAllTeams().observe(this, ts -> {
 
@@ -76,15 +98,21 @@ public class PitScoutActivity extends AppCompatActivity {
                         viewPager.setVisibility(View.VISIBLE);
                         selectTextPrompt.setVisibility(View.GONE);
 
-                        viewPagerAdapter.notifyDataSetChanged();
-
+                        String eventKey = status.getEventKey();
+                        pitScoutViewModel.getPitScout(eventKey, currentTeam.getTeamKey())
+                                .observe(PitScoutActivity.this, ps->{
+                                    if( ps == null ){
+                                        data = pitScoutViewModel.getDefault(status.getEventKey(), currentTeam.getTeamKey());
+                                    } else {
+                                        data = ps;
+                                    }
+                                    viewPagerAdapter.setData(data);
+                                    viewPagerAdapter.notifyDataSetChanged();
+                                });
                     }
                 }
             });
         });
-
-        data = new PitScout();
-
 
         viewPagerAdapter = new PitScoutingPagerAdapter(
                 getSupportFragmentManager(), getLifecycle(), data);
