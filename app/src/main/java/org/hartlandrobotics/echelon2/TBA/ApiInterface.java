@@ -24,4 +24,5 @@ public interface ApiInterface {
     @GET("event/{event_key}/teams")
     Call<List<SyncTeam>> getTeamsByEvent(@Path("event_key") String eventKey);
 
+
 }

@@ -73,4 +73,9 @@ public class Team {
     public void setSchoolName(String schoolName) {
         this.schoolName = schoolName;
     }
+
+    public EvtTeamCrossRef toEventTeam(String eventKey){
+        EvtTeamCrossRef crossRef = new EvtTeamCrossRef(eventKey, getTeamKey());
+        return crossRef;
+    }
 }
