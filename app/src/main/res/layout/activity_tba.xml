@@ -85,6 +85,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eventStatusLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".25"
@@ -93,7 +94,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2022milan"></com.google.android.material.textfield.TextInputEditText>
+                android:text="2022milan">
+
+            </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
 

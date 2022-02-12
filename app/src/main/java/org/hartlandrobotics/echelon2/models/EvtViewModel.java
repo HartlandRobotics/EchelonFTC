@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import org.hartlandrobotics.echelon2.database.entities.DistrictEvtCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Evt;
 import org.hartlandrobotics.echelon2.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.EvtTeamCrossRef;
@@ -47,6 +48,8 @@ public class EvtViewModel extends AndroidViewModel {
    public void upsert(Evt event) {
       mEventRepo.upsert( event );
    }
+
+   public void upsert(DistrictEvtCrossRef crossRef){ mEventRepo.upsert(crossRef);}
 
    public void upsert(EvtTeamCrossRef crossRef) {
       mEventRepo.upsert( crossRef );

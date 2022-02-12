@@ -36,6 +36,7 @@ public class TBAActivity extends AppCompatActivity {
 
     TextInputLayout onlineStatusLayout;
     TextInputLayout districtStatusLayout;
+    TextInputLayout eventStatusLayout;
 
     public static void launch(Context context){
         Intent intent = new Intent(context, TBAActivity.class);
@@ -60,6 +61,9 @@ public class TBAActivity extends AppCompatActivity {
 
         districtStatusLayout = findViewById(R.id.districtStatusLayout);
         setDistrictStatus( tbaStatus.getDistrictKey() );
+
+        eventStatusLayout = findViewById(R.id.eventStatusLayout);
+        setEventStatus(tbaStatus.getEventKey());
 
         onlineStatusLayout = findViewById(R.id.onlineStatusLayout);
         onlineStatusLayout.getEditText().setText(StringUtils.EMPTY);
@@ -96,8 +100,17 @@ public class TBAActivity extends AppCompatActivity {
         districtStatusLayout.getEditText().setText(districtKey);
     }
 
+    private void setEventStatus(String eventKey){
+        eventStatusLayout.getEditText().setText(eventKey);
+    }
+
     public void setDistrictKey( String districtKey ){
         setDistrictStatus( districtKey );
         tbaStatus.setDistrictKey(districtKey);
+    }
+
+    public void setEventKey(String eventKey){
+        setEventStatus(eventKey);
+        tbaStatus.setEventKey(eventKey);
     }
 }

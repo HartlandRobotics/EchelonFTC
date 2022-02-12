@@ -179,16 +179,8 @@ public class DistrictsFragment extends Fragment {
         @Override
         public void onClick(View view) {
             districtListAdapter.setCurrentDistrict(districtViewModel);
-            //districtSelectedCheckbox.setChecked(true);
-            //districtViewModel.setIsSelected(true);
-            // push up to activity to clear the rest?
 
         }
-
-        //private void onSelectDistrict(DistrictListViewModel viewModel){
-            //setDistrict(viewModel);
-
-        //}
 
     }
     public class DistrictListAdapter extends RecyclerView.Adapter<DistrictViewHolder> {

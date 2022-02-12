@@ -3,12 +3,14 @@ package org.hartlandrobotics.echelon2.database;
 import android.content.Context;
 
 import org.hartlandrobotics.echelon2.database.dao.DistrictDao;
+import org.hartlandrobotics.echelon2.database.dao.DistrictWithEventsDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithMatchesDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithTeamsDao;
 import org.hartlandrobotics.echelon2.database.dao.PitScoutDao;
 import org.hartlandrobotics.echelon2.database.dao.SeasonDao;
 import org.hartlandrobotics.echelon2.database.dao.TeamDao;
 import org.hartlandrobotics.echelon2.database.entities.District;
+import org.hartlandrobotics.echelon2.database.entities.DistrictEvtCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Evt;
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -32,9 +34,10 @@ import java.util.concurrent.Executors;
         PitScout.class,
         Season.class,
         EvtTeamCrossRef.class,
-        EvtMatchCrossRef.class
+        EvtMatchCrossRef.class,
+        DistrictEvtCrossRef.class
 
-}, version = 5,
+}, version = 6,
         exportSchema = false
 )
 public abstract class EchelonDatabase extends RoomDatabase {
@@ -45,6 +48,7 @@ public abstract class EchelonDatabase extends RoomDatabase {
     public abstract SeasonDao seasonDao();
     public abstract EvtWithTeamsDao eventTeamsDao();
     public abstract EvtWithMatchesDao eventMatchesDao();
+    public abstract DistrictWithEventsDao districtEventsDao();
 
     private static volatile EchelonDatabase _instance;
     private static final int NUMBER_OF_THREADS = 4;

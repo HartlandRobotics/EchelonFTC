@@ -277,4 +277,9 @@ public class Evt {
     public void setFirstEventCode(String firstEventCode) {
         this.firstEventCode = firstEventCode;
     }
+
+    public DistrictEvtCrossRef toDistrictEvent( String districtKey ){
+        DistrictEvtCrossRef crossRef = new DistrictEvtCrossRef(districtKey, getEventKey());
+        return crossRef;
+    }
 }

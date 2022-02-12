@@ -5,9 +5,12 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import org.hartlandrobotics.echelon2.database.EchelonDatabase;
+import org.hartlandrobotics.echelon2.database.dao.DistrictWithEventsDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithMatchesDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithTeamsDao;
+import org.hartlandrobotics.echelon2.database.entities.DistrictEvtCrossRef;
+import org.hartlandrobotics.echelon2.database.entities.DistrictWithEvents;
 import org.hartlandrobotics.echelon2.database.entities.Evt;
 import org.hartlandrobotics.echelon2.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.EvtTeamCrossRef;
@@ -20,6 +23,7 @@ public class EventRepo {
     private EvtDao mEventDao;
     private EvtWithTeamsDao mEventWithTeamsDao;
     private EvtWithMatchesDao mEventWithMatchesDao;
+    private DistrictWithEventsDao districtWithEventDao;
 
     private LiveData<List<Evt>> mAllEvents;
     private LiveData<EvtWithTeams> mEventWithTeams;
@@ -32,7 +36,13 @@ public class EventRepo {
 
         mEventWithTeamsDao = db.eventTeamsDao();
         mEventWithMatchesDao = db.eventMatchesDao();
+        districtWithEventDao = db.districtEventsDao();
     }
+
+    /*public LiveData<List<Evt>> getEventsByYear(int year){
+        mAllEvents = mEventDao.getEvents(year);
+        return mAllEvents;
+    }*/
 
     public LiveData<List<Evt>> getAllEvents() {
         mAllEvents = mEventDao.getEvents();
@@ -43,14 +53,14 @@ public class EventRepo {
         return mEventWithTeamsDao.getEventTeams( eventKey );
     }
 
-   /* public LiveData<EvtWithMatches> getMatchesForEvent(String eventKey) {
-        return mEventWithMatchesDao.getEventMatches( eventKey );
-    }*/
-
     public void upsert(Evt event) {
         EchelonDatabase.databaseWriteExecutor.execute( () -> mEventDao.upsert( event ) );
     }
 
+    public void upsert(DistrictEvtCrossRef crossRefDistrict){
+        EchelonDatabase.databaseWriteExecutor.execute( () -> { districtWithEventDao.upsert(crossRefDistrict);
+        });
+    }
     public void upsert(EvtTeamCrossRef crossRef) {
         EchelonDatabase.databaseWriteExecutor.execute( () -> {
             mEventWithTeamsDao.upsert(crossRef);
@@ -59,5 +69,15 @@ public class EventRepo {
 
     public void upsert(EvtMatchCrossRef crossRef) {
         EchelonDatabase.databaseWriteExecutor.execute( () -> mEventWithMatchesDao.upsert( crossRef ) );
+    }
+
+    public void upsert(List<Evt> events){
+        for(Evt evt: events){
+            upsert(evt);
+        }
+    }
+
+    public LiveData<DistrictWithEvents> getDistrictWithEvents(String currentDistrict) {
+        return districtWithEventDao.getDistrictEvents(currentDistrict);
     }
 }
