@@ -6,15 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".AdminSettingsActivity">
 
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/deviceRoleSelection"
+        app:singleSelection="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingLeft="15dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/red1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Red 1"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/red2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Red 2"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/red3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Red 3"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/blue1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blue 1"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/blue2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blue 2"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/blue3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blue 3"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/blueAllianceApiText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:hint="Blue Alliance API key"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deviceRoleSelection"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -39,13 +89,13 @@
             android:inputType="none"
             />
 
-       <!-- <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
+        <!-- <com.google.android.material.textfield.TextInputEditText
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:inputType="number"
 
-            android:text="2022"
-            />-->
+             android:text="2022"
+             />-->
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

@@ -1,5 +1,9 @@
 package org.hartlandrobotics.echelon2.configuration;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class AdminSettingsViewModel extends AdminSettings {
@@ -18,6 +22,9 @@ public class AdminSettingsViewModel extends AdminSettings {
 
         String prefScoutingSeason = prefSettings.getScoutingSeason();
         this.setScoutingSeason( StringUtils.isEmpty(prefScoutingSeason) ? fileSettings.getScoutingSeason() : prefScoutingSeason );
+
+        String prefDeviceRole = prefSettings.getDeviceRole();
+        this.setDeviceRole( StringUtils.defaultIfBlank(prefDeviceRole, fileSettings.getDeviceRole()));
     }
 
     public boolean isBlueAllianceApikeySynced(){
@@ -36,8 +43,16 @@ public class AdminSettingsViewModel extends AdminSettings {
         return fileSetting.equals( prefSetting );
     }
 
-    @Override
-    public void setBlueAllianceApiKey(String blueAllianceApiKey) {
+    public void setBlueAllianceApiKey(Context appContext, String blueAllianceApiKey) {
         super.setBlueAllianceApiKey(blueAllianceApiKey);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
+        preferences.edit().putString(AdminSettingsProvider.BLUE_ALLIANCE_KEY, blueAllianceApiKey).apply();
+    }
+
+    public void setDeviceRole(Context appContext, String deviceRole) {
+        super.setDeviceRole(deviceRole);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
+        preferences.edit().putString(AdminSettingsProvider.DEVICE_ROLE, deviceRole).apply();
     }
 }
