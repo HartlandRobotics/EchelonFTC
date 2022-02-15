@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="Blue Alliance Events"
+        android:text="Fetch Events"
         tools:layout_editor_absoluteX="239dp"
         tools:layout_editor_absoluteY="118dp" />
 

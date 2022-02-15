@@ -43,7 +43,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/select_team_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
@@ -54,8 +54,9 @@
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:visibility="invisible"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/ps_save_button"

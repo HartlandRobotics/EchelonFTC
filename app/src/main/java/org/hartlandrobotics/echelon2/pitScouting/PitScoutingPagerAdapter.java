@@ -23,11 +23,13 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
     private static final int TELEOP_POSITION = 1;
     private static final int ENDGAME_POSITION = 2;
     private static final int TEAM_POSITION = 3;
+    private static final int PHOTOS_POSITION = 4;
 
     private PitScoutAutoFragment autoFragment;
     private PitScoutTeleOpFragment teleOpFragment;
     private PitScoutEndGameFragment endGameFragment;
     private PitScoutTeamFragment teamFragment;
+    private PitScoutPhotosFragment photosFragment;
 
     public PitScoutingPagerAdapter(
             @NonNull FragmentManager fragmentManager, Lifecycle lifecycle, PitScout data)
@@ -49,6 +51,9 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
         if( endGameFragment != null ){
             endGameFragment.setData(data);
         }
+        if( photosFragment != null ){
+            // may not need to set data for this one
+        }
     }
 
     public static final String TAG = "PitScoutPagerAdapter";
@@ -59,6 +64,7 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
             titleByPosition.put(1,"Tele Op");
             titleByPosition.put(2, "End  Game");
             titleByPosition.put(3, "Team");
+            titleByPosition.put(4, "Photos");
         }
         return titleByPosition.get(position);
     }
@@ -75,6 +81,9 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
         if( endGameFragment != null ){
             Log.i(TAG, "populate end game fragment data");
             //endGameFragment.populateDataFromControls();
+        }
+        if( photosFragment != null ){
+            Log.i(TAG, "populate photos fragment");
         }
     }
 
@@ -102,6 +111,11 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
                 teamFragment = new PitScoutTeamFragment();
                 teamFragment.setData(data);
                 return teamFragment;
+            case PHOTOS_POSITION:
+                Log.i(TAG, "creating new Photos Fragment");
+                photosFragment = new PitScoutPhotosFragment();
+                // set data?
+                return photosFragment;
             default:
                 Log.e(TAG, "Invalid tab selected for pit scout tab layout");
                 return null;
@@ -121,6 +135,6 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 5;
     }
 }
