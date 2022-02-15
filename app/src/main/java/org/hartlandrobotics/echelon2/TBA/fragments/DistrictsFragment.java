@@ -83,13 +83,13 @@ public class DistrictsFragment extends Fragment {
     }
 
     public void setupCurrentDistricts(){
-        Context appContext = getActivity().getApplicationContext();
-        BlueAllianceStatus status = new BlueAllianceStatus(appContext);
-        int currentYear = Integer.parseInt( status.getYear() );
-        DistrictRepo districtRepo = new DistrictRepo(DistrictsFragment.this.getActivity().getApplication());
-        districtRepo.getDistrictsByYear(currentYear).observe(getViewLifecycleOwner(), districts -> {
-            districtListAdapter.setDistricts(districts);
-        });
+            Context appContext = getActivity().getApplicationContext();
+            BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+            int currentYear = Integer.parseInt(status.getYear());
+            DistrictRepo districtRepo = new DistrictRepo(DistrictsFragment.this.getActivity().getApplication());
+            districtRepo.getDistrictsByYear(currentYear).observe(getViewLifecycleOwner(), districts -> {
+                districtListAdapter.setDistricts(districts);
+            });
     }
 
     public void setupPullDistricts() {

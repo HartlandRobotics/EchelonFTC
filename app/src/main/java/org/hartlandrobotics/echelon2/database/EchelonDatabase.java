@@ -6,6 +6,7 @@ import org.hartlandrobotics.echelon2.database.dao.DistrictDao;
 import org.hartlandrobotics.echelon2.database.dao.DistrictWithEventsDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithMatchesDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithTeamsDao;
+import org.hartlandrobotics.echelon2.database.dao.MatchDao;
 import org.hartlandrobotics.echelon2.database.dao.PitScoutDao;
 import org.hartlandrobotics.echelon2.database.dao.SeasonDao;
 import org.hartlandrobotics.echelon2.database.dao.TeamDao;
@@ -20,6 +21,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import org.hartlandrobotics.echelon2.database.dao.EvtDao;
 import org.hartlandrobotics.echelon2.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.EvtTeamCrossRef;
+import org.hartlandrobotics.echelon2.database.entities.Match;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.database.entities.Season;
 import org.hartlandrobotics.echelon2.database.entities.Team;
@@ -35,9 +37,10 @@ import java.util.concurrent.Executors;
         Season.class,
         EvtTeamCrossRef.class,
         EvtMatchCrossRef.class,
-        DistrictEvtCrossRef.class
+        DistrictEvtCrossRef.class,
+        Match.class
 
-}, version = 6,
+}, version = 7,
         exportSchema = false
 )
 public abstract class EchelonDatabase extends RoomDatabase {
@@ -49,6 +52,8 @@ public abstract class EchelonDatabase extends RoomDatabase {
     public abstract EvtWithTeamsDao eventTeamsDao();
     public abstract EvtWithMatchesDao eventMatchesDao();
     public abstract DistrictWithEventsDao districtEventsDao();
+    public abstract MatchDao matchDao();
+
 
     private static volatile EchelonDatabase _instance;
     private static final int NUMBER_OF_THREADS = 4;

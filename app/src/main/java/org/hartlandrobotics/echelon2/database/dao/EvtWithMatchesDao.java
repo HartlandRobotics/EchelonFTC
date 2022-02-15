@@ -9,7 +9,9 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 
 import org.hartlandrobotics.echelon2.database.entities.EvtMatchCrossRef;
-//import org.hartlandrobotics.echelon2.database.entities.EvtWithMatches;
+import org.hartlandrobotics.echelon2.database.entities.EvtWithMatches;
+
+
 
 @Dao
 public abstract class EvtWithMatchesDao {
@@ -26,7 +28,7 @@ public abstract class EvtWithMatchesDao {
       }
    }
 
- /*  @Transaction
+   @Transaction
    @Query("SELECT * FROM event WHERE event_key = :eventKey")
-  // public abstract LiveData<EvtWithMatches> getEventMatches(String eventKey);*/
+   public abstract LiveData<EvtWithMatches> getEventMatches(String eventKey);
 }

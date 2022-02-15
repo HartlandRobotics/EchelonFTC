@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/match_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
+        tools:text="35"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/red1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="2dp"
+            android:minWidth="100dp"
+            android:textColor="?attr/colorError"
+            tools:text="3536" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/red2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="2dp"
+                android:textColor="?attr/colorError"
+                android:minWidth="100dp"
+                tools:text="3536"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/red3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="2dp"
+                android:textColor="?attr/colorError"
+                android:minWidth="100dp"
+                tools:text="3536"/>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blue1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="2dp"
+            android:minWidth="100dp"
+            android:textColor="@color/design_default_color_primary_variant"
+            tools:text="3536"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blue2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="2dp"
+            android:minWidth="100dp"
+            android:textColor="@color/design_default_color_primary_variant"
+            tools:text="3536"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blue3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="2dp"
+            android:minWidth="100dp"
+            android:textColor="@color/design_default_color_primary_variant"
+            tools:text="3536"/>
+    </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -34,9 +34,11 @@ public class TBAActivity extends AppCompatActivity {
     ViewPager2 viewPager;
     TBAPagerAdapter tbaPagerAdapter;
 
+    TextInputLayout seasonStatusLayout;
     TextInputLayout onlineStatusLayout;
     TextInputLayout districtStatusLayout;
     TextInputLayout eventStatusLayout;
+    TextInputLayout matchStatusLayout;
 
     public static void launch(Context context){
         Intent intent = new Intent(context, TBAActivity.class);
@@ -58,6 +60,9 @@ public class TBAActivity extends AppCompatActivity {
 
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> tab.setText(tbaPagerAdapter.getTabTitle(position))).attach();
+
+        seasonStatusLayout = findViewById(R.id.seasonStatusLayout);
+        setSeasonStatus( tbaStatus.getSeason() );
 
         districtStatusLayout = findViewById(R.id.districtStatusLayout);
         setDistrictStatus( tbaStatus.getDistrictKey() );
@@ -96,12 +101,19 @@ public class TBAActivity extends AppCompatActivity {
         tbaStatus.setOnline(isOnline);
     }
 
+    private void setSeasonStatus( String season ){
+        seasonStatusLayout.getEditText().setText(season);
+    }
     private void setDistrictStatus( String districtKey ){
         districtStatusLayout.getEditText().setText(districtKey);
     }
 
     private void setEventStatus(String eventKey){
         eventStatusLayout.getEditText().setText(eventKey);
+    }
+
+    private void setMatchStatus(String matchKey){
+        matchStatusLayout.getEditText().setText(matchKey);
     }
 
     public void setDistrictKey( String districtKey ){
