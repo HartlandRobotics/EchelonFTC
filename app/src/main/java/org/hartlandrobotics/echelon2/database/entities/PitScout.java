@@ -26,79 +26,63 @@ public class PitScout {
     @ColumnInfo(name = "team_key")
     private String teamKey;
 
-    @NonNull
     @ColumnInfo(name = "synced")
     private boolean hasBeenSynced;
 
-    @NonNull
     @ColumnInfo(name = "has_autonomous")
     private boolean hasAutonomous;
 
-    @NonNull
     @ColumnInfo(name = "help_creating_auto")
     private boolean helpCreatingAuto;
 
-    @NonNull
     @ColumnInfo(name = "coding_language")
     private String codingLanguage;
 
-    @NonNull
     @ColumnInfo(name = "shoots_in_auto")
     private boolean shootsInAuto;
 
-    @NonNull
     @ColumnInfo(name = "percent_auto_shots")
     private double percentAutoShots;
 
-    @NonNull
     @ColumnInfo(name = "balls_picked_or_shot_in_auto")
     private int ballsPickedOrShotInAuto;
 
-    @NonNull
     @ColumnInfo(name = "can_shoot")
     private boolean canShoot;
 
-    @NonNull
     @ColumnInfo(name = "shooting_accuracy")
     private double shootingAccuracy;
 
-    @NonNull
     @ColumnInfo(name = "preferred_goal")
     private String preferredGoal;
 
-    @NonNull
     @ColumnInfo(name = "can_play_defense")
     private boolean canPlayDefense;
 
-    @NonNull
     @ColumnInfo(name = "can_robot_hang")
     private boolean canRobotHang;
 
-    @NonNull
     @ColumnInfo(name = "highest_hang_bar")
     private int highestHangBar;
 
-    @NonNull
     @ColumnInfo(name = "hang_time")
     private int hangTime;
 
-    @NonNull
     @ColumnInfo(name = "preferred_hanging_spot")
     private String preferredHangingSpot;
 
-    @NonNull
     @ColumnInfo(name = "side_swing")
     private int sideSwing;
 
-    @NonNull
     @ColumnInfo(name = "driver_experience")
     private int driverExperience;
 
-    @NonNull
     @ColumnInfo(name = "operator_experience")
     private int operatorExperience;
 
-    @NonNull
+    @ColumnInfo(name = "human_player_accuracy")
+    private double humanPlayerAccuracy;
+
     @ColumnInfo(name = "extra_notes")
     private String extraNotes;
     
@@ -107,7 +91,7 @@ public class PitScout {
 
     }
 
-    public PitScout(@NonNull String pitScoutKey, @NonNull String eventKey, @NonNull String teamKey, boolean hasBeenSynced, boolean hasAutonomous, boolean helpCreatingAuto, @NonNull String codingLanguage, boolean shootsInAuto, double percentAutoShots, int ballsPickedOrShotInAuto, boolean canShoot, double shootingAccuracy, @NonNull String preferredGoal, boolean canPlayDefense, boolean canRobotHang, int highestHangBar, int hangTime, @NonNull String preferredHangingSpot, int sideSwing, int driverExperience, int operatorExperience, @NonNull String extraNotes) {
+    public PitScout(@NonNull String pitScoutKey, @NonNull String eventKey, @NonNull String teamKey, boolean hasBeenSynced, boolean hasAutonomous, boolean helpCreatingAuto, @NonNull String codingLanguage, boolean shootsInAuto, double percentAutoShots, int ballsPickedOrShotInAuto, boolean canShoot, double shootingAccuracy, @NonNull String preferredGoal, boolean canPlayDefense, boolean canRobotHang, int highestHangBar, int hangTime, @NonNull String preferredHangingSpot, int sideSwing, int driverExperience, int operatorExperience, double humanPlayerAccuracy, @NonNull String extraNotes) {
         if(StringUtils.isBlank(pitScoutKey)){
             pitScoutKey = UUID.randomUUID().toString();
         }
@@ -133,6 +117,7 @@ public class PitScout {
         this.sideSwing = sideSwing;
         this.driverExperience = driverExperience;
         this.operatorExperience = operatorExperience;
+        this.humanPlayerAccuracy = humanPlayerAccuracy;
         this.extraNotes = extraNotes;
     }
 
@@ -308,6 +293,11 @@ public class PitScout {
 
     public void setOperatorExperience(int operatorExperience) {
         this.operatorExperience = operatorExperience;
+    }
+
+    public double getHumanPlayerAccuracy() { return humanPlayerAccuracy; }
+    public void setHumanPlayerAccuracy( double humanPlayerAccuracy ){
+        this.humanPlayerAccuracy = humanPlayerAccuracy;
     }
 
     @NonNull

@@ -66,18 +66,15 @@ public class PitScoutActivity extends AppCompatActivity {
         selectTextPrompt = findViewById(R.id.select_team_text);
 
         pitScoutViewModel = new ViewModelProvider(this).get(PitScoutViewModel.class);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-                                          @Override
-                                          public void onClick(View v) {
-                                              if (data == null) {
-                                                  Log.e(TAG, "no pit scout data to save");
-                                                  return;
-                                              }
+        saveButton.setOnClickListener(v -> {
+            if (data == null) {
+                Log.e(TAG, "no pit scout data to save");
+                return;
+            }
 
-                                              viewPagerAdapter.updatePitScoutData();
-                                              pitScoutViewModel.upsert(data);
-                                          }
-                                      });
+            viewPagerAdapter.updatePitScoutData();
+            pitScoutViewModel.upsert(data);
+        });
         teamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
         teamViewModel.getAllTeams().observe(this, ts -> {
 
@@ -90,26 +87,23 @@ public class PitScoutActivity extends AppCompatActivity {
 
             ArrayAdapter adapter = new ArrayAdapter(this, R.layout.dropdown_item, teamNames);
             teamNumberAutoComplete.setAdapter(adapter);
-            teamNumberAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    currentTeam = teams.get(position);
-                    if (hasSelectedTeam()) {
-                        viewPager.setVisibility(View.VISIBLE);
-                        selectTextPrompt.setVisibility(View.GONE);
+            teamNumberAutoComplete.setOnItemClickListener((parent, view, position, id) -> {
+                currentTeam = teams.get(position);
+                if (hasSelectedTeam()) {
+                    viewPager.setVisibility(View.VISIBLE);
+                    selectTextPrompt.setVisibility(View.GONE);
 
-                        String eventKey = status.getEventKey();
-                        pitScoutViewModel.getPitScout(eventKey, currentTeam.getTeamKey())
-                                .observe(PitScoutActivity.this, ps->{
-                                    if( ps == null ){
-                                        data = pitScoutViewModel.getDefault(status.getEventKey(), currentTeam.getTeamKey());
-                                    } else {
-                                        data = ps;
-                                    }
-                                    viewPagerAdapter.setData(data);
-                                    viewPagerAdapter.notifyDataSetChanged();
-                                });
-                    }
+                    String eventKey = status.getEventKey();
+                    pitScoutViewModel.getPitScout(eventKey, currentTeam.getTeamKey())
+                            .observe(PitScoutActivity.this, ps->{
+                                if( ps == null ){
+                                    data = pitScoutViewModel.getDefault(status.getEventKey(), currentTeam.getTeamKey());
+                                } else {
+                                    data = ps;
+                                }
+                                viewPagerAdapter.setData(data);
+                                viewPagerAdapter.notifyDataSetChanged();
+                            });
                 }
             });
         });

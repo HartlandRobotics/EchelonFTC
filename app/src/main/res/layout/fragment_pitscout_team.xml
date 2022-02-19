@@ -12,36 +12,6 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/seasonNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="How many seasons have your team been apart of?"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/competitionsThisSeason"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="What competitions have you been in this season?"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType=""
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/driverSeasonNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

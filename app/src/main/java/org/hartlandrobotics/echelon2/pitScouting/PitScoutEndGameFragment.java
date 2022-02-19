@@ -4,29 +4,24 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
+
+import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PitScoutEndGameFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PitScoutEndGameFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    TextInputLayout hangTimeLayout;
+    RadioGroup hangPreferenceGroup;
+    TextInputLayout robotSwingLayout;
 
     public PitScoutEndGameFragment() {
         // Required empty public constructor
@@ -34,43 +29,101 @@ public class PitScoutEndGameFragment extends Fragment {
 
     PitScout data;
 
-    public void setData( PitScout data) { this.data = data; }
-    public PitScout getData() { return data; }
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EndGameFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PitScoutEndGameFragment newInstance(String param1, String param2) {
-        PitScoutEndGameFragment fragment = new PitScoutEndGameFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public void setData( PitScout data) {
+        this.data = data;
     }
 
-    TextView tv;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View endGameView =  inflater.inflate(R.layout.fragment_pitscout_end_game, container, false);
-        //tv.setText(data.getSomeString());
+        View view =  inflater.inflate(R.layout.fragment_pitscout_end_game, container, false);
 
-        return endGameView;
+        setupControls(view);
+
+        return view;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        populateControlsFromData();
+
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        populateDataFromControls();
+    }
+
+    private void setupControls(View view){
+        hangTimeLayout = view.findViewById(R.id.hangTime);
+        hangPreferenceGroup = view.findViewById(R.id.hangPreference);
+        robotSwingLayout = view.findViewById(R.id.robotSwing);
+    }
+
+    public void populateDataFromControls(){
+        if( data == null ) return;
+        if( hangTimeLayout == null ) return;
+
+        String hangTimeText = StringUtils.defaultIfBlank(hangTimeLayout.getEditText().getText().toString(), "0");
+        data.setHangTime(Integer.valueOf(hangTimeText));
+
+        String hangPreference = "none";
+        int hangPreferenceSelection = hangPreferenceGroup.getCheckedRadioButtonId();
+        switch( hangPreferenceSelection ){
+            case R.id.hangPreferenceLeft:
+                hangPreference = "left";
+                break;
+            case R.id.hangPreferenceCenter:
+                hangPreference = "center";
+                break;
+            case R.id.hangPreferenceRight:
+                hangPreference = "right";
+                break;
+            default:
+                hangPreference = "none";
+        }
+        data.setPreferredHangingSpot(hangPreference);
+
+        String swingInchesText = StringUtils.defaultIfBlank(robotSwingLayout.getEditText().getText().toString(), "0");
+        int swingInches = Integer.valueOf( swingInchesText );
+        data.setSideSwing(swingInches);
+    }
+
+    private void populateControlsFromData(){
+        if( data == null ){
+            return;
+        }
+
+        if( hangTimeLayout == null ) return;
+
+        String hangTimeText = String.valueOf(data.getHangTime());
+        hangTimeLayout.getEditText().setText(hangTimeText);
+
+        int hangPreferenceSelection = R.id.hangPreferenceNo;
+        String hangingPreference = StringUtils.defaultIfBlank(data.getPreferredHangingSpot(), "none");
+        switch( hangingPreference ){
+            case "left":
+                hangPreferenceSelection = R.id.hangPreferenceLeft;
+                break;
+            case "center":
+                hangPreferenceSelection = R.id.hangPreferenceCenter;
+                break;
+            case "right":
+                hangPreferenceSelection = R.id.hangPreferenceRight;
+                break;
+            default:
+                hangPreferenceSelection = R.id.hangPreferenceNo;
+        }
+        hangPreferenceGroup.check(hangPreferenceSelection);
+
+        String sideSwingSeconds = String.valueOf( data.getSideSwing());
+        robotSwingLayout.getEditText().setText(sideSwingSeconds);
     }
 }

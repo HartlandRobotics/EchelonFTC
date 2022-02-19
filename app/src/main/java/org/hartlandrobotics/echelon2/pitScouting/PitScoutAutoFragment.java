@@ -29,10 +29,12 @@ import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
 public class PitScoutAutoFragment extends Fragment {
     private static final String TAG = "PitScoutAutoFragment";
+
     RadioGroup hasAutoGroup;
     RadioGroup helpAutoGroup;
     TextInputLayout programmingLanguageLayout;
     AutoCompleteTextView programmingLanguageAutoComplete;
+    String defaultProgrammingLanguage;
     LinearLayout missingAutoLayout;
     LinearLayout hasAutoLayout;
     TextInputLayout autoLanguage;
@@ -42,15 +44,14 @@ public class PitScoutAutoFragment extends Fragment {
 
     PitScout data;
 
-    public void setData( PitScout data) { this.data = data; }
-    public PitScout getData() { return data; }
-
-
     public PitScoutAutoFragment() {
         // Required empty public constructor
     }
 
-
+    public void setData(PitScout data) {
+        this.data = data;
+        populateControlsFromData();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,96 +62,111 @@ public class PitScoutAutoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.fragment_pitscout_auto, container, false);
+        View view = inflater.inflate(R.layout.fragment_pitscout_auto, container, false);
 
         setupControls(view);
-
-        setupHasAuto( view );
-        setupNoAuto( view );
-
-        populateControlsFromData();
-
-        setVisibility();
 
         return view;
     }
 
-    private void setupControls(View view){
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG, "OnResume running");
+        populateControlsFromData();
+    }
+
+    @Override
+    public void onPause() {
+        Log.i(TAG, "OnPause running");
+        populateDataFromControls();
+        super.onPause();
+        Log.i(TAG, "pause Has auto: " + data.getHasAutonomous());
+    }
+
+    private void setupControls(View view) {
         hasAutoLayout = view.findViewById(R.id.hasAutoLayout);
+
         hasAutoGroup = view.findViewById(R.id.hasAutoGroup);
+        hasAutoGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            setVisibility();
+        });
+
         shotCount = view.findViewById(R.id.autoBallCount);
+
         shootingPercentage = view.findViewById(R.id.shootingPercentage);
 
         missingAutoLayout = view.findViewById(R.id.missingAutoLayout);
+
         helpAutoGroup = view.findViewById(R.id.helpAutoGroup);
+        helpAutoGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            setVisibility();
+        });
+
+        autoLanguage = view.findViewById(R.id.autoLanguage);
+
         programmingLanguageLayout = view.findViewById(R.id.autoLanguage);
         programmingLanguageAutoComplete = view.findViewById(R.id.autoLanguageAutoComplete);
-        autoLanguage = view.findViewById(R.id.autoLanguage);
-    }
-
-    public void populateDataFromControls(){
-        // has auto radio button
-        boolean hasAuto = hasAutoGroup.getCheckedRadioButtonId() == R.id.hasAutoYes;
-        data.setHasAutonomous(hasAuto);
-
-        // balls shot in auto
-        String ballCountString = StringUtils.defaultIfBlank( shotCount.getEditText().getText().toString(), "0");
-        int ballCount = Integer.parseInt(ballCountString.toString());
-        data.setBallsPickedOrShotInAuto(ballCount);
-
-        // want help creating auto
-        boolean wantsHelp = hasAutoGroup.getCheckedRadioButtonId() == R.id.helpAutoYes;
-        data.setHelpCreatingAuto(wantsHelp);
-
-        // scouted team programming Language
-        // default to StringUtils.EMPTH
-        data.setCodingLanguage(programmingLanguageAutoComplete.getEditableText().toString());
-    }
-
-   public void populateControlsFromData(){
-        if( data == null ){
-            Log.i(TAG,"no data to bind");
-            return;
-        }
-        // has auto radio button
-       if( hasAutoGroup != null ) {
-           int hasAutoCheckedButtonId = data.getHasAutonomous() ? R.id.hasAutoYes : R.id.hasAutoNo;
-           hasAutoGroup.check(hasAutoCheckedButtonId);
-       }
-
-        // balls shot in auto
-       if( shotCount != null ) {
-           String ballsShotInAuto = StringUtils.defaultIfBlank(String.valueOf(data.getBallsPickedOrShotInAuto()), "0");
-           shotCount.getEditText().setText(ballsShotInAuto);
-       }
-
-        // wants help creating auto
-       if( helpAutoGroup != null ){
-        boolean wantsHelpWithAuto = data.getHelpCreatingAuto();
-        int wantsHelpCheckedButtonId = wantsHelpWithAuto ? R.id.helpAutoYes : R.id.helpAutoNo;
-        helpAutoGroup.check(wantsHelpCheckedButtonId);
-       }
-        // scouted team programming Language
-       if( programmingLanguageAutoComplete != null) {
-           if (!StringUtils.isBlank(data.getCodingLanguage())) {
-               programmingLanguageAutoComplete.setText(data.getCodingLanguage(), false);
-           }
-       }
-    }
-
-    private void setupHasAuto(View view){
-        hasAutoGroup.setOnCheckedChangeListener((group, checkedId) -> { setVisibility(); });
-    }
-    private void setupNoAuto(View view){
         String[] languages = getResources().getStringArray(R.array.programming_languages);
+        defaultProgrammingLanguage = languages[0];
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.dropdown_item, languages);
         programmingLanguageAutoComplete.setAdapter(adapter);
 
-        helpAutoGroup.setOnCheckedChangeListener((group, checkedId) -> { setVisibility(); });
     }
 
-    public void setVisibility(){
-        if( hasAutoGroup.getCheckedRadioButtonId() == R.id.hasAutoYes ){
+
+    public void populateDataFromControls() {
+
+        Log.i(TAG, "Checked Button Id: " + hasAutoGroup.getCheckedRadioButtonId());
+        Log.i(TAG, "YES" + R.id.hasAutoYes);
+        Log.i(TAG, "NO" + R.id.hasAutoNo);
+        boolean hasAuto = hasAutoGroup.getCheckedRadioButtonId() == R.id.hasAutoYes;
+        data.setHasAutonomous(hasAuto);
+
+        String ballCountString = StringUtils.defaultIfBlank(shotCount.getEditText().getText().toString(), "0");
+        int ballCount = Integer.parseInt(ballCountString.toString());
+        data.setBallsPickedOrShotInAuto(ballCount);
+
+        double shootingPercentageText = Double.valueOf(StringUtils.defaultIfBlank(shootingPercentage.getEditText().getText().toString(), "0"));
+        data.setPercentAutoShots(shootingPercentageText);
+
+        boolean wantsHelp = hasAutoGroup.getCheckedRadioButtonId() == R.id.helpAutoYes;
+        data.setHelpCreatingAuto(wantsHelp);
+
+        String codingLanguage = StringUtils.defaultIfBlank(programmingLanguageAutoComplete.getEditableText().toString(), StringUtils.EMPTY);
+        data.setCodingLanguage(codingLanguage);
+    }
+
+    public void populateControlsFromData() {
+        if (data == null) {
+            Log.i(TAG, "no data to bind");
+            return;
+        }
+
+        if( hasAutoGroup == null ) return;
+        Log.i(TAG, "populating controls from data");
+
+        int hasAutoCheckedButtonId = data.getHasAutonomous() ? R.id.hasAutoYes : R.id.hasAutoNo;
+        hasAutoGroup.check(hasAutoCheckedButtonId);
+
+        double shootingPercentageValue = data.getPercentAutoShots();
+        shootingPercentage.getEditText().setText( String.valueOf(shootingPercentageValue));
+
+        String ballsShotInAuto = StringUtils.defaultIfBlank(String.valueOf(data.getBallsPickedOrShotInAuto()), "0");
+        shotCount.getEditText().setText(ballsShotInAuto);
+
+        boolean wantsHelpWithAuto = data.getHelpCreatingAuto();
+        int wantsHelpCheckedButtonId = wantsHelpWithAuto ? R.id.helpAutoYes : R.id.helpAutoNo;
+        helpAutoGroup.check(wantsHelpCheckedButtonId);
+
+        String programmingLanguage = StringUtils.defaultIfBlank(data.getCodingLanguage(), defaultProgrammingLanguage);
+        programmingLanguageAutoComplete.setText(programmingLanguage, false);
+
+        setVisibility();
+    }
+
+    public void setVisibility() {
+        if (hasAutoGroup.getCheckedRadioButtonId() == R.id.hasAutoYes) {
             missingAutoLayout.setVisibility(View.GONE);
             hasAutoLayout.setVisibility(View.VISIBLE);
             autoLanguage.setVisibility(View.GONE);
@@ -160,7 +176,7 @@ public class PitScoutAutoFragment extends Fragment {
             autoLanguage.setVisibility(View.VISIBLE);
         }
 
-        if( helpAutoGroup.getCheckedRadioButtonId() == R.id.helpAutoNo ){
+        if (helpAutoGroup.getCheckedRadioButtonId() == R.id.helpAutoNo) {
             autoLanguage.setVisibility(View.GONE);
         } else {
             autoLanguage.setVisibility(View.VISIBLE);

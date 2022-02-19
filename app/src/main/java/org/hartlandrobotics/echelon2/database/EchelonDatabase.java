@@ -40,7 +40,7 @@ import java.util.concurrent.Executors;
         DistrictEvtCrossRef.class,
         Match.class
 
-}, version = 7,
+}, version = 8,
         exportSchema = false
 )
 public abstract class EchelonDatabase extends RoomDatabase {

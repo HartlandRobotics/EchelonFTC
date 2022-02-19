@@ -48,6 +48,9 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
         if( teleOpFragment != null ){
             teleOpFragment.setData(data);
         }
+        if( teamFragment != null ){
+            teamFragment.setData(data);
+        }
         if( endGameFragment != null ){
             endGameFragment.setData(data);
         }
@@ -76,11 +79,11 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
         }
         if( teleOpFragment != null ){
             Log.i(TAG, "populating telop fragment data");
-            //teamFragment.populateDataFromControls();
+            teleOpFragment.populateDataFromControls();
         }
         if( endGameFragment != null ){
             Log.i(TAG, "populate end game fragment data");
-            //endGameFragment.populateDataFromControls();
+            endGameFragment.populateDataFromControls();
         }
         if( photosFragment != null ){
             Log.i(TAG, "populate photos fragment");
@@ -117,20 +120,13 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
                 // set data?
                 return photosFragment;
             default:
-                Log.e(TAG, "Invalid tab selected for pit scout tab layout");
-                return null;
+                throw new IllegalArgumentException("invalid tab selection for pitscouting");
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull FragmentViewHolder holder, int position, @NonNull List<Object> payloads) {
         super.onBindViewHolder(holder, position, payloads);
-
-        // call each fragment to update controls based on current data
-        if( autoFragment != null ){
-            autoFragment.populateControlsFromData();
-        }
-
     }
 
     @Override
