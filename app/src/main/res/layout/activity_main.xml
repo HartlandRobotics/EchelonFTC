@@ -29,6 +29,18 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/matchDropdownTesting"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Match Dropdown"
+        app:layout_constraintTop_toBottomOf="@id/pit_scout_button"
+        app:layout_constraintBottom_toTopOf="@id/status_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.33"
+        />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/main_admin_start_scouting"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -75,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.33"
-        app:layout_constraintBottom_toTopOf="@id/status_layout"
+        app:layout_constraintBottom_toTopOf="@id/matchDropdownTesting"
         />
 
     <LinearLayout

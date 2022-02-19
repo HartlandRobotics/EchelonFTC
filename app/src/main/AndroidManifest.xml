@@ -18,34 +18,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Echelon2">
         <activity
-            android:screenOrientation="landscape"
-            android:name=".PitScoutActivity"
-            android:exported="false" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".AdditionalNotesActivity"
-            android:exported="false" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".TeamQuestionsActivity"
-            android:exported="false" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".TBA.TBAActivity"
-            android:exported="true"/>
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".BlueAllianceActivity"
-            android:exported="true" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".AdminSettingsActivity"
-            android:exported="true" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".MatchDropdownActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"/>
 
+        <activity
+            android:name=".PitScoutActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".AdditionalNotesActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".TeamQuestionsActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".TBA.TBAActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".BlueAllianceActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".AdminSettingsActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
