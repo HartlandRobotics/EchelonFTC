@@ -64,7 +64,7 @@ public class BlueAllianceStatus {
         setPreferenceValue(EVENT_KEY, eventKey);
     }
 
-    private void loadSettingsFromPrefs(){
+    public void loadSettingsFromPrefs(){
         Log.i(TAG, "Loading BlueAllianceStatus from preferences");
 
         this.season = getSharedPreferences().getString(SEASON_KEY, StringUtils.EMPTY);

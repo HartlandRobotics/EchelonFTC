@@ -60,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
         setupSeasonSelection();
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        setupStatus();
+    }
+
     private void setupStartScoutingButton(){
         startScouting = this.findViewById(R.id.main_admin_start_scouting);
         startScouting.setOnClickListener(view -> AutoMatchScoutingActivity.launch(MainActivity.this));
@@ -87,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupStatus(){
+       status.loadSettingsFromPrefs();
         TextInputLayout seasonLayout = findViewById(R.id.season_status_layout);
         seasonLayout.getEditText().setText(status.getSeason());
 
