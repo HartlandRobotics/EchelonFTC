@@ -22,11 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Echelon2">
         <activity
-            android:name=".matchScouting.AutoMatchScoutingActivity"
+            android:name=".matchScouting.MatchScoutingAutoActivity"
             android:exported="false" />
             android:screenOrientation="landscape" />
         <activity
-            android:name=".matchScouting.MatchScoutingActvity"
+            android:name=".matchScouting.MatchScoutingTeleopActvity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
@@ -42,7 +42,7 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".TBA.TBAActivity"
+            android:name=".blueAlliance.BlueAllianceActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity

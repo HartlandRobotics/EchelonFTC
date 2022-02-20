@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.TBA.fragments;
+package org.hartlandrobotics.echelon2.blueAlliance.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,10 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.hartlandrobotics.echelon2.R;
-import org.hartlandrobotics.echelon2.TBA.Api;
-import org.hartlandrobotics.echelon2.TBA.ApiInterface;
-import org.hartlandrobotics.echelon2.TBA.TBAActivity;
-import org.hartlandrobotics.echelon2.TBA.models.SyncMatch;
+import org.hartlandrobotics.echelon2.blueAlliance.Api;
+import org.hartlandrobotics.echelon2.blueAlliance.ApiInterface;
+import org.hartlandrobotics.echelon2.blueAlliance.models.SyncMatch;
 import org.hartlandrobotics.echelon2.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Match;
 import org.hartlandrobotics.echelon2.database.repositories.EventRepo;

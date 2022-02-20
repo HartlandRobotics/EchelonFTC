@@ -15,9 +15,9 @@ import android.widget.AutoCompleteTextView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
-import org.hartlandrobotics.echelon2.TBA.TBAActivity;
+import org.hartlandrobotics.echelon2.blueAlliance.BlueAllianceActivity;
 import org.hartlandrobotics.echelon2.database.entities.Season;
-import org.hartlandrobotics.echelon2.matchScouting.AutoMatchScoutingActivity;
+import org.hartlandrobotics.echelon2.matchScouting.MatchScoutingAutoActivity;
 import org.hartlandrobotics.echelon2.matchScouting.MatchSelectionActivity;
 import org.hartlandrobotics.echelon2.models.SeasonViewModel;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupStartScoutingButton(){
         startScouting = this.findViewById(R.id.main_admin_start_scouting);
-        startScouting.setOnClickListener(view -> AutoMatchScoutingActivity.launch(MainActivity.this));
+        startScouting.setOnClickListener(view -> MatchScoutingAutoActivity.launch(MainActivity.this));
     }
 
     private void setupPitScoutingButton(){
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupTbaStatusButton(){
         tbaStatus = this.findViewById(R.id.tba_button);
-        tbaStatus.setOnClickListener(view -> TBAActivity.launch(MainActivity.this));
+        tbaStatus.setOnClickListener(view -> BlueAllianceActivity.launch(MainActivity.this));
     }
 
     //Testing match dropdown

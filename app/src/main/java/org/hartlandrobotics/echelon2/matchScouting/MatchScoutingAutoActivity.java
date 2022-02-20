@@ -11,7 +11,7 @@ import com.google.android.material.button.MaterialButton;
 
 import org.hartlandrobotics.echelon2.R;
 
-public class AutoMatchScoutingActivity extends AppCompatActivity {
+public class MatchScoutingAutoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +22,12 @@ public class AutoMatchScoutingActivity extends AppCompatActivity {
         teleOpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MatchScoutingActvity.launch(AutoMatchScoutingActivity.this);
+                MatchScoutingTeleopActvity.launch(MatchScoutingAutoActivity.this);
             }
         });
     }
     public static void launch(Context context){
-        Intent intent = new Intent(context, AutoMatchScoutingActivity.class);
+        Intent intent = new Intent(context, MatchScoutingAutoActivity.class);
         context.startActivity(intent);
     }
 

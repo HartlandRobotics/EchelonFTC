@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.TBA.fragments;
+package org.hartlandrobotics.echelon2.blueAlliance.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,10 +20,10 @@ import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.hartlandrobotics.echelon2.R;
-import org.hartlandrobotics.echelon2.TBA.Api;
-import org.hartlandrobotics.echelon2.TBA.ApiInterface;
-import org.hartlandrobotics.echelon2.TBA.TBAActivity;
-import org.hartlandrobotics.echelon2.TBA.models.SyncEvent;
+import org.hartlandrobotics.echelon2.blueAlliance.Api;
+import org.hartlandrobotics.echelon2.blueAlliance.ApiInterface;
+import org.hartlandrobotics.echelon2.blueAlliance.BlueAllianceActivity;
+import org.hartlandrobotics.echelon2.blueAlliance.models.SyncEvent;
 import org.hartlandrobotics.echelon2.database.entities.DistrictEvtCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Evt;
 import org.hartlandrobotics.echelon2.database.repositories.EventRepo;
@@ -228,8 +228,8 @@ public class EventsFragment extends Fragment {
         }
 
         void setCurrentEvent(EventsListViewModel currentViewModel){
-            TBAActivity tbaActivity = (TBAActivity)getActivity();
-            tbaActivity.setEventKey(currentViewModel.getEventKey());
+            BlueAllianceActivity blueAllianceActivity = (BlueAllianceActivity)getActivity();
+            blueAllianceActivity.setEventKey(currentViewModel.getEventKey());
 
             for(EventsListViewModel viewModel : eventViewModels){
                 viewModel.setIsSelected( currentViewModel.getEventKey().equals(viewModel.getEventKey()));

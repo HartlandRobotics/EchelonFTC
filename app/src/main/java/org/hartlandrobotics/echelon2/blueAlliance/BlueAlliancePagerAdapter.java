@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.TBA;
+package org.hartlandrobotics.echelon2.blueAlliance;
 
 import android.util.Log;
 
@@ -8,18 +8,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import org.hartlandrobotics.echelon2.TBA.fragments.DistrictsFragment;
-import org.hartlandrobotics.echelon2.TBA.fragments.EventsFragment;
-import org.hartlandrobotics.echelon2.TBA.fragments.MatchesFragment;
-import org.hartlandrobotics.echelon2.TBA.fragments.TeamsFragment;
+import org.hartlandrobotics.echelon2.blueAlliance.fragments.DistrictsFragment;
+import org.hartlandrobotics.echelon2.blueAlliance.fragments.EventsFragment;
+import org.hartlandrobotics.echelon2.blueAlliance.fragments.MatchesFragment;
+import org.hartlandrobotics.echelon2.blueAlliance.fragments.TeamsFragment;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class TBAPagerAdapter extends FragmentStateAdapter {
+public class BlueAlliancePagerAdapter extends FragmentStateAdapter {
 
-   public TBAPagerAdapter(@NonNull FragmentManager fragmentManager, Lifecycle lifecycle) {
+   public BlueAlliancePagerAdapter(@NonNull FragmentManager fragmentManager, Lifecycle lifecycle) {
       super(fragmentManager, lifecycle);
    }
 

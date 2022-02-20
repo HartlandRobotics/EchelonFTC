@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.TBA.fragments;
+package org.hartlandrobotics.echelon2.blueAlliance.fragments;
 
 import org.hartlandrobotics.echelon2.database.entities.Evt;
 

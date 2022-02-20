@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import org.hartlandrobotics.echelon2.R;
 
-public class MatchScoutingActvity extends AppCompatActivity {
+public class MatchScoutingTeleopActvity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class MatchScoutingActvity extends AppCompatActivity {
     }
 
     public static void launch(Context context){
-        Intent intent = new Intent(context, MatchScoutingActvity.class);
+        Intent intent = new Intent(context, MatchScoutingTeleopActvity.class);
         context.startActivity(intent);
     }
 

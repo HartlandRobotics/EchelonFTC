@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.TBA.fragments;
+package org.hartlandrobotics.echelon2.blueAlliance.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,13 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.hartlandrobotics.echelon2.R;
-import org.hartlandrobotics.echelon2.TBA.Api;
-import org.hartlandrobotics.echelon2.TBA.ApiInterface;
-import org.hartlandrobotics.echelon2.TBA.models.SyncTeam;
+import org.hartlandrobotics.echelon2.blueAlliance.Api;
+import org.hartlandrobotics.echelon2.blueAlliance.ApiInterface;
+import org.hartlandrobotics.echelon2.blueAlliance.models.SyncTeam;
 import org.hartlandrobotics.echelon2.database.entities.EvtTeamCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Team;
 import org.hartlandrobotics.echelon2.database.repositories.TeamRepo;
-import org.hartlandrobotics.echelon2.models.TeamViewModel;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.TBA;
+package org.hartlandrobotics.echelon2.blueAlliance;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,25 +14,20 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.R;
 
-import org.hartlandrobotics.echelon2.TBA.fragments.DistrictsFragment;
-import org.hartlandrobotics.echelon2.TBA.models.SyncStatus;
-import org.hartlandrobotics.echelon2.database.entities.District;
-import org.hartlandrobotics.echelon2.database.repositories.DistrictRepo;
+import org.hartlandrobotics.echelon2.blueAlliance.models.SyncStatus;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class TBAActivity extends AppCompatActivity {
+public class BlueAllianceActivity extends AppCompatActivity {
     BlueAllianceStatus tbaStatus;
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
-    TBAPagerAdapter tbaPagerAdapter;
+    BlueAlliancePagerAdapter blueAlliancePagerAdapter;
 
     TextInputLayout seasonStatusLayout;
     TextInputLayout onlineStatusLayout;
@@ -41,7 +36,7 @@ public class TBAActivity extends AppCompatActivity {
     TextInputLayout matchStatusLayout;
 
     public static void launch(Context context){
-        Intent intent = new Intent(context, TBAActivity.class);
+        Intent intent = new Intent(context, BlueAllianceActivity.class);
         context.startActivity(intent);
     }
 
@@ -55,11 +50,11 @@ public class TBAActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
-        tbaPagerAdapter = new TBAPagerAdapter(getSupportFragmentManager(), getLifecycle());
-        viewPager.setAdapter(tbaPagerAdapter);
+        blueAlliancePagerAdapter = new BlueAlliancePagerAdapter(getSupportFragmentManager(), getLifecycle());
+        viewPager.setAdapter(blueAlliancePagerAdapter);
 
         new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> tab.setText(tbaPagerAdapter.getTabTitle(position))).attach();
+                (tab, position) -> tab.setText(blueAlliancePagerAdapter.getTabTitle(position))).attach();
 
         seasonStatusLayout = findViewById(R.id.seasonStatusLayout);
         setSeasonStatus( tbaStatus.getSeason() );

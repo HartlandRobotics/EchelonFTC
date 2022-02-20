@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.TBA.fragments;
+package org.hartlandrobotics.echelon2.blueAlliance.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,10 +19,10 @@ import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.hartlandrobotics.echelon2.R;
-import org.hartlandrobotics.echelon2.TBA.Api;
-import org.hartlandrobotics.echelon2.TBA.ApiInterface;
-import org.hartlandrobotics.echelon2.TBA.TBAActivity;
-import org.hartlandrobotics.echelon2.TBA.models.SyncDistrict;
+import org.hartlandrobotics.echelon2.blueAlliance.Api;
+import org.hartlandrobotics.echelon2.blueAlliance.ApiInterface;
+import org.hartlandrobotics.echelon2.blueAlliance.BlueAllianceActivity;
+import org.hartlandrobotics.echelon2.blueAlliance.models.SyncDistrict;
 import org.hartlandrobotics.echelon2.database.entities.District;
 import org.hartlandrobotics.echelon2.database.repositories.DistrictRepo;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
@@ -227,8 +226,8 @@ public class DistrictsFragment extends Fragment {
         }
 
         void setCurrentDistrict(DistrictListViewModel currentViewModel){
-            TBAActivity tbaActivity = (TBAActivity)getActivity();
-            tbaActivity.setDistrictKey(currentViewModel.getDistrictKey());
+            BlueAllianceActivity blueAllianceActivity = (BlueAllianceActivity)getActivity();
+            blueAllianceActivity.setDistrictKey(currentViewModel.getDistrictKey());
 
             for(DistrictListViewModel viewModel : districtViewModels ){
                 viewModel.setIsSelected( currentViewModel.getDistrictKey().equals(viewModel.getDistrictKey()));
