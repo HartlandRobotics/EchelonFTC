@@ -60,11 +60,14 @@ public class EventsFragment extends Fragment {
         errorTextDisplay = fragmentView.findViewById(R.id.errorTextDisplay);
         errorTextDisplay.setVisibility(View.GONE);
 
-        setupCurrentEvents();
-
-        setupEventPulls();
-
         return fragmentView;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        setupCurrentEvents();
+        setupEventPulls();
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){

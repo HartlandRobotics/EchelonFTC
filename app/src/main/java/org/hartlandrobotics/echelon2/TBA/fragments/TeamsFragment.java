@@ -55,10 +55,14 @@ public class TeamsFragment extends Fragment {
         teamPull = fragmentView.findViewById(R.id.teamPullButton);
         errorTextDisplay = fragmentView.findViewById(R.id.errorTextDisplay);
 
+        return fragmentView;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
         setupCurrentTeams();
         setupTeamPull();
-
-        return fragmentView;
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){

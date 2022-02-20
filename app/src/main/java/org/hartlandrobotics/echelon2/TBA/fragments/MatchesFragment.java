@@ -61,11 +61,14 @@ public class MatchesFragment extends Fragment {
         //errorTextDisplay = fragmentView.findViewById(R.id.errorTextDisplay);
         //errorTextDisplay.setVisibility(View.GONE);
 
-        setupCurrentMatches();
-
-        setupPullMatches();
-
         return fragmentView;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        setupCurrentMatches();
+        setupPullMatches();
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
