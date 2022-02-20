@@ -25,6 +25,7 @@ import org.hartlandrobotics.echelon2.TBA.TBAActivity;
 import org.hartlandrobotics.echelon2.TBA.models.SyncMatch;
 import org.hartlandrobotics.echelon2.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Match;
+import org.hartlandrobotics.echelon2.database.repositories.EventRepo;
 import org.hartlandrobotics.echelon2.database.repositories.MatchRepo;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
@@ -87,9 +88,10 @@ public class MatchesFragment extends Fragment {
         Context appContext = getActivity().getApplicationContext();
         BlueAllianceStatus status = new BlueAllianceStatus(appContext);
         String eventKey = status.getEventKey();
-        MatchRepo matchRepo = new MatchRepo(MatchesFragment.this.getActivity().getApplication());
-        matchRepo.getMatchesByEvent(eventKey).observe(getViewLifecycleOwner(), events -> {
-            matchListAdapter.setMatches(events.matches);
+        EventRepo eventRepo = new EventRepo(MatchesFragment.this.getActivity().getApplication());
+        eventRepo.getEventWithMatchs(eventKey).observe(getViewLifecycleOwner(), events -> {
+            List<Match> matches = events != null ? events.matches : new ArrayList<>();
+            matchListAdapter.setMatches(matches);
         });
 
     }

@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2;
+package org.hartlandrobotics.echelon2.matchScouting;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.button.MaterialButton;
+
+import org.hartlandrobotics.echelon2.R;
 
 public class AutoMatchScoutingActivity extends AppCompatActivity {
 

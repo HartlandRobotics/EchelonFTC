@@ -1,13 +1,14 @@
 package org.hartlandrobotics.echelon2;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
@@ -16,6 +17,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.hartlandrobotics.echelon2.TBA.TBAActivity;
 import org.hartlandrobotics.echelon2.database.entities.Season;
+import org.hartlandrobotics.echelon2.matchScouting.AutoMatchScoutingActivity;
+import org.hartlandrobotics.echelon2.matchScouting.MatchSelectionActivity;
 import org.hartlandrobotics.echelon2.models.SeasonViewModel;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
@@ -58,6 +61,30 @@ public class MainActivity extends AppCompatActivity {
         setupStatus();
 
         setupSeasonSelection();
+
+        handlePermissions();
+    }
+
+    private void handlePermissions() {
+        int REQUEST_REQUIRED_PERMISSIONS = 1;
+        String[] REQUIRED_PERMISSIONS = {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.INTERNET,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.BLUETOOTH,
+                Manifest.permission.BLUETOOTH_ADMIN,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+        };
+
+        boolean requestNeeded = false;
+        for( String permission : REQUIRED_PERMISSIONS ){
+            int permissionId = ActivityCompat.checkSelfPermission(this, permission);
+            requestNeeded |=  (permissionId != PackageManager.PERMISSION_GRANTED);
+        }
+        if( requestNeeded ) {
+            ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS, REQUEST_REQUIRED_PERMISSIONS );
+        }
     }
 
     @Override
@@ -89,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     //Testing match dropdown
     private void setupMatchDropdownButton(){
         matchDropdownTesting = this.findViewById(R.id.matchDropdownTesting);
-        matchDropdownTesting.setOnClickListener(view -> MatchDropdownActivity.launch(MainActivity.this));
+        matchDropdownTesting.setOnClickListener(view -> MatchSelectionActivity.launch(MainActivity.this));
     }
 
     private void setupStatus(){

@@ -22,23 +22,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Echelon2">
         <activity
-            android:name=".AutoMatchScoutingActivity"
+            android:name=".matchScouting.AutoMatchScoutingActivity"
             android:exported="false" />
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MatchScoutingActvity"
+            android:name=".matchScouting.MatchScoutingActvity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MatchDropdownActivity"
+            android:name=".matchScouting.MatchSelectionActivity"
             android:exported="false"
             android:screenOrientation="landscape"/>
         <activity
             android:name=".PitScoutActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".AdditionalNotesActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity

@@ -1,10 +1,12 @@
-package org.hartlandrobotics.echelon2;
+package org.hartlandrobotics.echelon2.matchScouting;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import org.hartlandrobotics.echelon2.R;
 
 public class MatchScoutingActvity extends AppCompatActivity {
 
