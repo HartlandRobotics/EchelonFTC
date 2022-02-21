@@ -48,6 +48,17 @@
         android:textSize="48sp"
         />
 
+    <ImageButton
+        android:id="@+id/humanPlayer"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:src="@drawable/human_player_blank"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/teleOp"
         android:layout_width="wrap_content"

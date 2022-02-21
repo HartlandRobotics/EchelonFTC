@@ -88,4 +88,13 @@
         android:layout_margin="50dp"
         />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/scoutingDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

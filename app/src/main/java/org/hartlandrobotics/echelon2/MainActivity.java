@@ -16,6 +16,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.hartlandrobotics.echelon2.blueAlliance.BlueAllianceActivity;
+import org.hartlandrobotics.echelon2.configuration.AdminSettings;
+import org.hartlandrobotics.echelon2.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelon2.database.entities.Season;
 import org.hartlandrobotics.echelon2.matchScouting.MatchScoutingAutoActivity;
 import org.hartlandrobotics.echelon2.matchScouting.MatchSelectionActivity;
@@ -56,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
         setupPitScoutingButton();
         setupAdminSettingsButton();
         setupTbaStatusButton();
-        setupMatchDropdownButton();
-
-        setupStatus();
 
         setupSeasonSelection();
 
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupStartScoutingButton(){
         startScouting = this.findViewById(R.id.main_admin_start_scouting);
-        startScouting.setOnClickListener(view -> MatchScoutingAutoActivity.launch(MainActivity.this));
+        startScouting.setOnClickListener(view -> MatchSelectionActivity.launch(MainActivity.this));
     }
 
     private void setupPitScoutingButton(){
@@ -113,12 +112,6 @@ public class MainActivity extends AppCompatActivity {
         tbaStatus.setOnClickListener(view -> BlueAllianceActivity.launch(MainActivity.this));
     }
 
-    //Testing match dropdown
-    private void setupMatchDropdownButton(){
-        matchDropdownTesting = this.findViewById(R.id.matchDropdownTesting);
-        matchDropdownTesting.setOnClickListener(view -> MatchSelectionActivity.launch(MainActivity.this));
-    }
-
     private void setupStatus(){
        status.loadSettingsFromPrefs();
         TextInputLayout seasonLayout = findViewById(R.id.season_status_layout);
@@ -130,6 +123,9 @@ public class MainActivity extends AppCompatActivity {
         TextInputLayout eventLayout = findViewById(R.id.event_status_layout);
         eventLayout.getEditText().setText(status.getEventKey());
 
+        AdminSettings adminSettings = AdminSettingsProvider.getAdminSettings(this);
+        TextInputLayout deviceLayout = findViewById(R.id.device_status_layout);
+        deviceLayout.getEditText().setText(adminSettings.getDeviceRole());
     }
 
     List<Season> seasons = new ArrayList<>();

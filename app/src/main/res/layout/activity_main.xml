@@ -28,17 +28,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/matchDropdownTesting"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Match Dropdown"
-        app:layout_constraintTop_toBottomOf="@id/pit_scout_button"
-        app:layout_constraintBottom_toTopOf="@id/status_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.33"
-        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/main_admin_start_scouting"
@@ -60,10 +49,10 @@
         android:text="Admin Settings"
 
         app:layout_constraintTop_toBottomOf="@id/main_admin_start_scouting"
+        app:layout_constraintBottom_toTopOf="@id/tba_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.33"
-        app:layout_constraintBottom_toTopOf="@id/tba_button"
         />
 
     <com.google.android.material.button.MaterialButton
@@ -72,10 +61,10 @@
         android:layout_height="wrap_content"
         android:text="Blue Alliance"
         app:layout_constraintTop_toBottomOf="@id/main_admin_settings"
+        app:layout_constraintBottom_toTopOf="@id/pit_scout_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.33"
-        app:layout_constraintBottom_toTopOf="@id/pit_scout_button"
         />
 
     <com.google.android.material.button.MaterialButton
@@ -87,7 +76,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.33"
-        app:layout_constraintBottom_toTopOf="@id/matchDropdownTesting"
+        app:layout_constraintBottom_toTopOf="@id/status_layout"
         />
 
     <LinearLayout
@@ -137,6 +126,19 @@
             android:layout_height="wrap_content"
             android:layout_weight=".25"
             android:hint="Event">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/device_status_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".25"
+            android:hint="Device">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
