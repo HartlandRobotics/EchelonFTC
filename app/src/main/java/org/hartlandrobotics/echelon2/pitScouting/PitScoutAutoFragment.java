@@ -72,9 +72,8 @@ public class PitScoutAutoFragment extends Fragment {
     @Override
     public void onPause() {
         Log.i(TAG, "OnPause running");
-        populateDataFromControls();
         super.onPause();
-        Log.i(TAG, "pause Has auto: " + data.getHasAutonomous());
+        populateDataFromControls();
     }
 
     private void setupControls(View view) {

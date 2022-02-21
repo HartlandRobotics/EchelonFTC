@@ -89,6 +89,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/season_status_layout"
+            android:enabled="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".25"
@@ -98,7 +99,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:textColor="@color/secondaryTextColor"
                 >
             </com.google.android.material.textfield.TextInputEditText>
 
@@ -106,6 +107,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/district_status_layout"
+            android:enabled="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".25"
@@ -114,6 +116,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/secondaryTextColor"
                >
 
             </com.google.android.material.textfield.TextInputEditText>
@@ -122,6 +125,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/event_status_layout"
+            android:enabled="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".25"
@@ -130,6 +134,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/secondaryTextColor"
                 ></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,11 +143,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".25"
-            android:hint="Device">
+            android:hint="Device"
+            android:enabled="false"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/secondaryTextColor"
                 ></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 

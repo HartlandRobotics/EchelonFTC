@@ -42,11 +42,13 @@
             android:layout_height="wrap_content"
             android:layout_weight=".25"
             android:hint="Online"
+            android:enabled="false"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="false"
+                android:textColor="@color/secondaryTextColor"
                 >
             </com.google.android.material.textfield.TextInputEditText>
 
@@ -57,12 +59,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".25"
+            android:enabled="false"
             android:hint="Season"
             >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/secondaryTextColor"
                 >
             </com.google.android.material.textfield.TextInputEditText>
 
@@ -73,11 +77,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".25"
+            android:enabled="false"
             android:hint="District">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/secondaryTextColor"
                 >
 
             </com.google.android.material.textfield.TextInputEditText>
@@ -89,12 +95,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".25"
+            android:enabled="false"
             android:hint="Event">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2022milan">
+                android:textColor="@color/secondaryTextColor"
+                >
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
