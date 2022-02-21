@@ -34,19 +34,11 @@
             android:exported="false"
             android:screenOrientation="landscape"/>
         <activity
-            android:name=".PitScoutActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".TeamQuestionsActivity"
+            android:name=".pitScouting.PitScoutActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
             android:name=".blueAlliance.BlueAllianceActivity"
-            android:exported="true"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".BlueAllianceActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity

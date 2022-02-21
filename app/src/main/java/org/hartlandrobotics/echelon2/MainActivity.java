@@ -19,9 +19,9 @@ import org.hartlandrobotics.echelon2.blueAlliance.BlueAllianceActivity;
 import org.hartlandrobotics.echelon2.configuration.AdminSettings;
 import org.hartlandrobotics.echelon2.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelon2.database.entities.Season;
-import org.hartlandrobotics.echelon2.matchScouting.MatchScoutingAutoActivity;
 import org.hartlandrobotics.echelon2.matchScouting.MatchSelectionActivity;
 import org.hartlandrobotics.echelon2.models.SeasonViewModel;
+import org.hartlandrobotics.echelon2.pitScouting.PitScoutActivity;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
 import java.util.ArrayList;

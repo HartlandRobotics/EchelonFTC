@@ -2,27 +2,20 @@ package org.hartlandrobotics.echelon2.pitScouting;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.android.material.textview.MaterialTextView;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hartlandrobotics.echelon2.PitScoutActivity;
 import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
@@ -117,9 +110,9 @@ public class PitScoutAutoFragment extends Fragment {
 
     public void populateDataFromControls() {
 
-        Log.i(TAG, "Checked Button Id: " + hasAutoGroup.getCheckedRadioButtonId());
-        Log.i(TAG, "YES" + R.id.hasAutoYes);
-        Log.i(TAG, "NO" + R.id.hasAutoNo);
+        if( data == null ) return;
+        if( hasAutoGroup == null ) return;
+
         boolean hasAuto = hasAutoGroup.getCheckedRadioButtonId() == R.id.hasAutoYes;
         data.setHasAutonomous(hasAuto);
 
@@ -139,7 +132,6 @@ public class PitScoutAutoFragment extends Fragment {
 
     public void populateControlsFromData() {
         if (data == null) {
-            Log.i(TAG, "no data to bind");
             return;
         }
 

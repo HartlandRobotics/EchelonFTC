@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2;
+package org.hartlandrobotics.echelon2.pitScouting;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -9,8 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
@@ -19,13 +17,12 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textview.MaterialTextView;
 
+import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.database.entities.Team;
 import org.hartlandrobotics.echelon2.models.PitScoutViewModel;
 import org.hartlandrobotics.echelon2.models.TeamViewModel;
-import org.hartlandrobotics.echelon2.pitScouting.PitScoutingPagerAdapter;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
-import org.hartlandrobotics.echelon2.utilities.TabLayoutUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
