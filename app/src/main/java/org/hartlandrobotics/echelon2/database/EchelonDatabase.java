@@ -7,6 +7,7 @@ import org.hartlandrobotics.echelon2.database.dao.DistrictWithEventsDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithMatchesDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithTeamsDao;
 import org.hartlandrobotics.echelon2.database.dao.MatchDao;
+import org.hartlandrobotics.echelon2.database.dao.MatchResultDao;
 import org.hartlandrobotics.echelon2.database.dao.PitScoutDao;
 import org.hartlandrobotics.echelon2.database.dao.SeasonDao;
 import org.hartlandrobotics.echelon2.database.dao.TeamDao;
@@ -22,6 +23,7 @@ import org.hartlandrobotics.echelon2.database.dao.EvtDao;
 import org.hartlandrobotics.echelon2.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.EvtTeamCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Match;
+import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.database.entities.Season;
 import org.hartlandrobotics.echelon2.database.entities.Team;
@@ -38,7 +40,8 @@ import java.util.concurrent.Executors;
         EvtTeamCrossRef.class,
         EvtMatchCrossRef.class,
         DistrictEvtCrossRef.class,
-        Match.class
+        Match.class,
+        MatchResult.class
 
 }, version = 8,
         exportSchema = false
@@ -53,6 +56,7 @@ public abstract class EchelonDatabase extends RoomDatabase {
     public abstract EvtWithMatchesDao eventMatchesDao();
     public abstract DistrictWithEventsDao districtEventsDao();
     public abstract MatchDao matchDao();
+    public abstract MatchResultDao matchResultDao();
 
 
     private static volatile EchelonDatabase _instance;
@@ -98,12 +102,12 @@ public abstract class EchelonDatabase extends RoomDatabase {
 
             databaseWriteExecutor.execute(() -> {
                 //any initialization stuff goes here
-                //DistrictDao districtDao = _instance.districtDao();
                 EvtDao evtDao = _instance.eventDao();
                 TeamDao teamDao = _instance.teamDao();
                 DistrictDao districtDao = _instance.districtDao();
                 PitScoutDao pitScoutDao = _instance.pitScoutDao();
                 SeasonDao seasonDao = _instance.seasonDao();
+                MatchResultDao matchResultDao = _instance.matchResultDao();
             } );
         }
     };

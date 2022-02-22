@@ -21,12 +21,18 @@ public class MatchResult {
     private String eventKey;
 
     @NonNull
+    @ColumnInfo(name = "match_key")
+    private String matchKey;
+
+    @NonNull
     @ColumnInfo(name = "team_key")
     private String teamKey;
 
     @ColumnInfo(name = "has_been_synced")
     private boolean hasBeenSynced;
 
+    @ColumnInfo(name="auto_taxi_tarmac")
+    private boolean taxiTarmac;
     @ColumnInfo(name = "auto_high_balls")
     private int autoHighBalls;
 
@@ -57,8 +63,10 @@ public class MatchResult {
     public MatchResult(
             @NonNull String matchResultKey,
             @NonNull String eventKey,
+            @NonNull String matchKey,
             @NonNull String teamKey,
             boolean hasBeenSynced,
+            boolean taxiTarmac,
             int autoHighBalls,
             int autoLowBalls,
             int autoHumanPlayerShots,
@@ -71,8 +79,10 @@ public class MatchResult {
 
         this.matchResultKey = StringUtils.defaultIfBlank(matchResultKey, UUID.randomUUID().toString());
         this.eventKey = eventKey;
+        this.matchKey = matchKey;
         this.teamKey = teamKey;
         this.hasBeenSynced = hasBeenSynced;
+        this.taxiTarmac = taxiTarmac;
         this.autoHighBalls = autoHighBalls;
         this.autoLowBalls = autoLowBalls;
         this.autoHumanPlayerShots = autoHumanPlayerShots;
@@ -91,6 +101,9 @@ public class MatchResult {
         this.eventKey = eventKey;
     }
 
+    public String getMatchKey(){ return matchKey; }
+    public void setMatchKey(String matchKey){ this.matchKey = matchKey; }
+
     public String getTeamKey(){ return teamKey; }
     public void setTeamKey(String teamKey){
         this.teamKey = teamKey;
@@ -100,6 +113,9 @@ public class MatchResult {
     public void setHasBeenSynced(boolean hasBeenSynced){
         this.hasBeenSynced = hasBeenSynced;
     }
+
+    public boolean getTaxiTarmac(){ return taxiTarmac; }
+    public void setTaxiTarmac(boolean taxiTarmac){ this.taxiTarmac = taxiTarmac; }
 
     public int getAutoHighBalls() { return autoHighBalls; }
     public void setAutoHighBalls(int autoHighBalls){

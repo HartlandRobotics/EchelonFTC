@@ -41,6 +41,7 @@ public class MatchSelectionActivity extends AppCompatActivity {
     ViewPager2 robotImagePager;
 
     Match currentMatch;
+    String currentTeamKey;
 
     public static void launch(Context context){
         Intent intent = new Intent(context, MatchSelectionActivity.class);
@@ -58,30 +59,37 @@ public class MatchSelectionActivity extends AppCompatActivity {
         scoutMatchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MatchScoutingAutoActivity.launch(MatchSelectionActivity.this);
+                String matchkey = currentMatch.getMatchKey();
+                String teamKey = currentTeamKey;
+
+                MatchScoutingAutoActivity.launch(MatchSelectionActivity.this, matchkey, teamKey);
             }
         });
 
         robotImagePager = findViewById(R.id.robotImagePager);
     }
 
-    private String getTeamNumber( Match match, String deviceRole){
+    private String getTeamKey( Match match, String deviceRole ){
         switch( deviceRole ){
             case "red1":
-                return trimTeamNumber( match.getRed1TeamKey() );
+                return match.getRed1TeamKey();
             case "red2":
-                return trimTeamNumber(match.getRed2TeamKey());
+                return match.getRed2TeamKey();
             case "red3":
-                return trimTeamNumber(match.getRed3TeamKey());
+                return match.getRed3TeamKey();
             case "blue1":
-                return trimTeamNumber(match.getBlue1TeamKey());
+                return match.getBlue1TeamKey();
             case "blue2":
-                return trimTeamNumber(match.getBlue2TeamKey());
+                return match.getBlue2TeamKey();
             case "blue3":
-                return trimTeamNumber(match.getBlue3TeamKey());
+                return match.getBlue3TeamKey();
             default:
                 throw new IllegalArgumentException("Invalid device role for match drop down");
         }
+    }
+    private String getTeamNumber( Match match, String deviceRole){
+        String teamKey = getTeamKey( match, deviceRole );
+        return trimTeamNumber( teamKey );
     }
 
     private String trimTeamNumber(String teamKey){
@@ -120,6 +128,7 @@ public class MatchSelectionActivity extends AppCompatActivity {
 
                     scoutMatchButton.setEnabled(true);
 
+                    currentTeamKey = getTeamKey(currentMatch, settings.getDeviceRole());
                     String teamNumber = getTeamNumber( currentMatch, settings.getDeviceRole());
                     teamNumber = "6";
                     List<String> imageFileNames = getImageFiles(teamNumber);
