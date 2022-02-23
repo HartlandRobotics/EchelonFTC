@@ -111,6 +111,20 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/teamNumText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint = "Team Number"
+        app:layout_constraintTop_toBottomOf="@+id/scoutingSeasonText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="9999"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/errorText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

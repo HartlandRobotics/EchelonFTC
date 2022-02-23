@@ -25,6 +25,9 @@ public class AdminSettingsViewModel extends AdminSettings {
 
         String prefDeviceRole = prefSettings.getDeviceRole();
         this.setDeviceRole( StringUtils.defaultIfBlank(prefDeviceRole, fileSettings.getDeviceRole()));
+
+        String prefTeamNum = prefSettings.getTeamNumber();
+        this.setTeamNumber(StringUtils.defaultIfBlank(prefTeamNum, fileSettings.getTeamNumber()));
     }
 
     public boolean isBlueAllianceApikeySynced(){

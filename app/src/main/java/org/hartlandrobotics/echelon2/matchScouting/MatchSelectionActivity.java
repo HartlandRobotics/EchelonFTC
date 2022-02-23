@@ -130,7 +130,6 @@ public class MatchSelectionActivity extends AppCompatActivity {
 
                     currentTeamKey = getTeamKey(currentMatch, settings.getDeviceRole());
                     String teamNumber = getTeamNumber( currentMatch, settings.getDeviceRole());
-                    teamNumber = "6";
                     List<String> imageFileNames = getImageFiles(teamNumber);
 
                     robotImagePager.setAdapter(new RobotImageAdapter(imageFileNames));
