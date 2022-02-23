@@ -59,10 +59,10 @@ public class MatchSelectionActivity extends AppCompatActivity {
         scoutMatchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String matchkey = currentMatch.getMatchKey();
+                String matchKey = currentMatch.getMatchKey();
                 String teamKey = currentTeamKey;
 
-                MatchScoutingAutoActivity.launch(MatchSelectionActivity.this, matchkey, teamKey);
+                MatchScoutingAutoActivity.launch(MatchSelectionActivity.this, matchKey, teamKey);
             }
         });
 

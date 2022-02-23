@@ -37,7 +37,7 @@
             android:exported="false" />
         android:screenOrientation="landscape" />
         <activity
-            android:name=".matchScouting.MatchScoutingTeleopActvity"
+            android:name=".matchScouting.MatchScoutingTeleopActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity

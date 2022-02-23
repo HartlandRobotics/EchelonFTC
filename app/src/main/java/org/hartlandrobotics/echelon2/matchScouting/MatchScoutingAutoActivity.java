@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageSwitcher;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
@@ -18,8 +16,6 @@ import org.hartlandrobotics.echelon2.configuration.AdminSettings;
 import org.hartlandrobotics.echelon2.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.models.MatchResultViewModel;
-import org.hartlandrobotics.echelon2.models.PitScoutViewModel;
-import org.hartlandrobotics.echelon2.pitScouting.PitScoutActivity;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
 public class MatchScoutingAutoActivity extends AppCompatActivity {
@@ -43,7 +39,11 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     MatchResultViewModel matchResultViewModel;
     MatchResult matchResult;
 
-    public static void launch(Context context, String teamKey, String matchKey){
+    String matchKey;
+    String teamKey;
+
+
+    public static void launch(Context context, String matchKey, String teamKey){
         Intent intent = new Intent(context, MatchScoutingAutoActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(MATCH_KEY, matchKey);
@@ -61,8 +61,8 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         setupControls();
 
         Bundle bundle = getIntent().getExtras();
-        String matchKey = bundle.getString(MATCH_KEY);
-        String teamKey = bundle.getString(TEAM_KEY);
+        matchKey = bundle.getString(MATCH_KEY);
+        teamKey = bundle.getString(TEAM_KEY);
 
         BlueAllianceStatus blueAllianceStatus = new BlueAllianceStatus(getApplicationContext());
 
@@ -97,7 +97,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         MaterialButton teleOpButton = findViewById(R.id.teleOp);
         teleOpButton.setOnClickListener(v -> {
             matchResultViewModel.upsert(matchResult);
-            MatchScoutingTeleopActvity.launch(MatchScoutingAutoActivity.this);
+            MatchScoutingTeleopActivity.launch(MatchScoutingAutoActivity.this, matchKey, teamKey );
         });
 
         topHubText = findViewById(R.id.topHubText);
