@@ -6,12 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".AdminSettingsActivity">
 
+    <include
+        android:id="@+id/actionBar"
+        layout="@layout/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/deviceRoleSelection"
         app:singleSelection="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionBar"
         android:paddingLeft="15dp">
 
         <com.google.android.material.button.MaterialButton

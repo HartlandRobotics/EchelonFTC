@@ -12,6 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hartlandrobotics.echelon2.EchelonActivity;
 import org.hartlandrobotics.echelon2.R;
 
 import org.hartlandrobotics.echelon2.blueAlliance.models.SyncStatus;
@@ -22,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class BlueAllianceActivity extends AppCompatActivity {
+public class BlueAllianceActivity extends EchelonActivity {
     BlueAllianceStatus tbaStatus;
 
     TabLayout tabLayout;
@@ -44,6 +45,8 @@ public class BlueAllianceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tba);
+
+        setupToolbar();
 
         tbaStatus = new BlueAllianceStatus(getApplicationContext());
 

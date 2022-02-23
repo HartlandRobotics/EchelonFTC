@@ -21,7 +21,7 @@ import org.hartlandrobotics.echelon2.configuration.AdminSettingsViewModel;
 
 import java.util.HashMap;
 
-public class AdminSettingsActivity extends AppCompatActivity {
+public class AdminSettingsActivity extends EchelonActivity {
     private static final String LOG_TAG = AdminSettingsActivity.class.getSimpleName();
 
     private MaterialButtonToggleGroup deviceRoleGroup;
@@ -41,6 +41,8 @@ public class AdminSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_settings);
+
+        setupToolbar();
 
 
 

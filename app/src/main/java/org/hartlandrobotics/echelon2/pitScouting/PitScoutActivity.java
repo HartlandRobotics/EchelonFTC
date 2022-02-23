@@ -17,6 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textview.MaterialTextView;
 
+import org.hartlandrobotics.echelon2.EchelonActivity;
 import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.database.entities.Team;
@@ -27,7 +28,7 @@ import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PitScoutActivity extends AppCompatActivity {
+public class PitScoutActivity extends EchelonActivity {
     private static final String TAG = "PitScoutActivity";
     private BlueAllianceStatus status;
     TabLayout tabLayout;
@@ -53,6 +54,8 @@ public class PitScoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_scout);
+
+        setupToolbar();
 
         status = new BlueAllianceStatus(getApplicationContext());
 

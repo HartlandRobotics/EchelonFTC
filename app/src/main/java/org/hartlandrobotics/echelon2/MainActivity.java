@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -29,16 +30,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends EchelonActivity {
 
     private BlueAllianceStatus status;
 
     private MaterialButton startScouting;
     private MaterialButton pitScouting;
-    private MaterialButton adminSettings;
-    private MaterialButton tbaStatus;
-    private MaterialButton tabTest;
-    private MaterialButton matchDropdownTesting;
 
     private AutoCompleteTextView seasonsAutoComplete;
 
@@ -52,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setupToolbar();
+
         status= new BlueAllianceStatus(getApplicationContext());
 
         setupStartScoutingButton();
         setupPitScoutingButton();
-        setupAdminSettingsButton();
-        setupTbaStatusButton();
 
         setupSeasonSelection();
 
@@ -102,15 +99,6 @@ public class MainActivity extends AppCompatActivity {
         pitScouting.setOnClickListener( v -> PitScoutActivity.launch(MainActivity.this ));
     }
 
-    private void setupAdminSettingsButton(){
-        adminSettings = this.findViewById(R.id.main_admin_settings);
-        adminSettings.setOnClickListener( view -> AdminSettingsActivity.launch( MainActivity.this ) );
-    }
-
-    private void setupTbaStatusButton(){
-        tbaStatus = this.findViewById(R.id.tba_button);
-        tbaStatus.setOnClickListener(view -> BlueAllianceActivity.launch(MainActivity.this));
-    }
 
     private void setupStatus(){
        status.loadSettingsFromPrefs();
@@ -171,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setEnabled(boolean seasonSelected){
            startScouting.setEnabled(seasonSelected);
-           tbaStatus.setEnabled(seasonSelected);
            pitScouting.setEnabled(seasonSelected);
     }
 }
