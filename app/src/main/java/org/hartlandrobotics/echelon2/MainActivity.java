@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
             String currentSeason = status.getSeason();
             String currentYear = status.getYear();
             String currentDisplay = currentSeason + " - " + currentYear;
+
             Optional<Integer> foundIndex = Optional.empty();
             for(int displayIndex=0; displayIndex< displaySeasons.size(); displayIndex++ ){
                 if( displaySeasons.get(displayIndex).equals(currentDisplay)){
@@ -154,7 +155,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             if( foundIndex.isPresent() ){
-                seasonsAutoComplete.setListSelection(foundIndex.get());
+                String selectedText = seasonsAdapter.getItem(foundIndex.get()).toString();
+
+                seasonsAutoComplete.setText(selectedText, false);
             }
             setEnabled(foundIndex.isPresent());
 
@@ -162,12 +165,17 @@ public class MainActivity extends AppCompatActivity {
                 Season selectedSeason = seasons.get(position);
                 status.setYear( String.valueOf(selectedSeason.getYear()) );
                 status.setSeason( selectedSeason.getName() );
+                String selectedText = status.getSeason() + " - " + status.getYear();
+                seasonsAutoComplete.setText(selectedText, false);
                 setupStatus();
                 setEnabled(true);
             });
 
+
+
         });
     }
+
 
     private void setEnabled(boolean seasonSelected){
            startScouting.setEnabled(seasonSelected);
