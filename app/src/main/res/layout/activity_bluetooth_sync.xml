@@ -13,13 +13,164 @@
         android:layout_height="?attr/actionBarSize" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/devicesHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="status"
+        android:text="Devices"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionBar"
         />
 
+    <!-- all devices -->
+    <LinearLayout
+        android:id="@+id/deviceLayout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/devicesHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <!-- Red Devices -->
+        <LinearLayout
+            android:id="@+id/redLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight=".33"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/red1SyncButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fetch Red1 Data"
+                app:icon="@drawable/outline_download_24"
+                android:layout_gravity="center"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/red2SyncButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fetch Red2 Data"
+                app:icon="@drawable/outline_download_24"
+                android:layout_gravity="center"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/red3SyncButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fetch Red3 Data"
+                app:icon="@drawable/outline_download_24"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+        <!-- Blue Devices -->
+        <LinearLayout
+            android:id="@+id/blueLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight=".33"
+            >
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/blue1SyncButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fetch Blue1 Data"
+                app:icon="@drawable/outline_download_24"
+                android:layout_gravity="center"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/blue2SyncButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fetch Blue2 Data"
+                app:icon="@drawable/outline_download_24"
+                android:layout_gravity="center"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/blue3SyncButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fetch Blue3 Data"
+                app:icon="@drawable/outline_download_24"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+        <!-- Sub Devices -->
+        <LinearLayout
+            android:id="@+id/subLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight=".33"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sub1SyncButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fetch Sub1 Data"
+                app:icon="@drawable/outline_download_24"
+                android:layout_gravity="center"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sub2SyncButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fetch Sub2 Data"
+                app:icon="@drawable/outline_download_24"
+                android:layout_gravity="center"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sub3SyncButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fetch Sub3 Data"
+                app:icon="@drawable/outline_download_24"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/logsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logs"
+        app:layout_constraintTop_toBottomOf="@id/deviceLayout"
+        android:layout_marginTop="20dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sync_log_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logsLabel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/list_item_bluetooth_log"
+        />
 
 
 

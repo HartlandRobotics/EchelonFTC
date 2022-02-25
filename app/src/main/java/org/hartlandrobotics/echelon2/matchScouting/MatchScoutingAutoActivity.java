@@ -55,7 +55,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auto_match_scouting);
+        setContentView(R.layout.activity_match_auto_scouting);
 
         setupColor();
         setupControls();

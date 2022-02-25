@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/miAdminSettings"
-        android:icon="@drawable/baseline_settings_white_24dp"
-        android:onClick="settingsPressed"
+        android:id="@+id/miBluetooth"
+        android:icon="@drawable/bluetooth_image"
+        android:onClick="bluetoothPressed"
         android:title=""
         app:showAsAction="ifRoom|withText" />
     <item
@@ -15,9 +15,15 @@
         android:title=""
         app:showAsAction="ifRoom|withText" />
     <item
-        android:id="@+id/miBluetooth"
-        android:icon="@drawable/bluetooth_image"
-        android:onClick="bluetoothPressed"
+        android:id="@+id/miExport"
+        android:icon="@drawable/baseline_drive_file_move_white_24dp"
+        android:onClick="exportPressed"
+        android:title=""
+        app:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/miAdminSettings"
+        android:icon="@drawable/baseline_settings_white_24dp"
+        android:onClick="settingsPressed"
         android:title=""
         app:showAsAction="ifRoom|withText" />
     <item
