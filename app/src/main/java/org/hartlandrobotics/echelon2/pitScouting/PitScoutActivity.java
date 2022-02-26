@@ -79,10 +79,12 @@ public class PitScoutActivity extends EchelonActivity {
         teamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
         teamViewModel.getAllTeams().observe(this, ts -> {
 
-            teams = ts;
+            teams = ts.stream()
+                    .sorted(Comparator.comparingInt(t -> t.getTeamNumber()))
+                    .collect(Collectors.toList());
+
 
             teamNames = teams.stream()
-                    .sorted(Comparator.comparingInt(t -> t.getTeamNumber()))
                     .map(t -> t.getTeamNumber() + " - " + t.getNickname())
                     //.sorted(Comparator.comparingInt(t -> t.getTeamNumber()))
                     .collect(Collectors.toList());

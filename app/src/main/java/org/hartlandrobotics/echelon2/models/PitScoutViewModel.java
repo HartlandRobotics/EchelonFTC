@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.database.repositories.PitScoutRepo;
 
+import java.util.List;
 import java.util.UUID;
 
 public class PitScoutViewModel extends AndroidViewModel {
@@ -31,6 +32,10 @@ public class PitScoutViewModel extends AndroidViewModel {
     public LiveData<PitScout> getPitScout(String eventKey, String teamKey) {
         return pitScoutRepo.getPitScout(eventKey, teamKey);
 
+    }
+
+    public LiveData<List<PitScout>> getPitScoutByEvent(String eventKey){
+        return pitScoutRepo.getPitScoutByEvent(eventKey);
     }
     public void upsert( PitScout pitScout ){
         pitScoutRepo.upsert( pitScout );
