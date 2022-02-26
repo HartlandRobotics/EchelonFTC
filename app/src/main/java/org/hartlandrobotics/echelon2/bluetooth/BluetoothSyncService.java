@@ -218,6 +218,7 @@ public class BluetoothSyncService {
             while ( currentState != STATE_CONNECTED ) {
                 try {
                     socket = acceptServerSocket.accept();
+                    Log.i(TAG, "accept success");
                 } catch ( IOException e ) {
                     Log.e(TAG, "accept failed");
                     break;

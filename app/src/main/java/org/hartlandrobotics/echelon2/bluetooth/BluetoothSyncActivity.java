@@ -217,7 +217,8 @@ public class BluetoothSyncActivity extends EchelonActivity {
                         ;
                         List<MatchResult> transferredMatchResults = transferResults.getMatchResults();
                         for ( MatchResult currentResult : transferredMatchResults ) {
-                            currentResult.setHasBeenSynced( true );
+                            // dburton
+                            //currentResult.setHasBeenSynced( true );
                             matchResultViewModel.upsert( currentResult );
                         }
 
@@ -254,7 +255,8 @@ public class BluetoothSyncActivity extends EchelonActivity {
                 case BluetoothMessageType.MESSAGE_SENT:
                     logLinesAdapter.addStatusItem( "Data sent to master" );
                     for ( MatchResult currentMatchResult : bluetoothService.nextUnsyncedMatchResults ) {
-                        currentMatchResult.setHasBeenSynced(true);
+                        //currentMatchResult.setHasBeenSynced(true);
+                        // dburton
                         matchResultViewModel.upsert( currentMatchResult );
                     }
                     setupData();
