@@ -55,7 +55,6 @@ public class BluetoothSyncService {
         this.matchResults = matchResults;
         nextUnsyncedMatchResults = matchResults.stream()
                 .filter( result -> result.getHasBeenSynced() == false )
-                .limit( 5 )
                 .collect( Collectors.toList( ));
     }
 
@@ -93,7 +92,6 @@ public class BluetoothSyncService {
     public synchronized void start() {
         nextUnsyncedMatchResults = matchResults.stream()
                 .filter( result -> result.getHasBeenSynced() == false )
-                .limit( 5 )
                 .collect( Collectors.toList( ));
 
         if ( connectThread != null ) {
@@ -380,7 +378,7 @@ public class BluetoothSyncService {
                         //System.out.println("inRead");
 
                         // Send the obtained bytes to the UI Activity
-                        Log.e(TAG, "completed parsing with " + result);
+                        Log.i(TAG, "completed parsing with " + result);
                         byte[] msg = result.getBytes();
                         handler.obtainMessage( BluetoothMessageType.MESSAGE_READ, msg.length, -1, msg )
                                 .sendToTarget();
