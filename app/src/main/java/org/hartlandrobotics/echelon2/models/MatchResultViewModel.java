@@ -12,6 +12,8 @@ import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.database.repositories.MatchResultRepo;
 
+import java.util.List;
+
 public class MatchResultViewModel extends AndroidViewModel {
     private MatchResultRepo matchResultRepo;
 
@@ -45,6 +47,11 @@ public class MatchResultViewModel extends AndroidViewModel {
 
     public LiveData<MatchResult> getMatchResultByMatchTeam(String matchKey, String teamKey ){
         return matchResultRepo.getMatchResultByMatchTeam(matchKey, teamKey);
+    }
+
+    public LiveData<List<MatchResult>> getMatchResultsByEvent(String eventKey){
+        return matchResultRepo.getMatchResultsByEvent(eventKey);
+
     }
 
     public void upsert( MatchResult matchResult ){

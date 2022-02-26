@@ -5,10 +5,14 @@ import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.transform.Result;
+
 public class ResultsContainer {
 
     private String sourceDeviceName;
     private List<MatchResult> matchResults;
+
+    public ResultsContainer(){}
 
     public ResultsContainer(String sourceDeviceName, List<MatchResult> matchResults){
         this.sourceDeviceName = sourceDeviceName;

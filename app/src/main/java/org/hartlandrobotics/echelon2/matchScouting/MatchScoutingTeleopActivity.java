@@ -145,7 +145,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
         traversalButton = findViewById(R.id.traversal);
         traversalButton.setOnClickListener(v -> {
-            matchResult.setEndHangTravers(!matchResult.getEndHangTraverse());
+            matchResult.setEndHangTraverse(!matchResult.getEndHangTraverse());
             populateControlsFromData();
         });
 
@@ -157,7 +157,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
         midButton = findViewById(R.id.mid);
         midButton.setOnClickListener(v -> {
-            matchResult.setEndGangMid( !matchResult.getEndHangMid() );
+            matchResult.setEndHangMid( !matchResult.getEndHangMid() );
             populateControlsFromData();
         });
 

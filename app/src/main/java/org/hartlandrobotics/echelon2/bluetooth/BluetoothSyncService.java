@@ -6,7 +6,11 @@ import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 
 import java.io.IOException;
@@ -28,123 +32,123 @@ public class BluetoothSyncService {
     public static final int STATE_LISTEN = 1;     // now listening for incoming connections
     public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
     public static final int STATE_CONNECTED = 3;  // now connected to a remote device
-    private int mCurrentState;
-    // ? private int mNewState;
+    private int currentState;
 
-    private AcceptThread mAcceptThread;
-    private ConnectThread mConnectThread;
-    private ConnectedThread mConnectedThread;
+    private AcceptThread acceptThread;
+    private ConnectThread connectThread;
+    private ConnectedThread connectedThread;
 
-    private final Handler mHandler;
-    private BluetoothAdapter mBluetoothAdapter;
-    private Context mCallingContext;
-    private List<MatchResult> mMatchResults;
-    public List<MatchResult> NextUnsyncedResults;
-    //private List<PitScout> mPitScoutResults;
+    private final Handler handler;
+    private BluetoothAdapter bluetoothAdapter;
+    private Context callingContext;
+    private List<MatchResult> matchResults;
+    public List<MatchResult> nextUnsyncedMatchResults;
 
-    public BluetoothSyncService(Context context, Handler handler, List<MatchResult> matchResults){//, List<PitScout> pitScoutResults) {
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        mCallingContext = context;
-        mHandler = handler;
-        mCurrentState = STATE_NONE;
-        mMatchResults = matchResults;
-        //mPitScoutResults = pitScoutResults;
-        NextUnsyncedResults = matchResults.stream()
+    private String currentDeviceName;
+    private Map<String, BluetoothDevice> devices;
+
+    public BluetoothSyncService(Context context, Handler handler, List<MatchResult> matchResults ){
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        callingContext = context;
+        this.handler = handler;
+        currentState = STATE_NONE;
+        this.matchResults = matchResults;
+        nextUnsyncedMatchResults = matchResults.stream()
                 .filter( result -> result.getHasBeenSynced() == false )
                 .limit( 5 )
                 .collect( Collectors.toList( ));
     }
 
-    public boolean isAdapterAvailable() { return mBluetoothAdapter != null; }
+    public boolean isAdapterAvailable() {
+        return bluetoothAdapter != null;
+    }
 
     public boolean isEnabled() {
-        return isAdapterAvailable() && mBluetoothAdapter.isEnabled();
+        return isAdapterAvailable() && bluetoothAdapter.isEnabled();
     }
 
-    private String mCurrentDeviceName = "";
     public String getCurrentDeviceName(){
-        if( mCurrentDeviceName.isEmpty() )
-            mCurrentDeviceName = mBluetoothAdapter.getName();
-        return mCurrentDeviceName;
+        currentDeviceName = StringUtils.defaultIfBlank(currentDeviceName, bluetoothAdapter.getName());
+        return currentDeviceName;
     }
 
-    private Map<String, BluetoothDevice> mDevices;
     public Map<String, BluetoothDevice> getDevices() {
-        if ( mDevices != null ) return mDevices;
+        if ( devices != null ) return devices;
 
-        mDevices = mBluetoothAdapter.getBondedDevices()
+        devices = bluetoothAdapter.getBondedDevices()
                 .stream()
                 .filter( bluetoothDevice -> bluetoothDevice.getName().startsWith( "red" ) ||
                         bluetoothDevice.getName().startsWith( "blue" ) ||
+                        bluetoothDevice.getName().startsWith( "sub" ) ||
                         bluetoothDevice.getName().startsWith( "video" ) ||
                         bluetoothDevice.getName().startsWith( "master" ) )
                 .collect( Collectors.toMap( BluetoothDevice::getName, Function.identity() ) );
 
-        return mDevices;
+        return devices;
     }
 
     public synchronized void updateState(){
-
     }
 
     public synchronized void start() {
-        NextUnsyncedResults = mMatchResults.stream()
+        nextUnsyncedMatchResults = matchResults.stream()
                 .filter( result -> result.getHasBeenSynced() == false )
                 .limit( 5 )
                 .collect( Collectors.toList( ));
-        if ( mConnectThread != null ) {
-            mConnectThread.cancel();
-            mConnectThread = null;
+
+        if ( connectThread != null ) {
+            connectThread.cancel();
+            connectThread = null;
         }
 
-        if ( mConnectedThread != null ) {
-            mConnectedThread.cancel();
-            mConnectedThread = null;
+        if ( connectedThread != null ) {
+            connectedThread.cancel();
+            connectedThread = null;
         }
 
-        if ( mAcceptThread == null ) {
-            mAcceptThread = new AcceptThread( );
-            mAcceptThread.start();
+        if ( acceptThread == null ) {
+            acceptThread = new AcceptThread( );
+            acceptThread.start();
         }
 
         updateState();
     }
 
     public void connectToDevice(BluetoothDevice device) {
-        if ( mCurrentState == STATE_CONNECTING && mConnectThread != null ) {
-            mConnectThread.cancel();
-            mConnectThread = null;
+        if ( currentState == STATE_CONNECTING && connectThread != null ) {
+            connectThread.cancel();
+            connectThread = null;
         }
 
-        if ( mConnectedThread != null ) {
-            mConnectedThread.cancel();
-            mConnectedThread = null;
+        if ( connectedThread != null ) {
+            connectedThread.cancel();
+            connectedThread = null;
         }
 
-        mConnectThread = new ConnectThread( device );
-        mConnectThread.start();
+        connectThread = new ConnectThread( device );
+        connectThread.start();
 
         updateState();
     }
 
     public synchronized void connected(BluetoothSocket socket, BluetoothDevice device) {
-        if ( mConnectThread != null ) {
-            mConnectThread.cancel();
-            mConnectThread = null;
+        if ( connectThread != null ) {
+            connectThread.cancel();
+            connectThread = null;
         }
 
-        if ( mConnectedThread != null ) {
-            mConnectedThread.cancel();
-            mConnectedThread = null;
+        if ( connectedThread != null ) {
+            connectedThread.cancel();
+            connectedThread = null;
         }
 
-        if ( mAcceptThread != null ) {
-            mAcceptThread.cancel();
-            mAcceptThread = null;
+        if ( acceptThread != null ) {
+            acceptThread.cancel();
+            acceptThread = null;
         }
 
-        mConnectedThread = new ConnectedThread( socket );
-        mConnectedThread.start();
+        connectedThread = new ConnectedThread( socket );
+        connectedThread.start();
 
         // could send a message to say which device is connected, but
         // they way we use this we should know that
@@ -165,7 +169,7 @@ public class BluetoothSyncService {
         mHandler.sendMessage(msg);
          */
 
-        mCurrentState = STATE_NONE;
+        currentState = STATE_NONE;
         // Update UI title
         //updateUserInterfaceTitle();
 
@@ -178,8 +182,8 @@ public class BluetoothSyncService {
         ConnectedThread r;
         // Synchronize a copy of the ConnectedThread
         synchronized (this) {
-            if (mCurrentState != STATE_CONNECTED) return;
-            r = mConnectedThread;
+            if (currentState != STATE_CONNECTED) return;
+            r = connectedThread;
         }
         r.write(out);
     }
@@ -191,19 +195,19 @@ public class BluetoothSyncService {
     // \/\/\/\/\/ Threads below
 
     private class AcceptThread extends Thread {
-        private final BluetoothServerSocket mmServerSocket;
+        private final BluetoothServerSocket acceptServerSocket;
 
         public AcceptThread() {
             BluetoothServerSocket newServerSocket = null;
 
             // Create a new listening server socket
             try {
-                newServerSocket = mBluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord( SERVICE_NAME, SERVICE_UUID );
+                newServerSocket = bluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord( SERVICE_NAME, SERVICE_UUID );
             } catch ( IOException e ) {
                 //Toast.makeText( mCallingContext, "Could not create BT server socket", Toast.LENGTH_LONG ).show();
             }
-            mmServerSocket = newServerSocket;
-            mCurrentState = STATE_LISTEN;
+            acceptServerSocket = newServerSocket;
+            currentState = STATE_LISTEN;
         }
 
         public void run() {
@@ -211,11 +215,11 @@ public class BluetoothSyncService {
 
             BluetoothSocket socket;
 
-            while ( mCurrentState != STATE_CONNECTED ) {
+            while ( currentState != STATE_CONNECTED ) {
                 try {
-                    socket = mmServerSocket.accept();
+                    socket = acceptServerSocket.accept();
                 } catch ( IOException e ) {
-                    //Toast.makeText( mCallingContext, "accept failed", Toast.LENGTH_LONG ).show();
+                    Log.e(TAG, "accept failed");
                     break;
                 }
 
@@ -223,7 +227,7 @@ public class BluetoothSyncService {
                 if ( socket == null ) continue;
 
                 synchronized ( BluetoothSyncService.this ) {
-                    switch ( mCurrentState ) {
+                    switch ( currentState ) {
                         case STATE_LISTEN:
                         case STATE_CONNECTING:
                             // Start the connected thread.
@@ -234,31 +238,33 @@ public class BluetoothSyncService {
                             // Either not ready or already connected. Terminate new socket.
                             try {
                                 socket.close();
-                            } catch ( IOException e ) {/*Log.e(TAG, "Could not close unwanted socket", e);*/}
+                            } catch ( IOException e ) {
+                                Log.e(TAG,"could not close unwanted socket");
+                            }
                             break;
                     }
                 }
             }
-            //Log.i(TAG, "END mAcceptThread, socket Type: " + mSocketType);
+            Log.i(TAG, "END acceptThread");
 
         }
 
         public void cancel() {
             //Log.d(TAG, "Socket Type" + mSocketType + "cancel " + this);
             try {
-                mmServerSocket.close();
+                acceptServerSocket.close();
             } catch ( IOException e ) {
-                //Log.e(TAG, "Socket Type" + mSocketType + "close() of server failed", e);
+                Log.e(TAG,"close() of server failed");
             }
         }
     }
 
     private class ConnectThread extends Thread {
-        private final BluetoothSocket mmSocket;
-        private final BluetoothDevice mmDevice;
+        private final BluetoothSocket connectSocket;
+        private final BluetoothDevice connectDevice;
 
         public ConnectThread(BluetoothDevice device) {
-            mmDevice = device;
+            connectDevice = device;
             BluetoothSocket tmp = null;
 
             // Get a BluetoothSocket for a connection with the
@@ -266,9 +272,9 @@ public class BluetoothSyncService {
             try {
                 tmp = device.createInsecureRfcommSocketToServiceRecord( SERVICE_UUID );
             } catch ( IOException e ) {
-                //Toast.makeText( mCallingContext, "Socket Type: create() failed", Toast.LENGTH_LONG ).show();
+                Log.e(TAG,"Socket Type create failed");
             }
-            mmSocket = tmp;
+            connectSocket = tmp;
             //mState = STATE_CONNECTING;
         }
 
@@ -278,14 +284,14 @@ public class BluetoothSyncService {
             //Log.i(TAG, "BEGIN mConnectThread SocketType:" + mSocketType);
             setName( CONNECTED_THREAD_NAME );
 
-            mBluetoothAdapter.cancelDiscovery();
+            bluetoothAdapter.cancelDiscovery();
             try {
-                mmSocket.connect();
+                connectSocket.connect();
             } catch ( IOException connectException ) {
                 try {
-                    mmSocket.close();
+                    connectSocket.close();
                 } catch ( IOException closeException ) {
-                    //Toast.makeText( mCallingContext, "unable to close() socket during connection failure" + closeException.getMessage(), Toast.LENGTH_LONG ).show();
+                    Log.e(TAG, "unable to close socket during connection failute");
                 }
                 connectionFailed();
                 return;
@@ -293,31 +299,31 @@ public class BluetoothSyncService {
 
             // Reset the ConnectThread because we're done
             synchronized ( ConnectThread.this ) {
-                mConnectThread = null;
+                connectThread = null;
             }
 
             // Start the connected thread
             //mConnectThread.cancel();
-            connected( mmSocket, mmDevice);
+            connected( connectSocket, connectDevice);
         }
 
         public void cancel() {
             try {
-                mmSocket.close();
+                connectSocket.close();
             } catch ( IOException e ) {
-                //Toast.makeText( mCallingContext, "close() of connect socket failed" + e.getMessage(), Toast.LENGTH_LONG ).show();
+                Log.e(TAG,"close of connect socket failed");
             }
         }
     }
 
     private class ConnectedThread extends Thread {
-        private final BluetoothSocket mmSocket;
-        private final InputStream mmInStream;
-        private final OutputStream mmOutStream;
+        private final BluetoothSocket connectedSocket;
+        private final InputStream connectedInStream;
+        private final OutputStream connectedOutStream;
 
         public ConnectedThread(BluetoothSocket socket) {
             //Log.d(TAG, "create ConnectedThread: " + socketType);
-            mmSocket = socket;
+            connectedSocket = socket;
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
 
@@ -326,12 +332,12 @@ public class BluetoothSyncService {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
             } catch ( IOException e ) {
-                //Log.e(TAG, "temp sockets not created", e);
+                Log.e(TAG, "temp sockets not created");
             }
 
-            mmInStream = tmpIn;
-            mmOutStream = tmpOut;
-            mCurrentState = STATE_CONNECTED;
+            connectedInStream = tmpIn;
+            connectedOutStream = tmpOut;
+            currentState = STATE_CONNECTED;
         }
 
         private boolean dataSent = false;
@@ -339,7 +345,7 @@ public class BluetoothSyncService {
             //Log.i(TAG, "BEGIN mConnectedThread");
 
             // Keep listening to the InputStream while connected
-            while ( mCurrentState == STATE_CONNECTED ) {
+            while ( currentState == STATE_CONNECTED ) {
                 try {
                     if( getCurrentDeviceName().equals( "master_3536" )) {
                         String result = "";
@@ -347,7 +353,7 @@ public class BluetoothSyncService {
                         while( !isDone ){
                             int maxSize = 1024;//*20;
                             byte[] buffer = new byte[maxSize];
-                            int numberOfBytes = mmInStream.read( buffer );
+                            int numberOfBytes = connectedInStream.read( buffer );
                             //if( numberOfBytes <= maxSize || numberOfBytes == 0){
                             //if( numberOfBytes == 0){
                             //isDone = true;
@@ -355,16 +361,17 @@ public class BluetoothSyncService {
                             String currentString = new String(buffer, 0, numberOfBytes);
                             System.out.println( "currentString: " + currentString );
                             result += currentString;
-                            // dburton convert to Jackson
-                            //Gson gson = new Gson();
+
+                            ObjectMapper mapper = new ObjectMapper();
                             try {
-                                //ResultsContainer r = gson.fromJson( result, ResultsContainer.class );
+                                ResultsContainer r = mapper.readValue(result, ResultsContainer.class);
                                 isDone = true;
                             }
                             catch( Exception e) {
                                 String message = e.getMessage();
 
                                 //Toast.makeText( mCallingContext, "error" + e.getMessage(), Toast.LENGTH_LONG).show();
+                                Log.e(TAG,"parsing error: " + e.getMessage());
                             }
                         }
                         // Read from the InputStream
@@ -372,61 +379,64 @@ public class BluetoothSyncService {
                         //System.out.println("inRead");
 
                         // Send the obtained bytes to the UI Activity
+                        Log.e(TAG, "completed parsing with " + result);
                         byte[] msg = result.getBytes();
-                        mHandler.obtainMessage( BluetoothMessageType.MESSAGE_READ, msg.length, -1, msg )
+                        handler.obtainMessage( BluetoothMessageType.MESSAGE_READ, msg.length, -1, msg )
                                 .sendToTarget();
 
-                        mCurrentState = STATE_NONE;
+                        currentState = STATE_NONE;
                     }
                     else {
                         if( !dataSent ) {
-                            mHandler.obtainMessage( BluetoothMessageType.MESSAGE_REQUEST, -1, -1, null )
+                            handler.obtainMessage( BluetoothMessageType.MESSAGE_REQUEST, -1, -1, null )
                                     .sendToTarget();
 
                             //ResultsContainer resultsContainer = new ResultsContainer(getCurrentDeviceName(), mMatchResults, mPitScoutResults);
-                            ResultsContainer resultsContainer = new ResultsContainer(getCurrentDeviceName(), NextUnsyncedResults );
+                            //ResultsContainer resultsContainer = new ResultsContainer(getCurrentDeviceName(), nextUnsyncedMatchResults );
+                            ResultsContainer resultsContainer = new ResultsContainer(getCurrentDeviceName(), matchResults );
 
-                            // dburton convert to Jackson
-                            //Gson gson = new Gson();
-                            //String json = gson.toJson( resultsContainer );
-                            String json = "{}";
+                            ObjectMapper mapper = new ObjectMapper();
+                            String json = mapper.writeValueAsString( resultsContainer );
+
                             // get the pit scout and match result data serialize into a string
                             write( json.getBytes() );
                             dataSent = true;
-                            mHandler.obtainMessage( BluetoothMessageType.MESSAGE_SENT, -1, -1, null )
+                            handler.obtainMessage( BluetoothMessageType.MESSAGE_SENT, -1, -1, null )
                                     .sendToTarget();
                         }
                     }
                 } catch ( IOException e ) {
-                    //Log.e(TAG, "disconnected", e);
+                    Log.e(TAG, "disconnected", e);
                     connectionLost();
                     break;
                 }
 
                 try {
-                    mCurrentState = STATE_NONE;
-                    mmSocket.close();
+                    currentState = STATE_NONE;
+                    connectedSocket.close();
                 } catch ( IOException e ) {
                     // need a handler for sending an error message
+                    Log.e(TAG, "need a handler for sending error message", e);
                 }
             }
         }
 
         public void write(byte[] buffer) {
             try {
-                mmOutStream.write(buffer);
+                connectedOutStream.write(buffer);
 
                 // Share the sent message back to the UI Activity
-                mHandler.obtainMessage(BluetoothMessageType.MESSAGE_WRITE, buffer.length, -1, buffer)
+                handler.obtainMessage(BluetoothMessageType.MESSAGE_WRITE, buffer.length, -1, buffer)
                         .sendToTarget();
             } catch (IOException e) {
+                Log.e(TAG,"exception during write: " ,e);
                 //Toast.makeText( mCallingContext,"Exception during write", Toast.LENGTH_LONG).show();
             }
         }
 
 
         public void cancel() {
-            try { mmSocket.close(); }
+            try { connectedSocket.close(); }
             catch (IOException e) {
                 //Log.e(TAG, "close() of connect socket failed", e);
             }

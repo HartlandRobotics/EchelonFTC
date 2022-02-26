@@ -4,6 +4,7 @@ package org.hartlandrobotics.echelon2.database.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
@@ -60,6 +61,9 @@ public class MatchResult {
     @ColumnInfo(name = "end_hang_traverse")
     private boolean endHangTraverse;
 
+    @Ignore
+    public MatchResult(){}
+
     public MatchResult(
             @NonNull String matchResultKey,
             @NonNull String eventKey,
@@ -95,6 +99,9 @@ public class MatchResult {
     }
 
     public String getMatchResultKey() { return matchResultKey; }
+    public void setMatchResultKey(String matchResultKey){
+        this.matchResultKey = matchResultKey;
+    }
 
     public String getEventKey(){ return eventKey; }
     public void setEventKey(String eventKey){
@@ -148,7 +155,7 @@ public class MatchResult {
     }
 
     public boolean getEndHangMid(){ return endHangMid; }
-    public void setEndGangMid(boolean endHangMid){
+    public void setEndHangMid(boolean endHangMid){
         this.endHangMid = endHangMid;
     }
 
@@ -158,7 +165,7 @@ public class MatchResult {
     }
 
     public boolean getEndHangTraverse(){ return endHangTraverse; }
-    public void setEndHangTravers(boolean endHangTraverse){
+    public void setEndHangTraverse(boolean endHangTraverse){
         this.endHangTraverse = endHangTraverse;
     }
 }
