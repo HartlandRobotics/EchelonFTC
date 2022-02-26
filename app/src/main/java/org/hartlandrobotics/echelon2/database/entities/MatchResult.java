@@ -34,6 +34,7 @@ public class MatchResult {
 
     @ColumnInfo(name="auto_taxi_tarmac")
     private boolean taxiTarmac;
+
     @ColumnInfo(name = "auto_high_balls")
     private int autoHighBalls;
 
