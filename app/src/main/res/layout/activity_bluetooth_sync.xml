@@ -54,6 +54,62 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             tools:text="12"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/resetSyncButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset Sync"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/pitScoutLayout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:layout_constraintTop_toBottomOf="@id/matchResultsLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="PitScout Total"
+            android:textStyle="bold"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/totalPitScout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            tools:text="24"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/unsyncedPitScoutLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Ready to Sync"
+            android:textStyle="bold"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/unsyncedPitScout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            tools:text="12"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/resetPitScoutSyncButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset Sync"/>
+
     </LinearLayout>
 
 
@@ -63,7 +119,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/matchResultsLayout"
+        app:layout_constraintTop_toBottomOf="@id/pitScoutLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >

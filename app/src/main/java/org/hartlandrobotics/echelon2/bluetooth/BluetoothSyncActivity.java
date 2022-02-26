@@ -25,7 +25,9 @@ import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.configuration.AdminSettings;
 import org.hartlandrobotics.echelon2.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
+import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.models.MatchResultViewModel;
+import org.hartlandrobotics.echelon2.models.PitScoutViewModel;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
 import java.util.ArrayList;
@@ -41,6 +43,12 @@ public class BluetoothSyncActivity extends EchelonActivity {
     MaterialTextView matchResultsTotalText;
     MaterialTextView matchResultsUnsyncedLabel;
     MaterialTextView matchResultsUnsyncedText;
+    MaterialButton resetSyncButton;
+
+    MaterialTextView pitScoutTotalText;
+    MaterialTextView pitScoutUnsyncedLabel;
+    MaterialTextView pitScoutUnsyncedText;
+    MaterialButton resetPitscoutSyncButton;
 
     LinearLayout deviceLayout;
 
@@ -63,6 +71,8 @@ public class BluetoothSyncActivity extends EchelonActivity {
     BluetoothSyncService bluetoothService;
     private Map<String, BluetoothDevice> devices;
     List<MatchResult> matchResults;
+
+    PitScoutViewModel pitscoutViewModel;
 
     Map<String,String> deviceNameByRole;
     Map<String, MaterialButton> buttonsByDeviceName;
@@ -90,6 +100,8 @@ public class BluetoothSyncActivity extends EchelonActivity {
     private void setupData(){
         // only need this if this is a non captain tablet
         BlueAllianceStatus blueAllianceStatus = new BlueAllianceStatus(getApplicationContext());
+
+        pitscoutViewModel = new ViewModelProvider( this ).get(PitScoutViewModel.class);
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
         matchResultViewModel.getMatchResultsByEvent(blueAllianceStatus.getEventKey()).observe(this, mrList -> {
             logLinesAdapter.addStatusItem("Match results loaded");
@@ -104,6 +116,8 @@ public class BluetoothSyncActivity extends EchelonActivity {
             matchResultsTotalText.setText( String.valueOf( matchResults.size() ) );
             long unsyncedCount = matchResults.stream().filter( mr -> !mr.getHasBeenSynced() ).count();
             matchResultsUnsyncedText.setText( String.valueOf(unsyncedCount));
+
+            //pitscoutViewModel.getPitScout()
 
             setupService();
             setVisibility();
@@ -145,6 +159,32 @@ public class BluetoothSyncActivity extends EchelonActivity {
          matchResultsTotalText = findViewById(R.id.totalMatchResults);
          matchResultsUnsyncedLabel = findViewById(R.id.unsyncedMatchResultsLabel);
          matchResultsUnsyncedText = findViewById(R.id.unsyncedMatchResults);
+         resetSyncButton = findViewById(R.id.resetSyncButton);
+         resetSyncButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 for( MatchResult matchResult : matchResults ) {
+                     matchResult.setHasBeenSynced(false);
+                     matchResultViewModel.upsert(matchResult);
+                 }
+
+                 //setupData();
+             }
+         });
+        pitScoutTotalText = findViewById(R.id.totalPitScout);
+        pitScoutUnsyncedLabel = findViewById(R.id.unsyncedPitScoutLabel);
+        pitScoutUnsyncedText = findViewById(R.id.unsyncedPitScout);
+        resetPitscoutSyncButton = findViewById(R.id.resetPitScoutSyncButton);
+        resetPitscoutSyncButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //for( PitScout pitscout : pitScouts ){
+                //    pitscout.setHasBeenSynced(false);
+                //    pitscoutViewModel.upsert(pitscout);
+                //}
+            }
+        });
+
 
         deviceLayout = findViewById( R.id.deviceLayout);
 
