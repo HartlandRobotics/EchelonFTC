@@ -38,8 +38,6 @@ public abstract class EchelonActivity extends AppCompatActivity {
     public void bluetoothPressed(MenuItem item) {
         BluetoothSyncActivity.launch(this);
     }
-    public void exportPressed(MenuItem item){
-        // launch export activity
-    }
+    public void exportPressed(MenuItem item){ ExportActivity.launch(this); }
 }
 
