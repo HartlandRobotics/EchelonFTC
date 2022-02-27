@@ -12,10 +12,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
+import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -42,20 +44,34 @@ public class BluetoothSyncService {
     private BluetoothAdapter bluetoothAdapter;
     private Context callingContext;
     private List<MatchResult> matchResults;
-    public List<MatchResult> nextUnsyncedMatchResults;
+    public List<MatchResult> lastSentResults;
+
+    private List<PitScout> pitScoutResults;
+    public List<PitScout> lastSentPitScoutResults;
 
     private String currentDeviceName;
     private Map<String, BluetoothDevice> devices;
+    private String teamNumber;
 
-    public BluetoothSyncService(Context context, Handler handler, List<MatchResult> matchResults ){
+    public BluetoothSyncService(Context context,
+                                Handler handler,
+                                String teamNumber,
+                                List<MatchResult> matchResults,
+                                List<PitScout> pitScoutResults
+
+    ){
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         callingContext = context;
         this.handler = handler;
         currentState = STATE_NONE;
+        this.teamNumber = teamNumber;
         this.matchResults = matchResults;
-        nextUnsyncedMatchResults = matchResults.stream()
-                .filter( result -> result.getHasBeenSynced() == false )
-                .collect( Collectors.toList( ));
+        this.pitScoutResults = pitScoutResults;
+    }
+
+    public void setData(List<MatchResult> matchResults, List<PitScout> pitScoutResults){
+        this.matchResults = matchResults;
+        this.pitScoutResults = pitScoutResults;
     }
 
     public boolean isAdapterAvailable() {
@@ -78,9 +94,9 @@ public class BluetoothSyncService {
                 .stream()
                 .filter( bluetoothDevice -> bluetoothDevice.getName().startsWith( "red" ) ||
                         bluetoothDevice.getName().startsWith( "blue" ) ||
-                        bluetoothDevice.getName().startsWith( "sub" ) ||
+                        bluetoothDevice.getName().startsWith( "alt" ) ||
                         bluetoothDevice.getName().startsWith( "video" ) ||
-                        bluetoothDevice.getName().startsWith( "master" ) )
+                        bluetoothDevice.getName().startsWith("captain"))
                 .collect( Collectors.toMap( BluetoothDevice::getName, Function.identity() ) );
 
         return devices;
@@ -90,9 +106,6 @@ public class BluetoothSyncService {
     }
 
     public synchronized void start() {
-        nextUnsyncedMatchResults = matchResults.stream()
-                .filter( result -> result.getHasBeenSynced() == false )
-                .collect( Collectors.toList( ));
 
         if ( connectThread != null ) {
             connectThread.cancel();
@@ -346,17 +359,15 @@ public class BluetoothSyncService {
             // Keep listening to the InputStream while connected
             while ( currentState == STATE_CONNECTED ) {
                 try {
-                    if( getCurrentDeviceName().equals( "master_3536" )) {
+                    if( getCurrentDeviceName().equals( "captain_" + teamNumber )) {
+                       // captain tablet consuming data sent from scouting tablet
                         String result = "";
                         boolean isDone = false;
                         while( !isDone ){
                             int maxSize = 1024;//*20;
                             byte[] buffer = new byte[maxSize];
                             int numberOfBytes = connectedInStream.read( buffer );
-                            //if( numberOfBytes <= maxSize || numberOfBytes == 0){
-                            //if( numberOfBytes == 0){
-                            //isDone = true;
-                            //}
+
                             String currentString = new String(buffer, 0, numberOfBytes);
                             System.out.println( "currentString: " + currentString );
                             result += currentString;
@@ -368,14 +379,9 @@ public class BluetoothSyncService {
                             }
                             catch( Exception e) {
                                 String message = e.getMessage();
-
-                                //Toast.makeText( mCallingContext, "error" + e.getMessage(), Toast.LENGTH_LONG).show();
                                 Log.e(TAG,"parsing error: " + e.getMessage());
                             }
                         }
-                        // Read from the InputStream
-                        //bytes = mmInStream.read( buffer );
-                        //System.out.println("inRead");
 
                         // Send the obtained bytes to the UI Activity
                         Log.i(TAG, "completed parsing with " + result);
@@ -387,12 +393,20 @@ public class BluetoothSyncService {
                     }
                     else {
                         if( !dataSent ) {
+                            // scout tablet sending to the captain tablet
                             handler.obtainMessage( BluetoothMessageType.MESSAGE_REQUEST, -1, -1, null )
                                     .sendToTarget();
+                            lastSentResults = new ArrayList<>();
+                            List<MatchResult> nextUnsyncedMatchResults = matchResults.stream()
+                                    .filter( result -> result.getHasBeenSynced() == false )
+                                    .collect( Collectors.toList( ));
 
-                            //ResultsContainer resultsContainer = new ResultsContainer(getCurrentDeviceName(), mMatchResults, mPitScoutResults);
-                            //ResultsContainer resultsContainer = new ResultsContainer(getCurrentDeviceName(), nextUnsyncedMatchResults );
-                            ResultsContainer resultsContainer = new ResultsContainer(getCurrentDeviceName(), matchResults );
+                            lastSentPitScoutResults = new ArrayList<>();
+                            List<PitScout> nextUnsyncedPitScoutResults = pitScoutResults.stream()
+                                    .filter( result -> !result.getHasBeenSynced() )
+                                    .collect( Collectors.toList() );
+
+                            ResultsContainer resultsContainer = new ResultsContainer(getCurrentDeviceName(), nextUnsyncedMatchResults, nextUnsyncedPitScoutResults );
 
                             ObjectMapper mapper = new ObjectMapper();
                             String json = mapper.writeValueAsString( resultsContainer );
@@ -400,6 +414,9 @@ public class BluetoothSyncService {
                             // get the pit scout and match result data serialize into a string
                             write( json.getBytes() );
                             dataSent = true;
+
+                            lastSentResults.addAll(nextUnsyncedMatchResults);
+                            lastSentPitScoutResults.addAll(nextUnsyncedPitScoutResults);
                             handler.obtainMessage( BluetoothMessageType.MESSAGE_SENT, -1, -1, null )
                                     .sendToTarget();
                         }
@@ -437,7 +454,7 @@ public class BluetoothSyncService {
         public void cancel() {
             try { connectedSocket.close(); }
             catch (IOException e) {
-                //Log.e(TAG, "close() of connect socket failed", e);
+                Log.e(TAG, "close() of connect socket failed", e);
             }
         }
 

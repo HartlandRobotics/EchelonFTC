@@ -60,9 +60,9 @@ public class BluetoothSyncActivity extends EchelonActivity {
     MaterialButton blue2SyncButton;
     MaterialButton blue3SyncButton;
 
-    MaterialButton sub1SyncButton;
-    MaterialButton sub2SyncButton;
-    MaterialButton sub3SyncButton;
+    MaterialButton alt1SyncButton;
+    MaterialButton alt2SyncButton;
+    MaterialButton alt3SyncButton;
 
     RecyclerView logRecyclerView;
     LogLinesAdapter logLinesAdapter;
@@ -73,6 +73,7 @@ public class BluetoothSyncActivity extends EchelonActivity {
     List<MatchResult> matchResults;
 
     PitScoutViewModel pitscoutViewModel;
+    List<PitScout> pitScoutResults;
 
     Map<String,String> deviceNameByRole;
     Map<String, MaterialButton> buttonsByDeviceName;
@@ -100,6 +101,7 @@ public class BluetoothSyncActivity extends EchelonActivity {
     private void setupData(){
         // only need this if this is a non captain tablet
         BlueAllianceStatus blueAllianceStatus = new BlueAllianceStatus(getApplicationContext());
+        AdminSettings adminSettings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
         pitscoutViewModel = new ViewModelProvider( this ).get(PitScoutViewModel.class);
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
@@ -117,10 +119,23 @@ public class BluetoothSyncActivity extends EchelonActivity {
             long unsyncedCount = matchResults.stream().filter( mr -> !mr.getHasBeenSynced() ).count();
             matchResultsUnsyncedText.setText( String.valueOf(unsyncedCount));
 
-            //pitscoutViewModel.getPitScout()
+            pitscoutViewModel.getPitScoutByEvent(blueAllianceStatus.getEventKey()).observe(this, psList -> {
+                if( psList == null || psList.size() == 0){
+                    pitScoutResults = new ArrayList<>();
+                    logLinesAdapter.addStatusItem("No pitscout results onthis device");
+                } else {
+                    pitScoutResults = psList;
+                    logLinesAdapter.addStatusItem("device contains " + pitScoutResults.size() + " pit scouts");
+                }
 
-            setupService();
-            setVisibility();
+                pitScoutTotalText.setText( String.valueOf( pitScoutResults.size() ));
+                long unsyncedPitScoutCount = pitScoutResults.stream().filter( ps -> !ps.getHasBeenSynced() ).count();
+                pitScoutUnsyncedText.setText(String.valueOf(unsyncedPitScoutCount));
+
+                setupService(adminSettings.getTeamNumber());
+                setVisibility();
+            });
+
         });
     }
 
@@ -137,9 +152,9 @@ public class BluetoothSyncActivity extends EchelonActivity {
         deviceNameByRole.put("blue2", "blue_2_" + teamNumber);
         deviceNameByRole.put("blue3", "blue_3_" + teamNumber);
 
-        deviceNameByRole.put("sub1", "sub_1_" + teamNumber);
-        deviceNameByRole.put("sub2", "sub_2_" + teamNumber);
-        deviceNameByRole.put("sub3", "sub_3_" + teamNumber);
+        deviceNameByRole.put("alt1", "alt_1_" + teamNumber);
+        deviceNameByRole.put("alt2", "alt_2_" + teamNumber);
+        deviceNameByRole.put("alt3", "alt_3_" + teamNumber);
 
         buttonsByDeviceName = new HashMap<>();
         buttonsByDeviceName.put("red_1_" + teamNumber, red1SyncButton);
@@ -150,9 +165,9 @@ public class BluetoothSyncActivity extends EchelonActivity {
         buttonsByDeviceName.put("blue_2_" + teamNumber, blue2SyncButton);
         buttonsByDeviceName.put("blue_3_" + teamNumber, blue3SyncButton);
 
-        buttonsByDeviceName.put("sub_1_" + teamNumber, sub1SyncButton);
-        buttonsByDeviceName.put("sub_2_" + teamNumber, sub2SyncButton);
-        buttonsByDeviceName.put("sub_3_" + teamNumber, sub3SyncButton);
+        buttonsByDeviceName.put("alt_1_" + teamNumber, alt1SyncButton);
+        buttonsByDeviceName.put("alt_2_" + teamNumber, alt2SyncButton);
+        buttonsByDeviceName.put("alt_3_" + teamNumber, alt3SyncButton);
     }
 
     private void setupControls(){
@@ -160,28 +175,20 @@ public class BluetoothSyncActivity extends EchelonActivity {
          matchResultsUnsyncedLabel = findViewById(R.id.unsyncedMatchResultsLabel);
          matchResultsUnsyncedText = findViewById(R.id.unsyncedMatchResults);
          resetSyncButton = findViewById(R.id.resetSyncButton);
-         resetSyncButton.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 for( MatchResult matchResult : matchResults ) {
-                     matchResult.setHasBeenSynced(false);
-                     matchResultViewModel.upsert(matchResult);
-                 }
-
-                 //setupData();
+         resetSyncButton.setOnClickListener(v -> {
+             for( MatchResult matchResult : matchResults ) {
+                 matchResult.setHasBeenSynced(false);
+                 matchResultViewModel.upsert(matchResult);
              }
          });
         pitScoutTotalText = findViewById(R.id.totalPitScout);
         pitScoutUnsyncedLabel = findViewById(R.id.unsyncedPitScoutLabel);
         pitScoutUnsyncedText = findViewById(R.id.unsyncedPitScout);
         resetPitscoutSyncButton = findViewById(R.id.resetPitScoutSyncButton);
-        resetPitscoutSyncButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //for( PitScout pitscout : pitScouts ){
-                //    pitscout.setHasBeenSynced(false);
-                //    pitscoutViewModel.upsert(pitscout);
-                //}
+        resetPitscoutSyncButton.setOnClickListener(v -> {
+            for( PitScout pitscout : pitScoutResults ){
+                pitscout.setHasBeenSynced(false);
+                pitscoutViewModel.upsert(pitscout);
             }
         });
 
@@ -222,19 +229,19 @@ public class BluetoothSyncActivity extends EchelonActivity {
 
 
 
-        sub1SyncButton = findViewById(R.id.sub1SyncButton);
-        sub1SyncButton.setOnClickListener(v ->
-                pullDeviceData("sub1", sub1SyncButton)
+        alt1SyncButton = findViewById(R.id.alt1SyncButton);
+        alt1SyncButton.setOnClickListener(v ->
+                pullDeviceData("alt1", alt1SyncButton)
         );
 
-        sub2SyncButton = findViewById(R.id.sub2SyncButton);
-        sub2SyncButton.setOnClickListener(v ->
-                pullDeviceData("sub2", sub2SyncButton)
+        alt2SyncButton = findViewById(R.id.alt2SyncButton);
+        alt2SyncButton.setOnClickListener(v ->
+                pullDeviceData("alt2", alt2SyncButton)
         );
 
-        sub3SyncButton = findViewById(R.id.sub3SyncButton);
-        sub3SyncButton.setOnClickListener(v ->
-                pullDeviceData("sub3", sub3SyncButton)
+        alt3SyncButton = findViewById(R.id.alt3SyncButton);
+        alt3SyncButton.setOnClickListener(v ->
+                pullDeviceData("alt3", alt3SyncButton)
         );
 
         logRecyclerView = findViewById(R.id.sync_log_text);
@@ -247,11 +254,11 @@ public class BluetoothSyncActivity extends EchelonActivity {
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
         String deviceName = bluetoothService.getCurrentDeviceName();
-        //if( deviceName == "captain_" + settings.getTeamNumber() ){
-        // dburton
-        if( deviceName.equals("master_" + settings.getTeamNumber()) ){
+        if( deviceName.equals("captain_" + settings.getTeamNumber() ) ){
             matchResultsUnsyncedLabel.setVisibility(View.GONE);
             matchResultsUnsyncedText.setVisibility(View.GONE);
+            pitScoutUnsyncedLabel.setVisibility(View.GONE);
+            pitScoutUnsyncedText.setVisibility(View.GONE);
         } else {
             deviceLayout.setVisibility(View.GONE);
         }
@@ -270,19 +277,21 @@ public class BluetoothSyncActivity extends EchelonActivity {
         //source.setIconResource(R.drawable.outline_error_outline_24);
     }
 
-    private void setupService() {
+    private void setupService(String teamNumber) {
         if (bluetoothService == null) {
-            bluetoothService = new BluetoothSyncService(this, handler, matchResults);//, mPitScout );
+            bluetoothService = new BluetoothSyncService(this, handler, teamNumber, matchResults, pitScoutResults);
             if (bluetoothService.isEnabled()) {
                 devices = bluetoothService.getDevices();
             }
             bluetoothService.start();
+        } else {
+            bluetoothService.setData( matchResults, pitScoutResults);
         }
     }
 
     public class LogLinesAdapter extends RecyclerView.Adapter<LogLineViewHolder> {
         private final LayoutInflater inflater;
-        private List<String> statusItems = new ArrayList<String>();
+        private List<String> statusItems = new ArrayList<>();
 
         LogLinesAdapter(Context context) {
             inflater = LayoutInflater.from( context );
@@ -348,7 +357,6 @@ public class BluetoothSyncActivity extends EchelonActivity {
                     ResultsContainer transferResults;
                     try {
                         Log.i(TAG, "in read with message: " + runningMessage );
-                        //transferResults = jsonReader.readValue(runningMessage, ResultsContainer.class);
                         transferResults = gson.fromJson( runningMessage, ResultsContainer.class );
                         Log.i(TAG, "got transfer results with: " + transferResults.getMatchResults().size() );
                         runningMessage = "";
@@ -356,12 +364,18 @@ public class BluetoothSyncActivity extends EchelonActivity {
                         StringBuilder sb = new StringBuilder();
                         sb.append( "Uploaded:" )
                                 .append( transferResults.getMatchResults().size() ).append( " match results " )
-                        //.append( transferResults.getPitScoutResults().size() ).append( " pit scoutings");
-                        ;
+                                .append( transferResults.getPitScoutResults().size() ).append( " pit scout");
+
                         List<MatchResult> transferredMatchResults = transferResults.getMatchResults();
                         for ( MatchResult currentResult : transferredMatchResults ) {
                             currentResult.setHasBeenSynced( true );
                             matchResultViewModel.upsert( currentResult );
+                        }
+
+                        List<PitScout> transferredPitScout = transferResults.getPitScoutResults();
+                        for( PitScout pitScout : transferredPitScout ){
+                            pitScout.setHasBeenSynced(true);
+                            pitscoutViewModel.upsert(pitScout);
                         }
 
                         String deviceName = transferResults.getSourceDeviceName();
@@ -383,16 +397,20 @@ public class BluetoothSyncActivity extends EchelonActivity {
                     logLinesAdapter.addStatusItem( "message written from this device");
                     break;
                 case BluetoothMessageType.MESSAGE_REQUEST:
-                    logLinesAdapter.addStatusItem( "Request for data from master" );
+                    logLinesAdapter.addStatusItem( "Request for data from captain" );
                     break;
                 case BluetoothMessageType.MESSAGE_SENT:
-                    logLinesAdapter.addStatusItem( "Data sent to master" );
-                    for ( MatchResult currentMatchResult : bluetoothService.nextUnsyncedMatchResults ) {
+                    logLinesAdapter.addStatusItem( "Data sent to captain" );
+                    for ( MatchResult currentMatchResult : bluetoothService.lastSentResults ) {
                         currentMatchResult.setHasBeenSynced(true);
                         matchResultViewModel.upsert( currentMatchResult );
                     }
-                    setupData();
+                    for( PitScout pitScout : bluetoothService.lastSentPitScoutResults ){
+                        pitScout.setHasBeenSynced(true);
+                        pitscoutViewModel.upsert(pitScout);
+                    }
 
+                    setupData();
                     bluetoothService.start();
 
                     break;
