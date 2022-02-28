@@ -16,6 +16,8 @@ public abstract class EchelonActivity extends AppCompatActivity {
     public void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.electro_eagle_eyes_glow_transparent);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
