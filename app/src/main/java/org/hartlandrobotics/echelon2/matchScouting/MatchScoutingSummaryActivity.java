@@ -162,7 +162,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
 
         endTraverseCheckbox = findViewById(R.id.endTraverseCheckbox);
         endTraverseCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setEndHangTravers(isChecked);
+            matchResult.setEndHangTraverse(isChecked);
             populateControlsFromData();
         });
         endHighCheckBox = findViewById(R.id.endHighCheckbox);
@@ -172,7 +172,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         });
         endMidCheckBox = findViewById(R.id.endMidCheckbox);
         endMidCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setEndGangMid(isChecked);
+            matchResult.setEndHangMid(isChecked);
             populateControlsFromData();
         });
         endLowCheckBox = findViewById(R.id.endLowCheckbox);
