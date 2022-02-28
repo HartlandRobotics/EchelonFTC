@@ -259,6 +259,9 @@ public class BluetoothSyncActivity extends EchelonActivity {
             matchResultsUnsyncedText.setVisibility(View.GONE);
             pitScoutUnsyncedLabel.setVisibility(View.GONE);
             pitScoutUnsyncedText.setVisibility(View.GONE);
+
+            resetSyncButton.setVisibility(View.GONE);
+            resetPitscoutSyncButton.setVisibility(View.GONE);
         } else {
             deviceLayout.setVisibility(View.GONE);
         }
