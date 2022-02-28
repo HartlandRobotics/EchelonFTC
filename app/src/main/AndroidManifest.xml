@@ -29,11 +29,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Echelon2">
         <activity
-            android:name=".ExportActivity"
+            android:name=".matchScouting.MatchScoutingSummaryActivity"
             android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".bluetooth.BluetoothSyncActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ExportActivity"
             android:exported="false"
             android:screenOrientation="landscape"/>
         <activity
