@@ -39,7 +39,8 @@ public class MatchResultViewModel extends AndroidViewModel {
         false,
         false,
         false,
-        false
+        false,
+                StringUtils.EMPTY
         );
 
         return matchResult;

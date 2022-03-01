@@ -6,11 +6,14 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CompoundButton;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.hartlandrobotics.echelon2.R;
@@ -56,6 +59,8 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private MaterialCheckBox endHighCheckBox;
     private MaterialCheckBox endMidCheckBox;
     private MaterialCheckBox endLowCheckBox;
+
+    private TextInputLayout additionalNotesLayout;
 
     private MaterialButton submitButton;
 
@@ -185,6 +190,23 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         submitButton.setOnClickListener(v -> {
             matchResultViewModel.upsert(matchResult);
             MatchSelectionActivity.launch(MatchScoutingSummaryActivity.this);
+        });
+
+        additionalNotesLayout.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                matchResult.setAdditionalNotes(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
     }
     private void populateControlsFromData() {
