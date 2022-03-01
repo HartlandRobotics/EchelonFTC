@@ -15,13 +15,14 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class Api {
     private static String tbaApiKey;
-    private static String userAgent = "Echelon/1.0 3536";
+    private static String userAgentPrefix = "Echelon/1.0 ";
     private static ApiInterface api;
 
 
     public static ApiInterface getApiClient(Context context) {
         if(api == null) {
             AdminSettingsViewModel vm = AdminSettingsProvider.getAdminSettings(context);
+            String userAgent = userAgentPrefix + " " + vm.getTeamNumber();
             tbaApiKey = vm.getBlueAllianceApiKey();
 
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
