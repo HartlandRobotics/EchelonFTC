@@ -105,4 +105,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
+    <ImageButton
+        android:id="@+id/teleOpDefenses"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:src="@drawable/defense_blue"
+        android:background="@null"
+        app:layout_constraintTop_toBottomOf="@id/low"
+        app:layout_constraintEnd_toEndOf="@id/low"
+        app:layout_constraintStart_toStartOf="@id/low"
+        android:layout_marginTop="40dp"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/teleOpDefensesValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        tools:text="5"
+        app:layout_constraintTop_toTopOf="@id/teleOpDefenses"
+        app:layout_constraintBottom_toBottomOf="@id/teleOpDefenses"
+        app:layout_constraintEnd_toStartOf="@id/teleOpDefenses"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

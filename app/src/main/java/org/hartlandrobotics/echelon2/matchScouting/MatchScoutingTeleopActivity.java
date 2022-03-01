@@ -35,11 +35,15 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private MaterialButton highButton;
     private MaterialButton traversalButton;
 
+    private ImageButton defensesButton;
+    private MaterialTextView defensesText;
+
 
     private int topHubButtonDrawable;
     private int bottomHubButtonDrawable;
     private int buttonColor;
     private int buttonSelectedTextColor;
+    private int defenseDrawable;
 
     MatchResultViewModel matchResultViewModel;
     MatchResult matchResult;
@@ -87,6 +91,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     public void populateControlsFromData(){
         topHubText.setText(String.valueOf(matchResult.getTeleOpHighBalls()));
         bottomHubText.setText(String.valueOf(matchResult.getTeleOpLowBalls()));
+        defensesText.setText(String.valueOf(matchResult.getDefenseCount()));
 
         if (matchResult.getEndHangTraverse()){
             traversalButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.secondaryDarkColor)));
@@ -131,12 +136,14 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         });
 
         topHubButton = findViewById(R.id.topHub);
+        topHubButton.setImageResource(topHubButtonDrawable);
         topHubButton.setOnClickListener(v -> {
             matchResult.setTeleOpHighBalls(matchResult.getTeleOpHighBalls()+1);
             populateControlsFromData();
         });
 
         bottomHubButton = findViewById(R.id.bottomHub);
+        bottomHubButton.setImageResource(bottomHubButtonDrawable);
         bottomHubButton.setOnClickListener(v -> {
             matchResult.setTeleOpLowBalls(matchResult.getTeleOpLowBalls()+1);
             populateControlsFromData();
@@ -166,9 +173,16 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
+        defensesButton = findViewById(R.id.teleOpDefenses);
+        defensesButton.setImageResource(defenseDrawable);
+        defensesButton.setOnClickListener( v -> {
+            matchResult.setDefenseCount( matchResult.getDefenseCount() + 1);
+            populateControlsFromData();
+        });
+
         topHubText = findViewById(R.id.topHubText);
         bottomHubText = findViewById(R.id.bottomHubText);
-
+        defensesText = findViewById(R.id.teleOpDefensesValue);
     }
 
     public void setupColor() {
@@ -179,10 +193,12 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         if (settings.getDeviceRole().startsWith("red")){
             topHubButtonDrawable = R.drawable.frc_hub_top_red;
             bottomHubButtonDrawable = R.drawable.frc_hub_bottom_red;
+            defenseDrawable = R.drawable.defense_red;
             buttonColor = R.color.redAlliance;
         } else {
             topHubButtonDrawable = R.drawable.frc_hub_top_blue;
             bottomHubButtonDrawable = R.drawable.frc_hub_bottom_blue;
+            defenseDrawable = R.drawable.defense_blue;
             buttonColor = R.color.blueAlliance;
         }
     }

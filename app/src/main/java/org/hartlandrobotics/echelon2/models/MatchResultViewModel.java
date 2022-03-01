@@ -17,45 +17,46 @@ import java.util.List;
 public class MatchResultViewModel extends AndroidViewModel {
     private MatchResultRepo matchResultRepo;
 
-    public MatchResultViewModel( Application app){
+    public MatchResultViewModel(Application app) {
         super(app);
 
         matchResultRepo = new MatchResultRepo(app);
     }
 
-    public MatchResult getDefault(String eventKey, String matchKey, String teamKey){
+    public MatchResult getDefault(String eventKey, String matchKey, String teamKey) {
         MatchResult matchResult = new MatchResult(
                 StringUtils.EMPTY,
                 eventKey,
                 matchKey,
                 teamKey,
-        false,
-        false,
-        0,
-        0,
-        0,
-        0,
-        0,
-        false,
-        false,
-        false,
-        false,
-                StringUtils.EMPTY
+                false,
+                false,
+                0,
+                0,
+                0,
+                0,
+                0,
+                false,
+                false,
+                false,
+                false,
+                StringUtils.EMPTY,
+                0
         );
 
         return matchResult;
     }
 
-    public LiveData<MatchResult> getMatchResultByMatchTeam(String matchKey, String teamKey ){
+    public LiveData<MatchResult> getMatchResultByMatchTeam(String matchKey, String teamKey) {
         return matchResultRepo.getMatchResultByMatchTeam(matchKey, teamKey);
     }
 
-    public LiveData<List<MatchResult>> getMatchResultsByEvent(String eventKey){
+    public LiveData<List<MatchResult>> getMatchResultsByEvent(String eventKey) {
         return matchResultRepo.getMatchResultsByEvent(eventKey);
 
     }
 
-    public void upsert( MatchResult matchResult ){
-        matchResultRepo.upsert( matchResult );
+    public void upsert(MatchResult matchResult) {
+        matchResultRepo.upsert(matchResult);
     }
 }

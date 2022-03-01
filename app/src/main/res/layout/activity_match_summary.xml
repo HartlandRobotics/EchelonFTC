@@ -264,7 +264,7 @@
         android:layout_height="wrap_content"
         android:text="-"
         app:layout_constraintTop_toBottomOf="@id/teleOpHighDecrement"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/teleOpDefensesDecrement"
         app:layout_constraintStart_toEndOf="@id/teleOpLowLabel"
         app:layout_constraintEnd_toStartOf="@id/teleOpLowValue"
         />
@@ -287,13 +287,61 @@
         android:layout_height="wrap_content"
         android:text="+"
         app:layout_constraintTop_toBottomOf="@id/teleOpHighIncrement"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/teleOpDefensesIncrement"
 
         app:layout_constraintStart_toEndOf="@id/teleOpLowValue"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
     <!-- End of teleOpLow -->
+        `    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/teleOpDefensesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="60dp"
+        android:text="Defense:"
+        app:layout_constraintTop_toTopOf="@id/teleOpDefensesDecrement"
+        app:layout_constraintBottom_toBottomOf="@id/teleOpDefensesDecrement"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/teleOpDefensesDecrement"
+        />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/teleOpDefensesDecrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            app:layout_constraintTop_toBottomOf="@id/teleOpLowDecrement"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/teleOpDefensesLabel"
+            app:layout_constraintEnd_toStartOf="@id/teleOpDefensesValue"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/teleOpDefensesValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            tools:text="2"
+            app:layout_constraintTop_toTopOf="@id/teleOpDefensesDecrement"
+            app:layout_constraintBottom_toBottomOf="@+id/teleOpDefensesDecrement"
+            app:layout_constraintStart_toEndOf="@id/teleOpDefensesDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpDefensesIncrement"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/teleOpDefensesIncrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            app:layout_constraintTop_toBottomOf="@id/teleOpLowIncrement"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintStart_toEndOf="@id/teleOpLowValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <!-- end of teleOp defenses -->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

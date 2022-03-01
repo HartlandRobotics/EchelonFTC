@@ -55,6 +55,10 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private MaterialTextView teleOpLowValue;
     private MaterialButton teleOpLowIncrement;
 
+    private MaterialButton teleOpDefensesDecrement;
+    private MaterialTextView teleOpDefensesValue;
+    private MaterialButton teleOpDefensesIncrement;
+
     private MaterialCheckBox endTraverseCheckbox;
     private MaterialCheckBox endHighCheckBox;
     private MaterialCheckBox endMidCheckBox;
@@ -165,6 +169,19 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
+        teleOpDefensesValue = findViewById(R.id.teleOpDefensesValue);
+        teleOpDefensesDecrement = findViewById(R.id.teleOpDefensesDecrement);
+        teleOpDefensesDecrement.setOnClickListener(v -> {
+            matchResult.setDefenseCount(Math.max(matchResult.getDefenseCount()-1, 0));
+            populateControlsFromData();
+        });
+        teleOpDefensesIncrement = findViewById(R.id.teleOpDefensesIncrement);
+        teleOpDefensesIncrement.setOnClickListener(v -> {
+            matchResult.setDefenseCount(matchResult.getDefenseCount()+1);
+            populateControlsFromData();
+        });
+
+
         endTraverseCheckbox = findViewById(R.id.endTraverseCheckbox);
         endTraverseCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             matchResult.setEndHangTraverse(isChecked);
@@ -192,6 +209,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             MatchSelectionActivity.launch(MatchScoutingSummaryActivity.this);
         });
 
+        additionalNotesLayout = findViewById(R.id.additionalNotes);
         additionalNotesLayout.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -220,10 +238,13 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
 
         teleOpHighValue.setText( String.valueOf( matchResult.getTeleOpHighBalls() ));
         teleOpLowValue.setText( String.valueOf( matchResult.getTeleOpLowBalls() ));
+        teleOpDefensesValue.setText( String.valueOf( matchResult.getDefenseCount() ));
 
         endTraverseCheckbox.setChecked( matchResult.getEndHangTraverse() );
         endHighCheckBox.setChecked( matchResult.getEndHangHigh() );
         endMidCheckBox.setChecked( matchResult.getEndHangMid() );
         endLowCheckBox.setChecked( matchResult.getEndHangLow() );
+
+        additionalNotesLayout.getEditText().setText(matchResult.getAdditionalNotes());
     }
 }

@@ -64,7 +64,7 @@ public class ExportActivity extends EchelonActivity {
             matchResultViewModel.getMatchResultsByEvent(status.getEventKey()).observe(this, matchResults -> {
                 try {
                     FileOutputStream outputStream = new FileOutputStream(file);
-                    String header = "Event_Key,Match_Key,Team_Key,Auto_Taxi_Tarmac,Auto_High_Balls,Auto_Low_Balls,Auto_Human_Player_Shots,Teleop_High_Balls,Teleop_Low_Balls,End_Hang_Low,End_Hang_Mid,End_Hang_High,End_Hang_Traverse\n";
+                    String header = "Event_Key,Match_Key,Team_Key,Auto_Taxi_Tarmac,Auto_High_Balls,Auto_Low_Balls,Auto_Human_Player_Shots,Teleop_High_Balls,Teleop_Low_Balls,Teleop_Defenses,End_Hang_Low,End_Hang_Mid,End_Hang_High,End_Hang_Traverse\n";
                     outputStream.write(header.getBytes());
                     for(MatchResult mr: matchResults){
                         List<String> dataForFile = new ArrayList<>();
@@ -77,6 +77,7 @@ public class ExportActivity extends EchelonActivity {
                         dataForFile.add(String.valueOf(mr.getAutoHumanPlayerShots()));
                         dataForFile.add(String.valueOf(mr.getTeleOpHighBalls()));
                         dataForFile.add(String.valueOf(mr.getTeleOpLowBalls()));
+                        dataForFile.add(String.valueOf(mr.getDefenseCount()));
                         dataForFile.add(String.valueOf(mr.getEndHangLow()));
                         dataForFile.add(String.valueOf(mr.getEndHangMid()));
                         dataForFile.add(String.valueOf(mr.getEndHangHigh()));
