@@ -4,12 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
@@ -21,7 +18,7 @@ import org.hartlandrobotics.echelon2.configuration.AdminSettingsViewModel;
 
 import java.util.HashMap;
 
-public class AdminSettingsActivity extends AppCompatActivity {
+public class AdminSettingsActivity extends EchelonActivity {
     private static final String LOG_TAG = AdminSettingsActivity.class.getSimpleName();
 
     private MaterialButtonToggleGroup deviceRoleGroup;
@@ -29,6 +26,7 @@ public class AdminSettingsActivity extends AppCompatActivity {
     private HashMap<String, Integer> buttonRoleByText;
     private TextInputLayout blueAllianceText;
     private TextInputLayout scoutingSeasonText;
+    private TextInputLayout teamNumText;
     private TextInputLayout errorText;
     private AutoCompleteTextView scoutingSeasonsAutoComplete;
 
@@ -42,8 +40,10 @@ public class AdminSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_settings);
 
+        setupToolbar();
 
 
+        teamNumText = this.findViewById(R.id.teamNumText);
         errorText = this.findViewById(R.id.errorText);
         scoutingSeasonsAutoComplete = findViewById(R.id.scoutingSeasonDropDown);
 
@@ -57,13 +57,14 @@ public class AdminSettingsActivity extends AppCompatActivity {
         setupScoutingSeasonDropDown();
         initializeBlueAllianceKey(viewModel);
         initializeScoutingSeason(viewModel);
+        initializeTeamNumText(viewModel);
         initializeDeviceRole(viewModel);
 
     }
 
     public void setupScoutingSeasonDropDown(){
         String[] scoutingSeasons = getResources().getStringArray(R.array.scouting_years);
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.season_dropdown_item, scoutingSeasons);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.list_item_season_dropdown, scoutingSeasons);
         scoutingSeasonsAutoComplete.setAdapter(adapter);
     }
     public void initializeBlueAllianceKey(AdminSettingsViewModel vm){
@@ -72,6 +73,9 @@ public class AdminSettingsActivity extends AppCompatActivity {
         if( !vm.isBlueAllianceApikeySynced() ){
             setOutOfSync(blueAllianceText, vm.getFileSettings().getBlueAllianceApiKey());
         }
+    }
+    public void initializeTeamNumText(AdminSettingsViewModel vm){
+        setDisplayText(teamNumText, vm.getTeamNumber());
     }
 
     public void initializeDeviceRole(AdminSettingsViewModel vm){

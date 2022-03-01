@@ -24,6 +24,7 @@ public class AdminSettingsProvider {
     // Field names used in shared preference storage
     public static final String BLUE_ALLIANCE_KEY = "BlueAllianceKey";
     public static final String SCOUTING_YEAR = "ScoutingYear";
+    public static final String TEAM_NUMBER = "TeamNumber";
     public static final String DEVICE_ROLE = "DeviceRole";
 
     public static AdminSettingsViewModel getAdminSettings(Context appContext){
@@ -75,7 +76,9 @@ public class AdminSettingsProvider {
 
         String deviceRole = preferences.getString(DEVICE_ROLE, null);
 
-        return new AdminSettings(blueAllianceKey, scoutingYear, deviceRole);
+        String teamNumber = preferences.getString(TEAM_NUMBER, null);
+
+        return new AdminSettings(blueAllianceKey, scoutingYear, deviceRole, teamNumber);
     }
 
 

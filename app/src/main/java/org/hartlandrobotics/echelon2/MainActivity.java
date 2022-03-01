@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -29,16 +30,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends EchelonActivity {
 
     private BlueAllianceStatus status;
 
     private MaterialButton startScouting;
     private MaterialButton pitScouting;
-    private MaterialButton adminSettings;
-    private MaterialButton tbaStatus;
-    private MaterialButton tabTest;
-    private MaterialButton matchDropdownTesting;
 
     private AutoCompleteTextView seasonsAutoComplete;
 
@@ -52,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setupToolbar();
+
         status= new BlueAllianceStatus(getApplicationContext());
 
         setupStartScoutingButton();
         setupPitScoutingButton();
-        setupAdminSettingsButton();
-        setupTbaStatusButton();
 
         setupSeasonSelection();
 
@@ -102,15 +99,6 @@ public class MainActivity extends AppCompatActivity {
         pitScouting.setOnClickListener( v -> PitScoutActivity.launch(MainActivity.this ));
     }
 
-    private void setupAdminSettingsButton(){
-        adminSettings = this.findViewById(R.id.main_admin_settings);
-        adminSettings.setOnClickListener( view -> AdminSettingsActivity.launch( MainActivity.this ) );
-    }
-
-    private void setupTbaStatusButton(){
-        tbaStatus = this.findViewById(R.id.tba_button);
-        tbaStatus.setOnClickListener(view -> BlueAllianceActivity.launch(MainActivity.this));
-    }
 
     private void setupStatus(){
        status.loadSettingsFromPrefs();
@@ -125,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
 
         AdminSettings adminSettings = AdminSettingsProvider.getAdminSettings(this);
         TextInputLayout deviceLayout = findViewById(R.id.device_status_layout);
-        deviceLayout.getEditText().setText(adminSettings.getDeviceRole());
+        String deviceRole = adminSettings.getDeviceRole();
+        deviceLayout.getEditText().setText(deviceRole);
     }
 
     List<Season> seasons = new ArrayList<>();
@@ -146,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
             String currentSeason = status.getSeason();
             String currentYear = status.getYear();
             String currentDisplay = currentSeason + " - " + currentYear;
+
             Optional<Integer> foundIndex = Optional.empty();
             for(int displayIndex=0; displayIndex< displaySeasons.size(); displayIndex++ ){
                 if( displaySeasons.get(displayIndex).equals(currentDisplay)){
@@ -154,7 +144,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             if( foundIndex.isPresent() ){
-                seasonsAutoComplete.setListSelection(foundIndex.get());
+                String selectedText = seasonsAdapter.getItem(foundIndex.get()).toString();
+
+                seasonsAutoComplete.setText(selectedText, false);
             }
             setEnabled(foundIndex.isPresent());
 
@@ -162,16 +154,20 @@ public class MainActivity extends AppCompatActivity {
                 Season selectedSeason = seasons.get(position);
                 status.setYear( String.valueOf(selectedSeason.getYear()) );
                 status.setSeason( selectedSeason.getName() );
+                String selectedText = status.getSeason() + " - " + status.getYear();
+                seasonsAutoComplete.setText(selectedText, false);
                 setupStatus();
                 setEnabled(true);
             });
 
+
+
         });
     }
 
+
     private void setEnabled(boolean seasonSelected){
            startScouting.setEnabled(seasonSelected);
-           tbaStatus.setEnabled(seasonSelected);
            pitScouting.setEnabled(seasonSelected);
     }
 }

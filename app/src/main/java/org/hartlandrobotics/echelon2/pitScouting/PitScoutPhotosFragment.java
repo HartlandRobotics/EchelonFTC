@@ -2,6 +2,7 @@ package org.hartlandrobotics.echelon2.pitScouting;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Intent.ACTION_GET_CONTENT;
+import static android.content.Intent.parseIntent;
 
 import android.app.Activity;
 import android.content.ContextWrapper;
@@ -24,7 +25,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.R;
+import org.hartlandrobotics.echelon2.database.entities.PitScout;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,13 +45,17 @@ public class PitScoutPhotosFragment extends Fragment {
     private Button backPicture;
     private ViewPager robotImagesPager;
     RobotImage robotImageAdapter;
-    private int teamNumber = 6;
+    PitScout data;
+    private int teamNumber;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    public void setData(PitScout data){
+        this.data = data;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,10 +63,20 @@ public class PitScoutPhotosFragment extends Fragment {
 
         nextPicture = view.findViewById(R.id.nextPic);
         backPicture = view.findViewById(R.id.backPic);
+
+        teamNumber = Integer.parseInt(trimTeamNumber(data.getTeamKey()));
         SetupImagesArea(view);
         setupNextAndBackButton();
 
         return view;
+    }
+
+    private String trimTeamNumber(String teamKey){
+        String safeTeamKey = StringUtils.defaultIfBlank(teamKey,StringUtils.EMPTY);
+
+        String teamNumber = safeTeamKey.startsWith("frc") ? safeTeamKey.substring(3) : safeTeamKey;
+
+        return teamNumber;
     }
 
     public void setupNextAndBackButton(){

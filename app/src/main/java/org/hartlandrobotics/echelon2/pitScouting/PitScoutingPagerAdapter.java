@@ -55,6 +55,7 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
             endGameFragment.setData(data);
         }
         if( photosFragment != null ){
+            photosFragment.setData(data);
             // may not need to set data for this one
         }
     }
@@ -117,7 +118,7 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
             case PHOTOS_POSITION:
                 Log.i(TAG, "creating new Photos Fragment");
                 photosFragment = new PitScoutPhotosFragment();
-                // set data?
+                photosFragment.setData(data);
                 return photosFragment;
             default:
                 throw new IllegalArgumentException("invalid tab selection for pitscouting");

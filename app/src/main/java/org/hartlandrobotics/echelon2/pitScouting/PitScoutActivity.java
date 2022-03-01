@@ -17,6 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textview.MaterialTextView;
 
+import org.hartlandrobotics.echelon2.EchelonActivity;
 import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.database.entities.Team;
@@ -24,10 +25,11 @@ import org.hartlandrobotics.echelon2.models.PitScoutViewModel;
 import org.hartlandrobotics.echelon2.models.TeamViewModel;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PitScoutActivity extends AppCompatActivity {
+public class PitScoutActivity extends EchelonActivity {
     private static final String TAG = "PitScoutActivity";
     private BlueAllianceStatus status;
     TabLayout tabLayout;
@@ -54,6 +56,8 @@ public class PitScoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_scout);
 
+        setupToolbar();
+
         status = new BlueAllianceStatus(getApplicationContext());
 
         saveButton = findViewById(R.id.ps_save_button);
@@ -75,12 +79,16 @@ public class PitScoutActivity extends AppCompatActivity {
         teamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
         teamViewModel.getAllTeams().observe(this, ts -> {
 
-            teams = ts;
+            teams = ts.stream()
+                    .sorted(Comparator.comparingInt(t -> t.getTeamNumber()))
+                    .collect(Collectors.toList());
+
 
             teamNames = teams.stream()
                     .map(t -> t.getTeamNumber() + " - " + t.getNickname())
-                    .sorted()
+                    //.sorted(Comparator.comparingInt(t -> t.getTeamNumber()))
                     .collect(Collectors.toList());
+
 
             ArrayAdapter adapter = new ArrayAdapter(this, R.layout.dropdown_item, teamNames);
             teamNumberAutoComplete.setAdapter(adapter);
