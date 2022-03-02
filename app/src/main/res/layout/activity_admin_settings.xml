@@ -18,7 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/actionBar"
-        android:paddingLeft="15dp">
+        android:paddingLeft="40dp"
+        android:paddingBottom="20dp"
+        >
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/red1"
@@ -72,57 +74,89 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/blueAllianceApiText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
         android:hint="Blue Alliance API key"
         app:layout_constraintTop_toBottomOf="@id/deviceRoleSelection"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/apiKeySaveButton"
         >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="asdfasfdsf" />
+            tools:text="YOUR KEY HERE" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/scoutingSeasonText"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/apiKeySaveButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Scouting Season"
-        app:layout_constraintTop_toBottomOf="@id/blueAllianceApiText"
+        android:text="save"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:layout_constraintTop_toTopOf="@id/blueAllianceApiText"
+        app:layout_constraintBottom_toBottomOf="@id/blueAllianceApiText"
+        app:layout_constraintStart_toEndOf="@id/blueAllianceApiText"
+        app:layout_constraintEnd_toStartOf="@id/apiKeyRestoreButton"
+        />
 
-        >
-        <AutoCompleteTextView
-            android:id="@+id/scoutingSeasonDropDown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            />
-
-        <!-- <com.google.android.material.textfield.TextInputEditText
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:inputType="number"
-
-             android:text="2022"
-             />-->
-    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/apiKeyRestoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:text="restore"
+        app:layout_constraintTop_toTopOf="@id/blueAllianceApiText"
+        app:layout_constraintBottom_toBottomOf="@id/blueAllianceApiText"
+        app:layout_constraintStart_toEndOf="@id/apiKeySaveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/teamNumText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint = "Team Number"
-        app:layout_constraintTop_toBottomOf="@+id/scoutingSeasonText">
+        app:layout_constraintTop_toBottomOf="@+id/blueAllianceApiText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/teamNumberSaveButton"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="9999"/>
-
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/teamNumberSaveButton"
+        android:text="save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="3dp"
+        app:layout_constraintTop_toTopOf="@id/teamNumText"
+        app:layout_constraintBottom_toBottomOf="@id/teamNumText"
+        app:layout_constraintStart_toEndOf="@id/teamNumText"
+        app:layout_constraintEnd_toStartOf="@id/teamNumberRestoreButton"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/teamNumberRestoreButton"
+        android:text="restore"
+        android:layout_marginRight="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/teamNumText"
+        app:layout_constraintBottom_toBottomOf="@id/teamNumText"
+        app:layout_constraintStart_toEndOf="@id/teamNumberSaveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/errorText"

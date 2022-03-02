@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
@@ -24,11 +25,18 @@ public class AdminSettingsActivity extends EchelonActivity {
     private MaterialButtonToggleGroup deviceRoleGroup;
     private HashMap<Integer, String> buttonRoleById;
     private HashMap<String, Integer> buttonRoleByText;
+
     private TextInputLayout blueAllianceText;
-    private TextInputLayout scoutingSeasonText;
+    private MaterialButton apiKeySaveButton;
+    private MaterialButton apiKeyRestoreButton;
+
     private TextInputLayout teamNumText;
+    private MaterialButton teamNumSaveButton;
+    private MaterialButton teamNumRestoreButton;
+
     private TextInputLayout errorText;
-    private AutoCompleteTextView scoutingSeasonsAutoComplete;
+
+
 
     public static void launch(Context context){
         Intent intent = new Intent( context, AdminSettingsActivity.class );
@@ -43,9 +51,7 @@ public class AdminSettingsActivity extends EchelonActivity {
         setupToolbar();
 
 
-        teamNumText = this.findViewById(R.id.teamNumText);
         errorText = this.findViewById(R.id.errorText);
-        scoutingSeasonsAutoComplete = findViewById(R.id.scoutingSeasonDropDown);
 
         AdminSettingsViewModel viewModel = AdminSettingsProvider.getAdminSettings(getApplicationContext());
         if( viewModel == null ){
@@ -54,33 +60,52 @@ public class AdminSettingsActivity extends EchelonActivity {
             return;
         }
 
-        setupScoutingSeasonDropDown();
-        initializeBlueAllianceKey(viewModel);
-        initializeScoutingSeason(viewModel);
-        initializeTeamNumText(viewModel);
         initializeDeviceRole(viewModel);
 
+        initializeBlueAllianceKey(viewModel);
+        initializeTeamNumText(viewModel);
+
     }
 
-    public void setupScoutingSeasonDropDown(){
-        String[] scoutingSeasons = getResources().getStringArray(R.array.scouting_years);
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.list_item_season_dropdown, scoutingSeasons);
-        scoutingSeasonsAutoComplete.setAdapter(adapter);
-    }
     public void initializeBlueAllianceKey(AdminSettingsViewModel vm){
         blueAllianceText = this.findViewById(R.id.blueAllianceApiText);
-        setDisplayText( blueAllianceText, vm.getBlueAllianceApiKey() );
-        if( !vm.isBlueAllianceApikeySynced() ){
-            setOutOfSync(blueAllianceText, vm.getFileSettings().getBlueAllianceApiKey());
-        }
+        setDisplayText( blueAllianceText, vm.getBlueAllianceApiKey(), vm.getFileSettings().getBlueAllianceApiKey() );
+
+        apiKeySaveButton = this.findViewById(R.id.apiKeySaveButton);
+        apiKeySaveButton.setOnClickListener(v -> {
+            String apiKey = blueAllianceText.getEditText().getText().toString();
+            vm.setBlueAllianceApiKey(getApplicationContext(), apiKey);
+        });
+
+        apiKeyRestoreButton = this.findViewById(R.id.apiKeyRestoreButton);
+        apiKeyRestoreButton.setOnClickListener(v -> {
+            String fileApiKey = vm.getFileSettings().getBlueAllianceApiKey();
+            vm.setBlueAllianceApiKey(getApplicationContext(), fileApiKey);
+            setDisplayText( blueAllianceText, fileApiKey, fileApiKey);
+        });
     }
+
     public void initializeTeamNumText(AdminSettingsViewModel vm){
-        setDisplayText(teamNumText, vm.getTeamNumber());
+        teamNumText = this.findViewById(R.id.teamNumText);
+        setDisplayText(teamNumText, vm.getTeamNumber(), vm.getFileSettings().getTeamNumber());
+
+        teamNumSaveButton = this.findViewById(R.id.teamNumberSaveButton);
+        teamNumSaveButton.setOnClickListener(v -> {
+            String teamNumber = teamNumText.getEditText().getText().toString();
+            vm.setTeamNumber(getApplicationContext(), teamNumber);
+        });
+
+        teamNumRestoreButton = this.findViewById(R.id.teamNumberRestoreButton);
+        teamNumRestoreButton.setOnClickListener(v -> {
+            String fileTeamNumber = vm.getFileSettings().getTeamNumber();
+            vm.setTeamNumber(getApplicationContext(), fileTeamNumber );
+            setDisplayText(teamNumText, fileTeamNumber, fileTeamNumber);
+        });
     }
 
     public void initializeDeviceRole(AdminSettingsViewModel vm){
         buttonRoleByText = new HashMap<>();
-        buttonRoleByText.put( "red1", R.id.red1);
+        buttonRoleByText.put("red1", R.id.red1);
         buttonRoleByText.put("red2", R.id.red2);
         buttonRoleByText.put("red3", R.id.red3);
         buttonRoleByText.put("blue1", R.id.blue1);
@@ -103,33 +128,17 @@ public class AdminSettingsActivity extends EchelonActivity {
                     String currentRole = buttonRoleById.get(checkedId);
                     vm.setDeviceRole(AdminSettingsActivity.this, currentRole);
                 }
-
             }
         });
 
         int currentButtonId = buttonRoleByText.get(StringUtils.defaultIfBlank(vm.getDeviceRole(),"red1"));
         MaterialButton currentButton = deviceRoleGroup.findViewById(currentButtonId);
         currentButton.toggle();
-
     }
 
-    public void initializeScoutingSeason(AdminSettingsViewModel vm){
-        scoutingSeasonText = this.findViewById(R.id.scoutingSeasonText);
-        setDisplayText( scoutingSeasonText, vm.getScoutingSeason() );
-        if( !vm.isScoutingSeasonSynced() ){
-            setOutOfSync(scoutingSeasonText, vm.getFileSettings().getScoutingSeason());
-        }
-    }
-
-
-    private void setDisplayText(TextInputLayout layout, String displayText){
+    private void setDisplayText(TextInputLayout layout, String displayText, String fileText){
         layout.getEditText().setText(displayText);
-    }
-
-    private void setOutOfSync(TextInputLayout layout, String fileValue ){
-        layout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
-        layout.setEndIconDrawable(R.drawable.ic_menu_refresh);
-        layout.setHelperText(fileValue);
+        layout.setHelperText( fileText );
     }
 
     private void showError( String errorMessage ){

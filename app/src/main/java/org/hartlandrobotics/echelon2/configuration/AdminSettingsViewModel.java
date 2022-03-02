@@ -52,6 +52,12 @@ public class AdminSettingsViewModel extends AdminSettings {
         preferences.edit().putString(AdminSettingsProvider.BLUE_ALLIANCE_KEY, blueAllianceApiKey).apply();
     }
 
+    public void setTeamNumber(Context appContext, String teamNumber) {
+        super.setTeamNumber(teamNumber);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
+        preferences.edit().putString(AdminSettingsProvider.TEAM_NUMBER, teamNumber).apply();
+    }
+
     public void setDeviceRole(Context appContext, String deviceRole) {
         super.setDeviceRole(deviceRole);
 
