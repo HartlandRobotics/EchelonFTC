@@ -37,7 +37,7 @@ public class ExportActivity extends EchelonActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_export);
-        setupToolbar();
+        setupToolbar("Export Data");
 
         exportMatchResultsButton = findViewById(R.id.exportMatchResults);
         exportMatchResults();
@@ -142,8 +142,8 @@ public class ExportActivity extends EchelonActivity {
                     }
                     outputStream.close();
                 }
-                catch(Exception E){
-                    Log.e("In Catch for Pit Scout", "Exception trying to export pitscout data");
+                catch(Exception e){
+                    Log.e("In Catch for Pit Scout", "Exception trying to export pitscout data", e);
                 }
             });
         });

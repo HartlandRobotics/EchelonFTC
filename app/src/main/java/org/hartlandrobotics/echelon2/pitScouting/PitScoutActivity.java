@@ -56,7 +56,7 @@ public class PitScoutActivity extends EchelonActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_scout);
 
-        setupToolbar();
+        setupToolbar("Pit Scout");
 
         status = new BlueAllianceStatus(getApplicationContext());
 

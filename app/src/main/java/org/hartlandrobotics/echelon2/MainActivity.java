@@ -49,7 +49,7 @@ public class MainActivity extends EchelonActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setupToolbar();
+        setupToolbar("Home");
 
         status= new BlueAllianceStatus(getApplicationContext());
 
