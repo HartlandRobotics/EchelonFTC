@@ -3,6 +3,7 @@ package org.hartlandrobotics.echelon2;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,8 +13,11 @@ import org.hartlandrobotics.echelon2.bluetooth.BluetoothSyncActivity;
 import org.hartlandrobotics.echelon2.configuration.AdminSettings;
 
 public abstract class EchelonActivity extends AppCompatActivity {
+    private TextView pageName;
 
-    public void setupToolbar() {
+    public void setupToolbar(String pageNameIn) {
+        pageName = findViewById(R.id.titleOfPage);
+        pageName.setText(pageNameIn);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.electro_eagle_eyes_glow_transparent);

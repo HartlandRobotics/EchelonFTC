@@ -40,7 +40,7 @@ public class AdminSettingsActivity extends EchelonActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_settings);
 
-        setupToolbar();
+        setupToolbar("Admin Settings");
 
 
         teamNumText = this.findViewById(R.id.teamNumText);

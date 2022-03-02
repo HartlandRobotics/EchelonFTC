@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:orientation="vertical"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <androidx.appcompat.widget.Toolbar
     android:id="@+id/toolbar"
@@ -14,6 +14,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     app:titleTextColor="@android:color/white"
     android:background="?attr/colorPrimary"
     android:fitsSystemWindows="true">
+
+    <TextView
+        android:id="@+id/titleOfPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/primaryTextColor"
+        tools:text="Test"
+        android:textSize="24dp"/>
 </androidx.appcompat.widget.Toolbar>
 
 </LinearLayout>

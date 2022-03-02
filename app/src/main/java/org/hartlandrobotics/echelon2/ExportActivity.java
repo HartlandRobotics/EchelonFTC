@@ -37,7 +37,7 @@ public class ExportActivity extends EchelonActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_export);
-        setupToolbar();
+        setupToolbar("Export Data");
 
         exportMatchResultsButton = findViewById(R.id.exportMatchResults);
         exportMatchResults();
