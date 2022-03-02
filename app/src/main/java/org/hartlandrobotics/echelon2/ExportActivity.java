@@ -142,8 +142,8 @@ public class ExportActivity extends EchelonActivity {
                     }
                     outputStream.close();
                 }
-                catch(Exception E){
-                    Log.e("In Catch for Pit Scout", "Exception trying to export pitscout data");
+                catch(Exception e){
+                    Log.e("In Catch for Pit Scout", "Exception trying to export pitscout data", e);
                 }
             });
         });
