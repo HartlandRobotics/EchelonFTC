@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 
@@ -21,7 +22,11 @@ import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.models.MatchResultViewModel;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class MatchScoutingSummaryActivity extends AppCompatActivity {
+    private static final String TAG = "MatchScoutingSummaryActivity";
 
     private static final String MATCH_KEY = "auto_match_key_param";
     private static final String TEAM_KEY = "auto_team_key_param";
@@ -206,7 +211,12 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         submitButton = findViewById(R.id.matchSummarySaveButton);
         submitButton.setOnClickListener(v -> {
             matchResultViewModel.upsert(matchResult);
-            MatchSelectionActivity.launch(MatchScoutingSummaryActivity.this);
+            Log.i(TAG, "current match key is " + matchKey);
+            // 2020mimil_qm1
+            String[] tokens = matchKey.split("_qm");
+            String matchNumberStr = tokens[1];
+            Integer nextMatchNumber = Integer.valueOf(matchNumberStr) + 1;
+            MatchSelectionActivity.launch(MatchScoutingSummaryActivity.this, nextMatchNumber);
         });
 
         additionalNotesLayout = findViewById(R.id.additionalNotes);

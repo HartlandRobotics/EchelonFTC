@@ -91,7 +91,7 @@ public class MainActivity extends EchelonActivity {
 
     private void setupStartScoutingButton(){
         startScouting = this.findViewById(R.id.main_admin_start_scouting);
-        startScouting.setOnClickListener(view -> MatchSelectionActivity.launch(MainActivity.this));
+        startScouting.setOnClickListener(view -> MatchSelectionActivity.launch(MainActivity.this, null));
     }
 
     private void setupPitScoutingButton(){

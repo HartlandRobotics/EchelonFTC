@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +17,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hartlandrobotics.echelon2.EchelonActivity;
 import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.configuration.AdminSettings;
 import org.hartlandrobotics.echelon2.configuration.AdminSettingsProvider;
@@ -29,7 +31,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MatchSelectionActivity extends AppCompatActivity {
+public class MatchSelectionActivity extends EchelonActivity {
     public static final String TAG = "MatchDropdownActivity";
     List<Match> matches;
     List<String> matchNumbers;
@@ -40,11 +42,19 @@ public class MatchSelectionActivity extends AppCompatActivity {
 
     ViewPager2 robotImagePager;
 
+    Integer requestedMatchNumber;
     Match currentMatch;
     String currentTeamKey;
 
-    public static void launch(Context context){
+    private static final String MATCH_NUMBER_KEY = "MatchNumber";
+
+    public static void launch(Context context, Integer matchNumber){
         Intent intent = new Intent(context, MatchSelectionActivity.class);
+        if( matchNumber != null ){
+            Bundle bundle = new Bundle();
+            bundle.putString(MATCH_NUMBER_KEY, matchNumber.toString() );
+            intent.putExtras(bundle);
+        }
         context.startActivity(intent);
     }
 
@@ -52,7 +62,19 @@ public class MatchSelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_selection);
+
+        Bundle bundle = getIntent().getExtras();
+        if( bundle != null ) {
+            String requestedMatchNumberString = bundle.getString(MATCH_NUMBER_KEY);
+            if (!StringUtils.isBlank(requestedMatchNumberString)) {
+                requestedMatchNumber = Integer.valueOf(requestedMatchNumberString);
+            }
+        }
+
+        setupToolbar("Match Selection");
+
         setupMatchDropdown();
+
         selectTextPrompt = findViewById(R.id.matchSelection);
         matchNumberAutoComplete = findViewById(R.id.matchSelectionAutoComplete);
         scoutMatchButton = findViewById(R.id.scoutMatch);
@@ -124,22 +146,53 @@ public class MatchSelectionActivity extends AppCompatActivity {
             matchNumberAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                    currentMatch = matches.get(position);
+                    Log.i(TAG, "match selection on Item click called with pos " + position);
+                    setMatchSelectionPosition( position );
 
-                    scoutMatchButton.setEnabled(true);
-
-                    currentTeamKey = getTeamKey(currentMatch, settings.getDeviceRole());
-                    String teamNumber = getTeamNumber( currentMatch, settings.getDeviceRole());
-                    List<String> imageFileNames = getImageFiles(teamNumber);
-
-                    robotImagePager.setAdapter(new RobotImageAdapter(imageFileNames));
                 }
             });
+            matchNumberAutoComplete.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    Log.i(TAG, "match selection on Item selected listener called with pos " + position);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            if( requestedMatchNumber != null ){
+                // find that selection in the drop down and selected it
+                Log.i(TAG, "match " + requestedMatchNumber + " was requested");
+
+                int nextMatchPosition = requestedMatchNumber - 1;
+                if( nextMatchPosition < matches.size() ){
+                    String text = matchNumberAutoComplete.getAdapter().getItem(nextMatchPosition).toString();
+                    matchNumberAutoComplete.setText(text, false);
+                    setMatchSelectionPosition( nextMatchPosition );
+                }
+
+
+            }
         });
 
 
 
 
+    }
+    private void setMatchSelectionPosition(int position){
+        AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
+        currentMatch = matches.get(position);
+
+        scoutMatchButton.setEnabled(true);
+
+        currentTeamKey = getTeamKey(currentMatch, settings.getDeviceRole());
+        String teamNumber = getTeamNumber( currentMatch, settings.getDeviceRole());
+        List<String> imageFileNames = getImageFiles(teamNumber);
+
+        robotImagePager.setAdapter(new RobotImageAdapter(imageFileNames));
     }
 
     private List<String> getImageFiles(String teamNumber) {
