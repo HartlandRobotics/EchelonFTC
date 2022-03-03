@@ -108,7 +108,7 @@
     <ImageButton
         android:id="@+id/teleOpDefenses"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:src="@drawable/defense_blue"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/low"
@@ -126,6 +126,7 @@
         app:layout_constraintTop_toTopOf="@id/teleOpDefenses"
         app:layout_constraintBottom_toBottomOf="@id/teleOpDefenses"
         app:layout_constraintEnd_toStartOf="@id/teleOpDefenses"
+        android:textSize="48sp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
