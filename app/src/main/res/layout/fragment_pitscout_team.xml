@@ -45,7 +45,7 @@
             android:id="@+id/humanShotAccuracy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How accurate is your human player at making shots?"
+            android:hint="How many shots out of 10 does your human player make?"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
