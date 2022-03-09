@@ -9,6 +9,7 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
+import org.hartlandrobotics.echelon2.database.entities.MatchResultWithTeamMatch;
 
 import java.util.List;
 
@@ -34,4 +35,8 @@ public abstract class MatchResultDao {
     @Transaction
     @Query("SELECT * from match_result WHERE event_key = :eventKey")
     public abstract LiveData<List<MatchResult>> getMatchResultsByEvent(String eventKey);
+
+    @Transaction
+    @Query("SELECT * from match_result WHERE event_key = :eventKey")
+    public abstract LiveData<List<MatchResultWithTeamMatch>> getMatchResultsWithTeamMatchByEvent(String eventKey);
 }

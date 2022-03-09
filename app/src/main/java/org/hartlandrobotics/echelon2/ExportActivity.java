@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
+import org.hartlandrobotics.echelon2.database.entities.Match;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
+import org.hartlandrobotics.echelon2.database.entities.MatchResultWithTeamMatch;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
+import org.hartlandrobotics.echelon2.database.entities.Team;
 import org.hartlandrobotics.echelon2.models.MatchResultViewModel;
 import org.hartlandrobotics.echelon2.models.PitScoutViewModel;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
@@ -61,12 +64,16 @@ public class ExportActivity extends EchelonActivity {
             String fileName = "Match_Data_" + dateForFile + ".csv";
             File file = new File( externalFilesDir, fileName);
 
-            matchResultViewModel.getMatchResultsByEvent(status.getEventKey()).observe(this, matchResults -> {
+            matchResultViewModel.getMatchResultsWithTeamMatchByEvent(status.getEventKey()).observe(this, matchResults -> {
                 try {
                     FileOutputStream outputStream = new FileOutputStream(file);
                     String header = "Event_Key,Match_Key,Team_Key,Auto_Taxi_Tarmac,Auto_High_Balls,Auto_Low_Balls,Auto_Human_Player_Shots,Teleop_High_Balls,Teleop_Low_Balls,Teleop_Defenses,End_Hang_Low,End_Hang_Mid,End_Hang_High,End_Hang_Traverse\n";
                     outputStream.write(header.getBytes());
-                    for(MatchResult mr: matchResults){
+                    for(MatchResultWithTeamMatch matchResultWithTeamMatch: matchResults){
+                        MatchResult mr = matchResultWithTeamMatch.matchResult;
+                        Match m = matchResultWithTeamMatch.match;
+                        Team t = matchResultWithTeamMatch.team;
+
                         List<String> dataForFile = new ArrayList<>();
                         dataForFile.add(mr.getEventKey());
                         dataForFile.add(mr.getMatchKey());
