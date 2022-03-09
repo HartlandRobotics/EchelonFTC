@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.database.dao.MatchResultDao;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
+import org.hartlandrobotics.echelon2.database.entities.MatchResultWithTeamMatch;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.database.repositories.MatchResultRepo;
 
@@ -53,8 +54,13 @@ public class MatchResultViewModel extends AndroidViewModel {
 
     public LiveData<List<MatchResult>> getMatchResultsByEvent(String eventKey) {
         return matchResultRepo.getMatchResultsByEvent(eventKey);
-
     }
+
+    public LiveData<List<MatchResultWithTeamMatch>> getMatchResultsWithTeamMatchByEvent(String eventKey) {
+        return matchResultRepo.getMatchResultsWithTeamMatchByEvent(eventKey);
+    }
+
+
 
     public void upsert(MatchResult matchResult) {
         matchResultRepo.upsert(matchResult);

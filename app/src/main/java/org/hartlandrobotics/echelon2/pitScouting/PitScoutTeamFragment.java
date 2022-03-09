@@ -24,7 +24,10 @@ public class PitScoutTeamFragment extends Fragment {
 
     PitScout data;
 
-    public void setData( PitScout data) { this.data = data; }
+    public void setData( PitScout data) {
+        this.data = data;
+        populateControlsFromData();
+    }
 
     public PitScoutTeamFragment() {
         // Required empty public constructor

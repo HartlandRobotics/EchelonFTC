@@ -86,6 +86,10 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
             Log.i(TAG, "populate end game fragment data");
             endGameFragment.populateDataFromControls();
         }
+        if( teamFragment != null ){
+            Log.i(TAG, "populate team fragment data");
+            teamFragment.populateDataFromControls();
+        }
         if( photosFragment != null ){
             Log.i(TAG, "populate photos fragment");
         }
