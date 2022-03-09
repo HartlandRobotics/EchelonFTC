@@ -13,8 +13,12 @@ newList = []
 for team in arrOfTeams:
     newList.append(team.split(','))
     
-#removes the first element (column names)
-newList.pop(0)
+#makes dictionary of column names and index in array
+columnNames = newList.pop(0)
+columnNamesDic = {}
+for name in columnNames:
+    columnNamesDic[name] = columnNames.index(name)
+print(columnNamesDic)
 
 #make each element of the array in the format that you want to print
 f = open("PitScoutResult.html", "w")
@@ -28,42 +32,42 @@ header = H1([], "PitScout Data")
 f.write(header.render(pretty = True))
 
 #makes the hyperlink for the team
-str1 =  A([Href("#{0}")], "{0}")
+str1 =  A([Href("#{" + str(columnNamesDic['Team_Key'])+ "}")], "{" + str(columnNamesDic['Team_Key'])+ "}")
 
 for item in newList:
-    item[0] = item[0][3:]
-    f.write(str1.render(pretty = True).format(item[0]))
+    item[columnNamesDic['Team_Key']] = item[columnNamesDic['Team_Key']][3:]
+    f.write(str1.render(pretty = True).format(item[columnNamesDic['Team_Key']]))
 
 
 #template for each teams info
 html = Div([],
-        H2([Id("{0}")], "Team Number: {0}"),
+        H2([Id("{" + str(columnNamesDic['Team_Key'])+ "}")], "Team Number: {" + str(columnNamesDic['Team_Key'])+ "}"),
         H3([], "AUTO INFO"),
-        P([], "Has Auto: {1}"),
-        P([], "Wants Help Creating an Auto: {2}"),
-        P([], "Coding Language Used: {3}"),
-        P([], "Can Shoot: {4}"),
-        P([], "Shots Made Out of Ten: {5}"),
-        P([], "Amount of Balls Picked up or Shot: {6}"),
-        P([], "Human Player Shots Made Out of Ten: {18}"),
+        P([], "Has Auto: {" + str(columnNamesDic['Has_Autonomous'])+ "}"),
+        P([], "Wants Help Creating an Auto: {" + str(columnNamesDic['Help_With_Auto'])+ "}"),
+        P([], "Coding Language Used: {" + str(columnNamesDic['Coding_Language'])+ "}"),
+        P([], "Can Shoot: {" + str(columnNamesDic['Shoots_Auto'])+ "}"),
+        P([], "Shots Made Out of Ten: {" + str(columnNamesDic['Percent_Auto_Shots'])+ "}"),
+        P([], "Amount of Balls Picked up or Shot: {" + str(columnNamesDic['Balls_Picked_Or_Shot_Auto'])+ "}"),
+        P([], "Human Player Shots Made Out of Ten: {" + str(columnNamesDic['Human_Player_Accuracy'])+ "}"),
                 
         H3([], "TELE OP INFO"),
-        P([], "Can Shoot: {7}"),
-        P([], "Shots Made Out of Ten: {8}"),
-        P([], "Preferred Goal: {9}"),
-        P([], "Can Play Defense: {10}"),
+        P([], "Can Shoot: {" + str(columnNamesDic['Can_Shoot'])+ "}"),
+        P([], "Shots Made Out of Ten: {" + str(columnNamesDic['Shooting_Accuracy'])+ "}"),
+        P([], "Preferred Goal: {" + str(columnNamesDic['Preferred_Goal'])+ "}"),
+        P([], "Can Play Defense: {" + str(columnNamesDic['Can_Play_Defense'])+ "}"),
                    
         H3([], "END GAME INFO"),
-        P([], "Can Robot Hang: {11}"),
-        P([], "Highest Bar Robot can Hang on: {12}"),
-        P([], "Time to Hang: {13}"),
-        P([], "Preferred Hanging Spot: {14}"),
-        P([], "Does Robot has Side Swing: {15}"),
+        P([], "Can Robot Hang: {" + str(columnNamesDic['Can_Robot_Hang'])+ "}"),
+        P([], "Highest Bar Robot can Hang on: {" + str(columnNamesDic['Highest_Hang_Bar'])+ "}"),
+        P([], "Time to Hang: {" + str(columnNamesDic['Hang_Time'])+ "}"),
+        P([], "Preferred Hanging Spot: {" + str(columnNamesDic['Preferred_Hanging_Spot'])+ "}"),
+        P([], "Does Robot has Side Swing: {" + str(columnNamesDic['Side_Swing'])+ "}"),
                    
         H3([], "TEAM INFO"),
-        P([], "Driver Experience: {16}"),
-        P([], "Operator Experience: {17}"),
-        P([], "Extra Notes: {19}"),
+        P([], "Driver Experience: {" + str(columnNamesDic['Driver_Experience'])+ "}"),
+        P([], "Operator Experience: {" + str(columnNamesDic['Operator_Experience'])+ "}"),
+        P([], "Extra Notes: {" + str(columnNamesDic['Extra_Notes'])+ "}"),
                 
         )
     
