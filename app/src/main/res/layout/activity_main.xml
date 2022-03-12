@@ -57,7 +57,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.33"
-        app:layout_constraintBottom_toTopOf="@id/status_layout"
+        app:layout_constraintBottom_toTopOf="@id/match_schedule_button"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/match_schedule_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Match Schedule"
+    app:layout_constraintTop_toBottomOf="@id/pit_scout_button"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintWidth_percent="0.33"
+    app:layout_constraintBottom_toTopOf="@id/status_layout"
+        android:visibility="gone"
         />
 
     <LinearLayout

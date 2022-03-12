@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
@@ -36,6 +38,7 @@ public class MainActivity extends EchelonActivity {
 
     private MaterialButton startScouting;
     private MaterialButton pitScouting;
+    private MaterialButton matchSchedule;
 
     private AutoCompleteTextView seasonsAutoComplete;
 
@@ -55,6 +58,7 @@ public class MainActivity extends EchelonActivity {
 
         setupStartScoutingButton();
         setupPitScoutingButton();
+        setupMatchScheduleButton();
 
         setupSeasonSelection();
 
@@ -97,6 +101,15 @@ public class MainActivity extends EchelonActivity {
     private void setupPitScoutingButton(){
         pitScouting = findViewById(R.id.pit_scout_button);
         pitScouting.setOnClickListener( v -> PitScoutActivity.launch(MainActivity.this ));
+    }
+
+    private void setupMatchScheduleButton(){
+        matchSchedule = findViewById(R.id.match_schedule_button);
+        String deviceName = Settings.Secure.getString(getContentResolver(), "bluetooth_name");
+        if( deviceName.contains("aptain")){
+            matchSchedule.setVisibility(View.VISIBLE);
+        }
+        matchSchedule.setOnClickListener( v -> MatchScheduleActivity.launch(MainActivity.this));
     }
 
 
