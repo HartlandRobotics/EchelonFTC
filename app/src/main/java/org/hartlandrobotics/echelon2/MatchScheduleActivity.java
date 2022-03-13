@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
@@ -41,6 +43,7 @@ public class MatchScheduleActivity extends EchelonActivity {
     TextInputLayout teamSearchLayout;
     RecyclerView matchRecycler;
     MatchListAdapter matchListAdapter;
+    String deviceName;
 
     public static void launch(Context context) {
         Intent intent = new Intent(context, MatchScheduleActivity.class);
@@ -51,6 +54,8 @@ public class MatchScheduleActivity extends EchelonActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_schedule);
+
+        deviceName = Settings.Secure.getString(getContentResolver(), "bluetooth_name");
 
         setupToolbar("Match Schedule");
 
@@ -173,11 +178,13 @@ public class MatchScheduleActivity extends EchelonActivity {
         private MaterialTextView blue3;
         private MaterialTextView redPrediction;
         private MaterialTextView bluePrediction;
+        private LinearLayout predictionLayout;
 
         private MatchScheduleViewModel matchScheduleViewModel;
 
         MatchScheduleViewHolder(View itemView){
             super(itemView);
+
 
             matchNumber = itemView.findViewById(R.id.match_number);
             red1 = itemView.findViewById(R.id.red1);
@@ -188,6 +195,11 @@ public class MatchScheduleActivity extends EchelonActivity {
             blue3 = itemView.findViewById(R.id.blue3);
             redPrediction = itemView.findViewById(R.id.red_prediction);
             bluePrediction = itemView.findViewById(R.id.blue_prediction);
+            predictionLayout = itemView.findViewById(R.id.prediction_layout);
+            if( !deviceName.contains("aptain")){
+                predictionLayout.setVisibility(View.INVISIBLE);
+            }
+
         }
 
         public void setMatch(MatchScheduleViewModel matchScheduleViewModel){

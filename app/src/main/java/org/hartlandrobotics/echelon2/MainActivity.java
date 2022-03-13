@@ -105,11 +105,7 @@ public class MainActivity extends EchelonActivity {
 
     private void setupMatchScheduleButton(){
         matchSchedule = findViewById(R.id.match_schedule_button);
-        String deviceName = Settings.Secure.getString(getContentResolver(), "bluetooth_name");
-        if( deviceName.contains("aptain")){
-            matchSchedule.setVisibility(View.VISIBLE);
-        }
-        matchSchedule.setOnClickListener( v -> MatchScheduleActivity.launch(MainActivity.this));
+       matchSchedule.setOnClickListener( v -> MatchScheduleActivity.launch(MainActivity.this));
     }
 
 
