@@ -8,12 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.blueAlliance.fragments.MatchListViewModel;
 import org.hartlandrobotics.echelon2.blueAlliance.fragments.MatchesFragment;
 import org.hartlandrobotics.echelon2.database.entities.Match;
@@ -34,6 +38,7 @@ public class MatchScheduleActivity extends EchelonActivity {
     MatchResultRepo matchResultRepo;
     Map<String, List<MatchResult>> matchResultsByTeam =  new HashMap<>();
     List<MatchScheduleViewModel> viewModels = new ArrayList<>();
+    TextInputLayout teamSearchLayout;
     RecyclerView matchRecycler;
     MatchListAdapter matchListAdapter;
 
@@ -48,6 +53,24 @@ public class MatchScheduleActivity extends EchelonActivity {
         setContentView(R.layout.activity_match_schedule);
 
         setupToolbar("Match Schedule");
+
+        teamSearchLayout = findViewById(R.id.team_search);
+        teamSearchLayout.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                matchListAdapter.setTeamFilter(StringUtils.defaultIfBlank(s.toString(), StringUtils.EMPTY));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         matchListAdapter = new MatchListAdapter(this);
 
@@ -188,7 +211,9 @@ public class MatchScheduleActivity extends EchelonActivity {
 
     public class MatchListAdapter extends RecyclerView.Adapter<MatchScheduleViewHolder>{
         private final LayoutInflater inflater;
+        private List<MatchScheduleViewModel> allHolderViewModels;
         private List<MatchScheduleViewModel> holderViewModels;
+        private String teamFilter = StringUtils.EMPTY;
 
         MatchListAdapter(Context context){
             inflater = LayoutInflater.from(context);
@@ -210,9 +235,25 @@ public class MatchScheduleActivity extends EchelonActivity {
             }
         }
 
+        void setTeamFilter(String filter){
+            teamFilter = StringUtils.defaultIfBlank(filter, StringUtils.EMPTY);
+            setMatches(allHolderViewModels);
+        }
+
         void setMatches(List<MatchScheduleViewModel> vms){
+            allHolderViewModels = vms;
+            String filter = StringUtils.defaultIfBlank(teamFilter, StringUtils.EMPTY );
+            String teamKeyFilter = "frc" + filter;
             holderViewModels = vms.stream()
                     .sorted(Comparator.comparingInt(m -> Integer.valueOf( m.getMatchNumber())))
+                    .filter( m -> StringUtils.isBlank(filter)
+                            || m.getRed1().equals(teamKeyFilter)
+                            || m.getRed2().equals(teamKeyFilter)
+                            || m.getRed3().equals(teamKeyFilter)
+                            || m.getBlue1().equals(teamKeyFilter)
+                            || m.getBlue2().equals(teamKeyFilter)
+                            || m.getBlue3().equals(teamKeyFilter)
+                    )
                     .collect(Collectors.toList());
 
             notifyDataSetChanged();
