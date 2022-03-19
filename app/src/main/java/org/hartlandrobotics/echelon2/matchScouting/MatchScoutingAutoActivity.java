@@ -30,6 +30,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     private MaterialTextView topHubText;
     private MaterialTextView bottomHubText;
     private MaterialTextView humanPlayerText;
+    private MaterialTextView teamKeyText;
 
     int topHubButtonDrawable;
     int bottomHubButtonDrawable;
@@ -63,6 +64,9 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         matchKey = bundle.getString(MATCH_KEY);
         teamKey = bundle.getString(TEAM_KEY);
+
+        teamKeyText = findViewById(R.id.teamKeyText);
+        teamKeyText.setText(teamKey);
 
         BlueAllianceStatus blueAllianceStatus = new BlueAllianceStatus(getApplicationContext());
 

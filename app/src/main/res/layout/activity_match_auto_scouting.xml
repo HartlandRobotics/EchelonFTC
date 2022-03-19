@@ -92,4 +92,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/teamKeyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="FRC 3536"
+        android:padding="20px"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
