@@ -67,6 +67,8 @@ public class BluetoothSyncActivity extends EchelonActivity {
     RecyclerView logRecyclerView;
     LogLinesAdapter logLinesAdapter;
 
+    private MaterialTextView deviceNameText;
+
     MatchResultViewModel matchResultViewModel;
     BluetoothSyncService bluetoothService;
     private Map<String, BluetoothDevice> devices;
@@ -90,6 +92,7 @@ public class BluetoothSyncActivity extends EchelonActivity {
 
 
         setupToolbar("Bluetooth Sync");
+        deviceNameText = findViewById(R.id.deviceNameText);
         setupControls();
 
         setupDeviceMapping();
@@ -254,6 +257,8 @@ public class BluetoothSyncActivity extends EchelonActivity {
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
         String deviceName = bluetoothService.getCurrentDeviceName();
+        deviceNameText.setText(deviceName);
+
         if( deviceName.equals("captain_" + settings.getTeamNumber() ) ){
             matchResultsUnsyncedLabel.setVisibility(View.GONE);
             matchResultsUnsyncedText.setVisibility(View.GONE);
