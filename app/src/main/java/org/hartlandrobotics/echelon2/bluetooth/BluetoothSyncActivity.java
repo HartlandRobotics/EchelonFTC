@@ -145,7 +145,7 @@ public class BluetoothSyncActivity extends EchelonActivity {
 
         deviceNameByRole = new HashMap<>();
         deviceNameByRole.put("red1", "red_1_" + teamNumber);
-        deviceNameByRole.put("red2", "red__2_" + teamNumber);
+        deviceNameByRole.put("red2", "red_2_" + teamNumber);
         deviceNameByRole.put("red3", "red_3_" + teamNumber);
 
         deviceNameByRole.put("blue1", "blue_1_" + teamNumber);
