@@ -19,6 +19,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.hartlandrobotics.echelon2.blueAlliance.BlueAllianceActivity;
+import org.hartlandrobotics.echelon2.charts.ChartsActivity;
 import org.hartlandrobotics.echelon2.configuration.AdminSettings;
 import org.hartlandrobotics.echelon2.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelon2.database.entities.Season;
@@ -39,6 +40,7 @@ public class MainActivity extends EchelonActivity {
     private MaterialButton startScouting;
     private MaterialButton pitScouting;
     private MaterialButton matchSchedule;
+    private MaterialButton chartsButton;
 
     private AutoCompleteTextView seasonsAutoComplete;
 
@@ -59,6 +61,7 @@ public class MainActivity extends EchelonActivity {
         setupStartScoutingButton();
         setupPitScoutingButton();
         setupMatchScheduleButton();
+        setupChartsButton();
 
         setupSeasonSelection();
 
@@ -106,6 +109,11 @@ public class MainActivity extends EchelonActivity {
     private void setupMatchScheduleButton(){
         matchSchedule = findViewById(R.id.match_schedule_button);
        matchSchedule.setOnClickListener( v -> MatchScheduleActivity.launch(MainActivity.this));
+    }
+
+    private void setupChartsButton(){
+        chartsButton = findViewById(R.id.charts_button);
+        chartsButton.setOnClickListener( v -> ChartsActivity.launch(MainActivity.this));
     }
 
 

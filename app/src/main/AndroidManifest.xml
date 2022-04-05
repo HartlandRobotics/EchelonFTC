@@ -21,6 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Echelon2">
         <activity
+            android:name=".charts.ChartsActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".MatchScheduleActivity"
             android:exported="false"
             android:screenOrientation="landscape" />

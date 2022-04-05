@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.configuration;
+package org.hartlandrobotics.echelon2.utilities;
 
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
-public class ConfigFileUtility {
+public class FileUtilities {
 
     public static File getFile(Context applicationContext, String directoryName, String fileName){
         File directory = ensureDirectory(applicationContext, directoryName);

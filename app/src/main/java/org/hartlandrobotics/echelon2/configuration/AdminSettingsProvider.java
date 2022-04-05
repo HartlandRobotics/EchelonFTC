@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hartlandrobotics.echelon2.utilities.FileUtilities;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class AdminSettingsProvider {
     }
 
     private static AdminSettings settingsFromFile(Context appContext){
-        File configFile = ConfigFileUtility.getFile(appContext, CONFIG_DIRECTORY, CONFIG_FILE_NAME );
+        File configFile = FileUtilities.getFile(appContext, CONFIG_DIRECTORY, CONFIG_FILE_NAME );
         if( configFile == null ) {
             Log.e(LOG_TAG, "Missing Config File");
             Toast.makeText(appContext, "Missing Config File", Toast.LENGTH_LONG).show();
