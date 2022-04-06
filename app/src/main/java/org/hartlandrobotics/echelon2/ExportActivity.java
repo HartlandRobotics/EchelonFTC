@@ -193,7 +193,7 @@ public class ExportActivity extends EchelonActivity {
             int matchNum = Integer.parseInt(columns[3]);
             int teamNum = Integer.parseInt(columns[4]);
             boolean taxi = false;
-            if(columns[5].equals("TRUE")) {
+            if(columns[5].equalsIgnoreCase("TRUE")) {
                 taxi = true;
             }
             int autoHigh = Integer.parseInt(columns[6]);
@@ -203,19 +203,19 @@ public class ExportActivity extends EchelonActivity {
             int teleLow = Integer.parseInt(columns[10]);
             int teleDef = Integer.parseInt(columns[11]);
             boolean lowHang = false;
-            if(columns[12].equals("TRUE")){
+            if(columns[12].equalsIgnoreCase("TRUE")){
                 lowHang = true;
             }
             boolean midHang = false;
-            if(columns[13].equals("TRUE")){
+            if(columns[13].equalsIgnoreCase("TRUE")){
                 midHang = true;
             }
             boolean highHang = false;
-            if(columns[14].equals("TRUE")){
+            if(columns[14].equalsIgnoreCase("TRUE")){
                 highHang = true;
             }
             boolean travHang = false;
-            if(columns[15].equals("TRUE")){
+            if(columns[15].equalsIgnoreCase("TRUE")){
                 travHang = true;
             }
             String matchResultKey = columns[16];
