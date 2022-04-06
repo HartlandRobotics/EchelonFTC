@@ -36,6 +36,7 @@ import java.util.stream.Collectors;
 public class MainActivity extends EchelonActivity {
 
     private BlueAllianceStatus status;
+    String deviceName;
 
     private MaterialButton startScouting;
     private MaterialButton pitScouting;
@@ -57,6 +58,7 @@ public class MainActivity extends EchelonActivity {
         setupToolbar("Home");
 
         status= new BlueAllianceStatus(getApplicationContext());
+        deviceName = Settings.Secure.getString(getContentResolver(), "bluetooth_name");
 
         setupStartScoutingButton();
         setupPitScoutingButton();
@@ -114,6 +116,10 @@ public class MainActivity extends EchelonActivity {
     private void setupChartsButton(){
         chartsButton = findViewById(R.id.charts_button);
         chartsButton.setOnClickListener( v -> ChartsActivity.launch(MainActivity.this));
+
+        if( deviceName.contains("aptain" ) || deviceName.contains("oach")){
+            chartsButton.setVisibility(View.VISIBLE);
+        }
     }
 
 

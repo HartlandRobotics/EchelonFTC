@@ -3,6 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingVertical="3dp"
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.textview.MaterialTextView
@@ -47,7 +48,41 @@
                 android:textColor="?attr/colorError"
                 android:minWidth="100dp"
                 tools:text="3536"/>
-        </LinearLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="2dp"
+            android:text="cargo: "
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/red_cargo_count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="40dp"
+            android:paddingHorizontal="2dp"
+            android:textColor="?attr/colorError"
+            tools:text="12" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="5dp"
+            android:text="hang:"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/red_hang_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorError"
+            android:paddingHorizontal="2dp"
+            android:minWidth="40dp"
+            tools:text="20"
+            />
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,6 +111,39 @@
             android:minWidth="100dp"
             android:textColor="@color/design_default_color_primary_variant"
             tools:text="3536"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="2dp"
+            android:text="cargo: "/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blue_cargo_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/design_default_color_primary_variant"
+            android:paddingHorizontal="2dp"
+            android:minWidth="40dp"
+            tools:text="12"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="5dp"
+            android:text="hang:"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blue_hang_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/design_default_color_primary_variant"
+            android:paddingHorizontal="2dp"
+            android:minWidth="40dp"
+            tools:text="20"
+            />
+
     </LinearLayout>
     </LinearLayout>
     <LinearLayout

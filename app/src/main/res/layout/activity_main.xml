@@ -82,6 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.33"
         app:layout_constraintBottom_toTopOf="@id/status_layout"
+        android:visibility="gone"
         />
 
     <LinearLayout
