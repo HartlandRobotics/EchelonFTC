@@ -152,24 +152,48 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         traversalButton = findViewById(R.id.traversal);
         traversalButton.setOnClickListener(v -> {
             matchResult.setEndHangTraverse(!matchResult.getEndHangTraverse());
+            boolean isSelected = matchResult.getEndHangTraverse();
+            if( isSelected ){
+                matchResult.setEndHangLow(false);
+                matchResult.setEndHangMid(false);
+                matchResult.setEndHangHigh(false);
+            }
             populateControlsFromData();
         });
 
         highButton = findViewById(R.id.high);
         highButton.setOnClickListener(v -> {
             matchResult.setEndHangHigh( !matchResult.getEndHangHigh());
+            boolean isSelected = matchResult.getEndHangHigh();
+            if ( isSelected ){
+                matchResult.setEndHangTraverse(false);
+                matchResult.setEndHangMid(false);
+                matchResult.setEndHangLow(false);
+            }
             populateControlsFromData();
         });
 
         midButton = findViewById(R.id.mid);
         midButton.setOnClickListener(v -> {
             matchResult.setEndHangMid( !matchResult.getEndHangMid() );
+            boolean isSelected = matchResult.getEndHangMid();
+            if ( isSelected ){
+                matchResult.setEndHangTraverse(false);
+                matchResult.setEndHangHigh(false);
+                matchResult.setEndHangLow(false);
+            }
             populateControlsFromData();
         });
 
         lowButton = findViewById(R.id.low);
         lowButton.setOnClickListener(v -> {
             matchResult.setEndHangLow( !matchResult.getEndHangLow() );
+            boolean isSelected = matchResult.getEndHangLow();
+            if ( isSelected ){
+                matchResult.setEndHangTraverse(false);
+                matchResult.setEndHangHigh(false);
+                matchResult.setEndHangMid(false);
+            }
             populateControlsFromData();
         });
 
