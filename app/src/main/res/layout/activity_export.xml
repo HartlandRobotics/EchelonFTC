@@ -30,7 +30,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Pit Scouting -> CSV"
+        app:layout_constraintBottom_toTopOf="@id/importMatchCSV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/exportMatchResults"
+        app:layout_constraintWidth_percent="0.33" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/importMatchCSV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="CSV -> Matches"
+        app:layout_constraintTop_toBottomOf="@id/exportPitScouting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -3,10 +3,16 @@ package org.hartlandrobotics.echelon2;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.lifecycle.ViewModelProvider;
+
+import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.database.entities.Match;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.database.entities.MatchResultWithTeamMatch;
@@ -20,32 +26,42 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ExportActivity extends EchelonActivity {
 
     private Button exportMatchResultsButton;
     private Button exportPitScoutResultsButton;
+    private Button importCSVMatchButton;
+
+    private MatchResultViewModel matchResultViewModel;
 
     public static void launch(Context context){
         Intent intent = new Intent( context, ExportActivity.class );
         context.startActivity(intent);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_export);
         setupToolbar("Export Data");
 
+        matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
+
         exportMatchResultsButton = findViewById(R.id.exportMatchResults);
         exportMatchResults();
         exportPitScoutResultsButton = findViewById(R.id.exportPitScouting);
         exportPitScoutResults();
+        importCSVMatchButton = findViewById(R.id.importMatchCSV);
+        setupCSVImportButton();
 
     }
 
@@ -67,7 +83,7 @@ public class ExportActivity extends EchelonActivity {
             matchResultViewModel.getMatchResultsWithTeamMatchByEvent(status.getEventKey()).observe(this, matchResults -> {
                 try {
                     FileOutputStream outputStream = new FileOutputStream(file);
-                    String header = "Event_Key,Match_Key,Team_Key,Match_Number,Team_Number,Auto_Taxi_Tarmac,Auto_High_Balls,Auto_Low_Balls,Auto_Human_Player_Shots,Teleop_High_Balls,Teleop_Low_Balls,Teleop_Defenses,End_Hang_Low,End_Hang_Mid,End_Hang_High,End_Hang_Traverse\n";
+                    String header = "Event_Key,Match_Key,Team_Key,Match_Number,Team_Number,Auto_Taxi_Tarmac,Auto_High_Balls,Auto_Low_Balls,Auto_Human_Player_Shots,Teleop_High_Balls,Teleop_Low_Balls,Teleop_Defenses,End_Hang_Low,End_Hang_Mid,End_Hang_High,End_Hang_Traverse,Match_Result_Key\n";
                     outputStream.write(header.getBytes());
                     for(MatchResultWithTeamMatch matchResultWithTeamMatch: matchResults){
                         MatchResult mr = matchResultWithTeamMatch.matchResult;
@@ -91,6 +107,7 @@ public class ExportActivity extends EchelonActivity {
                         dataForFile.add(String.valueOf(mr.getEndHangMid()));
                         dataForFile.add(String.valueOf(mr.getEndHangHigh()));
                         dataForFile.add(String.valueOf(mr.getEndHangTraverse()));
+                        dataForFile.add(mr.getMatchResultKey());
                         String outputString = dataForFile.stream().collect(Collectors.joining(",")) + "\n";
                         outputStream.write(outputString.getBytes());
                     }
@@ -156,6 +173,74 @@ public class ExportActivity extends EchelonActivity {
                 }
             });
         });
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void importCSVMatches() throws IOException {
+        File importPath = getImportPath();
+        File newFile = new File(importPath.getAbsolutePath().concat("/matchResults.csv"));
+        Stream<String> lines = Files.lines(newFile.toPath());
+        List<String> inputLines = lines.collect(Collectors.toList());
+
+        int timesRan = 0;
+        for(int lineIndex = 1; lineIndex < inputLines.size(); lineIndex++){
+            timesRan++;
+            String currentLine = inputLines.get(lineIndex);
+            String[] columns = currentLine.split(",");
+
+            String eventKey = columns[0];
+            String matchKey = columns[1];
+            String teamKey = columns[2];
+            int matchNum = Integer.parseInt(columns[3]);
+            int teamNum = Integer.parseInt(columns[4]);
+            boolean taxi = false;
+            if(columns[5].equals("TRUE")) {
+                taxi = true;
+            }
+            int autoHigh = Integer.parseInt(columns[6]);
+            int autoLow = Integer.parseInt(columns[7]);
+            int autoHuman = Integer.parseInt(columns[8]);
+            int teleHigh = Integer.parseInt(columns[9]);
+            int teleLow = Integer.parseInt(columns[10]);
+            int teleDef = Integer.parseInt(columns[11]);
+            boolean lowHang = false;
+            if(columns[12].equals("TRUE")){
+                lowHang = true;
+            }
+            boolean midHang = false;
+            if(columns[13].equals("TRUE")){
+                midHang = true;
+            }
+            boolean highHang = false;
+            if(columns[14].equals("TRUE")){
+                highHang = true;
+            }
+            boolean travHang = false;
+            if(columns[15].equals("TRUE")){
+                travHang = true;
+            }
+            String matchResultKey = columns[16];
+            MatchResult matchResult = new MatchResult(matchResultKey, eventKey, matchKey, teamKey, false, taxi, autoHigh, autoLow, autoHuman, teleHigh, teleLow, lowHang, midHang, highHang, travHang, " ", teleDef);
+            matchResultViewModel.upsert(matchResult);
+        }
+        Log.e("Test", "Times ran: " + timesRan);
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void setupCSVImportButton(){
+        importCSVMatchButton.setOnClickListener(v -> {
+            try{
+                importCSVMatches();
+                Log.e("under setupCSVImportButton", "imported match results");
+                Toast.makeText(this, "imported matches", Toast.LENGTH_LONG).show();
+            }
+            catch(Exception E){
+                E.printStackTrace();
+            }
+        });
+    }
+
+    public File getImportPath(){
+        ContextWrapper cw = new ContextWrapper( getApplicationContext() );
+        return cw.getExternalFilesDir( "imports");
     }
 
     private File[] getFilePathsForMatch() {
