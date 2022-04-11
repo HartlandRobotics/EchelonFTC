@@ -17,7 +17,7 @@
         android:layout_weight="85"
         />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
         android:id="@+id/team_list"
         android:layout_width="0dp"
         android:layout_height="match_parent"

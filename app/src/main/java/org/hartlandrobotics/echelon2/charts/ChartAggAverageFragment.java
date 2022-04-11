@@ -14,6 +14,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
+import android.widget.ListView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -28,6 +34,7 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.hartlandrobotics.echelon2.R;
+import org.hartlandrobotics.echelon2.models.TeamViewModel;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -37,8 +44,11 @@ import java.util.stream.Collectors;
 public class ChartAggAverageFragment extends Fragment {
 
     private BarChart aggScoringChart;
-    private RecyclerView teamNumberRecycler;
-    private TeamListAdapter teamListAdapter;
+    private ListView teamNumberListView;
+    private ListViewItemCheckboxBaseAdapter teamListAdapter;
+
+    private List<TeamListViewModel> allTeamNumbers;
+    private List<ChartsActivity.TeamDataViewModel> allTeamData;
 
     private List<ChartsActivity.TeamDataViewModel> visibleTeamData;
 
@@ -63,11 +73,19 @@ public class ChartAggAverageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        teamListAdapter = new TeamListAdapter( getActivity() );
+        teamListAdapter = new ListViewItemCheckboxBaseAdapter(getContext());
 
-        teamNumberRecycler = view.findViewById(R.id.team_list);
-        teamNumberRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        teamNumberRecycler.setAdapter(teamListAdapter);
+        teamNumberListView = view.findViewById(R.id.team_list);
+        //teamNumberRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        teamNumberListView.setAdapter(teamListAdapter);
+        teamNumberListView.setOnItemClickListener( new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("test", "test");
+
+            }
+        });
+
 
 
         aggScoringChart = view.findViewById(R.id.agg_average_chart);
@@ -76,9 +94,18 @@ public class ChartAggAverageFragment extends Fragment {
     }
 
     public void setData(List<TeamListViewModel> allTeamNumbers, List<ChartsActivity.TeamDataViewModel> allTeamData) {
+        this.allTeamNumbers = allTeamNumbers;
+        this.allTeamData = allTeamData;
+
         teamListAdapter.setTeams(allTeamNumbers);
         teamListAdapter.notifyDataSetChanged();
 
+        setVisibleTeams();
+
+        setupChartData();
+    }
+
+    public void setVisibleTeams(){
         List<String> visibleTeamNumbers = allTeamNumbers.stream()
                 .filter(TeamListViewModel::getIsSelected)
                 .map( teamListViewModel -> teamListViewModel.getTeamNumber() )
@@ -87,12 +114,11 @@ public class ChartAggAverageFragment extends Fragment {
         visibleTeamData = allTeamData.stream()
                 .filter( teamData -> {
                     boolean isVisible = visibleTeamNumbers.contains( String.valueOf(teamData.getTeamNumber()) );
-                            return isVisible;
+                    return isVisible;
                 })
                 .sorted(Comparator.comparingDouble(ChartsActivity.TeamDataViewModel::getTotalAverage).reversed())
+                .limit(35)
                 .collect(Collectors.toList());
-
-        setupChartData();
     }
 
     public void setupChart(){
@@ -186,62 +212,59 @@ public class ChartAggAverageFragment extends Fragment {
         aggScoringChart.invalidate();
     }
 
-    public class TeamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        MaterialCheckBox teamSelectedCheckBox;
-        MaterialTextView teamNumber;
 
-        TeamListViewModel teamViewModel;
 
-        TeamViewHolder(View itemView){
-            super(itemView);
-            itemView.setOnClickListener(this);
-
-            teamNumber = itemView.findViewById(R.id.team_number);
-            teamSelectedCheckBox = itemView.findViewById(R.id.team_visible);
-        }
-
-        public void setTeam(TeamListViewModel teamViewModel){
-            this.teamViewModel = teamViewModel;
-
-            teamNumber.setText(teamViewModel.getTeamNumber());
-            teamSelectedCheckBox.setChecked(teamViewModel.getIsSelected());
-        }
-
-        public void onClick(View view){
-            // update teamViewModel with selected state
-            // set team selection back to adapter
-            //teamListAdapter.setTeamSelectionChange(teamViewModel);
-        }
-
-    }
-
-    public class TeamListAdapter extends RecyclerView.Adapter<TeamViewHolder>{
-        private final LayoutInflater inflater;
+    public class ListViewItemCheckboxBaseAdapter extends BaseAdapter {
+        Context context;
         List<TeamListViewModel> teamViewModels;
+
+        public ListViewItemCheckboxBaseAdapter(Context context) {
+            this.context = context;
+        }
 
         public void setTeams(List<TeamListViewModel> teamViewModels){
             this.teamViewModels = teamViewModels;
         }
 
-        TeamListAdapter(Context context){ inflater = LayoutInflater.from(context); }
-
-        @NonNull
         @Override
-        public TeamViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-            View itemView = inflater.inflate(R.layout.list_item_agg_chart, parent, false);
-            return new TeamViewHolder(itemView);
+        public int getCount() {
+            if( this.teamViewModels == null ) return 0;
+            return this.teamViewModels.size();
         }
 
         @Override
-        public void onBindViewHolder(@NonNull TeamViewHolder holder, int position){
-            if( teamViewModels != null){
-                holder.setTeam(teamViewModels.get(position));
-            }
+        public TeamListViewModel getItem(int index) {
+            return this.teamViewModels.get(index);
         }
 
         @Override
-        public int getItemCount(){
-            return teamViewModels == null ? 0 : teamViewModels.size();
+        public long getItemId(int position) {
+            return position;
         }
+
+        public View getView(int position,View view,ViewGroup parent) {
+            LayoutInflater inflater=getActivity().getLayoutInflater();
+            View rowView=inflater.inflate(R.layout.list_item_agg_chart, null,true);
+
+            MaterialTextView teamNumber = rowView.findViewById(R.id.team_number);
+            MaterialCheckBox teamSelectedCheckBox = rowView.findViewById(R.id.team_visible);
+
+            TeamListViewModel teamListViewModel = teamViewModels.get(position);
+            teamNumber.setText(teamListViewModel.getTeamNumber());
+            teamSelectedCheckBox.setChecked(teamListViewModel.getIsSelected());
+            teamSelectedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    ViewParent layoutViewParent = buttonView.getParent();
+                    ListView listView =  (ListView) layoutViewParent.getParent();
+                    int position = listView.getPositionForView(buttonView);
+                    teamViewModels.get(position).setIsSelected(isChecked);
+
+                    setVisibleTeams();
+                    setupChartData();
+                }
+            });
+            return rowView;
+        };
     }
 }
