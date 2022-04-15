@@ -1,5 +1,7 @@
 package org.hartlandrobotics.echelon2;
 
+import org.apache.commons.math3.distribution.TDistribution;
+
 class MatchScheduleViewModel {
     private int matchNumber;
 
@@ -13,21 +15,32 @@ class MatchScheduleViewModel {
     private int red1Average;
     private int red1Cargo;
     private int red1Hang;
+    private double red1StdDeviation;
     private int red2Average;
     private int red2Cargo;
     private int red2Hang;
+    private double red2StdDeviation;
     private int red3Average;
     private int red3Cargo;
     private int red3Hang;
+    private double red3StdDeviation;
     private int blue1Average;
     private int blue1Cargo;
     private int blue1Hang;
+    private double blue1StdDeviation;
     private int blue2Average;
     private int blue2Cargo;
     private int blue2Hang;
+    private double blue2StdDeviation;
     private int blue3Average;
     private int blue3Cargo;
     private int blue3Hang;
+    private double blue3StdDeviation;
+    private int matchCount;
+
+    MatchScheduleViewModel() {
+    }
+
 
     public String getMatchNumber() { return String.valueOf(matchNumber); }
     public void setMatchNumber( int matchNumber ){
@@ -174,5 +187,104 @@ class MatchScheduleViewModel {
     public int getRedHangTotal() { return getRed1Hang() + getRed2Hang() + getRed3Hang(); }
     public int getBlueHangTotal() { return getBlue1Hang() + getBlue2Hang() + getBlue3Hang(); }
 
+    public int getRedConfidenceIntervalMin() { return Math.max(0,getRedTotal() - getRedMarginOfError()); }
+    public int getBlueConfidenceIntervalMin() { return Math.max(0, getBlueTotal() - getBlueMarginOfError()); }
+    public int getRedConfidenceIntervalMax() { return getRedTotal() + getRedMarginOfError(); }
+    public int getBlueConfidenceIntervalMax() { return getBlueTotal() + getBlueMarginOfError(); }
 
+    public int getRedPercentage() {
+        if(matchCount < 2){
+            return 50;
+        }
+        double normalizedStat = (getRedTotal() - getBlueTotal()) / Math.sqrt(getRedTotalStdDeviation() * getRedTotalStdDeviation() + getBlueTotalStdDeviation() * getBlueTotalStdDeviation());
+        TDistribution tDif = new TDistribution(matchCount - 1);
+        //I'm pretty sure this is the right polarity, but avg might need to not be negative...
+        //get the difference between the average scores, then put that in terms of standard deviations
+        //using that, calculate the probability of that difference being exceeded based on the sample
+        return (int) ((1-tDif.cumulativeProbability(-normalizedStat)) * 100);
+    }
+    public int getBluePercentage() { return 100 - getRedPercentage(); }
+
+    public int getRedMarginOfError(){
+        if(matchCount < 2){
+            return 0;
+        }
+        //70% confidence interval
+        return (int)(Math.abs(new TDistribution(matchCount - 1).
+                inverseCumulativeProbability(.15))
+                * getRedTotalStdDeviation());
+    }
+    public int getBlueMarginOfError(){
+        if(matchCount < 2){
+            return 0;
+        }
+        return (int)(Math.abs(new TDistribution(matchCount - 1).
+                inverseCumulativeProbability(.15))
+                * getBlueTotalStdDeviation());
+    }
+
+    public double getRedTotalStdDeviation(){
+//        System.out.println("red std dev: " + Math.sqrt(red1StdDeviation * red1StdDeviation + red2StdDeviation * red2StdDeviation + red3StdDeviation * red3StdDeviation));
+        return Math.sqrt(red1StdDeviation * red1StdDeviation + red2StdDeviation * red2StdDeviation + red3StdDeviation * red3StdDeviation);
+    }
+
+    public double getBlueTotalStdDeviation(){
+        //System.out.println("blue std dev: " + Math.sqrt(blue1StdDeviation * blue1StdDeviation + blue2StdDeviation * blue2StdDeviation + blue3StdDeviation * blue3StdDeviation));
+        return Math.sqrt(blue1StdDeviation * blue1StdDeviation + blue2StdDeviation * blue2StdDeviation + blue3StdDeviation * blue3StdDeviation);
+    }
+    public double getRed1StdDeviation() {
+        return red1StdDeviation;
+    }
+
+    public void setRed1StdDeviation(double red1StdDeviation) {
+        this.red1StdDeviation = red1StdDeviation;
+    }
+
+    public double getRed2StdDeviation() {
+        return red2StdDeviation;
+    }
+
+    public void setRed2StdDeviation(double red2StdDeviation) {
+        this.red2StdDeviation = red2StdDeviation;
+    }
+
+    public double getRed3StdDeviation() {
+        return red3StdDeviation;
+    }
+
+    public void setRed3StdDeviation(double red3StdDeviation) {
+        this.red3StdDeviation = red3StdDeviation;
+    }
+
+    public double getBlue1StdDeviation() {
+        return blue1StdDeviation;
+    }
+
+    public void setBlue1StdDeviation(double blue1StdDeviation) {
+        this.blue1StdDeviation = blue1StdDeviation;
+    }
+
+    public double getBlue2StdDeviation() {
+        return blue2StdDeviation;
+    }
+
+    public void setBlue2StdDeviation(double blue2StdDeviation) {
+        this.blue2StdDeviation = blue2StdDeviation;
+    }
+
+    public double getBlue3StdDeviation() {
+        return blue3StdDeviation;
+    }
+
+    public void setBlue3StdDeviation(double blue3StdDeviation) {
+        this.blue3StdDeviation = blue3StdDeviation;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public void setMatchCount(int matchCount) {
+        this.matchCount = matchCount;
+    }
 }

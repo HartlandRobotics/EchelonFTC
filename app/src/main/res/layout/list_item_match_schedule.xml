@@ -1,182 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="3dp"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:orientation="vertical"
+    android:paddingVertical="3dp">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/match_number"
-        android:minWidth="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="50dp"
         android:paddingHorizontal="10dp"
-        tools:text="35"/>
+        tools:text="35" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <LinearLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/red1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="2dp"
-            android:minWidth="100dp"
-            android:textColor="?attr/colorError"
-            tools:text="3536" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/red1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100dp"
+                android:paddingHorizontal="2dp"
+                android:textColor="?attr/colorError"
+                tools:text="3536" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/red2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="100dp"
                 android:paddingHorizontal="2dp"
                 android:textColor="?attr/colorError"
-                android:minWidth="100dp"
-                tools:text="3536"/>
+                tools:text="3536" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/red3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="100dp"
                 android:paddingHorizontal="2dp"
                 android:textColor="?attr/colorError"
+                tools:text="3536" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="2dp"
+                android:text="cargo: " />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/red_cargo_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:minWidth="40dp"
+                android:paddingHorizontal="2dp"
+                android:textColor="?attr/colorError"
+                tools:text="12" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
+                android:text="hang:" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/red_hang_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="40dp"
+                android:paddingHorizontal="2dp"
+                android:textColor="?attr/colorError"
+                tools:text="20" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/blue1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:minWidth="100dp"
-                tools:text="3536"/>
+                android:paddingHorizontal="2dp"
+                android:textColor="@color/design_default_color_primary_variant"
+                tools:text="3536" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="2dp"
-            android:text="cargo: "
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/blue2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100dp"
+                android:paddingHorizontal="2dp"
+                android:textColor="@color/design_default_color_primary_variant"
+                tools:text="3536" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/red_cargo_count"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:minWidth="40dp"
-            android:paddingHorizontal="2dp"
-            android:textColor="?attr/colorError"
-            tools:text="12" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/blue3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100dp"
+                android:paddingHorizontal="2dp"
+                android:textColor="@color/design_default_color_primary_variant"
+                tools:text="3536" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="5dp"
-            android:text="hang:"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="2dp"
+                android:text="cargo: " />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/red_hang_points"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/colorError"
-            android:paddingHorizontal="2dp"
-            android:minWidth="40dp"
-            tools:text="20"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/blue_cargo_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="40dp"
+                android:paddingHorizontal="2dp"
+                android:textColor="@color/design_default_color_primary_variant"
+                tools:text="12" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
+                android:text="hang:" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/blue_hang_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="40dp"
+                android:paddingHorizontal="2dp"
+                android:textColor="@color/design_default_color_primary_variant"
+                tools:text="20" />
+
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/blue1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="2dp"
-            android:minWidth="100dp"
-            android:textColor="@color/design_default_color_primary_variant"
-            tools:text="3536"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/blue2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="2dp"
-            android:minWidth="100dp"
-            android:textColor="@color/design_default_color_primary_variant"
-            tools:text="3536"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/blue3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="2dp"
-            android:minWidth="100dp"
-            android:textColor="@color/design_default_color_primary_variant"
-            tools:text="3536"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="2dp"
-            android:text="cargo: "/>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/blue_cargo_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/design_default_color_primary_variant"
-            android:paddingHorizontal="2dp"
-            android:minWidth="40dp"
-            tools:text="12"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="5dp"
-            android:text="hang:"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/blue_hang_points"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/design_default_color_primary_variant"
-            android:paddingHorizontal="2dp"
-            android:minWidth="40dp"
-            tools:text="20"
-            />
-
-    </LinearLayout>
-    </LinearLayout>
     <LinearLayout
         android:id="@+id/prediction_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" prediction:  "/>
+            android:text=" prediction:  " />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/red_prediction"
-            android:textColor="?attr/colorError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="123"
-            />
+            android:textColor="?attr/colorError"
+            tools:text="30" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" - "
-            />
+            android:text="(" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/red_confidence_interval_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorError"
+            tools:text="20" />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/red_confidence_interval_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorError"
+            tools:text="40" />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - " />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/blue_prediction"
-            android:textColor="@color/design_default_color_primary_variant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="321"/>
+            android:textColor="@color/design_default_color_primary_variant"
+            tools:text="40" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blue_confidence_interval_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/design_default_color_primary_variant"
+            tools:text="20" />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blue_confidence_interval_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/design_default_color_primary_variant"
+            tools:text="40" />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" (" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/red_percentage_prediction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorError"
+            tools:text="30%" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - " />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/blue_percentage_prediction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/design_default_color_primary_variant"
+            tools:text="70%" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")" />
+
 
     </LinearLayout>
 
