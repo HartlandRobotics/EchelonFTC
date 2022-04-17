@@ -9,6 +9,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import org.hartlandrobotics.echelon2.database.entities.Evt;
+import org.hartlandrobotics.echelon2.database.entities.EvtWithTeams;
 
 import java.util.List;
 
@@ -19,6 +20,9 @@ public abstract class EvtDao {
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
     public abstract void update(Evt event);
+
+    @Query("SELECT * FROM event WHERE event_key = :eventKey")
+    public abstract LiveData<List<Evt>> getEvent(String eventKey);
 
     @Query("SELECT * FROM event")
     public abstract LiveData<List<Evt>> getEvents();

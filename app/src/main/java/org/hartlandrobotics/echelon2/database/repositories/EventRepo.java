@@ -70,6 +70,10 @@ public class EventRepo {
         }
     }
 
+    public LiveData<List<Evt>> getEvent(String eventKey){
+        return eventDao.getEvent(eventKey);
+    }
+
     public LiveData<DistrictWithEvents> getDistrictWithEvents(String currentDistrict) {
         return districtWithEventDao.getDistrictEvents(currentDistrict);
     }

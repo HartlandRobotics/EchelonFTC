@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import org.hartlandrobotics.echelon2.database.entities.EvtWithTeams;
 import org.hartlandrobotics.echelon2.database.entities.Team;
 import org.hartlandrobotics.echelon2.database.repositories.TeamRepo;
 
@@ -21,5 +22,9 @@ public class TeamViewModel extends AndroidViewModel {
 
     public LiveData<List<Team>> getAllTeams(){
         return teamRepo.getAllTeams();
+    }
+
+    public LiveData<EvtWithTeams> getTeamsForEvent(String eventKey){
+        return teamRepo.getEventsWithTeams(eventKey);
     }
 }

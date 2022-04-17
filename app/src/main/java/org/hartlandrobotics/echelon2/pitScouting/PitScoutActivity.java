@@ -43,6 +43,7 @@ public class PitScoutActivity extends EchelonActivity {
     List<String> teamNames;
     Team currentTeam;
 
+
     PitScoutViewModel pitScoutViewModel;
     private PitScout data;
 
@@ -76,10 +77,12 @@ public class PitScoutActivity extends EchelonActivity {
             viewPagerAdapter.updatePitScoutData();
             pitScoutViewModel.upsert(data);
         });
-        teamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
-        teamViewModel.getAllTeams().observe(this, ts -> {
 
-            teams = ts.stream()
+        teamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
+        teamViewModel.getTeamsForEvent(status.getEventKey()).observe( this, evtWithTeams ->{
+        //teamViewModel.getAllTeams().observe(this, ts -> {
+
+            teams = evtWithTeams.teams.stream()
                     .sorted(Comparator.comparingInt(t -> t.getTeamNumber()))
                     .collect(Collectors.toList());
 

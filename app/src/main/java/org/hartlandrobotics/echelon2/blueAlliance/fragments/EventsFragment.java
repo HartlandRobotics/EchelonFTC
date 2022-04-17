@@ -17,8 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.radiobutton.MaterialRadioButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.blueAlliance.Api;
 import org.hartlandrobotics.echelon2.blueAlliance.ApiInterface;
@@ -31,6 +33,7 @@ import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import retrofit2.Call;
@@ -40,6 +43,7 @@ import retrofit2.Response;
 public class EventsFragment extends Fragment {
     private Button eventPull;
     private TextView errorTextDisplay;
+    private TextInputLayout eventKeyOverrideLayout;
 
     private RecyclerView eventRecycler;
     private EventListAdapter eventListAdapter;
@@ -56,6 +60,7 @@ public class EventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View fragmentView = inflater.inflate(R.layout.fragment_events, container, false);
 
+        eventKeyOverrideLayout = fragmentView.findViewById(R.id.event_key_override_layout);
         eventPull = fragmentView.findViewById(R.id.eventPullButton);
         errorTextDisplay = fragmentView.findViewById(R.id.errorTextDisplay);
         errorTextDisplay.setVisibility(View.GONE);
@@ -86,11 +91,32 @@ public class EventsFragment extends Fragment {
     public void setupCurrentEvents(){
         Context appContext = getActivity().getApplicationContext();
         BlueAllianceStatus status = new BlueAllianceStatus(appContext);
-        String currentDistrict = status.getDistrictKey();
+
+        String eventKey = eventKeyOverrideLayout.getEditText().getText().toString();
         EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
-        eventRepo.getDistrictWithEvents(currentDistrict).observe(getViewLifecycleOwner(), district -> {
-            eventListAdapter.setEvents(district.events);
-        });
+        if( StringUtils.isBlank(eventKey)) {
+            String currentDistrict = status.getDistrictKey();
+            eventRepo.getDistrictWithEvents(currentDistrict).observe(getViewLifecycleOwner(), district -> {
+
+                String eventKeyInner = eventKeyOverrideLayout.getEditText().getText().toString();
+                if( !StringUtils.isBlank(eventKeyInner )) {
+                    Optional<Evt> matchingEvent = district.events.stream()
+                            .filter( districtEvent -> districtEvent.getEventKey().equals(eventKeyInner ))
+                            .findFirst();
+                    if(matchingEvent.isPresent()) {
+                        eventListAdapter.setEvents(district.events);
+                    }
+                }
+            });
+        }
+        else{
+            eventRepo.getEvent(eventKey).observe(getViewLifecycleOwner(), event ->{
+                int i = 10;
+                i++;
+                //eventListAdapter.setEvents(List.of);
+
+            });
+        }
     }
 
     public void setupEventPulls(){
@@ -101,44 +127,78 @@ public class EventsFragment extends Fragment {
                 Context appContext = getActivity().getApplicationContext();
                 BlueAllianceStatus status = new BlueAllianceStatus(appContext);
                 String districtKey = status.getDistrictKey();
+                String eventKeyOverride = StringUtils.defaultIfEmpty( eventKeyOverrideLayout.getEditText().getText().toString(), StringUtils.EMPTY);
 
-                Call<List<SyncEvent>> newCall = newApi.getEventsByDistrict(districtKey);
-                newCall.enqueue(new Callback<List<SyncEvent>>() {
-                    @Override
-                    public void onResponse(Call<List<SyncEvent>> call, Response<List<SyncEvent>> response){
-                        try{
-                            if(!response.isSuccessful()){
-                                errorTextDisplay.setText("Couldn't pull events");
-                            }
-                            else{
-                                EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
-                                List<SyncEvent> syncEvents = response.body();
-                                List<Evt> events = syncEvents.stream()
-                                        .map(event -> event.toEvent())
-                                        .collect(Collectors.toList());
+                if( StringUtils.isBlank( eventKeyOverride )) {
+                    Call<List<SyncEvent>> newCall = newApi.getEventsByDistrict(districtKey);
+                    newCall.enqueue(new Callback<List<SyncEvent>>() {
+                        @Override
+                        public void onResponse(Call<List<SyncEvent>> call, Response<List<SyncEvent>> response) {
+                            try {
+                                if (!response.isSuccessful()) {
+                                    errorTextDisplay.setText("Couldn't pull events");
+                                } else {
+                                    EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
+                                    List<SyncEvent> syncEvents = response.body();
+                                    List<Evt> events = syncEvents.stream()
+                                            .map(event -> event.toEvent())
+                                            .collect(Collectors.toList());
 
-                                eventRepo.upsert(events);
+                                    eventRepo.upsert(events);
 
-                                for(Evt event: events){
-                                    DistrictEvtCrossRef crossRef = event.toDistrictEvent(districtKey);
-                                    eventRepo.upsert(crossRef);
+                                    for (Evt event : events) {
+                                        DistrictEvtCrossRef crossRef = event.toDistrictEvent(districtKey);
+                                        eventRepo.upsert(crossRef);
 
+                                    }
+
+                                    eventListAdapter.setEvents(events);
+                                    errorTextDisplay.setText("Got event: " + syncEvents.size());
                                 }
-
-                                eventListAdapter.setEvents(events);
-                                errorTextDisplay.setText("Got event: " + syncEvents.size());
+                            } catch (Exception e) {
+                                Log.e("Inside onResponse", "\"Exception thrown inside onResponse\"");
                             }
                         }
-                        catch(Exception e){
-                            Log.e("Inside onResponse", "\"Exception thrown inside onResponse\"");
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<List<SyncEvent>> call, Throwable t){
-                        errorTextDisplay.setText("Error attempting to pull events from TBA");
-                    }
 
-                });
+                        @Override
+                        public void onFailure(Call<List<SyncEvent>> call, Throwable t) {
+                            errorTextDisplay.setText("Error attempting to pull events from TBA");
+                        }
+
+                    });
+                }else {
+                    Call<SyncEvent> newCall = newApi.getEventByKey(eventKeyOverride);
+                    newCall.enqueue(new Callback<SyncEvent>() {
+                        @Override
+                        public void onResponse(Call<SyncEvent> call, Response<SyncEvent> response) {
+                            try {
+                                if (!response.isSuccessful()) {
+                                    errorTextDisplay.setText("Couldn't pull events");
+                                } else {
+                                    EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
+                                    SyncEvent syncEvent = response.body();
+                                    List<Evt> events = new ArrayList<>();
+                                    events.add(syncEvent.toEvent()) ;
+
+                                    eventRepo.upsert(events);
+
+                                    BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+                                    status.setEventKey(eventKeyOverride);
+
+                                    eventListAdapter.setEvents(events);
+                                    errorTextDisplay.setText("Got event: " + events.size());
+                                }
+                            } catch (Exception e) {
+                                Log.e("Inside onResponse", "\"Exception thrown inside onResponse\"");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SyncEvent> call, Throwable t) {
+                            errorTextDisplay.setText("Error attempting to pull events from TBA");
+                        }
+                    });
+                }
             }
             catch(Exception e){
                 Log.e("Outside Onresponse", "Exception attempting to pull from TBA");
