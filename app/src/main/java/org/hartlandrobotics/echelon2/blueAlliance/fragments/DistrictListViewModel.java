@@ -1,6 +1,6 @@
 package org.hartlandrobotics.echelon2.blueAlliance.fragments;
 
-import org.hartlandrobotics.echelon2.database.entities.District;
+import org.hartlandrobotics.echelon2.database.entities.Region;
 
 public class DistrictListViewModel {
     private String districtKey;
@@ -9,11 +9,11 @@ public class DistrictListViewModel {
     private int year;
     private boolean isSelected;
 
-    public DistrictListViewModel(District district) {
-        this.districtKey = district.getDistrictKey();
-        this.abbreviation = district.getAbbreviation();
-        this.displayName = district.getDisplayName();
-        this.year = district.getYear();
+    public DistrictListViewModel(Region region) {
+        this.districtKey = region.getDistrictKey();
+        this.abbreviation = region.getAbbreviation();
+        this.displayName = region.getDisplayName();
+        this.year = region.getYear();
         this.isSelected = false;
     }
 

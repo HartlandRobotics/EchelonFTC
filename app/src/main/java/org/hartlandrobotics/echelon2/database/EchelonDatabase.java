@@ -11,7 +11,7 @@ import org.hartlandrobotics.echelon2.database.dao.MatchResultDao;
 import org.hartlandrobotics.echelon2.database.dao.PitScoutDao;
 import org.hartlandrobotics.echelon2.database.dao.SeasonDao;
 import org.hartlandrobotics.echelon2.database.dao.TeamDao;
-import org.hartlandrobotics.echelon2.database.entities.District;
+import org.hartlandrobotics.echelon2.database.entities.Region;
 import org.hartlandrobotics.echelon2.database.entities.DistrictEvtCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Evt;
 import androidx.annotation.NonNull;
@@ -33,7 +33,7 @@ import java.util.concurrent.Executors;
 
 @Database(entities = {
         Evt.class,
-        District.class,
+        Region.class,
         Team.class,
         PitScout.class,
         Season.class,

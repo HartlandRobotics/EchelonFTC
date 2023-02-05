@@ -7,33 +7,33 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import org.hartlandrobotics.echelon2.database.entities.District;
+import org.hartlandrobotics.echelon2.database.entities.Region;
 
 import java.util.List;
 
 @Dao
 public abstract class DistrictDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    public abstract long insert(District district);
+    public abstract long insert(Region region);
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
-    public abstract void update(District district);
+    public abstract void update(Region region);
 
-    @Query("SELECT * FROM district")
-    public abstract LiveData<List<District>> getDistricts();
+    @Query("SELECT * FROM Region")
+    public abstract LiveData<List<Region>> getDistricts();
 
-    @Query("SELECT * FROM district WHERE year = :year")
-    public abstract LiveData<List<District>> getDistrictsByYear(int year);
+    @Query("SELECT * FROM Region WHERE year = :year")
+    public abstract LiveData<List<Region>> getDistrictsByYear(int year);
 
-    public void upsert(District district){
-        long id = insert(district);
+    public void upsert(Region region){
+        long id = insert(region);
         if(id == -1){
-            update(district);
+            update(region);
         }
     }
 
-    public void upsert(List<District> districts){
-        for( District d : districts ){
+    public void upsert(List<Region> regions){
+        for( Region d : regions){
             upsert(d);
         }
     }
