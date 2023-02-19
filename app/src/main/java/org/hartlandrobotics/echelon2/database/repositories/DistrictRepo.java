@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import org.hartlandrobotics.echelon2.database.EchelonDatabase;
 import org.hartlandrobotics.echelon2.database.dao.DistrictDao;
-import org.hartlandrobotics.echelon2.database.entities.Region;
+import org.hartlandrobotics.echelon2.database.entities.District;
 
 import java.util.List;
 
@@ -19,16 +19,16 @@ public class DistrictRepo {
 
     }
 
-    public LiveData<List<Region>> getDistrictsByYear(int year){return districtDao.getDistrictsByYear(year);}
+    public LiveData<List<District>> getDistrictsByYear(int year){return districtDao.getDistrictsByYear(year);}
 
-    public void upsert(Region region){
+    public void upsert(District district){
         EchelonDatabase.databaseWriteExecutor.execute( () -> {
-            districtDao.upsert(region);
+            districtDao.upsert(district);
         });
     }
 
-    public void upsert(List<Region> regions){
-        for( Region d : regions){
+    public void upsert(List<District> districts){
+        for( District d : districts){
             upsert(d);
         }
     }

@@ -22,8 +22,8 @@ import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.blueAlliance.Api;
 import org.hartlandrobotics.echelon2.blueAlliance.ApiInterface;
 import org.hartlandrobotics.echelon2.blueAlliance.BlueAllianceActivity;
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncRegion;
-import org.hartlandrobotics.echelon2.database.entities.Region;
+import org.hartlandrobotics.echelon2.blueAlliance.models.SyncDistrict;
+import org.hartlandrobotics.echelon2.database.entities.District;
 import org.hartlandrobotics.echelon2.database.repositories.DistrictRepo;
 import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 
@@ -101,27 +101,27 @@ public class DistrictsFragment extends Fragment {
                 BlueAllianceStatus status = new BlueAllianceStatus(appContext);
                 int currentYear = Integer.parseInt( status.getYear() );
 
-                Call<List<SyncRegion>> newCall = newApi.getDistrictsByYear(currentYear);
-                newCall.enqueue(new Callback<List<SyncRegion>>() {
+                Call<List<SyncDistrict>> newCall = newApi.getDistrictsByYear(currentYear);
+                newCall.enqueue(new Callback<List<SyncDistrict>>() {
                     @Override
-                    public void onResponse(Call<List<SyncRegion>> call, Response<List<SyncRegion>> response) {
+                    public void onResponse(Call<List<SyncDistrict>> call, Response<List<SyncDistrict>> response) {
                         try {
                             if (!response.isSuccessful()) {
                                 errorTextDisplay.setText("Couldn't pull districts");
                             } else {
                                 DistrictRepo districtRepo = new DistrictRepo(DistrictsFragment.this.getActivity().getApplication());
-                                List<SyncRegion> syncRegions = response.body();
-                                List<Region> regions = syncRegions.stream()
+                                List<SyncDistrict> syncDistricts = response.body();
+                                List<District> districts = syncDistricts.stream()
                                         .map(district -> district.toDistrict())
                                         .collect(Collectors.toList());
 
-                                districtRepo.upsert(regions);
+                                districtRepo.upsert(districts);
                                 // convert entity districts to district view model merging
                                 // with status to get the current distruct
                                 // so the is selected can be set correctly
-                                districtListAdapter.setDistricts(regions);
+                                districtListAdapter.setDistricts(districts);
 
-                                errorTextDisplay.setText("Got districts " + syncRegions.size());
+                                errorTextDisplay.setText("Got districts " + syncDistricts.size());
 
                             }
                         } catch (Exception e) {
@@ -130,7 +130,7 @@ public class DistrictsFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<List<SyncRegion>> call, Throwable t) {
+                    public void onFailure(Call<List<SyncDistrict>> call, Throwable t) {
                         errorTextDisplay.setText("Couldn't pull districts");
                     }
                 });
@@ -209,15 +209,15 @@ public class DistrictsFragment extends Fragment {
             }
         }
 
-        void setDistricts(List<Region> regions) {
+        void setDistricts(List<District> districts) {
             Context appContext = getActivity().getApplicationContext();
             BlueAllianceStatus status = new BlueAllianceStatus(appContext);
             String currentDistrictKey = status.getDistrictKey();
 
             districtViewModels = new ArrayList<>();
-            for( Region region : regions){
-                DistrictListViewModel viewModel = new DistrictListViewModel(region);
-                if( region.getDistrictKey().equals(currentDistrictKey) ){
+            for( District district : districts ){
+                DistrictListViewModel viewModel = new DistrictListViewModel(district);
+                if( district.getDistrictKey().equals(currentDistrictKey) ){
                     viewModel.setIsSelected(true);
                 }
                 districtViewModels.add(viewModel);

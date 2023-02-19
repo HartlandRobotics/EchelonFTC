@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DistrictWithEvents {
     @Embedded
-    public Region region;
+    public District district;
 
     @Relation(
             parentColumn = "district_key",

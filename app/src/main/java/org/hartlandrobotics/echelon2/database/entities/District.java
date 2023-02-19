@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "district")
-public class Region {
+public class District {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "district_key")
@@ -21,7 +21,7 @@ public class Region {
     @ColumnInfo(name = "year")
     private int year;
 
-    public Region(@NonNull String districtKey, String abbreviation, String displayName, int year) {
+    public District(@NonNull String districtKey, String abbreviation, String displayName, int year) {
         this.districtKey = districtKey;
         this.abbreviation = abbreviation;
         this.displayName = displayName;

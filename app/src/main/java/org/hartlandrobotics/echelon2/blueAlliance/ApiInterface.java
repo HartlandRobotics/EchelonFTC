@@ -1,7 +1,7 @@
 package org.hartlandrobotics.echelon2.blueAlliance;
 //TODO: change to orange alliance
 
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncRegion;
+import org.hartlandrobotics.echelon2.blueAlliance.models.SyncDistrict;
 import org.hartlandrobotics.echelon2.blueAlliance.models.SyncEvent;
 import org.hartlandrobotics.echelon2.blueAlliance.models.SyncMatch;
 import org.hartlandrobotics.echelon2.blueAlliance.models.SyncStatus;
@@ -14,23 +14,25 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
-    //@GET("status")
-    //Call<SyncStatus> getStatus();
-
-    @GET("/")
+    @GET("status")
     Call<SyncStatus> getStatus();
 
-    //@GET("districts/{year}")
-    Call<List<SyncRegion>> getDistrictsByYear(@Path("year") int year);
+    //@GET("/")
+    //Call<SyncStatus> getStatus();
+    // returns version number if call is successful, otherwise, we aren't connected
 
-    @GET("regions")
-    Call<List<SyncRegion>> getRegions();
+    @GET("districts/{year}")
+    Call<List<SyncDistrict>> getDistrictsByYear(@Path("year") int year);
 
-    //@GET("district/{district_key}/events")
-    //Call<List<SyncEvent>> getEventsByDistrict(@Path("district_key") String districtKey);
+    //@GET("regions")
+    //Call<List<SyncRegion>> getRegions();
+    // gets all FTC regions
 
-    @GET("event/{region_key}")
-    Call<List<SyncEvent>> getEventsByRegion(@Path("region_key") String regionKey);
+    @GET("district/{district_key}/events")
+    Call<List<SyncEvent>> getEventsByDistrict(@Path("district_key") String districtKey);
+
+    //@GET("event/{region_key}")
+    //Call<List<SyncEvent>> getEventsByRegion(@Path("region_key") String regionKey);
 
     // same for orange alliance
     @GET("event/{event_key}")
@@ -41,9 +43,9 @@ public interface ApiInterface {
     Call<List<SyncTeam>> getTeamsByEvent(@Path("event_key") String eventKey);
 
 
-//    @GET("event/{event_key}/matches/simple")
-//    Call<List<SyncMatch>> getMatchesByEvent(@Path("event_key") String eventKey);
-
-    @GET("event/{event_key}/matches")
+    @GET("event/{event_key}/matches/simple")
     Call<List<SyncMatch>> getMatchesByEvent(@Path("event_key") String eventKey);
+
+    //@GET("event/{event_key}/matches")
+    //Call<List<SyncMatch>> getMatchesByEvent(@Path("event_key") String eventKey);
 }
