@@ -21,11 +21,11 @@ public interface ApiInterface {
     //Call<SyncStatus> getStatus();
     // returns version number if call is successful, otherwise, we aren't connected
 
-    @GET("districts/{year}")
-    Call<List<SyncDistrict>> getDistrictsByYear(@Path("year") int year);
+    //@GET("districts/{year}")
+    <List<SyncDistrict>> getDistrictsByYear(@Path("year") int year);
 
-    //@GET("regions")
-    //Call<List<SyncRegion>> getRegions();
+    @GET("regions")
+    Call<List<SyncDistrict>> getRegions();
     // gets all FTC regions
 
     @GET("district/{district_key}/events")
