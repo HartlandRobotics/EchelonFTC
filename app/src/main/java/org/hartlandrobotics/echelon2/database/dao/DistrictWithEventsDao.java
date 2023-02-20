@@ -27,6 +27,6 @@ public abstract class DistrictWithEventsDao {
    }
 
    @Transaction
-   @Query("SELECT * FROM district WHERE district_key = :districtKey")
-   public abstract LiveData<DistrictWithEvents> getDistrictEvents(String districtKey );
+   @Query("SELECT * FROM region WHERE region_key = :regionKey")
+   public abstract LiveData<DistrictWithEvents> getDistrictEvents(String regionKey );
 }

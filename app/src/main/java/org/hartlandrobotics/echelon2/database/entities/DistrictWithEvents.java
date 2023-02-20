@@ -11,7 +11,7 @@ public class DistrictWithEvents {
     public District district;
 
     @Relation(
-            parentColumn = "district_key",
+            parentColumn = "region_key",
             entityColumn = "event_key",
             associateBy = @Junction(DistrictEvtCrossRef.class)
     )

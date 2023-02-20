@@ -19,7 +19,8 @@ public class DistrictRepo {
 
     }
 
-    public LiveData<List<District>> getDistrictsByYear(int year){return districtDao.getDistrictsByYear(year);}
+    public LiveData<List<District>> getDistricts(){return districtDao.getDistricts();}
+    // public LiveData<List<District>> getDistrictsByYear(int year){return districtDao.getDistrictsByYear(year);}
 
     public void upsert(District district){
         EchelonDatabase.databaseWriteExecutor.execute( () -> {

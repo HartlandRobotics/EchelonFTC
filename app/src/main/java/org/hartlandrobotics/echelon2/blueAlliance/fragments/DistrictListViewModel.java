@@ -3,34 +3,22 @@ package org.hartlandrobotics.echelon2.blueAlliance.fragments;
 import org.hartlandrobotics.echelon2.database.entities.District;
 
 public class DistrictListViewModel {
-    private String districtKey;
-    private String abbreviation;
-    private String displayName;
-    private int year;
+    private String regionKey;
+    private String description;
     private boolean isSelected;
 
     public DistrictListViewModel(District district) {
-        this.districtKey = district.getDistrictKey();
-        this.abbreviation = district.getAbbreviation();
-        this.displayName = district.getDisplayName();
-        this.year = district.getYear();
+        this.regionKey = district.getRegionKey();
+        this.description = district.getDescription();
         this.isSelected = false;
     }
 
     public String getDistrictKey() {
-        return districtKey;
+        return regionKey;
     }
 
-    public String getAbbreviation() {
-        return abbreviation;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public int getYear() {
-        return year;
+    public String getDescription() {
+        return description;
     }
 
     public boolean getIsSelected() {

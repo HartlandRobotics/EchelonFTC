@@ -5,43 +5,27 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "district")
+@Entity(tableName = "region")
 public class District {
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "district_key")
-    private String districtKey;
+    @ColumnInfo(name = "region_key")
+    private String regionKey;
 
-    @ColumnInfo(name = "abbreviation")
-    private String abbreviation;
+    @ColumnInfo(name = "description")
+    private String description;
 
-    @ColumnInfo(name = "display_name")
-    private String displayName;
-
-    @ColumnInfo(name = "year")
-    private int year;
-
-    public District(@NonNull String districtKey, String abbreviation, String displayName, int year) {
-        this.districtKey = districtKey;
-        this.abbreviation = abbreviation;
-        this.displayName = displayName;
-        this.year = year;
+    public District(@NonNull String regionKey, String description) {
+        this.regionKey = regionKey;
+        this.description = description;
     }
 
     @NonNull
-    public String getDistrictKey() {
-        return districtKey;
+    public String getRegionKey() {
+        return regionKey;
     }
 
-    public String getAbbreviation() {
-        return abbreviation;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public int getYear() {
-        return year;
+    public String getDescription() {
+        return description;
     }
 }

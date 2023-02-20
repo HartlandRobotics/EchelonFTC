@@ -5,36 +5,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hartlandrobotics.echelon2.database.entities.District;
 
 public class SyncDistrict {
-    @JsonProperty("abbreviation")
-    private String abbreviation;
+    @JsonProperty("region_key")
+    private String regionKey;
 
-    @JsonProperty("display_name")
-    private String displayName;
+    @JsonProperty("description")
+    private String description;
 
-    @JsonProperty("key")
-    private String key;
-
-    @JsonProperty("year")
-    private int year;
-
-    public String getAbbreviation() {
-        return abbreviation;
+    public String getRegionKey() {
+        return regionKey;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public int getYear() {
-        return year;
+    public String getDescription() {
+        return description;
     }
 
     public District toDistrict(){
-        District district = new District(getKey(), getAbbreviation(), getDisplayName(), getYear());
+        District district = new District(getRegionKey(), getDescription());
         return district;
     }
 

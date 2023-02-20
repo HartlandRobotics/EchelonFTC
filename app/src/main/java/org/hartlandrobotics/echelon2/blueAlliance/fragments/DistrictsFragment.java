@@ -83,13 +83,16 @@ public class DistrictsFragment extends Fragment {
     }
 
     public void setupCurrentDistricts(){
-            Context appContext = getActivity().getApplicationContext();
-            BlueAllianceStatus status = new BlueAllianceStatus(appContext);
-            int currentYear = Integer.parseInt(status.getYear());
+            //Context appContext = getActivity().getApplicationContext();
+            //BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+            // int currentYear = Integer.parseInt(status.getYear());
             DistrictRepo districtRepo = new DistrictRepo(DistrictsFragment.this.getActivity().getApplication());
-            districtRepo.getDistrictsByYear(currentYear).observe(getViewLifecycleOwner(), districts -> {
+            districtRepo.getDistricts().observe(getViewLifecycleOwner(), districts -> {
                 districtListAdapter.setDistricts(districts);
             });
+            //districtRepo.getDistrictsByYear(currentYear).observe(getViewLifecycleOwner(), districts -> {
+            //    districtListAdapter.setDistricts(districts);
+            //});
     }
 
     public void setupPullDistricts() {
@@ -99,9 +102,8 @@ public class DistrictsFragment extends Fragment {
             try {
                 Context appContext = getActivity().getApplicationContext();
                 BlueAllianceStatus status = new BlueAllianceStatus(appContext);
-                int currentYear = Integer.parseInt( status.getYear() );
 
-                Call<List<SyncDistrict>> newCall = newApi.getDistrictsByYear(currentYear);
+                Call<List<SyncDistrict>> newCall = newApi.getRegions();
                 newCall.enqueue(new Callback<List<SyncDistrict>>() {
                     @Override
                     public void onResponse(Call<List<SyncDistrict>> call, Response<List<SyncDistrict>> response) {
@@ -167,7 +169,7 @@ public class DistrictsFragment extends Fragment {
         public void setDistrict(DistrictListViewModel districtViewModel) {
             this.districtViewModel = districtViewModel;
 
-            districtName.setText(districtViewModel.getDisplayName());
+            districtName.setText(districtViewModel.getDescription());
             districtKey.setText(districtViewModel.getDistrictKey());
             districtSelectedRadioButton.setChecked(districtViewModel.getIsSelected());
         }
@@ -217,7 +219,7 @@ public class DistrictsFragment extends Fragment {
             districtViewModels = new ArrayList<>();
             for( District district : districts ){
                 DistrictListViewModel viewModel = new DistrictListViewModel(district);
-                if( district.getDistrictKey().equals(currentDistrictKey) ){
+                if( district.getRegionKey().equals(currentDistrictKey) ){
                     viewModel.setIsSelected(true);
                 }
                 districtViewModels.add(viewModel);

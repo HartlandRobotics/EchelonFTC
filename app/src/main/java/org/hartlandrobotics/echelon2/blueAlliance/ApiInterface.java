@@ -14,25 +14,29 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
-    @GET("status")
+    //tba
+    //@GET("status")
+    //Call<SyncStatus> getStatus();
+
+    @GET("/")
     Call<SyncStatus> getStatus();
 
-    //@GET("/")
-    //Call<SyncStatus> getStatus();
-    // returns version number if call is successful, otherwise, we aren't connected
-
+    //tba
     //@GET("districts/{year}")
-    <List<SyncDistrict>> getDistrictsByYear(@Path("year") int year);
+    //Call<List<SyncDistrict>> getDistrictsByYear(@Path("year") int year);
 
     @GET("regions")
     Call<List<SyncDistrict>> getRegions();
     // gets all FTC regions
 
-    @GET("district/{district_key}/events")
-    Call<List<SyncEvent>> getEventsByDistrict(@Path("district_key") String districtKey);
+    //todo: look into /seasons because year isn't available on region
 
-    //@GET("event/{region_key}")
-    //Call<List<SyncEvent>> getEventsByRegion(@Path("region_key") String regionKey);
+    //tba
+    //@GET("district/{district_key}/events")
+    //Call<List<SyncEvent>> getEventsByDistrict(@Path("district_key") String districtKey);
+
+    @GET("event/{region_key}")
+    Call<List<SyncEvent>> getEventsByRegion(@Path("region_key") String regionKey);
 
     // same for orange alliance
     @GET("event/{event_key}")
@@ -43,9 +47,10 @@ public interface ApiInterface {
     Call<List<SyncTeam>> getTeamsByEvent(@Path("event_key") String eventKey);
 
 
-    @GET("event/{event_key}/matches/simple")
-    Call<List<SyncMatch>> getMatchesByEvent(@Path("event_key") String eventKey);
-
-    //@GET("event/{event_key}/matches")
+    //tba
+    //@GET("event/{event_key}/matches/simple")
     //Call<List<SyncMatch>> getMatchesByEvent(@Path("event_key") String eventKey);
+
+    @GET("event/{event_key}/matches")
+    Call<List<SyncMatch>> getMatchesByEvent(@Path("event_key") String eventKey);
 }

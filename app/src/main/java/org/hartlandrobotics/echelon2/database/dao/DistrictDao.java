@@ -19,11 +19,11 @@ public abstract class DistrictDao {
     @Update(onConflict = OnConflictStrategy.IGNORE)
     public abstract void update(District district);
 
-    @Query("SELECT * FROM district")
+    @Query("SELECT * FROM region")
     public abstract LiveData<List<District>> getDistricts();
 
-    @Query("SELECT * FROM district WHERE year = :year")
-    public abstract LiveData<List<District>> getDistrictsByYear(int year);
+    //@Query("SELECT * FROM region WHERE year = :year")
+    //public abstract LiveData<List<District>> getDistrictsByYear(int year);
 
     public void upsert(District district){
         long id = insert(district);
