@@ -23,7 +23,11 @@ public interface ApiInterface {
 
     //tba
     //@GET("districts/{year}")
+<<<<<<< Updated upstream
     //Call<List<SyncDistrict>> getDistrictsByYear(@Path("year") int year);
+=======
+    //<List<SyncDistrict>> getDistrictsByYear(@Path("year") int year);
+>>>>>>> Stashed changes
 
     @GET("regions")
     Call<List<SyncDistrict>> getRegions();

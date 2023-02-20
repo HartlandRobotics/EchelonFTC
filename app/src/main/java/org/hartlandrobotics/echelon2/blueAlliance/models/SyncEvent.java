@@ -5,26 +5,35 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hartlandrobotics.echelon2.database.entities.Evt;
 
 public class SyncEvent {
-    @JsonProperty("key")
+    @JsonProperty("event_key")
     private String eventKey;
 
-    @JsonProperty("name")
-    private String name;
+//E
+    @JsonProperty("season_key")
+    private String seasonKey;
+
+    @JsonProperty("region_key")
+    private String regionKey;
+
+    @JsonProperty("league_key")
+    private String leagueKey;
 
     @JsonProperty("event_code")
     private String eventCode;
 
-    @JsonProperty("event_type")
-    private int eventType;
+    @JsonProperty("event_type_key")
+    private String eventTypeKey;
 
-    @JsonProperty("city")
-    private String city;
+    @JsonProperty("division_key")
+    private int divisionKey;
 
-    @JsonProperty("state")
-    private String state;
 
-    @JsonProperty("country")
-    private String country;
+
+    @JsonProperty("division_name")
+    private int divisionName;
+
+    @JsonProperty("event_name")
+    private String eventName;
 
     @JsonProperty("start_date")
     private String startDate;
@@ -32,135 +41,198 @@ public class SyncEvent {
     @JsonProperty("end_date")
     private String endDate;
 
-    @JsonProperty("year")
-    private int year;
+    @JsonProperty("week_key")
+    private String weekKey;
 
-    @JsonProperty("short_name")
-    private String shortName;
+    @JsonProperty("city")
+    private String city;
 
-    @JsonProperty("event_type_string")
-    private String eventTypeString;
+    @JsonProperty("state_prov")
+    private String state_prov;
 
-    @JsonProperty("week")
-    private int week;
+    @JsonProperty("country")
+    private String country;
 
-    @JsonProperty("address")
-    private String address;
-
-    @JsonProperty("postal_code")
-    private String postalCode;
-
-    @JsonProperty("google_maps_place_id")
-    private String googleMapsPlaceId;
-
-    @JsonProperty("google_maps_url")
-    private String googleMapsUrl;
-
-    @JsonProperty("location_name")
-    private String locationName;
-
-    @JsonProperty("timezone")
-    private String timezone;
+    @JsonProperty("venue")
+    private String venue;
 
     @JsonProperty("website")
     private String website;
 
-    @JsonProperty("first_event_id")
-    private String firstEventId;
+    @JsonProperty("time_zone")
+    private String timeZone;
 
-    @JsonProperty("first_event_code")
-    private String firstEventCode;
+    @JsonProperty("is_public")
+    private boolean isPublic;
+
+    @JsonProperty("date-source")
+    private int dataSource;
+
+    public int getDivisionName() {
+        return divisionName;
+    }
+
+    public void setDivisionName(int divisionName) {
+        this.divisionName = divisionName;
+    }
 
     public String getEventKey() {
         return eventKey;
     }
 
-    public String getName() {
-        return name;
+    public void setEventKey(String eventKey) {
+        this.eventKey = eventKey;
+    }
+
+    public String getSeasonKey() {
+        return seasonKey;
+    }
+
+    public void setSeasonKey(String seasonKey) {
+        this.seasonKey = seasonKey;
+    }
+
+    public String getRegionKey() {
+        return regionKey;
+    }
+
+    public void setRegionKey(String regionKey) {
+        this.regionKey = regionKey;
+    }
+
+    public String getLeagueKey() {
+        return leagueKey;
+    }
+
+    public void setLeagueKey(String leagueKey) {
+        this.leagueKey = leagueKey;
     }
 
     public String getEventCode() {
         return eventCode;
     }
 
-    public int getEventType() {
-        return eventType;
+    public void setEventCode(String eventCode) {
+        this.eventCode = eventCode;
     }
 
-    public String getCity() {
-        return city;
+    public String getEventTypeKey() {
+        return eventTypeKey;
     }
 
-    public String getState() {
-        return state;
+    public void setEventTypeKey(String eventTypeKey) {
+        this.eventTypeKey = eventTypeKey;
     }
 
-    public String getCountry() {
-        return country;
+    public int getDivisionKey() {
+        return divisionKey;
+    }
+
+    public void setDivisionKey(int divisionKey) {
+        this.divisionKey = divisionKey;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getStartDate() {
         return startDate;
     }
 
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
     public String getEndDate() {
         return endDate;
     }
 
-    public int getYear() {
-        return year;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
-    public String getShortName() {
-        return shortName;
+    public String getWeekKey() {
+        return weekKey;
     }
 
-    public String getEventTypeString() {
-        return eventTypeString;
+    public void setWeekKey(String weekKey) {
+        this.weekKey = weekKey;
     }
 
-    public int getWeek() {
-        return week;
+    public String getCity() {
+        return city;
     }
 
-    public String getAddress() {
-        return address;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getPostalCode() {
-        return postalCode;
+    public String getState_prov() {
+        return state_prov;
     }
 
-    public String getGoogleMapsPlaceId() {
-        return googleMapsPlaceId;
+    public void setState_prov(String state_prov) {
+        this.state_prov = state_prov;
     }
 
-    public String getGoogleMapsUrl() {
-        return googleMapsUrl;
+    public String getCountry() {
+        return country;
     }
 
-    public String getLocationName() {
-        return locationName;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String getTimezone() {
-        return timezone;
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
     public String getWebsite() {
         return website;
     }
 
-    public String getFirstEventId() {
-        return firstEventId;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
-    public String getFirstEventCode() {
-        return firstEventCode;
+    public String getTimeZone() {
+        return timeZone;
     }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
+    public int getDataSource() {
+        return dataSource;
+    }
+
+    public void setDataSource(int dataSource) {
+        this.dataSource = dataSource;
+    }
+
+
+
 
     public Evt toEvent(){
-        Evt event = new Evt(getEventKey(), getName(), getEventCode(), getEventType(), getCity(), getState(), getCountry(), getStartDate(), getEndDate(), getYear(), getShortName(), getEventTypeString(), getWeek(), getAddress(), getPostalCode(), getGoogleMapsPlaceId(), getGoogleMapsUrl(), getLocationName(), getTimezone(), getWebsite(), getFirstEventId(), getFirstEventCode());
+        Evt event = new Evt(getEventKey(), getSeasonKey(), getRegionKey(),getLeagueKey(), getEventCode(), getEventTypeKey(),getDivisionKey(),getDivisionName(),getEventName(),getStartDate(),getEndDate(),getWeekKey(),getCity(),getState_prov(), getCountry(), getVenue(),getWebsite(),getTimeZone(),isPublic(),getDataSource());
         return event;
     }
 }

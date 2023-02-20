@@ -13,23 +13,26 @@ public class Evt {
     @ColumnInfo(name="event_key")
     private String eventKey;
 
-    @ColumnInfo(name = "name")
-    private String name;
+    @ColumnInfo(name = "season_key")
+    private String seasonKey;
+
+    @ColumnInfo(name = "region_key")
+    private String regionKey;
+
+    @ColumnInfo(name = "league_key")
+    private String leagueKey;
 
     @ColumnInfo(name = "event_code")
     private String eventCode;
 
-    @ColumnInfo(name = "event_type")
-    private int eventType;
+    @ColumnInfo(name = "event_type_key")
+    private String eventTypeKey
 
-    @ColumnInfo(name = "city")
-    private String city;
+    @ColumnInfo(name = "division_key")
+    private int divisionKey;
 
-    @ColumnInfo(name = "state")
-    private String state;
-
-    @ColumnInfo(name = "country")
-    private String country;
+    @ColumnInfo(name = "event_name")
+    private String eventName;
 
     @ColumnInfo(name = "start_date")
     private String startDate;
@@ -37,48 +40,36 @@ public class Evt {
     @ColumnInfo(name = "end_date")
     private String endDate;
 
-    @ColumnInfo(name = "year")
-    private int year;
+    @ColumnInfo(name = "week_key")
+    private String weekKey;
 
-    @ColumnInfo(name = "short_name")
-    private String shortName;
+    @ColumnInfo(name = "city")
+    private String city;
 
-    @ColumnInfo(name = "event_type_string")
-    private String eventTypeString;
+    @ColumnInfo(name = "state_prov")
+    private String state_prov;
 
-    @ColumnInfo(name = "week")
-    private int week;
+    @ColumnInfo(name = "country")
+    private String country;
 
-    @ColumnInfo(name = "address")
-    private String address;
-
-    @ColumnInfo(name = "postal_code")
-    private String postalCode;
-
-    @ColumnInfo(name = "google_maps_place_id")
-    private String googleMapsPlaceId;
-
-    @ColumnInfo(name = "google_maps_url")
-    private String googleMapsUrl;
-
-    @ColumnInfo(name = "location_name")
-    private String locationName;
-
-    @ColumnInfo(name = "timezone")
-    private String timezone;
+    @ColumnInfo(name = "venue")
+    private String venue;
 
     @ColumnInfo(name = "website")
     private String website;
 
-    @ColumnInfo(name = "first_event_id")
-    private String firstEventId;
+    @ColumnInfo(name = "time_zone")
+    private String timezone;
 
-    @ColumnInfo(name = "first_event_code")
-    private String firstEventCode;
+    @ColumnInfo(name = "is_public")
+    private boolean isPublic;
 
-    public Evt(@NonNull String eventKey, String name, String eventCode, int eventType, String city, String state, String country, String startDate, String endDate, int year, String shortName, String eventTypeString, int week, String address, String postalCode, String googleMapsPlaceId, String googleMapsUrl, String locationName, String timezone, String website, String firstEventId, String firstEventCode) {
+    @ColumnInfo(name = "data_source")
+    private int dateSource;
+
+    public Evt(@NonNull String eventKey, String seasonKey, String regionKey, String leagueKey, String eventCode, String eventTypeKey, int divisionKey, String divisionName, String eventName, String startDate, String endDate, String weekKey, String city, String state_prov, String country, String venue, String website, ) {
         this.eventKey = eventKey;
-        this.name = name;
+        this.seasonKey = seasonKey
         this.eventCode = eventCode;
         this.eventType = eventType;
         this.city = city;
