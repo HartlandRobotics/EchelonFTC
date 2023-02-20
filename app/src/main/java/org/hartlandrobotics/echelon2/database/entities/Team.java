@@ -22,15 +22,15 @@ public class Team {
     @ColumnInfo(name = "name")
     private String name;
 
-    @ColumnInfo(name = "school_name")
-    private String schoolName;
+    @ColumnInfo(name = "city")
+    private String city;
 
-    public Team(@NonNull String teamKey, int teamNumber, String nickname, String name, String schoolName) {
+    public Team(@NonNull String teamKey, int teamNumber, String nickname, String name, String city) {
         this.teamKey = teamKey;
         this.teamNumber = teamNumber;
         this.nickname = nickname;
         this.name = name;
-        this.schoolName = schoolName;
+        this.city = city;
     }
 
     @NonNull
@@ -66,12 +66,12 @@ public class Team {
         this.name = name;
     }
 
-    public String getSchoolName() {
-        return schoolName;
+    public String getCity() {
+        return city;
     }
 
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public EvtTeamCrossRef toEventTeam(String eventKey){
