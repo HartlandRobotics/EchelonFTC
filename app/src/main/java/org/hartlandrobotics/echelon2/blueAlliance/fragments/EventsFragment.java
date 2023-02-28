@@ -101,7 +101,7 @@ public class EventsFragment extends Fragment {
                 String eventKeyInner = eventKeyOverrideLayout.getEditText().getText().toString();
                 if( !StringUtils.isBlank(eventKeyInner )) {
                     Optional<Evt> matchingEvent = district.events.stream()
-                            .filter( districtEvent -> districtEvent.getEventKey().equals(eventKeyInner ))
+                            .filter( districtEvent -> districtEvent.getEventCode().equals(eventKeyInner ))
                             .findFirst();
                     if(matchingEvent.isPresent()) {
                         eventListAdapter.setEvents(district.events);
@@ -130,7 +130,7 @@ public class EventsFragment extends Fragment {
                 String eventKeyOverride = StringUtils.defaultIfEmpty( eventKeyOverrideLayout.getEditText().getText().toString(), StringUtils.EMPTY);
 
                 if( StringUtils.isBlank( eventKeyOverride )) {
-                    Call<List<SyncEvent>> newCall = newApi.getEventsByDistrict(districtKey);
+                    Call<List<SyncEvent>> newCall = newApi.getEventsByRegion(districtKey);
                     newCall.enqueue(new Callback<List<SyncEvent>>() {
                         @Override
                         public void onResponse(Call<List<SyncEvent>> call, Response<List<SyncEvent>> response) {
@@ -278,7 +278,7 @@ public class EventsFragment extends Fragment {
             eventViewModels = new ArrayList<>();
             for( Evt event : events ){
                 EventsListViewModel viewModel = new EventsListViewModel(event);
-                if( event.getEventKey().equals(currentEventKey) ){
+                if( event.getEventCode().equals(currentEventKey) ){
                     viewModel.setIsSelected(true);
                 }
                 eventViewModels.add(viewModel);
