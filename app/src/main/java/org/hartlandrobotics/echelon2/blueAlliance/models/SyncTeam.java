@@ -5,45 +5,49 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hartlandrobotics.echelon2.database.entities.Team;
 
 public class SyncTeam {
-    @JsonProperty("key")
-    private String teamKey;
+    @JsonProperty("team")
+    private TeamProperty team;
 
-    @JsonProperty("team_number")
-    private int teamNumber;
+    class TeamProperty {
+        @JsonProperty("team_key")
+        private String teamKey;
 
-    @JsonProperty("nickname")
-    private String nickname;
+        @JsonProperty("team_number")
+        private int teamNumber;
 
-    @JsonProperty("name")
-    private String name;
+        @JsonProperty("team_name_short")
+        private String nickname;
 
-    @JsonProperty("school_name")
-    private String schoolName;
+        @JsonProperty("team_name_long")
+        private String name;
 
+        @JsonProperty("city")
+        private String city;
+    }
 
     public String getTeamKey() {
-        return teamKey;
+        return team.teamKey;
     }
 
     public int getTeamNumber() {
-        return teamNumber;
+        return team.teamNumber;
     }
 
     public String getNickname() {
-        return nickname;
+        return team.nickname;
     }
 
     public String getName() {
-        return name;
+        return team.name;
     }
 
-    public String getSchoolName() {
-        return schoolName;
+    public String getCity() {
+        return team.city;
     }
 
     public Team toTeam(){
         Team team = new Team(
-            getTeamKey(), getTeamNumber(), getNickname(), getName(), getSchoolName());
+            getTeamKey(), getTeamNumber(), getNickname(), getName(), getCity());
         return team;
     }
 }
