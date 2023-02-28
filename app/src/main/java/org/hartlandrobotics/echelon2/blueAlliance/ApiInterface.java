@@ -35,6 +35,7 @@ public interface ApiInterface {
     //@GET("district/{district_key}/events")
     //Call<List<SyncEvent>> getEventsByDistrict(@Path("district_key") String districtKey);
 
+    // todo: this doesn't actually exist
     @GET("event/{region_key}")
     Call<List<SyncEvent>> getEventsByRegion(@Path("region_key") String regionKey);
 
