@@ -30,7 +30,7 @@ public class SyncEvent {
 
 
     @JsonProperty("division_name")
-    private int divisionName;
+    private String divisionName;
 
     @JsonProperty("event_name")
     private String eventName;
@@ -68,11 +68,11 @@ public class SyncEvent {
     @JsonProperty("date-source")
     private int dataSource;
 
-    public int getDivisionName() {
+    public String getDivisionName() {
         return divisionName;
     }
 
-    public void setDivisionName(int divisionName) {
+    public void setDivisionName(String divisionName) {
         this.divisionName = divisionName;
     }
 
