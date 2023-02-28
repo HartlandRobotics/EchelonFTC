@@ -8,25 +8,28 @@ import org.hartlandrobotics.echelon2.database.entities.Match;
 import java.util.ArrayList;
 
 public class SyncMatch {
-    @JsonProperty("key")
+    @JsonProperty("match_key")
     private String matchKey;
-    //yyyy[EVENT_CODE]_[COMP_LEVEL]m[MATCH_NUMBER]
 
     @JsonProperty("comp_level")
     private String compLevel;
     // possible values [ qm, ef, qf, sf, f ]
+    // need to revisit later. in the orange alliance this is an integer.
 
-    @JsonProperty("match_number")
-    private int matchNumber;
+    @JsonProperty("play_number")
+    private int playNumber;
+    //play_number?
 
     @JsonProperty("winning_alliance")
     private String winningAlliance;
+    // not in doc. it seems there is a hierarchy structure that makes it complicated to find what this is.
 
-    @JsonProperty("time")
-    private int time;
+    @JsonProperty("match_start_time")
+    private String marchStartTime;
 
-    @JsonProperty("predicted_time")
-    private int predictedTime;
+
+    @JsonProperty("prestart_tiem")
+    private String prestartTime;
 
     @JsonProperty("alliances")
     private Alliances alliances;
