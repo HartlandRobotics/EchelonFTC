@@ -24,8 +24,18 @@ public class District {
     public String getRegionKey() {
         return regionKey;
     }
-
+    public String getDistrictKey() {return regionKey;}
     public String getDescription() {
         return description;
     }
+
+    public String getAbbreviation() {
+        return regionKey;
+    }
+
+    public String getDisplayName() {
+        return description;
+    }
+
+
 }
