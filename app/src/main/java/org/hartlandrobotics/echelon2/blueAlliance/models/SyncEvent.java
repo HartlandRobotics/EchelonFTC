@@ -232,6 +232,8 @@ public class SyncEvent {
 
 
     public Evt toEvent(){
+        //String eventKey, String seasonKey, String regionKey, String leagueKey, String eventCode, String eventTypeKey, int divisionKey, String divisionName, String eventName, String startDate, String endDate, String weekKey, String city, String state_prov, String country, String venue, String website, String timezone, boolean isPublic, int data_source
+
         Evt event = new Evt(getEventKey(), getSeasonKey(), getRegionKey(),getLeagueKey(), getEventCode(), getEventTypeKey(),getDivisionKey(),getDivisionName(),getEventName(),getStartDate(),getEndDate(),getWeekKey(),getCity(),getState_prov(), getCountry(), getVenue(),getWebsite(),getTimeZone(),isPublic(),getDataSource());
         return event;
     }
