@@ -15,14 +15,14 @@ public class Match {
    @ColumnInfo(name = "match_number")
    private int matchNumber;
 
-   @ColumnInfo(name = "comp_level")
-   private String compLevel;
+   @ColumnInfo(name = "tournament_level")
+   private int tournamentLevel;
 
    @ColumnInfo(name = "match_time")
-   private int matchTime;
+   private String matchTime;
 
-   @ColumnInfo(name = "predicted_time")
-   private int predictedTime;
+   @ColumnInfo(name = "scheduled_time")
+   private String scheduledTime;
 
    @ColumnInfo(name = "red_1_team_key")
    private String red1TeamKey;
@@ -30,34 +30,26 @@ public class Match {
    @ColumnInfo(name = "red_2_team_key")
    private String red2TeamKey;
 
-   @ColumnInfo(name = "red_3_team_key")
-   private String red3TeamKey;
-
    @ColumnInfo(name = "blue_1_team_key")
    private String blue1TeamKey;
 
    @ColumnInfo(name = "blue_2_team_key")
    private String blue2TeamKey;
 
-   @ColumnInfo(name = "blue_3_team_key")
-   private String blue3TeamKey;
-
    public Match(String matchKey, int matchNumber,
-                String compLevel, int matchTime, int predictedTime,
-                String red1TeamKey, String red2TeamKey, String red3TeamKey,
-                String blue1TeamKey, String blue2TeamKey, String blue3TeamKey
+                int tournamentLevel, String matchTime, String scheduledTime,
+                String red1TeamKey, String red2TeamKey,
+                String blue1TeamKey, String blue2TeamKey
    ) {
       this.matchKey = matchKey;
       this.matchNumber = matchNumber;
-      this.compLevel = compLevel;
+      this.tournamentLevel = tournamentLevel;
       this.matchTime = matchTime;
-      this.predictedTime = predictedTime;
+      this.scheduledTime = scheduledTime;
       this.red1TeamKey = red1TeamKey;
       this.red2TeamKey =  red2TeamKey;
-      this.red3TeamKey = red3TeamKey;
       this.blue1TeamKey = blue1TeamKey;
       this.blue2TeamKey = blue2TeamKey;
-      this.blue3TeamKey = blue3TeamKey;
    }
 
    public String getMatchKey() {
@@ -68,16 +60,16 @@ public class Match {
       return matchNumber;
    }
 
-   public String getCompLevel() {
-      return compLevel;
+   public int getTournamentLevel() {
+      return tournamentLevel;
    }
 
-   public int getMatchTime() {
+   public String getMatchTime() {
       return matchTime;
    }
 
-   public int getPredictedTime() {
-      return predictedTime;
+   public String getScheduledTime() {
+      return scheduledTime;
    }
 
    public String getRed1TeamKey(){
@@ -88,19 +80,11 @@ public class Match {
       return red2TeamKey;
    }
 
-   public String getRed3TeamKey(){
-      return red3TeamKey;
-   }
-
    public String getBlue1TeamKey(){
       return blue1TeamKey;
    }
 
    public String getBlue2TeamKey(){
       return blue2TeamKey;
-   }
-
-   public String getBlue3TeamKey(){
-      return blue3TeamKey;
    }
 }

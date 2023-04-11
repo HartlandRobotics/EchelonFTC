@@ -7,10 +7,10 @@ class MatchScheduleViewModel {
 
     private String red1;
     private String red2;
-    private String red3;
     private String blue1;
     private String blue2;
-    private String blue3;
+
+    // todo: update to be generic scores
 
     private int red1Average;
     private int red1Cargo;
@@ -63,14 +63,6 @@ class MatchScheduleViewModel {
         this.red2 = red2;
     }
 
-    public String getRed3() {
-        return red3;
-    }
-
-    public void setRed3(String red3) {
-        this.red3 = red3;
-    }
-
     public String getBlue1() {
         return blue1;
     }
@@ -87,14 +79,6 @@ class MatchScheduleViewModel {
         this.blue2 = blue2;
     }
 
-    public String getBlue3() {
-        return blue3;
-    }
-
-    public void setBlue3(String blue3) {
-        this.blue3 = blue3;
-    }
-
     public int getRed1Average() {
         return red1Average;
     }
@@ -109,14 +93,6 @@ class MatchScheduleViewModel {
 
     public void setRed2Average(int red2Average) {
         this.red2Average = red2Average;
-    }
-
-    public int getRed3Average() {
-        return red3Average;
-    }
-
-    public void setRed3Average(int red3Average) {
-        this.red3Average = red3Average;
     }
 
     public int getBlue1Average() {

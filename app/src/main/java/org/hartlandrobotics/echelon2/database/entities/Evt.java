@@ -138,6 +138,23 @@ public class Evt {
         this.data_source = data_source;
     }
 
+    @NonNull
+    public String getEventKey() {
+        return eventKey;
+    }
+
+    public String getSeasonKey() {
+        return seasonKey;
+    }
+
+    public String getRegionKey() {
+        return regionKey;
+    }
+
+    public String getDivisionName() {
+        return divisionName;
+    }
+
     @PrimaryKey
     @NonNull
     @ColumnInfo(name="event_key")

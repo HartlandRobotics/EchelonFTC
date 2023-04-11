@@ -5,13 +5,13 @@ import org.hartlandrobotics.echelon2.database.entities.Evt;
 public class EventsListViewModel {
     private String eventName;
     private String eventKey;
-    private int year;
+    private String eventStartDate;
     private boolean isSelected;
 
     public EventsListViewModel(Evt event) {
-        this.eventName = event.getName();
+        this.eventName = event.getEventName();
         this.eventKey = event.getEventKey();
-        this.year = event.getYear();
+        this.eventStartDate = event.getStartDate();
         this.isSelected = false;
     }
 
@@ -24,7 +24,11 @@ public class EventsListViewModel {
     }
 
     public int getYear() {
-        return year;
+        try {
+            return Integer.parseInt(eventStartDate.substring(0, 4));
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     public boolean getIsSelected() {

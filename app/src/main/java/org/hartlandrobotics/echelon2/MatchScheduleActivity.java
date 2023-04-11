@@ -122,15 +122,6 @@ public class MatchScheduleActivity extends EchelonActivity {
                     matchScheduleViewModel.setMatchCount(Math.max(matchScheduleViewModel.getMatchCount(),
                             getSize(match.getRed2TeamKey())));
 
-                    int red3Average = getAverageByTeam(match.getRed3TeamKey());
-                    matchScheduleViewModel.setRed3(match.getRed3TeamKey());
-                    matchScheduleViewModel.setRed3Average(red3Average);
-                    matchScheduleViewModel.setRed3Cargo( getAverageCargoCountByTeam(match.getRed3TeamKey()) );
-                    matchScheduleViewModel.setRed3Hang( getAverageHangPointsByTeam(match.getRed3TeamKey()) );
-                    matchScheduleViewModel.setRed3StdDeviation(getStdDeviationByTeam(match.getRed3TeamKey()));
-                    matchScheduleViewModel.setMatchCount(Math.max(matchScheduleViewModel.getMatchCount(),
-                            getSize(match.getRed3TeamKey())));
-
                     int blue1Average = getAverageByTeam(match.getBlue1TeamKey());
                     matchScheduleViewModel.setBlue1(match.getBlue1TeamKey());
                     matchScheduleViewModel.setBlue1Average(blue1Average);
@@ -148,15 +139,6 @@ public class MatchScheduleActivity extends EchelonActivity {
                     matchScheduleViewModel.setBlue2StdDeviation(getStdDeviationByTeam(match.getBlue2TeamKey()));
                     matchScheduleViewModel.setMatchCount(Math.max(matchScheduleViewModel.getMatchCount(),
                             getSize(match.getBlue2TeamKey())));
-
-                    int blue3Average = getAverageByTeam(match.getBlue3TeamKey());
-                    matchScheduleViewModel.setBlue3(match.getBlue3TeamKey());
-                    matchScheduleViewModel.setBlue3Average(blue3Average);
-                    matchScheduleViewModel.setBlue3Cargo( getAverageCargoCountByTeam(match.getBlue3TeamKey()) );
-                    matchScheduleViewModel.setBlue3Hang( getAverageHangPointsByTeam(match.getBlue3TeamKey()) );
-                    matchScheduleViewModel.setBlue3StdDeviation(getStdDeviationByTeam(match.getBlue3TeamKey()));
-                    matchScheduleViewModel.setMatchCount(Math.max(matchScheduleViewModel.getMatchCount(),
-                            getSize(match.getBlue3TeamKey())));
 
                     viewModels.add(matchScheduleViewModel);
                 }
@@ -341,10 +323,8 @@ public class MatchScheduleActivity extends EchelonActivity {
             matchNumber.setText(String.valueOf(matchScheduleViewModel.getMatchNumber()));
             red1.setText("1: " + matchScheduleViewModel.getRed1());
             red2.setText("2: " + matchScheduleViewModel.getRed2());
-            red3.setText("3: " + matchScheduleViewModel.getRed3());
             blue1.setText("1: " + matchScheduleViewModel.getBlue1());
             blue2.setText("2: " + matchScheduleViewModel.getBlue2());
-            blue3.setText("3: " + matchScheduleViewModel.getBlue3());
             redPrediction.setText( String.valueOf( matchScheduleViewModel.getRedTotal() ) );
             bluePrediction.setText( String.valueOf( matchScheduleViewModel.getBlueTotal() ) );
 
@@ -406,10 +386,8 @@ public class MatchScheduleActivity extends EchelonActivity {
                     .filter( m -> StringUtils.isBlank(filter)
                             || m.getRed1().equals(teamKeyFilter)
                             || m.getRed2().equals(teamKeyFilter)
-                            || m.getRed3().equals(teamKeyFilter)
                             || m.getBlue1().equals(teamKeyFilter)
                             || m.getBlue2().equals(teamKeyFilter)
-                            || m.getBlue3().equals(teamKeyFilter)
                     )
                     .collect(Collectors.toList());
 

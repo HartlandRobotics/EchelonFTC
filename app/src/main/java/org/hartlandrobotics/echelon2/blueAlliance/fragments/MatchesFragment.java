@@ -114,7 +114,7 @@ public class MatchesFragment extends Fragment {
                                 MatchRepo matchRepo = new MatchRepo(MatchesFragment.this.getActivity().getApplication());
                                 List<SyncMatch> syncMatches = response.body();
                                 List<Match> matches = syncMatches.stream()
-                                        .filter( match -> match.getCompLevel().equalsIgnoreCase("qm"))
+                                        .filter( match -> match.getTournamentLevel() == 1)
                                         .map(match -> match.toMatch())
                                         .collect(Collectors.toList());
 
@@ -155,10 +155,8 @@ public class MatchesFragment extends Fragment {
         private MaterialTextView matchKey;
         private MaterialTextView red1;
         private MaterialTextView red2;
-        private MaterialTextView red3;
         private MaterialTextView blue1;
         private MaterialTextView blue2;
-        private MaterialTextView blue3;
 
         private MatchListViewModel matchViewModel;
 
@@ -168,10 +166,8 @@ public class MatchesFragment extends Fragment {
             matchNumber = itemView.findViewById(R.id.match_number);
             red1 = itemView.findViewById(R.id.red1);
             red2 = itemView.findViewById(R.id.red2);
-            red3 = itemView.findViewById(R.id.red3);
             blue1 = itemView.findViewById(R.id.blue1);
             blue2 = itemView.findViewById(R.id.blue2);
-            blue3 = itemView.findViewById(R.id.blue3);
 
         }
 
@@ -181,10 +177,8 @@ public class MatchesFragment extends Fragment {
             matchNumber.setText(String.valueOf(matchViewModel.getMatchNumber()));
             red1.setText("1: " + matchViewModel.getRed1());
             red2.setText("2: " + matchViewModel.getRed2());
-            red3.setText("3: " + matchViewModel.getRed3());
             blue1.setText("1: " + matchViewModel.getBlue1());
             blue2.setText("2: " + matchViewModel.getBlue2());
-            blue3.setText("3: " + matchViewModel.getBlue3());
 
 
         }

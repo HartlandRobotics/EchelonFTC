@@ -12,6 +12,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
     //tba
@@ -37,9 +38,8 @@ public interface ApiInterface {
     //@GET("district/{district_key}/events")
     //Call<List<SyncEvent>> getEventsByDistrict(@Path("district_key") String districtKey);
 
-    // todo: this doesn't actually exist
-    @GET("event/{region_key}")
-    Call<List<SyncEvent>> getEventsByRegion(@Path("region_key") String regionKey);
+    @GET("event")
+    Call<List<SyncEvent>> getEventsByRegion(@Query("region_key") String regionKey);
 
     // same for orange alliance
     @GET("event/{event_key}")

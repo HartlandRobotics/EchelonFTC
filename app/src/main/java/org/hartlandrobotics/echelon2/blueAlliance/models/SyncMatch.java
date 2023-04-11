@@ -6,57 +6,51 @@ import org.hartlandrobotics.echelon2.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Match;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SyncMatch {
     @JsonProperty("match_key")
     private String matchKey;
 
-    @JsonProperty("comp_level")
-    private String compLevel;
-    // possible values [ qm, ef, qf, sf, f ]
-    // need to revisit later. in the orange alliance this is an integer.
+    @JsonProperty("tournament_level")
+    private int tournamentLevel;
+    // todo: determine what the values mean, was qf, ef, qf, sf, and f before
 
     @JsonProperty("play_number")
     private int playNumber;
-    //play_number?
-
-    @JsonProperty("winning_alliance")
-    private String winningAlliance;
-    // not in doc. it seems there is a hierarchy structure that makes it complicated to find what this is.
 
     @JsonProperty("match_start_time")
-    private String marchStartTime;
+    private String matchStartTime;
 
+    @JsonProperty("scheduled_time")
+    private String scheduledTime;
 
-    @JsonProperty("prestart_tiem")
-    private String prestartTime;
+    @JsonProperty("participants")
+    private Participants[] participants;
 
-    @JsonProperty("alliances")
-    private Alliances alliances;
+    public static class Participants {
+        @JsonProperty("station")
+        private int station;
+        // 11 and 12 are red 1 and 2, 21 and 21 are blue 1 and blue 2
 
-    public static class Alliances {
-        @JsonProperty("blue")
-        private MatchAlliance blueAlliance;
-
-        @JsonProperty("red")
-        private MatchAlliance redAlliance;
+        @JsonProperty("team")
+        private Team team;
     }
 
-    public static class MatchAlliance {
-        @JsonProperty("team_keys")
-        ArrayList<String> teamKeys;
+    public static class Team {
+        @JsonProperty("team_key")
+        String teamKey;
     }
 
     public Match toMatch() {
+        Arrays.sort(participants);
         Match match = new Match(
-                getMatchKey(), getMatchNumber(),
-                getCompLevel(), getTime(), getPredictedTime(),
-                alliances.redAlliance.teamKeys.get( 0 ),
-                alliances.redAlliance.teamKeys.get( 1 ),
-                alliances.redAlliance.teamKeys.get( 2 ),
-                alliances.blueAlliance.teamKeys.get( 0 ),
-                alliances.blueAlliance.teamKeys.get( 1 ),
-                alliances.blueAlliance.teamKeys.get( 2 )
+                getMatchKey(), getPlayNumber(),
+                getTournamentLevel(), getMatchStartTime(), getScheduledTime(),
+                participants[0].team.teamKey,
+                participants[1].team.teamKey,
+                participants[2].team.teamKey,
+                participants[3].team.teamKey
         );
         return match;
     }
@@ -72,19 +66,19 @@ public class SyncMatch {
     }
 
     // possible values [ qm, ef, qf, sf, f ]
-    public String getCompLevel() {
-        return compLevel;
+    public int getTournamentLevel() {
+        return tournamentLevel;
     }
 
-    public int getMatchNumber() {
-        return matchNumber;
+    public int getPlayNumber() {
+        return playNumber;
     }
 
-    public int getTime() {
-        return time;
+    public String getMatchStartTime() {
+        return matchStartTime;
     }
 
-    public int getPredictedTime() {
-        return predictedTime;
+    public String getScheduledTime() {
+        return scheduledTime;
     }
 }

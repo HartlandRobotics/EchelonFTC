@@ -97,14 +97,10 @@ public class MatchSelectionActivity extends EchelonActivity {
                 return match.getRed1TeamKey();
             case "red2":
                 return match.getRed2TeamKey();
-            case "red3":
-                return match.getRed3TeamKey();
             case "blue1":
                 return match.getBlue1TeamKey();
             case "blue2":
                 return match.getBlue2TeamKey();
-            case "blue3":
-                return match.getBlue3TeamKey();
             default:
                 throw new IllegalArgumentException("Invalid device role for match drop down");
         }
