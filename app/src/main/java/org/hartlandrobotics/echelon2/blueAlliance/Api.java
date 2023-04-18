@@ -16,7 +16,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class Api {
     //private static String toaApiKey;
-    private static String tbaApiKey;
+    private static String apiKey;
     private static String userAgentPrefix = "Echelon/1.0 ";
     private static ApiInterface api;
 
@@ -24,8 +24,8 @@ public class Api {
         if(api == null) {
             AdminSettingsViewModel vm = AdminSettingsProvider.getAdminSettings(context);
             String userAgent = userAgentPrefix + " " + vm.getTeamNumber();
-            //toaApiKey = vm.getOrangeAllianceApiKey();
-            tbaApiKey = vm.getBlueAllianceApiKey();
+            apiKey = vm.getOrangeAllianceApiKey();
+            //tbaApiKey = vm.getBlueAllianceApiKey();
 
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(chain -> {
@@ -33,8 +33,9 @@ public class Api {
                 Request request = original.newBuilder()
                         .header("Accept", "application/json")
                         .header("User-Agent", userAgent)
-                        // TODO: figure out orange alliance api key
-                        .header("X-TBA-Auth-Key", tbaApiKey)
+                        //.header("X-TBA-Auth-Key", tbaApiKey)
+                        .header("X-TOA-Key", apiKey)
+                        .header("X-Application-Origin", apiKey)
                         .build();
                 return chain.proceed(request);
             });
@@ -43,8 +44,8 @@ public class Api {
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             Retrofit retrofit = new Retrofit.Builder()
-                    //.baseUrl("https://theorangealliance.org/api/")
-                    .baseUrl("https://thebluealliance.com/api/v3/")
+                    .baseUrl("https://theorangealliance.org/api/")
+                    //.baseUrl("https://thebluealliance.com/api/v3/")
                     .addConverterFactory(JacksonConverterFactory.create(mapper))
                     .client(client)
                     .build();

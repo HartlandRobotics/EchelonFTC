@@ -17,8 +17,13 @@ public class AdminSettingsViewModel extends AdminSettings {
         this.fileSettings = fileSettings;
         this.prefSettings = prefSettings;
 
+        /*
         String prefBlueAllianceApiKey = prefSettings.getBlueAllianceApiKey();
         this.setBlueAllianceApiKey(StringUtils.defaultIfBlank(prefBlueAllianceApiKey, fileSettings.getBlueAllianceApiKey()));
+        */
+
+        String prefApiKey = prefSettings.getOrangeAllianceApiKey();
+        this.setOrangeAllianceApiKey(StringUtils.defaultIfBlank(prefApiKey, fileSettings.getOrangeAllianceApiKey()));
 
         String prefScoutingSeason = prefSettings.getScoutingSeason();
         this.setScoutingSeason( StringUtils.isEmpty(prefScoutingSeason) ? fileSettings.getScoutingSeason() : prefScoutingSeason );
@@ -30,10 +35,10 @@ public class AdminSettingsViewModel extends AdminSettings {
         this.setTeamNumber(StringUtils.defaultIfBlank(prefTeamNum, fileSettings.getTeamNumber()));
     }
 
-    public boolean isBlueAllianceApikeySynced(){
+    public boolean isApikeySynced(){
         if( fileSettings == null  && prefSettings == null ){ return true; }
-        String fileSetting = fileSettings == null ? StringUtils.EMPTY : fileSettings.getBlueAllianceApiKey();
-        String prefSetting = prefSettings == null ? StringUtils.EMPTY : prefSettings.getBlueAllianceApiKey();
+        String fileSetting = fileSettings == null ? StringUtils.EMPTY : fileSettings.getOrangeAllianceApiKey();
+        String prefSetting = prefSettings == null ? StringUtils.EMPTY : prefSettings.getOrangeAllianceApiKey();
 
         return fileSetting.equals( prefSetting );
     }
@@ -46,10 +51,10 @@ public class AdminSettingsViewModel extends AdminSettings {
         return fileSetting.equals( prefSetting );
     }
 
-    public void setBlueAllianceApiKey(Context appContext, String blueAllianceApiKey) {
-        super.setBlueAllianceApiKey(blueAllianceApiKey);
+    public void setOrangeAllianceApiKey(Context appContext, String apiKey) {
+        super.setOrangeAllianceApiKey(apiKey);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
-        preferences.edit().putString(AdminSettingsProvider.BLUE_ALLIANCE_KEY, blueAllianceApiKey).apply();
+        preferences.edit().putString(AdminSettingsProvider.ORANGE_ALLIANCE_KEY, apiKey).apply();
     }
 
     public void setTeamNumber(Context appContext, String teamNumber) {

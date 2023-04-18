@@ -69,18 +69,18 @@ public class AdminSettingsActivity extends EchelonActivity {
 
     public void initializeBlueAllianceKey(AdminSettingsViewModel vm){
         blueAllianceText = this.findViewById(R.id.blueAllianceApiText);
-        setDisplayText( blueAllianceText, vm.getBlueAllianceApiKey(), vm.getFileSettings().getBlueAllianceApiKey() );
+        setDisplayText( blueAllianceText, vm.getOrangeAllianceApiKey(), vm.getFileSettings().getOrangeAllianceApiKey() );
 
         apiKeySaveButton = this.findViewById(R.id.apiKeySaveButton);
         apiKeySaveButton.setOnClickListener(v -> {
             String apiKey = blueAllianceText.getEditText().getText().toString();
-            vm.setBlueAllianceApiKey(getApplicationContext(), apiKey);
+            vm.setOrangeAllianceApiKey(getApplicationContext(), apiKey);
         });
 
         apiKeyRestoreButton = this.findViewById(R.id.apiKeyRestoreButton);
         apiKeyRestoreButton.setOnClickListener(v -> {
-            String fileApiKey = vm.getFileSettings().getBlueAllianceApiKey();
-            vm.setBlueAllianceApiKey(getApplicationContext(), fileApiKey);
+            String fileApiKey = vm.getFileSettings().getOrangeAllianceApiKey();
+            vm.setOrangeAllianceApiKey(getApplicationContext(), fileApiKey);
             setDisplayText( blueAllianceText, fileApiKey, fileApiKey);
         });
     }

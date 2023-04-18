@@ -23,7 +23,8 @@ public class AdminSettingsProvider {
     private static final String CONFIG_FILE_NAME = "adminSettings.json";
 
     // Field names used in shared preference storage
-    public static final String BLUE_ALLIANCE_KEY = "BlueAllianceKey";
+    //public static final String BLUE_ALLIANCE_KEY = "BlueAllianceKey";
+    public static final String ORANGE_ALLIANCE_KEY = "OrangeAllianceKey";
     public static final String SCOUTING_YEAR = "ScoutingYear";
     public static final String TEAM_NUMBER = "TeamNumber";
     public static final String DEVICE_ROLE = "DeviceRole";
@@ -69,17 +70,19 @@ public class AdminSettingsProvider {
     private static AdminSettings settingsFromPrefs(Context appContext, AdminSettings fileSettings){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
 
-        String blueAllianceKey = preferences.getString(BLUE_ALLIANCE_KEY, null);
+        //String blueAllianceKey = preferences.getString(BLUE_ALLIANCE_KEY, null);
+        String orangeAllianceKey = preferences.getString(ORANGE_ALLIANCE_KEY, null);
+        /*
         if(StringUtils.isEmpty(blueAllianceKey)){
         }
-
+        */
         String scoutingYear = preferences.getString(SCOUTING_YEAR, null);
 
         String deviceRole = preferences.getString(DEVICE_ROLE, null);
 
         String teamNumber = preferences.getString(TEAM_NUMBER, null);
 
-        return new AdminSettings(blueAllianceKey, scoutingYear, deviceRole, teamNumber);
+        return new AdminSettings(orangeAllianceKey, scoutingYear, deviceRole, teamNumber);
     }
 
 
