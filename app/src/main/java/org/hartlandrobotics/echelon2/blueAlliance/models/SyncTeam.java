@@ -8,7 +8,7 @@ public class SyncTeam {
     @JsonProperty("team")
     private TeamProperty team;
 
-    class TeamProperty {
+    public static class TeamProperty {
         @JsonProperty("team_key")
         private String teamKey;
 

@@ -7,6 +7,7 @@ import org.hartlandrobotics.echelon2.database.entities.Match;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class SyncMatch {
     @JsonProperty("match_key")
@@ -43,7 +44,7 @@ public class SyncMatch {
     }
 
     public Match toMatch() {
-        Arrays.sort(participants);
+        Arrays.sort(participants, Comparator.comparingInt(o -> o.station));
         Match match = new Match(
                 getMatchKey(), getPlayNumber(),
                 getTournamentLevel(), getMatchStartTime(), getScheduledTime(),
