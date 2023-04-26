@@ -17,8 +17,8 @@ public class SyncMatch {
     private int tournamentLevel;
     // todo: determine what the values mean, was qf, ef, qf, sf, and f before
 
-    @JsonProperty("play_number")
-    private int playNumber;
+    @JsonProperty("match_name")
+    private String matchName;
 
     @JsonProperty("match_start_time")
     private String matchStartTime;
@@ -46,7 +46,7 @@ public class SyncMatch {
     public Match toMatch() {
         Arrays.sort(participants, Comparator.comparingInt(o -> o.station));
         Match match = new Match(
-                getMatchKey(), getPlayNumber(),
+                getMatchKey(), getMatchName(),
                 getTournamentLevel(), getMatchStartTime(), getScheduledTime(),
                 participants[0].team.teamKey,
                 participants[1].team.teamKey,
@@ -71,8 +71,8 @@ public class SyncMatch {
         return tournamentLevel;
     }
 
-    public int getPlayNumber() {
-        return playNumber;
+    public String getMatchName() {
+        return matchName;
     }
 
     public String getMatchStartTime() {

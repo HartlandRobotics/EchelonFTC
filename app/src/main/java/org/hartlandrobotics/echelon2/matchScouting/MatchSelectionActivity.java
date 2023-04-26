@@ -129,11 +129,11 @@ public class MatchSelectionActivity extends EchelonActivity {
                 matchNumbers = new ArrayList<>();
             }else {
                 matches = event.matches.stream()
-                        .sorted(Comparator.comparingInt(m -> m.getMatchNumber()))
+                        .sorted(Comparator.comparing(Match::getMatchName))
                         .collect(Collectors.toList());
 
                 matchNumbers = matches.stream()
-                        .map(m -> String.valueOf(m.getMatchNumber()) + " - " + getTeamNumber(m, settings.getDeviceRole()))
+                        .map(m -> String.valueOf(m.getMatchName()) + " - " + getTeamNumber(m, settings.getDeviceRole()))
                         .collect(Collectors.toList());
             }
 

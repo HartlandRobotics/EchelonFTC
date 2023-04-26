@@ -3,7 +3,7 @@ package org.hartlandrobotics.echelon2;
 import org.apache.commons.math3.distribution.TDistribution;
 
 class MatchScheduleViewModel {
-    private int matchNumber;
+    private String matchName;
 
     private String red1;
     private String red2;
@@ -42,9 +42,9 @@ class MatchScheduleViewModel {
     }
 
 
-    public String getMatchNumber() { return String.valueOf(matchNumber); }
-    public void setMatchNumber( int matchNumber ){
-        this.matchNumber = matchNumber;
+    public String getMatchName() { return String.valueOf(matchName); }
+    public void setMatchName( String matchName ){
+        this.matchName = matchName;
     }
 
     public String getRed1() {

@@ -12,8 +12,8 @@ public class Match {
    @ColumnInfo(name = "match_key")
    private String matchKey;
 
-   @ColumnInfo(name = "match_number")
-   private int matchNumber;
+   @ColumnInfo(name = "match_name")
+   private String matchName;
 
    @ColumnInfo(name = "tournament_level")
    private int tournamentLevel;
@@ -36,13 +36,13 @@ public class Match {
    @ColumnInfo(name = "blue_2_team_key")
    private String blue2TeamKey;
 
-   public Match(String matchKey, int matchNumber,
+   public Match(String matchKey, String matchName,
                 int tournamentLevel, String matchTime, String scheduledTime,
                 String red1TeamKey, String red2TeamKey,
                 String blue1TeamKey, String blue2TeamKey
    ) {
       this.matchKey = matchKey;
-      this.matchNumber = matchNumber;
+      this.matchName = matchName;
       this.tournamentLevel = tournamentLevel;
       this.matchTime = matchTime;
       this.scheduledTime = scheduledTime;
@@ -56,8 +56,8 @@ public class Match {
       return matchKey;
    }
 
-   public int getMatchNumber() {
-      return matchNumber;
+   public String getMatchName() {
+      return matchName;
    }
 
    public int getTournamentLevel() {

@@ -102,7 +102,7 @@ public class MatchScheduleActivity extends EchelonActivity {
                 for( Match match : matches ){
                     MatchScheduleViewModel matchScheduleViewModel = new MatchScheduleViewModel();
 
-                    matchScheduleViewModel.setMatchNumber( match.getMatchNumber() );
+                    matchScheduleViewModel.setMatchName( match.getMatchName() );
 
                     int red1Average = getAverageByTeam(match.getRed1TeamKey());
                     matchScheduleViewModel.setRed1(match.getRed1TeamKey());
@@ -320,7 +320,7 @@ public class MatchScheduleActivity extends EchelonActivity {
         public void setMatch(MatchScheduleViewModel matchScheduleViewModel){
             this.matchScheduleViewModel = matchScheduleViewModel;
 
-            matchNumber.setText(String.valueOf(matchScheduleViewModel.getMatchNumber()));
+            matchNumber.setText(String.valueOf(matchScheduleViewModel.getMatchName()));
             red1.setText("1: " + matchScheduleViewModel.getRed1());
             red2.setText("2: " + matchScheduleViewModel.getRed2());
             blue1.setText("1: " + matchScheduleViewModel.getBlue1());
@@ -382,7 +382,7 @@ public class MatchScheduleActivity extends EchelonActivity {
             String filter = StringUtils.defaultIfBlank(teamFilter, StringUtils.EMPTY );
             String teamKeyFilter = "frc" + filter;
             holderViewModels = vms.stream()
-                    .sorted(Comparator.comparingInt(m -> Integer.valueOf( m.getMatchNumber())))
+                    .sorted(Comparator.comparing(MatchScheduleViewModel::getMatchName))
                     .filter( m -> StringUtils.isBlank(filter)
                             || m.getRed1().equals(teamKeyFilter)
                             || m.getRed2().equals(teamKeyFilter)
