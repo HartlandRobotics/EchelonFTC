@@ -21,7 +21,7 @@ import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+import android.util.Log;
 
 public class BlueAllianceActivity extends EchelonActivity {
     BlueAllianceStatus tbaStatus;
@@ -80,11 +80,13 @@ public class BlueAllianceActivity extends EchelonActivity {
             statusCall.enqueue(new Callback<SyncStatus>() {
                 @Override
                 public void onResponse(Call<SyncStatus> call, Response<SyncStatus> response) {
+                    Log.d("onS", response.toString());
                     setOnlineStatus(response.isSuccessful());
                 }
 
                 @Override
                 public void onFailure(Call<SyncStatus> call, Throwable t) {
+                    Log.d("onF","none");
                     setOnlineStatus(false);
                 }
             });

@@ -19,7 +19,7 @@ public interface ApiInterface {
     //@GET("status")
     //Call<SyncStatus> getStatus();
 
-    @GET("/")
+    @GET("")
     Call<SyncStatus> getStatus();
 
     //tba
