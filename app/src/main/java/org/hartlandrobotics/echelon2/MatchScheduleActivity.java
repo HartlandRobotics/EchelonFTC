@@ -380,7 +380,7 @@ public class MatchScheduleActivity extends EchelonActivity {
         void setMatches(List<MatchScheduleViewModel> vms){
             allHolderViewModels = vms;
             String filter = StringUtils.defaultIfBlank(teamFilter, StringUtils.EMPTY );
-            String teamKeyFilter = "frc" + filter;
+            String teamKeyFilter = filter;
             holderViewModels = vms.stream()
                     .sorted(Comparator.comparing(MatchScheduleViewModel::getMatchName))
                     .filter( m -> StringUtils.isBlank(filter)

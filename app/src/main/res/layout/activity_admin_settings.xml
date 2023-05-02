@@ -38,14 +38,7 @@
             android:text="Red 2"
             style="?attr/materialButtonOutlinedStyle"
             />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/red3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/colorError"
-            android:text="Red 3"
-            style="?attr/materialButtonOutlinedStyle"
-            />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/blue1"
             android:layout_width="wrap_content"
@@ -62,27 +55,18 @@
             android:text="Blue 2"
             style="?attr/materialButtonOutlinedStyle"
             />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/blue3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/design_default_color_primary_variant"
-            android:text="Blue 3"
-            style="?attr/materialButtonOutlinedStyle"
-            />
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/blueAllianceApiText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
-        android:hint="Blue Alliance API key"
-        app:layout_constraintTop_toBottomOf="@id/deviceRoleSelection"
-        app:layout_constraintStart_toStartOf="parent"
+        android:hint="Orange Alliance API key"
         app:layout_constraintEnd_toStartOf="@id/apiKeySaveButton"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deviceRoleSelection">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

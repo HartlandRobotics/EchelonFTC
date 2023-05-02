@@ -38,6 +38,7 @@ public interface ApiInterface {
     //@GET("district/{district_key}/events")
     //Call<List<SyncEvent>> getEventsByDistrict(@Path("district_key") String districtKey);
 
+    //todo: add query parameter for season key
     @GET("event")
     Call<List<SyncEvent>> getEventsByRegion(@Query("region_key") String regionKey);
 

@@ -46,7 +46,7 @@ public class BlueAllianceActivity extends EchelonActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tba);
 
-        setupToolbar("Blue Alliance");
+        setupToolbar("Orange Alliance");
 
         tbaStatus = new BlueAllianceStatus(getApplicationContext());
 

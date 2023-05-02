@@ -216,7 +216,7 @@ public class MatchesFragment extends Fragment {
 
         void setMatches(List<Match> matches){
             matches = matches.stream()
-                    .sorted(Comparator.comparing(Match::getMatchName))
+                    .sorted(Comparator.comparingInt(m -> Integer.parseInt(m.getMatchName().substring(6))))
                     .collect(Collectors.toList());
 
             matchViewModels = new ArrayList<>();
