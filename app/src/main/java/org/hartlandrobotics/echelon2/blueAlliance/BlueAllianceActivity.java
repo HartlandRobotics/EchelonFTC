@@ -80,13 +80,13 @@ public class BlueAllianceActivity extends EchelonActivity {
             statusCall.enqueue(new Callback<SyncStatus>() {
                 @Override
                 public void onResponse(Call<SyncStatus> call, Response<SyncStatus> response) {
-                    Log.d("onS", response.toString());
+
                     setOnlineStatus(response.isSuccessful());
                 }
 
                 @Override
                 public void onFailure(Call<SyncStatus> call, Throwable t) {
-                    Log.d("onF","none");
+
                     setOnlineStatus(false);
                 }
             });
