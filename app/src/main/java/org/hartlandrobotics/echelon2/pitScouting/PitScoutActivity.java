@@ -1,6 +1,5 @@
 package org.hartlandrobotics.echelon2.pitScouting;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -23,7 +22,7 @@ import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.database.entities.Team;
 import org.hartlandrobotics.echelon2.models.PitScoutViewModel;
 import org.hartlandrobotics.echelon2.models.TeamViewModel;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.util.Comparator;
 import java.util.List;
@@ -31,7 +30,7 @@ import java.util.stream.Collectors;
 
 public class PitScoutActivity extends EchelonActivity {
     private static final String TAG = "PitScoutActivity";
-    private BlueAllianceStatus status;
+    private OrangeAllianceStatus status;
     TabLayout tabLayout;
     MaterialTextView selectTextPrompt;
     ViewPager2 viewPager;
@@ -59,7 +58,7 @@ public class PitScoutActivity extends EchelonActivity {
 
         setupToolbar("Pit Scout");
 
-        status = new BlueAllianceStatus(getApplicationContext());
+        status = new OrangeAllianceStatus(getApplicationContext());
 
         saveButton = findViewById(R.id.ps_save_button);
         teamNumberAutoComplete = findViewById(R.id.teamSelectionAutoComplete);

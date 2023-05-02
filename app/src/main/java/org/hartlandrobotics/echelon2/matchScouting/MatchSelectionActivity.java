@@ -1,6 +1,5 @@
 package org.hartlandrobotics.echelon2.matchScouting;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
@@ -23,7 +22,7 @@ import org.hartlandrobotics.echelon2.configuration.AdminSettings;
 import org.hartlandrobotics.echelon2.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelon2.database.entities.Match;
 import org.hartlandrobotics.echelon2.database.repositories.EventRepo;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -121,7 +120,7 @@ public class MatchSelectionActivity extends EchelonActivity {
     public void setupMatchDropdown(){
         Context appContext = this.getApplicationContext();
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(appContext);
-        BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
         String eventKey = status.getEventKey();
         EventRepo eventRepo = new EventRepo(this.getApplication());
         eventRepo.getEventWithMatchs(eventKey).observe(this, event ->{

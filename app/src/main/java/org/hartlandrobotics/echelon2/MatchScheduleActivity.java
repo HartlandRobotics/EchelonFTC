@@ -20,13 +20,11 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hartlandrobotics.echelon2.blueAlliance.fragments.MatchListViewModel;
-import org.hartlandrobotics.echelon2.blueAlliance.fragments.MatchesFragment;
 import org.hartlandrobotics.echelon2.database.entities.Match;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.database.repositories.EventRepo;
 import org.hartlandrobotics.echelon2.database.repositories.MatchResultRepo;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -84,7 +82,7 @@ public class MatchScheduleActivity extends EchelonActivity {
       matchRecycler.setAdapter(matchListAdapter);
       matchRecycler.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
-        BlueAllianceStatus status = new BlueAllianceStatus(getApplicationContext());
+        OrangeAllianceStatus status = new OrangeAllianceStatus(getApplicationContext());
         String currentEvent = status.getEventKey();
 
         eventRepo = new EventRepo(getApplication());

@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.database.entities.Match;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.database.entities.MatchResultWithTeamMatch;
@@ -20,7 +19,7 @@ import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.database.entities.Team;
 import org.hartlandrobotics.echelon2.models.MatchResultViewModel;
 import org.hartlandrobotics.echelon2.models.PitScoutViewModel;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -68,7 +67,7 @@ public class ExportActivity extends EchelonActivity {
     public void exportMatchResults(){
         exportMatchResultsButton.setOnClickListener((view) -> {
             Context appContext = getApplicationContext();
-            BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+            OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
             File externalFilesDir = getFilePathForMatch();
             externalFilesDir.mkdirs();
             String path = externalFilesDir.getAbsolutePath();
@@ -124,7 +123,7 @@ public class ExportActivity extends EchelonActivity {
     public void exportPitScoutResults(){
         exportPitScoutResultsButton.setOnClickListener((view) -> {
             Context appContext = getApplicationContext();
-            BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+            OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
             File externalFilesDir = getFilePathForPitScout();
             externalFilesDir.mkdirs();
             String path = externalFilesDir.getAbsolutePath();

@@ -1,6 +1,5 @@
 package org.hartlandrobotics.echelon2;
 
-import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -8,9 +7,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import org.hartlandrobotics.echelon2.blueAlliance.BlueAllianceActivity;
+import org.hartlandrobotics.echelon2.orangeAlliance.OrangeAllianceActivity;
 import org.hartlandrobotics.echelon2.bluetooth.BluetoothSyncActivity;
-import org.hartlandrobotics.echelon2.configuration.AdminSettings;
 
 public abstract class EchelonActivity extends AppCompatActivity {
     private TextView pageName;
@@ -32,7 +30,7 @@ public abstract class EchelonActivity extends AppCompatActivity {
     }
 
     public void blueAlliancePressed(MenuItem item) {
-        BlueAllianceActivity.launch(this);
+        OrangeAllianceActivity.launch(this);
     }
 
     public void settingsPressed(MenuItem item) {

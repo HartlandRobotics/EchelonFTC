@@ -1,10 +1,9 @@
-package org.hartlandrobotics.echelon2.blueAlliance;
+package org.hartlandrobotics.echelon2.orangeAlliance;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -15,20 +14,19 @@ import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.EchelonActivity;
 import org.hartlandrobotics.echelon2.R;
 
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncStatus;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import android.util.Log;
 
-public class BlueAllianceActivity extends EchelonActivity {
-    BlueAllianceStatus tbaStatus;
+public class OrangeAllianceActivity extends EchelonActivity {
+    OrangeAllianceStatus tbaStatus;
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
-    BlueAlliancePagerAdapter blueAlliancePagerAdapter;
+    OrangeAlliancePagerAdapter orangeAlliancePagerAdapter;
 
     TextInputLayout seasonStatusLayout;
     TextInputLayout onlineStatusLayout;
@@ -37,7 +35,7 @@ public class BlueAllianceActivity extends EchelonActivity {
     TextInputLayout matchStatusLayout;
 
     public static void launch(Context context){
-        Intent intent = new Intent(context, BlueAllianceActivity.class);
+        Intent intent = new Intent(context, OrangeAllianceActivity.class);
         context.startActivity(intent);
     }
 
@@ -48,16 +46,16 @@ public class BlueAllianceActivity extends EchelonActivity {
 
         setupToolbar("Orange Alliance");
 
-        tbaStatus = new BlueAllianceStatus(getApplicationContext());
+        tbaStatus = new OrangeAllianceStatus(getApplicationContext());
 
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
-        blueAlliancePagerAdapter = new BlueAlliancePagerAdapter(getSupportFragmentManager(), getLifecycle());
-        viewPager.setAdapter(blueAlliancePagerAdapter);
+        orangeAlliancePagerAdapter = new OrangeAlliancePagerAdapter(getSupportFragmentManager(), getLifecycle());
+        viewPager.setAdapter(orangeAlliancePagerAdapter);
 
         new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> tab.setText(blueAlliancePagerAdapter.getTabTitle(position))).attach();
+                (tab, position) -> tab.setText(orangeAlliancePagerAdapter.getTabTitle(position))).attach();
 
         seasonStatusLayout = findViewById(R.id.seasonStatusLayout);
         setSeasonStatus( tbaStatus.getSeason() );

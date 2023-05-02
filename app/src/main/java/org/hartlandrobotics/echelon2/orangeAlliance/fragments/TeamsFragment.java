@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.blueAlliance.fragments;
+package org.hartlandrobotics.echelon2.orangeAlliance.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,16 +16,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.hartlandrobotics.echelon2.R;
-import org.hartlandrobotics.echelon2.blueAlliance.Api;
-import org.hartlandrobotics.echelon2.blueAlliance.ApiInterface;
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncTeam;
+import org.hartlandrobotics.echelon2.orangeAlliance.Api;
+import org.hartlandrobotics.echelon2.orangeAlliance.ApiInterface;
+import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncTeam;
 import org.hartlandrobotics.echelon2.database.entities.EvtTeamCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Team;
 import org.hartlandrobotics.echelon2.database.repositories.TeamRepo;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,7 +77,7 @@ public class TeamsFragment extends Fragment {
 
     public void setupCurrentTeams(){
         Context appContext = getActivity().getApplicationContext();
-        BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
         String eventKey = status.getEventKey();
 
         TeamRepo teamRepo = new TeamRepo(TeamsFragment.this.getActivity().getApplication());
@@ -93,7 +92,7 @@ public class TeamsFragment extends Fragment {
 
             try{
                 Context context = getActivity().getApplication();
-                BlueAllianceStatus status = new BlueAllianceStatus(context);
+                OrangeAllianceStatus status = new OrangeAllianceStatus(context);
                 String eventKey = status.getEventKey();
 
                 Call<List<SyncTeam>> newCall = newApi.getTeamsByEvent(eventKey);

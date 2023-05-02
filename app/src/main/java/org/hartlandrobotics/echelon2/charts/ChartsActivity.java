@@ -13,7 +13,7 @@ import org.hartlandrobotics.echelon2.EchelonActivity;
 import org.hartlandrobotics.echelon2.R;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.database.repositories.MatchResultRepo;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -62,7 +62,7 @@ public class ChartsActivity extends EchelonActivity {
     }
 
     public void setupData(){
-        BlueAllianceStatus status = new BlueAllianceStatus(getApplicationContext());
+        OrangeAllianceStatus status = new OrangeAllianceStatus(getApplicationContext());
         String currentEvent = status.getEventKey();
 
         matchResultRepo = new MatchResultRepo(getApplication());

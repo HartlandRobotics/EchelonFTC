@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.blueAlliance.fragments;
+package org.hartlandrobotics.echelon2.orangeAlliance.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,14 +22,14 @@ import com.google.android.material.textview.MaterialTextView;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelon2.R;
-import org.hartlandrobotics.echelon2.blueAlliance.Api;
-import org.hartlandrobotics.echelon2.blueAlliance.ApiInterface;
-import org.hartlandrobotics.echelon2.blueAlliance.BlueAllianceActivity;
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncEvent;
+import org.hartlandrobotics.echelon2.orangeAlliance.Api;
+import org.hartlandrobotics.echelon2.orangeAlliance.ApiInterface;
+import org.hartlandrobotics.echelon2.orangeAlliance.OrangeAllianceActivity;
+import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncEvent;
 import org.hartlandrobotics.echelon2.database.entities.DistrictEvtCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Evt;
 import org.hartlandrobotics.echelon2.database.repositories.EventRepo;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +90,7 @@ public class EventsFragment extends Fragment {
     //Bring back later when filter events by year
     public void setupCurrentEvents(){
         Context appContext = getActivity().getApplicationContext();
-        BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
 
         String eventKey = eventKeyOverrideLayout.getEditText().getText().toString();
         EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
@@ -125,7 +125,7 @@ public class EventsFragment extends Fragment {
 
             try{
                 Context appContext = getActivity().getApplicationContext();
-                BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+                OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
                 String districtKey = status.getDistrictKey();
                 String eventKeyOverride = StringUtils.defaultIfEmpty( eventKeyOverrideLayout.getEditText().getText().toString(), StringUtils.EMPTY);
 
@@ -182,7 +182,7 @@ public class EventsFragment extends Fragment {
 
                                     eventRepo.upsert(events);
 
-                                    BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+                                    OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
                                     status.setEventKey(eventKeyOverride);
 
                                     eventListAdapter.setEvents(events);
@@ -272,7 +272,7 @@ public class EventsFragment extends Fragment {
 
         void setEvents(List<Evt> events) {
             Context appContext = getActivity().getApplicationContext();
-            BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+            OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
             String currentEventKey = status.getEventKey();
 
             eventViewModels = new ArrayList<>();
@@ -288,8 +288,8 @@ public class EventsFragment extends Fragment {
         }
 
         void setCurrentEvent(EventsListViewModel currentViewModel){
-            BlueAllianceActivity blueAllianceActivity = (BlueAllianceActivity)getActivity();
-            blueAllianceActivity.setEventKey(currentViewModel.getEventKey());
+            OrangeAllianceActivity orangeAllianceActivity = (OrangeAllianceActivity)getActivity();
+            orangeAllianceActivity.setEventKey(currentViewModel.getEventKey());
 
             for(EventsListViewModel viewModel : eventViewModels){
                 viewModel.setIsSelected( currentViewModel.getEventKey().equals(viewModel.getEventKey()));

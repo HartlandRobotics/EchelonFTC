@@ -17,7 +17,7 @@ import org.hartlandrobotics.echelon2.configuration.AdminSettings;
 import org.hartlandrobotics.echelon2.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.models.MatchResultViewModel;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private static final String MATCH_KEY = "auto_match_key_param";
@@ -72,13 +72,13 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         matchKey = bundle.getString(MATCH_KEY);
         teamKey = bundle.getString(TEAM_KEY);
 
-        BlueAllianceStatus blueAllianceStatus = new BlueAllianceStatus(getApplicationContext());
+        OrangeAllianceStatus orangeAllianceStatus = new OrangeAllianceStatus(getApplicationContext());
 
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
         matchResultViewModel.getMatchResultByMatchTeam(matchKey, teamKey)
                 .observe(MatchScoutingTeleopActivity.this, mr->{
                     if( mr == null ){
-                        matchResult = matchResultViewModel.getDefault(blueAllianceStatus.getEventKey(), matchKey, teamKey);
+                        matchResult = matchResultViewModel.getDefault(orangeAllianceStatus.getEventKey(), matchKey, teamKey);
                     } else {
                         matchResult = mr;
                     }

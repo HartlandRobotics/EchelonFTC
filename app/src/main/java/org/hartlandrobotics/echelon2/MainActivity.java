@@ -3,8 +3,7 @@ package org.hartlandrobotics.echelon2;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -18,7 +17,6 @@ import android.widget.AutoCompleteTextView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
-import org.hartlandrobotics.echelon2.blueAlliance.BlueAllianceActivity;
 import org.hartlandrobotics.echelon2.charts.ChartsActivity;
 import org.hartlandrobotics.echelon2.configuration.AdminSettings;
 import org.hartlandrobotics.echelon2.configuration.AdminSettingsProvider;
@@ -26,7 +24,7 @@ import org.hartlandrobotics.echelon2.database.entities.Season;
 import org.hartlandrobotics.echelon2.matchScouting.MatchSelectionActivity;
 import org.hartlandrobotics.echelon2.models.SeasonViewModel;
 import org.hartlandrobotics.echelon2.pitScouting.PitScoutActivity;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +33,7 @@ import java.util.stream.Collectors;
 
 public class MainActivity extends EchelonActivity {
 
-    private BlueAllianceStatus status;
+    private OrangeAllianceStatus status;
     String deviceName;
 
     private MaterialButton startScouting;
@@ -57,7 +55,7 @@ public class MainActivity extends EchelonActivity {
 
         setupToolbar("Home");
 
-        status= new BlueAllianceStatus(getApplicationContext());
+        status= new OrangeAllianceStatus(getApplicationContext());
         deviceName = Settings.Secure.getString(getContentResolver(), "bluetooth_name");
 
         setupStartScoutingButton();

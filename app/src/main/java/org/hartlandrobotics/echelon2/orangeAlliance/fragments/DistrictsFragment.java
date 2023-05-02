@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.blueAlliance.fragments;
+package org.hartlandrobotics.echelon2.orangeAlliance.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,13 +19,13 @@ import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.hartlandrobotics.echelon2.R;
-import org.hartlandrobotics.echelon2.blueAlliance.Api;
-import org.hartlandrobotics.echelon2.blueAlliance.ApiInterface;
-import org.hartlandrobotics.echelon2.blueAlliance.BlueAllianceActivity;
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncDistrict;
+import org.hartlandrobotics.echelon2.orangeAlliance.Api;
+import org.hartlandrobotics.echelon2.orangeAlliance.ApiInterface;
+import org.hartlandrobotics.echelon2.orangeAlliance.OrangeAllianceActivity;
+import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncDistrict;
 import org.hartlandrobotics.echelon2.database.entities.District;
 import org.hartlandrobotics.echelon2.database.repositories.DistrictRepo;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +101,7 @@ public class DistrictsFragment extends Fragment {
 
             try {
                 Context appContext = getActivity().getApplicationContext();
-                BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+                OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
 
                 Call<List<SyncDistrict>> newCall = newApi.getRegions();
                 newCall.enqueue(new Callback<List<SyncDistrict>>() {
@@ -213,7 +213,7 @@ public class DistrictsFragment extends Fragment {
 
         void setDistricts(List<District> districts) {
             Context appContext = getActivity().getApplicationContext();
-            BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+            OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
             String currentDistrictKey = status.getDistrictKey();
 
             districtViewModels = new ArrayList<>();
@@ -229,8 +229,8 @@ public class DistrictsFragment extends Fragment {
         }
 
         void setCurrentDistrict(DistrictListViewModel currentViewModel){
-            BlueAllianceActivity blueAllianceActivity = (BlueAllianceActivity)getActivity();
-            blueAllianceActivity.setDistrictKey(currentViewModel.getDistrictKey());
+            OrangeAllianceActivity orangeAllianceActivity = (OrangeAllianceActivity)getActivity();
+            orangeAllianceActivity.setDistrictKey(currentViewModel.getDistrictKey());
 
             for(DistrictListViewModel viewModel : districtViewModels ){
                 viewModel.setIsSelected( currentViewModel.getDistrictKey().equals(viewModel.getDistrictKey()));

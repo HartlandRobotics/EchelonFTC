@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.blueAlliance.fragments;
+package org.hartlandrobotics.echelon2.orangeAlliance.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,14 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.hartlandrobotics.echelon2.R;
-import org.hartlandrobotics.echelon2.blueAlliance.Api;
-import org.hartlandrobotics.echelon2.blueAlliance.ApiInterface;
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncMatch;
+import org.hartlandrobotics.echelon2.orangeAlliance.Api;
+import org.hartlandrobotics.echelon2.orangeAlliance.ApiInterface;
+import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncMatch;
 import org.hartlandrobotics.echelon2.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Match;
 import org.hartlandrobotics.echelon2.database.repositories.EventRepo;
 import org.hartlandrobotics.echelon2.database.repositories.MatchRepo;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -84,7 +84,7 @@ public class MatchesFragment extends Fragment {
 
     public void setupCurrentMatches(){
         Context appContext = getActivity().getApplicationContext();
-        BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
         String eventKey = status.getEventKey();
         EventRepo eventRepo = new EventRepo(MatchesFragment.this.getActivity().getApplication());
         eventRepo.getEventWithMatchs(eventKey).observe(getViewLifecycleOwner(), events -> {
@@ -100,7 +100,7 @@ public class MatchesFragment extends Fragment {
 
             try{
                 Context appContext = getActivity().getApplicationContext();
-                BlueAllianceStatus status = new BlueAllianceStatus(appContext);
+                OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
                 String eventKey = status.getEventKey();
 
                 Call<List<SyncMatch>> newCall = newApi.getMatchesByEvent(eventKey);

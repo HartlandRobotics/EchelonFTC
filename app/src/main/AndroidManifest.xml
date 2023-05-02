@@ -57,7 +57,7 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".blueAlliance.BlueAllianceActivity"
+            android:name=".orangeAlliance.OrangeAllianceActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity

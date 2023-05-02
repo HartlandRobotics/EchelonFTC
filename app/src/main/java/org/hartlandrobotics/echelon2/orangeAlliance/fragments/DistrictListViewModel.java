@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.blueAlliance.fragments;
+package org.hartlandrobotics.echelon2.orangeAlliance.fragments;
 
 import org.hartlandrobotics.echelon2.database.entities.District;
 

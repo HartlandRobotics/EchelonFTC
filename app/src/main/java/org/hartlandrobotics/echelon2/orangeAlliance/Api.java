@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelon2.blueAlliance;
+package org.hartlandrobotics.echelon2.orangeAlliance;
 //TODO: change to orange alliance
 
 import android.content.Context;

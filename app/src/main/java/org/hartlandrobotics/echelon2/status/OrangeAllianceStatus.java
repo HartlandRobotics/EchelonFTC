@@ -7,7 +7,7 @@ import android.util.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class BlueAllianceStatus {
+public class OrangeAllianceStatus {
     private final static String TAG = "BlueAllianceStatus";
 
     private final static String SEASON_KEY = "SeasonKey";
@@ -22,7 +22,7 @@ public class BlueAllianceStatus {
     private String districtKey;
     private String eventKey;
 
-    public BlueAllianceStatus(
+    public OrangeAllianceStatus(
             Context appContext
     ){
         if( appContext == null){

@@ -1,11 +1,11 @@
-package org.hartlandrobotics.echelon2.blueAlliance;
+package org.hartlandrobotics.echelon2.orangeAlliance;
 //TODO: change to orange alliance
 
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncDistrict;
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncEvent;
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncMatch;
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncStatus;
-import org.hartlandrobotics.echelon2.blueAlliance.models.SyncTeam;
+import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncDistrict;
+import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncEvent;
+import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncMatch;
+import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncStatus;
+import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncTeam;
 
 import java.util.List;
 

@@ -28,7 +28,7 @@ import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.database.entities.PitScout;
 import org.hartlandrobotics.echelon2.models.MatchResultViewModel;
 import org.hartlandrobotics.echelon2.models.PitScoutViewModel;
-import org.hartlandrobotics.echelon2.status.BlueAllianceStatus;
+import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -103,12 +103,12 @@ public class BluetoothSyncActivity extends EchelonActivity {
 
     private void setupData(){
         // only need this if this is a non captain tablet
-        BlueAllianceStatus blueAllianceStatus = new BlueAllianceStatus(getApplicationContext());
+        OrangeAllianceStatus orangeAllianceStatus = new OrangeAllianceStatus(getApplicationContext());
         AdminSettings adminSettings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
         pitscoutViewModel = new ViewModelProvider( this ).get(PitScoutViewModel.class);
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
-        matchResultViewModel.getMatchResultsByEvent(blueAllianceStatus.getEventKey()).observe(this, mrList -> {
+        matchResultViewModel.getMatchResultsByEvent(orangeAllianceStatus.getEventKey()).observe(this, mrList -> {
             logLinesAdapter.addStatusItem("Match results loaded");
             if( mrList == null || mrList.size() == 0){
                 matchResults = new ArrayList<>();
@@ -122,7 +122,7 @@ public class BluetoothSyncActivity extends EchelonActivity {
             long unsyncedCount = matchResults.stream().filter( mr -> !mr.getHasBeenSynced() ).count();
             matchResultsUnsyncedText.setText( String.valueOf(unsyncedCount));
 
-            pitscoutViewModel.getPitScoutByEvent(blueAllianceStatus.getEventKey()).observe(this, psList -> {
+            pitscoutViewModel.getPitScoutByEvent(orangeAllianceStatus.getEventKey()).observe(this, psList -> {
                 if( psList == null || psList.size() == 0){
                     pitScoutResults = new ArrayList<>();
                     logLinesAdapter.addStatusItem("No pitscout results onthis device");
