@@ -1,13 +1,13 @@
 package org.hartlandrobotics.echelon2.orangeAlliance.fragments;
 
-import org.hartlandrobotics.echelon2.database.entities.District;
+import org.hartlandrobotics.echelon2.database.entities.Rgn;
 
 public class DistrictListViewModel {
     private String regionKey;
     private String description;
     private boolean isSelected;
 
-    public DistrictListViewModel(District district) {
+    public DistrictListViewModel(Rgn district) {
         this.regionKey = district.getRegionKey();
         this.description = district.getDescription();
         this.isSelected = false;

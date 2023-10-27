@@ -6,15 +6,15 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 
-@Entity(tableName = "district_event",
+@Entity(tableName = "region_event",
         primaryKeys = {"region_key", "event_key"},
         indices = {
                      @Index(value = {"region_key", "event_key"}),
                      @Index(value = {"event_key", "region_key"})
          })
 
-public class DistrictEvtCrossRef {
-   public DistrictEvtCrossRef(String regionKey, String eventKey){
+public class RgnEvtCrossRef {
+   public RgnEvtCrossRef(String regionKey, String eventKey){
       this.regionKey = regionKey;
       this.eventKey = eventKey;
    }

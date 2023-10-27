@@ -5,12 +5,12 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import org.hartlandrobotics.echelon2.database.EchelonDatabase;
-import org.hartlandrobotics.echelon2.database.dao.DistrictWithEventsDao;
+import org.hartlandrobotics.echelon2.database.dao.RgnWithEventsDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithMatchesDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithTeamsDao;
-import org.hartlandrobotics.echelon2.database.entities.DistrictEvtCrossRef;
-import org.hartlandrobotics.echelon2.database.entities.DistrictWithEvents;
+import org.hartlandrobotics.echelon2.database.entities.RgnEvtCrossRef;
+import org.hartlandrobotics.echelon2.database.entities.RgnWithEvents;
 import org.hartlandrobotics.echelon2.database.entities.Evt;
 import org.hartlandrobotics.echelon2.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.EvtTeamCrossRef;
@@ -24,7 +24,7 @@ public class EventRepo {
     private EvtDao eventDao;
     private EvtWithTeamsDao eventWithTeamsDao;
     private EvtWithMatchesDao eventWithMatchesDao;
-    private DistrictWithEventsDao districtWithEventDao;
+    private RgnWithEventsDao rgnWithEventDao;
 
 
     public EventRepo(Application application) {
@@ -34,7 +34,7 @@ public class EventRepo {
 
         eventWithTeamsDao = db.eventTeamsDao();
         eventWithMatchesDao = db.eventMatchesDao();
-        districtWithEventDao = db.districtEventsDao();
+        rgnWithEventDao = db.districtEventsDao();
     }
 
     public LiveData<EvtWithTeams> getEventWithTeams(String eventKey) {
@@ -49,8 +49,8 @@ public class EventRepo {
         EchelonDatabase.databaseWriteExecutor.execute( () -> eventDao.upsert( event ) );
     }
 
-    public void upsert(DistrictEvtCrossRef crossRefDistrict){
-        EchelonDatabase.databaseWriteExecutor.execute( () -> { districtWithEventDao.upsert(crossRefDistrict);
+    public void upsert(RgnEvtCrossRef crossRefDistrict){
+        EchelonDatabase.databaseWriteExecutor.execute( () -> { rgnWithEventDao.upsert(crossRefDistrict);
         });
     }
 
@@ -74,8 +74,8 @@ public class EventRepo {
         return eventDao.getEvent(eventKey);
     }
 
-    public LiveData<DistrictWithEvents> getDistrictWithEvents(String currentDistrict) {
-        return districtWithEventDao.getDistrictEvents(currentDistrict);
+    public LiveData<RgnWithEvents> getDistrictWithEvents(String currentDistrict) {
+        return rgnWithEventDao.getRgnEvents(currentDistrict);
     }
 
     public LiveData<EvtWithMatches> getMatchesForEvent(String eventKey){

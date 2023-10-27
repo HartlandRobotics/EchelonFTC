@@ -2,8 +2,8 @@ package org.hartlandrobotics.echelon2.database;
 
 import android.content.Context;
 
-import org.hartlandrobotics.echelon2.database.dao.DistrictDao;
-import org.hartlandrobotics.echelon2.database.dao.DistrictWithEventsDao;
+import org.hartlandrobotics.echelon2.database.dao.RgnDao;
+import org.hartlandrobotics.echelon2.database.dao.RgnWithEventsDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithMatchesDao;
 import org.hartlandrobotics.echelon2.database.dao.EvtWithTeamsDao;
 import org.hartlandrobotics.echelon2.database.dao.MatchDao;
@@ -11,8 +11,8 @@ import org.hartlandrobotics.echelon2.database.dao.MatchResultDao;
 import org.hartlandrobotics.echelon2.database.dao.PitScoutDao;
 import org.hartlandrobotics.echelon2.database.dao.SeasonDao;
 import org.hartlandrobotics.echelon2.database.dao.TeamDao;
-import org.hartlandrobotics.echelon2.database.entities.District;
-import org.hartlandrobotics.echelon2.database.entities.DistrictEvtCrossRef;
+import org.hartlandrobotics.echelon2.database.entities.Rgn;
+import org.hartlandrobotics.echelon2.database.entities.RgnEvtCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Evt;
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -33,13 +33,13 @@ import java.util.concurrent.Executors;
 
 @Database(entities = {
         Evt.class,
-        District.class,
+        Rgn.class,
         Team.class,
         PitScout.class,
         Season.class,
         EvtTeamCrossRef.class,
         EvtMatchCrossRef.class,
-        DistrictEvtCrossRef.class,
+        RgnEvtCrossRef.class,
         Match.class,
         MatchResult.class
 
@@ -49,12 +49,12 @@ import java.util.concurrent.Executors;
 public abstract class EchelonDatabase extends RoomDatabase {
     public abstract EvtDao eventDao();
     public abstract TeamDao teamDao();
-    public abstract DistrictDao districtDao();
+    public abstract RgnDao regionDao();
     public abstract PitScoutDao pitScoutDao();
     public abstract SeasonDao seasonDao();
     public abstract EvtWithTeamsDao eventTeamsDao();
     public abstract EvtWithMatchesDao eventMatchesDao();
-    public abstract DistrictWithEventsDao districtEventsDao();
+    public abstract RgnWithEventsDao districtEventsDao();
     public abstract MatchDao matchDao();
     public abstract MatchResultDao matchResultDao();
 
@@ -102,7 +102,7 @@ public abstract class EchelonDatabase extends RoomDatabase {
                 //any initialization stuff goes here
                 EvtDao evtDao = _instance.eventDao();
                 TeamDao teamDao = _instance.teamDao();
-                DistrictDao districtDao = _instance.districtDao();
+                RgnDao rgnDao = _instance.regionDao();
                 PitScoutDao pitScoutDao = _instance.pitScoutDao();
                 SeasonDao seasonDao = _instance.seasonDao();
                 MatchResultDao matchResultDao = _instance.matchResultDao();

@@ -6,14 +6,14 @@ import androidx.room.Relation;
 
 import java.util.List;
 
-public class DistrictWithEvents {
+public class RgnWithEvents {
     @Embedded
-    public District district;
+    public Rgn district;
 
     @Relation(
             parentColumn = "region_key",
             entityColumn = "event_key",
-            associateBy = @Junction(DistrictEvtCrossRef.class)
+            associateBy = @Junction(RgnEvtCrossRef.class)
     )
     public List<Evt> events;
 }

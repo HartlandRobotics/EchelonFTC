@@ -2,7 +2,7 @@ package org.hartlandrobotics.echelon2.orangeAlliance.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.hartlandrobotics.echelon2.database.entities.District;
+import org.hartlandrobotics.echelon2.database.entities.Rgn;
 
 public class SyncDistrict {
     @JsonProperty("region_key")
@@ -19,8 +19,8 @@ public class SyncDistrict {
         return description;
     }
 
-    public District toDistrict(){
-        District district = new District(getRegionKey(), getDescription());
+    public Rgn toDistrict(){
+        Rgn district = new Rgn(getRegionKey(), getDescription());
         return district;
     }
 

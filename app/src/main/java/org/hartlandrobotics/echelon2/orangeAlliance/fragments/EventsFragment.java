@@ -26,7 +26,7 @@ import org.hartlandrobotics.echelon2.orangeAlliance.Api;
 import org.hartlandrobotics.echelon2.orangeAlliance.ApiInterface;
 import org.hartlandrobotics.echelon2.orangeAlliance.OrangeAllianceActivity;
 import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncEvent;
-import org.hartlandrobotics.echelon2.database.entities.DistrictEvtCrossRef;
+import org.hartlandrobotics.echelon2.database.entities.RgnEvtCrossRef;
 import org.hartlandrobotics.echelon2.database.entities.Evt;
 import org.hartlandrobotics.echelon2.database.repositories.EventRepo;
 import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
@@ -147,7 +147,7 @@ public class EventsFragment extends Fragment {
                                     eventRepo.upsert(events);
 
                                     for (Evt event : events) {
-                                        DistrictEvtCrossRef crossRef = event.toDistrictEvent(districtKey);
+                                        RgnEvtCrossRef crossRef = event.toRgnEvent(districtKey);
                                         eventRepo.upsert(crossRef);
 
                                     }

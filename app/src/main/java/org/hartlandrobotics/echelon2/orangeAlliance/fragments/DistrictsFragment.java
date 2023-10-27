@@ -23,7 +23,7 @@ import org.hartlandrobotics.echelon2.orangeAlliance.Api;
 import org.hartlandrobotics.echelon2.orangeAlliance.ApiInterface;
 import org.hartlandrobotics.echelon2.orangeAlliance.OrangeAllianceActivity;
 import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncDistrict;
-import org.hartlandrobotics.echelon2.database.entities.District;
+import org.hartlandrobotics.echelon2.database.entities.Rgn;
 import org.hartlandrobotics.echelon2.database.repositories.DistrictRepo;
 import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
@@ -113,7 +113,7 @@ public class DistrictsFragment extends Fragment {
                             } else {
                                 DistrictRepo districtRepo = new DistrictRepo(DistrictsFragment.this.getActivity().getApplication());
                                 List<SyncDistrict> syncDistricts = response.body();
-                                List<District> districts = syncDistricts.stream()
+                                List<Rgn> districts = syncDistricts.stream()
                                         .map(district -> district.toDistrict())
                                         .collect(Collectors.toList());
 
@@ -211,13 +211,13 @@ public class DistrictsFragment extends Fragment {
             }
         }
 
-        void setDistricts(List<District> districts) {
+        void setDistricts(List<Rgn> districts) {
             Context appContext = getActivity().getApplicationContext();
             OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
             String currentDistrictKey = status.getDistrictKey();
 
             districtViewModels = new ArrayList<>();
-            for( District district : districts ){
+            for( Rgn district : districts ){
                 DistrictListViewModel viewModel = new DistrictListViewModel(district);
                 if( district.getRegionKey().equals(currentDistrictKey) ){
                     viewModel.setIsSelected(true);

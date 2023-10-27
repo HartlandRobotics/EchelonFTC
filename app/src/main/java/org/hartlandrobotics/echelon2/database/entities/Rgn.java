@@ -5,8 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "region")
-public class District {
+@Entity(tableName = "rgn")
+public class Rgn {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "region_key")
@@ -15,7 +15,7 @@ public class District {
     @ColumnInfo(name = "description")
     private String description;
 
-    public District(@NonNull String regionKey, String description) {
+    public Rgn(@NonNull String regionKey, String description) {
         this.regionKey = regionKey;
         this.description = description;
     }
@@ -24,7 +24,6 @@ public class District {
     public String getRegionKey() {
         return regionKey;
     }
-    public String getDistrictKey() {return regionKey;}
     public String getDescription() {
         return description;
     }
