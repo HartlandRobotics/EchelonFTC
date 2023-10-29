@@ -32,9 +32,12 @@ import org.hartlandrobotics.echelon2.database.repositories.EventRepo;
 import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -129,8 +132,13 @@ public class EventsFragment extends Fragment {
                 String districtKey = status.getDistrictKey();
                 String eventKeyOverride = StringUtils.defaultIfEmpty( eventKeyOverrideLayout.getEditText().getText().toString(), StringUtils.EMPTY);
 
+                Map<String, String> map = Stream.of(new String[][] {
+                        { "region_key", districtKey },
+                        { "season_key", "2223" },
+                }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
+
                 if( StringUtils.isBlank( eventKeyOverride )) {
-                    Call<List<SyncEvent>> newCall = newApi.getEventsByRegion(districtKey);
+                    Call<List<SyncEvent>> newCall = newApi.getEventsByRegion(map);
                     newCall.enqueue(new Callback<List<SyncEvent>>() {
                         @Override
                         public void onResponse(Call<List<SyncEvent>> call, Response<List<SyncEvent>> response) {

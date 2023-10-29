@@ -27,7 +27,7 @@ public class OrangeAlliancePagerAdapter extends FragmentStateAdapter {
    private Map<Integer, String> titleByPosition = new HashMap<>();
    public String getTabTitle(int position){
       if( titleByPosition.size() == 0 ){
-         titleByPosition.put(0,"Districts");
+         titleByPosition.put(0,"Regions");
          titleByPosition.put(1,"Events");
          titleByPosition.put(2, "Teams");
          titleByPosition.put(3, "Matches");

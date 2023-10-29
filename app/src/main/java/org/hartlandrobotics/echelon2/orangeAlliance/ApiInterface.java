@@ -8,11 +8,13 @@ import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncStatus;
 import org.hartlandrobotics.echelon2.orangeAlliance.models.SyncTeam;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public interface ApiInterface {
     //tba
@@ -40,7 +42,7 @@ public interface ApiInterface {
 
     //todo: add query parameter for season key
     @GET("event")
-    Call<List<SyncEvent>> getEventsByRegion(@Query("region_key") String regionKey);
+    Call<List<SyncEvent>> getEventsByRegion(@QueryMap Map<String,String> filters);
 
     // same for orange alliance
     @GET("event/{event_key}")
