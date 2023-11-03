@@ -106,12 +106,12 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         autoHighValue = findViewById(R.id.autoHighValue);
         autoHighDecrement = findViewById(R.id.autoHighDecrement);
         autoHighDecrement.setOnClickListener(v -> {
-                matchResult.setAutoHighBalls( Math.max( matchResult.getAutoHighBalls() - 1, 0 ));
+                matchResult.setAutoHighBalls( Math.max( matchResult.getAutoWhitePxlPurplePxl() - 1, 0 ));
                 populateControlsFromData();
                 });
         autoHighIncrement = findViewById(R.id.autoHighIncrement);
         autoHighIncrement.setOnClickListener(v -> {
-            matchResult.setAutoHighBalls( matchResult.getAutoHighBalls() + 1);
+            matchResult.setAutoHighBalls( matchResult.getAutoWhitePxlPurplePxl() + 1);
             populateControlsFromData();
         });
 
@@ -141,7 +141,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
 
         autoTarmac = findViewById(R.id.autoTarmacCheckBox);
         autoTarmac.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setTaxiTarmac(isChecked);
+            matchResult.setParkBackstage(isChecked);
             populateControlsFromData();
         });
 
@@ -235,11 +235,11 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private void populateControlsFromData() {
         if( matchResult == null ) return;
 
-        autoHighValue.setText( String.valueOf( matchResult.getAutoHighBalls() ));
+        autoHighValue.setText( String.valueOf( matchResult.getAutoWhitePxlPurplePxl() ));
         autoLowValue.setText( String.valueOf( matchResult.getAutoLowBalls() ));
         autoHumanValue.setText( String.valueOf( matchResult.getAutoHumanPlayerShots() ));
 
-        autoTarmac.setChecked( matchResult.getTaxiTarmac() );
+        autoTarmac.setChecked( matchResult.getParkBackstage() );
 
         teleOpHighValue.setText( String.valueOf( matchResult.getTeleOpHighBalls() ));
         teleOpLowValue.setText( String.valueOf( matchResult.getTeleOpLowBalls() ));

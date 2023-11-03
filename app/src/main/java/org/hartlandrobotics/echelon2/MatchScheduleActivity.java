@@ -159,7 +159,7 @@ public class MatchScheduleActivity extends EchelonActivity {
 
         int totalCargoCount = 0;
         for(MatchResult matchResult : teamMatchResults ){
-            totalCargoCount += matchResult.getAutoLowBalls() + matchResult.getAutoHighBalls() +
+            totalCargoCount += matchResult.getAutoLowBalls() + matchResult.getAutoWhitePxlPurplePxl() +
                     matchResult.getTeleOpLowBalls() + matchResult.getTeleOpHighBalls();
         }
         int averageCargoCount = totalCargoCount / teamMatchResults.size();
@@ -188,9 +188,9 @@ public class MatchScheduleActivity extends EchelonActivity {
         int totalScore = 0;
         for( MatchResult matchResult : teamMatchResults ){
             int matchScore = 0;
-            matchScore += matchResult.getAutoHighBalls() * 4;
+            matchScore += matchResult.getAutoWhitePxlPurplePxl() * 10;
             matchScore += matchResult.getAutoLowBalls() * 2;
-            matchScore += (matchResult.getTaxiTarmac()? 1 : 0) * 2;
+            matchScore += (matchResult.getParkBackstage()? 1 : 0) * 5;
             matchScore += matchResult.getAutoHumanPlayerShots() * 4;
 
             matchScore += matchResult.getTeleOpHighBalls() * 2;
@@ -216,9 +216,9 @@ public class MatchScheduleActivity extends EchelonActivity {
         int totalScore = 0;
         for( MatchResult matchResult : teamMatchResults ){
             int matchScore = 0;
-            matchScore += matchResult.getAutoHighBalls() * 4;
+            matchScore += matchResult.getAutoWhitePxlPurplePxl() * 10;
             matchScore += matchResult.getAutoLowBalls() * 2;
-            matchScore += (matchResult.getTaxiTarmac()? 1 : 0) * 2;
+            matchScore += (matchResult.getParkBackstage()? 1 : 0) * 2;
             matchScore += matchResult.getAutoHumanPlayerShots() * 4;
 
             matchScore += matchResult.getTeleOpHighBalls() * 2;
@@ -237,9 +237,9 @@ public class MatchScheduleActivity extends EchelonActivity {
         int totalDeviation = 0;
         for( MatchResult matchResult : teamMatchResults ){
             int matchScore = 0;
-            matchScore += matchResult.getAutoHighBalls() * 4;
+            matchScore += matchResult.getAutoWhitePxlPurplePxl() * 10;
             matchScore += matchResult.getAutoLowBalls() * 2;
-            matchScore += (matchResult.getTaxiTarmac()? 1 : 0) * 2;
+            matchScore += (matchResult.getParkBackstage()? 1 : 0) * 2;
             matchScore += matchResult.getAutoHumanPlayerShots() * 4;
 
             matchScore += matchResult.getTeleOpHighBalls() * 2;

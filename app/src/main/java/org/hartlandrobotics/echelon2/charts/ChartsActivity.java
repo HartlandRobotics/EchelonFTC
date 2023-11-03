@@ -94,9 +94,9 @@ public class ChartsActivity extends EchelonActivity {
                 for( MatchResult matchResult : matchResults ){
                     Integer matchNumber = Integer.valueOf(matchResult.getMatchKey().replace( matchResult.getEventKey() + "_qm", ""));
                     int matchAuto = 0;
-                    matchAuto += matchResult.getAutoHighBalls() * 4;
+                    matchAuto += matchResult.getAutoWhitePxlPurplePxl() * 10;
                     matchAuto += matchResult.getAutoLowBalls() * 2;
-                    matchAuto += matchResult.getTaxiTarmac() ? 2 : 0;
+                    matchAuto += matchResult.getParkBackstage() ? 10 : 0;
                     autoTotal += matchAuto;
                     autoScores.put(matchNumber, matchAuto);
 

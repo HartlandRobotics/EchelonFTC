@@ -32,11 +32,11 @@ public class MatchResult {
     @ColumnInfo(name = "has_been_synced")
     private boolean hasBeenSynced;
 
-    @ColumnInfo(name="auto_taxi_tarmac")
-    private boolean taxiTarmac;
+    @ColumnInfo(name="auto_park_backstage")
+    private boolean parkBackstage;
 
-    @ColumnInfo(name = "auto_high_balls")
-    private int autoHighBalls;
+    @ColumnInfo(name = "auto_white_pxl_purple_pxl")
+    private int autoWhitePxlPurplePxl;
 
     @ColumnInfo( name = "auto_low_balls")
     private int autoLowBalls;
@@ -77,8 +77,8 @@ public class MatchResult {
             @NonNull String matchKey,
             @NonNull String teamKey,
             boolean hasBeenSynced,
-            boolean taxiTarmac,
-            int autoHighBalls,
+            boolean parkBackstage,
+            int autoWhitePxlPurplePxl,
             int autoLowBalls,
             int autoHumanPlayerShots,
             int teleOpHighBalls,
@@ -96,8 +96,8 @@ public class MatchResult {
         this.matchKey = matchKey;
         this.teamKey = teamKey;
         this.hasBeenSynced = hasBeenSynced;
-        this.taxiTarmac = taxiTarmac;
-        this.autoHighBalls = autoHighBalls;
+        this.parkBackstage = parkBackstage;
+        this.autoWhitePxlPurplePxl = autoWhitePxlPurplePxl;
         this.autoLowBalls = autoLowBalls;
         this.autoHumanPlayerShots = autoHumanPlayerShots;
         this.teleOpHighBalls = teleOpHighBalls;
@@ -133,12 +133,12 @@ public class MatchResult {
         this.hasBeenSynced = hasBeenSynced;
     }
 
-    public boolean getTaxiTarmac(){ return taxiTarmac; }
-    public void setTaxiTarmac(boolean taxiTarmac){ this.taxiTarmac = taxiTarmac; }
+    public boolean getParkBackstage(){ return parkBackstage; }
+    public void setParkBackstage(boolean taxiTarmac){ this.parkBackstage = parkBackstage; }
 
-    public int getAutoHighBalls() { return autoHighBalls; }
-    public void setAutoHighBalls(int autoHighBalls){
-        this.autoHighBalls = autoHighBalls;
+    public int getAutoWhitePxlPurplePxl() { return autoWhitePxlPurplePxl; }
+    public void setAutoHighBalls(int autoWhitePxlPurplePxl ){
+        this.autoWhitePxlPurplePxl = autoWhitePxlPurplePxl;
     }
 
     public int getAutoLowBalls(){ return autoLowBalls; }

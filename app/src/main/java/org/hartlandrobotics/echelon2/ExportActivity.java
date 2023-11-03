@@ -95,8 +95,8 @@ public class ExportActivity extends EchelonActivity {
                         dataForFile.add(mr.getTeamKey());
                         dataForFile.add(String.valueOf(m.getMatchName()));
                         dataForFile.add(String.valueOf(t.getTeamNumber()));
-                        dataForFile.add(String.valueOf(mr.getTaxiTarmac()));
-                        dataForFile.add(String.valueOf(mr.getAutoHighBalls()));
+                        dataForFile.add(String.valueOf(mr.getParkBackstage()));
+                        dataForFile.add(String.valueOf(mr.getAutoWhitePxlPurplePxl()));
                         dataForFile.add(String.valueOf(mr.getAutoLowBalls()));
                         dataForFile.add(String.valueOf(mr.getAutoHumanPlayerShots()));
                         dataForFile.add(String.valueOf(mr.getTeleOpHighBalls()));

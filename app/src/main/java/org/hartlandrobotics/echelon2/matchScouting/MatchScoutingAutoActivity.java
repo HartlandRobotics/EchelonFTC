@@ -84,11 +84,11 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     }
 
     public void populateControlsFromData(){
-        topHubText.setText(String.valueOf(matchResult.getAutoHighBalls()));
+        topHubText.setText(String.valueOf(matchResult.getAutoWhitePxlPurplePxl()));
         bottomHubText.setText(String.valueOf(matchResult.getAutoLowBalls()));
         humanPlayerText.setText(String.valueOf(matchResult.getAutoHumanPlayerShots()));
 
-        if( matchResult.getTaxiTarmac() ){
+        if( matchResult.getParkBackstage() ){
             exitTarmacButton.setImageResource(R.drawable.taxi_tarmac_green);
         } else {
             exitTarmacButton.setImageResource(tarmacButtonDrawable);
@@ -108,7 +108,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         topHubButton = findViewById(R.id.topHub);
         topHubButton.setImageResource(topHubButtonDrawable);
         topHubButton.setOnClickListener(v -> {
-            matchResult.setAutoHighBalls( matchResult.getAutoHighBalls() + 1);
+            matchResult.setAutoHighBalls( matchResult.getAutoWhitePxlPurplePxl() + 1);
             populateControlsFromData();
         });
 
@@ -131,7 +131,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         exitTarmacButton = findViewById(R.id.taxiTarmac);
         exitTarmacButton.setImageResource(humanPlayoutButtonDrawable);
         exitTarmacButton.setOnClickListener(v -> {
-            matchResult.setTaxiTarmac( !matchResult.getTaxiTarmac() );
+            matchResult.setParkBackstage( !matchResult.getParkBackstage() );
             populateControlsFromData();
         });
 
