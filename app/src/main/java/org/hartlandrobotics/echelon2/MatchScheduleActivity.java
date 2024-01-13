@@ -105,8 +105,9 @@ public class MatchScheduleActivity extends EchelonActivity {
                     int red1Average = getAverageByTeam(match.getRed1TeamKey());
                     matchScheduleViewModel.setRed1(match.getRed1TeamKey());
                     matchScheduleViewModel.setRed1Average(red1Average);
-                    matchScheduleViewModel.setRed1Cargo( getAverageCargoCountByTeam(match.getRed1TeamKey()) );
-                    matchScheduleViewModel.setRed1Hang( getAverageHangPointsByTeam(match.getRed1TeamKey()) );
+                    matchScheduleViewModel.setRed1Auto( getAverageAutoPointsByTeam(match.getRed1TeamKey()) );
+                    matchScheduleViewModel.setRed1TeleOp( getAverageTeleOpPointsByTeam(match.getRed1TeamKey()) );
+                    matchScheduleViewModel.setRed1End( getAverageEndPointsByTeam(match.getRed1TeamKey()) );
                     matchScheduleViewModel.setRed1StdDeviation(getStdDeviationByTeam(match.getRed1TeamKey()));
                     matchScheduleViewModel.setMatchCount(Math.max(matchScheduleViewModel.getMatchCount(),
                             getSize(match.getRed1TeamKey())));
@@ -114,8 +115,9 @@ public class MatchScheduleActivity extends EchelonActivity {
                     int red2Average = getAverageByTeam(match.getRed2TeamKey());
                     matchScheduleViewModel.setRed2(match.getRed2TeamKey());
                     matchScheduleViewModel.setRed2Average(red2Average);
-                    matchScheduleViewModel.setRed2Cargo( getAverageCargoCountByTeam(match.getRed2TeamKey()) );
-                    matchScheduleViewModel.setRed2Hang( getAverageHangPointsByTeam(match.getRed2TeamKey()) );
+                    matchScheduleViewModel.setRed2Auto( getAverageAutoPointsByTeam(match.getRed2TeamKey()) );
+                    matchScheduleViewModel.setRed2TeleOp( getAverageTeleOpPointsByTeam(match.getRed2TeamKey()) );
+                    matchScheduleViewModel.setRed2End( getAverageEndPointsByTeam(match.getRed2TeamKey()) );
                     matchScheduleViewModel.setRed2StdDeviation(getStdDeviationByTeam(match.getRed2TeamKey()));
                     matchScheduleViewModel.setMatchCount(Math.max(matchScheduleViewModel.getMatchCount(),
                             getSize(match.getRed2TeamKey())));
@@ -123,8 +125,9 @@ public class MatchScheduleActivity extends EchelonActivity {
                     int blue1Average = getAverageByTeam(match.getBlue1TeamKey());
                     matchScheduleViewModel.setBlue1(match.getBlue1TeamKey());
                     matchScheduleViewModel.setBlue1Average(blue1Average);
-                    matchScheduleViewModel.setBlue1Cargo( getAverageCargoCountByTeam(match.getBlue1TeamKey()) );
-                    matchScheduleViewModel.setBlue1Hang( getAverageHangPointsByTeam(match.getBlue1TeamKey()) );
+                    matchScheduleViewModel.setBlue1Auto( getAverageAutoPointsByTeam(match.getBlue1TeamKey()) );
+                    matchScheduleViewModel.setBlue1TeleOp( getAverageTeleOpPointsByTeam(match.getBlue1TeamKey()) );
+                    matchScheduleViewModel.setBlue1End( getAverageEndPointsByTeam(match.getBlue1TeamKey()) );
                     matchScheduleViewModel.setBlue1StdDeviation(getStdDeviationByTeam(match.getBlue1TeamKey()));
                     matchScheduleViewModel.setMatchCount(Math.max(matchScheduleViewModel.getMatchCount(),
                             getSize(match.getBlue1TeamKey())));
@@ -132,8 +135,9 @@ public class MatchScheduleActivity extends EchelonActivity {
                     int blue2Average = getAverageByTeam(match.getBlue2TeamKey());
                     matchScheduleViewModel.setBlue2(match.getBlue2TeamKey());
                     matchScheduleViewModel.setBlue2Average(blue2Average);
-                    matchScheduleViewModel.setBlue2Cargo( getAverageCargoCountByTeam(match.getBlue2TeamKey()) );
-                    matchScheduleViewModel.setBlue2Hang( getAverageHangPointsByTeam(match.getBlue2TeamKey()) );
+                    matchScheduleViewModel.setBlue2Auto( getAverageAutoPointsByTeam(match.getBlue2TeamKey()) );
+                    matchScheduleViewModel.setBlue2TeleOp( getAverageTeleOpPointsByTeam(match.getBlue2TeamKey()) );
+                    matchScheduleViewModel.setBlue2End( getAverageEndPointsByTeam(match.getBlue2TeamKey()) );
                     matchScheduleViewModel.setBlue2StdDeviation(getStdDeviationByTeam(match.getBlue2TeamKey()));
                     matchScheduleViewModel.setMatchCount(Math.max(matchScheduleViewModel.getMatchCount(),
                             getSize(match.getBlue2TeamKey())));
@@ -153,33 +157,57 @@ public class MatchScheduleActivity extends EchelonActivity {
         if( teamMatchResults ==null) return 0;
         return teamMatchResults.size();
     }
-    private int getAverageCargoCountByTeam(String teamKey){
+    private int getAverageAutoPointsByTeam(String teamKey){
         List<MatchResult> teamMatchResults = matchResultsByTeam.get(teamKey);
         if( teamMatchResults == null || teamMatchResults.size() == 0 ) return 0;
 
-        int totalCargoCount = 0;
+        int totalAutoCount = 0;
         for(MatchResult matchResult : teamMatchResults ){
-            totalCargoCount += matchResult.getAutoLowBalls() + matchResult.getAutoWhitePxlPurplePxl() +
-                    matchResult.getTeleOpLowBalls() + matchResult.getTeleOpHighBalls();
+            totalAutoCount +=
+                    (matchResult.getAutoWhitePxlYellowPxl() ? 1:0) +
+                    (matchResult.getAutoWhitePxlPurplePxl() ? 1:0) +
+                    (matchResult.getAutoTeamYellowPxl() ? 1:0) +
+                    (matchResult.getAutoTeamPurplePxl() ? 1:0) +
+                    matchResult.getAutoPxlBackdrop() +
+                    matchResult.getAutoPxlBackstage();
+
         }
-        int averageCargoCount = totalCargoCount / teamMatchResults.size();
+        int averageCargoCount = totalAutoCount / teamMatchResults.size();
         return averageCargoCount;
     }
 
-    private int getAverageHangPointsByTeam(String teamKey){
+    private int getAverageTeleOpPointsByTeam(String teamKey){
         List<MatchResult> teamMatchResults = matchResultsByTeam.get(teamKey);
         if( teamMatchResults == null || teamMatchResults.size() == 0 ) return 0;
 
-        int totalHangPoints = 0;
+        int totalTeleOpPoints = 0;
         for(MatchResult matchResult : teamMatchResults ){
-            totalHangPoints += (matchResult.getEndHangLow()? 1 : 0 ) * 4;
-            totalHangPoints += (matchResult.getEndHangMid()? 1 : 0 ) * 6;
-            totalHangPoints += (matchResult.getEndHangHigh()? 1 : 0 ) * 10;
-            totalHangPoints += (matchResult.getEndHangTraverse()? 1 : 0 ) * 15;
+            totalTeleOpPoints += (matchResult.getTeleOpPxlBackstage() ) * 4;
+            totalTeleOpPoints += (matchResult.getTeleOpPxlBackdrop() ) * 4;
+            totalTeleOpPoints += (matchResult.getTeleOpSet() ) * 4;
+            totalTeleOpPoints += (matchResult.getTeleOpArtist() ) * 4;
+
         }
-        int averageHangPoints = totalHangPoints / teamMatchResults.size();
+        int averageTeleOpPoints = totalTeleOpPoints / teamMatchResults.size();
+        return averageTeleOpPoints;
+    }
+
+    private int getAverageEndPointsByTeam(String teamKey){
+        List<MatchResult> teamMatchResults = matchResultsByTeam.get(teamKey);
+        if( teamMatchResults == null || teamMatchResults.size() == 0 ) return 0;
+
+        int totalEndPoints = 0;
+        for(MatchResult matchResult : teamMatchResults ){
+            totalEndPoints += (matchResult.getEndParkBackstage() ? 1:0) * 5+
+                    (matchResult.getEndSuspended() ? 1:0) * 20+
+                    (matchResult.getEndLandingZone() * 10);
+
+
+        }
+        int averageHangPoints = totalEndPoints / teamMatchResults.size();
         return averageHangPoints;
     }
+
 
     private int getAverageByTeam( String teamKey ){
         List<MatchResult> teamMatchResults = matchResultsByTeam.get(teamKey);
@@ -188,18 +216,24 @@ public class MatchScheduleActivity extends EchelonActivity {
         int totalScore = 0;
         for( MatchResult matchResult : teamMatchResults ){
             int matchScore = 0;
-            matchScore += matchResult.getAutoWhitePxlPurplePxl() * 10;
-            matchScore += matchResult.getAutoLowBalls() * 2;
-            matchScore += (matchResult.getParkBackstage()? 1 : 0) * 5;
-            matchScore += matchResult.getAutoHumanPlayerShots() * 4;
 
-            matchScore += matchResult.getTeleOpHighBalls() * 2;
-            matchScore += matchResult.getTeleOpLowBalls() * 1;
+            matchScore += matchResult.getAutoParkBackstage() ? 5 : 0;
+            matchScore += matchResult.getAutoWhitePxlPurplePxl()? 10 : 0;
+            matchScore += matchResult.getAutoWhitePxlYellowPxl() ? 10 : 0;
+            matchScore += matchResult.getAutoTeamPurplePxl() ? 20 : 0;
+            matchScore += matchResult.getAutoTeamYellowPxl() ? 20 : 0;
+            matchScore += matchResult.getAutoPxlBackdrop() * 5;
+            matchScore += matchResult.getAutoPxlBackstage() * 3;
 
-            matchScore += (matchResult.getEndHangLow()? 1 : 0 ) * 4;
-            matchScore += (matchResult.getEndHangMid()? 1 : 0 ) * 6;
-            matchScore += (matchResult.getEndHangHigh()? 1 : 0 ) * 10;
-            matchScore += (matchResult.getEndHangTraverse()? 1 : 0 ) * 15;
+
+            matchScore += matchResult.getTeleOpPxlBackstage();
+            matchScore += matchResult.getTeleOpPxlBackdrop() * 3;
+            matchScore += matchResult.getTeleOpArtist() * 10;
+            matchScore += matchResult.getTeleOpSet() * 10;
+
+            matchScore += matchResult.getEndParkBackstage() ? 5 : 0;
+            matchScore += matchResult.getEndSuspended() ? 20 : 0;
+            matchScore += matchResult.getEndLandingZone() * 10;
 
             totalScore += matchScore;
         }
@@ -216,18 +250,23 @@ public class MatchScheduleActivity extends EchelonActivity {
         int totalScore = 0;
         for( MatchResult matchResult : teamMatchResults ){
             int matchScore = 0;
-            matchScore += matchResult.getAutoWhitePxlPurplePxl() * 10;
-            matchScore += matchResult.getAutoLowBalls() * 2;
-            matchScore += (matchResult.getParkBackstage()? 1 : 0) * 2;
-            matchScore += matchResult.getAutoHumanPlayerShots() * 4;
+            matchScore += matchResult.getAutoParkBackstage() ? 5 : 0;
+            matchScore += matchResult.getAutoWhitePxlPurplePxl()? 10 : 0;
+            matchScore += matchResult.getAutoWhitePxlYellowPxl() ? 10 : 0;
+            matchScore += matchResult.getAutoTeamPurplePxl() ? 20 : 0;
+            matchScore += matchResult.getAutoTeamYellowPxl() ? 20 : 0;
+            matchScore += matchResult.getAutoPxlBackdrop() * 5;
+            matchScore += matchResult.getAutoPxlBackstage() * 3;
 
-            matchScore += matchResult.getTeleOpHighBalls() * 2;
-            matchScore += matchResult.getTeleOpLowBalls() * 1;
 
-            matchScore += (matchResult.getEndHangLow()? 1 : 0 ) * 4;
-            matchScore += (matchResult.getEndHangMid()? 1 : 0 ) * 6;
-            matchScore += (matchResult.getEndHangHigh()? 1 : 0 ) * 10;
-            matchScore += (matchResult.getEndHangTraverse()? 1 : 0 ) * 15;
+            matchScore += matchResult.getTeleOpPxlBackstage();
+            matchScore += matchResult.getTeleOpPxlBackdrop() * 3;
+            matchScore += matchResult.getTeleOpArtist() * 10;
+            matchScore += matchResult.getTeleOpSet() * 10;
+
+            matchScore += matchResult.getEndParkBackstage() ? 5 : 0;
+            matchScore += matchResult.getEndSuspended() ? 20 : 0;
+            matchScore += matchResult.getEndLandingZone() * 10;
 
             totalScore += matchScore;
         }
@@ -237,18 +276,23 @@ public class MatchScheduleActivity extends EchelonActivity {
         int totalDeviation = 0;
         for( MatchResult matchResult : teamMatchResults ){
             int matchScore = 0;
-            matchScore += matchResult.getAutoWhitePxlPurplePxl() * 10;
-            matchScore += matchResult.getAutoLowBalls() * 2;
-            matchScore += (matchResult.getParkBackstage()? 1 : 0) * 2;
-            matchScore += matchResult.getAutoHumanPlayerShots() * 4;
+            matchScore += matchResult.getAutoParkBackstage() ? 5 : 0;
+            matchScore += matchResult.getAutoWhitePxlPurplePxl()? 10 : 0;
+            matchScore += matchResult.getAutoWhitePxlYellowPxl() ? 10 : 0;
+            matchScore += matchResult.getAutoTeamPurplePxl() ? 20 : 0;
+            matchScore += matchResult.getAutoTeamYellowPxl() ? 20 : 0;
+            matchScore += matchResult.getAutoPxlBackdrop() * 5;
+            matchScore += matchResult.getAutoPxlBackstage() * 3;
 
-            matchScore += matchResult.getTeleOpHighBalls() * 2;
-            matchScore += matchResult.getTeleOpLowBalls() * 1;
 
-            matchScore += (matchResult.getEndHangLow()? 1 : 0 ) * 4;
-            matchScore += (matchResult.getEndHangMid()? 1 : 0 ) * 6;
-            matchScore += (matchResult.getEndHangHigh()? 1 : 0 ) * 10;
-            matchScore += (matchResult.getEndHangTraverse()? 1 : 0 ) * 15;
+            matchScore += matchResult.getTeleOpPxlBackstage();
+            matchScore += matchResult.getTeleOpPxlBackdrop() * 3;
+            matchScore += matchResult.getTeleOpArtist() * 10;
+            matchScore += matchResult.getTeleOpSet() * 10;
+
+            matchScore += matchResult.getEndParkBackstage() ? 5 : 0;
+            matchScore += matchResult.getEndSuspended() ? 20 : 0;
+            matchScore += matchResult.getEndLandingZone() * 10;
 
             totalDeviation += (matchScore - averageScore) * (matchScore - averageScore);
         }
@@ -264,16 +308,17 @@ public class MatchScheduleActivity extends EchelonActivity {
         //private MaterialTextView matchKey;
         private MaterialTextView red1;
         private MaterialTextView red2;
-        private MaterialTextView red3;
         private MaterialTextView blue1;
         private MaterialTextView blue2;
-        private MaterialTextView blue3;
         private MaterialTextView redPrediction;
         private MaterialTextView bluePrediction;
-        private MaterialTextView redCargoPrediction;
-        private MaterialTextView blueCargoPrediction;
-        private MaterialTextView redHangerPrediction;
-        private MaterialTextView blueHangerPrediction;
+        private MaterialTextView redAutoPrediction;
+        private MaterialTextView blueAutoPrediction;
+        private MaterialTextView redTeleOpPrediction;
+        private MaterialTextView blueTeleOpPrediction;
+        private MaterialTextView redEndPrediction;
+        private MaterialTextView blueEndPrediction;
+
         private MaterialTextView redConfidenceIntervalMin;
         private MaterialTextView blueConfidenceIntervalMin;
         private MaterialTextView redConfidenceIntervalMax;
@@ -291,16 +336,17 @@ public class MatchScheduleActivity extends EchelonActivity {
             matchNumber = itemView.findViewById(R.id.match_number);
             red1 = itemView.findViewById(R.id.red1);
             red2 = itemView.findViewById(R.id.red2);
-            red3 = itemView.findViewById(R.id.red3);
             blue1 = itemView.findViewById(R.id.blue1);
             blue2 = itemView.findViewById(R.id.blue2);
-            blue3 = itemView.findViewById(R.id.blue3);
             redPrediction = itemView.findViewById(R.id.red_prediction);
             bluePrediction = itemView.findViewById(R.id.blue_prediction);
-            redCargoPrediction = itemView.findViewById(R.id.red_cargo_count);
-            blueCargoPrediction = itemView.findViewById(R.id.blue_cargo_count);
-            redHangerPrediction = itemView.findViewById(R.id.red_hang_points);
-            blueHangerPrediction = itemView.findViewById(R.id.blue_hang_points);
+            redAutoPrediction = itemView.findViewById(R.id.red_auto_points);
+            blueAutoPrediction = itemView.findViewById(R.id.blue_auto_points);
+            redTeleOpPrediction = itemView.findViewById(R.id.red_teleOp_points);
+            blueTeleOpPrediction = itemView.findViewById(R.id.blue_teleOp_points);
+            redEndPrediction = itemView.findViewById(R.id.red_end_points);
+            blueEndPrediction = itemView.findViewById(R.id.blue_end_points);
+
             redConfidenceIntervalMin = itemView.findViewById(R.id.red_confidence_interval_min);
             blueConfidenceIntervalMin = itemView.findViewById(R.id.blue_confidence_interval_min);
             redConfidenceIntervalMax = itemView.findViewById(R.id.red_confidence_interval_max);
@@ -333,10 +379,13 @@ public class MatchScheduleActivity extends EchelonActivity {
             redPercentage.setText(matchScheduleViewModel.getRedPercentage() + "%");
             bluePercentage.setText(matchScheduleViewModel.getBluePercentage() + "%");
 
-            redCargoPrediction.setText( String.valueOf(matchScheduleViewModel.getRedCargoTotal()));
-            blueCargoPrediction.setText( String.valueOf(matchScheduleViewModel.getBlueCargoTotal()));
-            redHangerPrediction.setText( String.valueOf(matchScheduleViewModel.getRedHangTotal()));
-            blueHangerPrediction.setText( String.valueOf(matchScheduleViewModel.getBlueHangTotal()));
+            redAutoPrediction.setText( String.valueOf(matchScheduleViewModel.getRedAutoTotal()));
+            blueAutoPrediction.setText( String.valueOf(matchScheduleViewModel.getBlueAutoTotal()));
+            redTeleOpPrediction.setText( String.valueOf(matchScheduleViewModel.getRedTeleOpTotal()));
+            blueTeleOpPrediction.setText( String.valueOf(matchScheduleViewModel.getBlueTeleOpTotal()));
+            redEndPrediction.setText( String.valueOf(matchScheduleViewModel.getRedEndTotal()));
+            blueEndPrediction.setText( String.valueOf(matchScheduleViewModel.getBlueEndTotal()));
+
         }
 
         public void setDisplayText(String displayText){

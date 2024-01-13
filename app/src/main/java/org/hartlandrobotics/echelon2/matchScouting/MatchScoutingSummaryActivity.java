@@ -106,42 +106,42 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         autoHighValue = findViewById(R.id.autoHighValue);
         autoHighDecrement = findViewById(R.id.autoHighDecrement);
         autoHighDecrement.setOnClickListener(v -> {
-                matchResult.setAutoHighBalls( Math.max( matchResult.getAutoWhitePxlPurplePxl() - 1, 0 ));
+                matchResult.setAutoWhitePxlPurplePxl( false );
                 populateControlsFromData();
                 });
         autoHighIncrement = findViewById(R.id.autoHighIncrement);
         autoHighIncrement.setOnClickListener(v -> {
-            matchResult.setAutoHighBalls( matchResult.getAutoWhitePxlPurplePxl() + 1);
+            matchResult.setAutoWhitePxlPurplePxl( true);
             populateControlsFromData();
         });
 
         autoLowValue = findViewById(R.id.autoLowValue);
         autoLowDecrement = findViewById(R.id.autoLowDecrement);
         autoLowDecrement.setOnClickListener(v -> {
-            matchResult.setAutoLowBalls( Math.max(matchResult.getAutoLowBalls() -1, 0));
+            matchResult.setAutoWhitePxlYellowPxl( false );
             populateControlsFromData();
         });
         autoLowIncrement = findViewById(R.id.autoLowIncrement);
         autoLowIncrement.setOnClickListener(v -> {
-            matchResult.setAutoLowBalls( matchResult.getAutoLowBalls() +1 );
+            matchResult.setAutoWhitePxlYellowPxl( true );
             populateControlsFromData();
         });
 
         autoHumanValue = findViewById(R.id.autoHumanValue);
         autoHumanDecrement = findViewById(R.id.autoHumanDecrement);
         autoHumanDecrement.setOnClickListener(v -> {
-            matchResult.setAutoHumanPlayerShots( Math.max( matchResult.getAutoHumanPlayerShots()-1,0));
+            matchResult.setAutoTeamPurplePxl( Math.max( matchResult.getAutoTeamPurplePxl()-1,0));
             populateControlsFromData();
         });
         autoHumanIncrement = findViewById(R.id.autoHumanIncrement);
         autoHumanIncrement.setOnClickListener(v -> {
-            matchResult.setAutoHumanPlayerShots( matchResult.getAutoHumanPlayerShots()+1);
+            matchResult.setAutoTeamPurplePxl( matchResult.getAutoTeamPurplePxl()+1);
             populateControlsFromData();
         });
 
         autoTarmac = findViewById(R.id.autoTarmacCheckBox);
         autoTarmac.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setParkBackstage(isChecked);
+            matchResult.setAutoParkBackstage(isChecked);
             populateControlsFromData();
         });
 
@@ -236,8 +236,8 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         if( matchResult == null ) return;
 
         autoHighValue.setText( String.valueOf( matchResult.getAutoWhitePxlPurplePxl() ));
-        autoLowValue.setText( String.valueOf( matchResult.getAutoLowBalls() ));
-        autoHumanValue.setText( String.valueOf( matchResult.getAutoHumanPlayerShots() ));
+        autoLowValue.setText( String.valueOf( matchResult.getAutoWhitePxlYellowPxl() ));
+        autoHumanValue.setText( String.valueOf( matchResult.getAutoTeamPurplePxl() ));
 
         autoTarmac.setChecked( matchResult.getParkBackstage() );
 

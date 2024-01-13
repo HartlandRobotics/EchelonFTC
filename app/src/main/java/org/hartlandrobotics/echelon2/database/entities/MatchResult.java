@@ -33,34 +33,49 @@ public class MatchResult {
     private boolean hasBeenSynced;
 
     @ColumnInfo(name="auto_park_backstage")
-    private boolean parkBackstage;
+    private boolean autoParkBackstage;
 
     @ColumnInfo(name = "auto_white_pxl_purple_pxl")
-    private int autoWhitePxlPurplePxl;
+    private boolean autoWhitePxlPurplePxl;
 
-    @ColumnInfo( name = "auto_low_balls")
-    private int autoLowBalls;
+    @ColumnInfo( name = "auto_white_pxl_yellow_pxl")
+    private boolean autoWhitePxlYellowPxl ;
 
-    @ColumnInfo( name = "auto_human_player_shots")
-    private int autoHumanPlayerShots;
+    @ColumnInfo( name = "auto_team_purple_pxl")
+    private boolean autoTeamPurplePxl;
 
-    @ColumnInfo( name = "teleop_high_balls")
-    private int teleOpHighBalls;
+    @ColumnInfo( name = "auto_team_yellow_pxl")
+    private boolean autoTeamYellowPxl;
 
-    @ColumnInfo( name = "teleop_low_balls")
-    private int teleOpLowBalls;
+    @ColumnInfo( name = "auto_pxl_backdrop")
+    private int autoPxlBackdrop;
 
-    @ColumnInfo( name = "end_hang_low")
-    private boolean endHangLow;
+    @ColumnInfo( name= "auto_pxl_backstage")
+    private int autoPxlBackstage;
 
-    @ColumnInfo(name = "end_hang_mid")
-    private boolean endHangMid;
+    @ColumnInfo( name = "teleOp_Pxl_Backstage" )
+    private int teleOpPxlBackstage;
 
-    @ColumnInfo(name = "end_hang_high")
-    private boolean endHangHigh;
+    @ColumnInfo( name = "teleOp_Pxl_Backdrop" )
+    private int teleOpPxlBackdrop;
 
-    @ColumnInfo(name = "end_hang_traverse")
-    private boolean endHangTraverse;
+    @ColumnInfo( name = "teleOp_Artist" )
+    private int teleOpArtist;
+
+    @ColumnInfo( name = "teleOp_Set" )
+    private int teleOpSet;
+
+    @ColumnInfo( name = "teleOp_Drop" )
+    private int teleOpDrop;
+
+    @ColumnInfo( name = "end_park_backstage" )
+    private boolean endParkBackstage;
+
+    @ColumnInfo( name = "end_suspended" )
+    private boolean endSuspended;
+
+    @ColumnInfo( name = "end_landing_zone" )
+    private int endLandingZone;
 
     @ColumnInfo(name = "additional_notes")
     private String additionalNotes;
@@ -77,16 +92,25 @@ public class MatchResult {
             @NonNull String matchKey,
             @NonNull String teamKey,
             boolean hasBeenSynced,
-            boolean parkBackstage,
-            int autoWhitePxlPurplePxl,
-            int autoLowBalls,
-            int autoHumanPlayerShots,
-            int teleOpHighBalls,
-            int teleOpLowBalls,
-            boolean endHangLow,
-            boolean endHangMid,
-            boolean endHangHigh,
-            boolean endHangTraverse,
+
+            boolean autoParkBackstage,
+            boolean autoWhitePxlPurplePxl,
+            boolean autoWhitePxlYellowPxl,
+            boolean autoTeamPurplePxl,
+            boolean autoTeamYellowPxl,
+            int autoPxlBackdrop,
+            int autoPxlBackstage,
+
+            int teleOpPxlBackstage,
+            int teleOpPxlBackdrop,
+            int teleOpArtist,
+            int teleOpSet,
+            int teleOpDrop,
+
+            boolean endParkBackstage,
+            boolean endSuspended,
+            int endLandingZone,
+
             String additionalNotes,
             int defenseCount
     ) {
@@ -96,16 +120,25 @@ public class MatchResult {
         this.matchKey = matchKey;
         this.teamKey = teamKey;
         this.hasBeenSynced = hasBeenSynced;
-        this.parkBackstage = parkBackstage;
+        this.autoParkBackstage = autoParkBackstage;
         this.autoWhitePxlPurplePxl = autoWhitePxlPurplePxl;
-        this.autoLowBalls = autoLowBalls;
-        this.autoHumanPlayerShots = autoHumanPlayerShots;
-        this.teleOpHighBalls = teleOpHighBalls;
-        this.teleOpLowBalls = teleOpLowBalls;
-        this.endHangLow = endHangLow;
-        this.endHangMid = endHangMid;
-        this.endHangHigh = endHangHigh;
-        this.endHangTraverse = endHangTraverse;
+        this.autoWhitePxlYellowPxl = autoWhitePxlYellowPxl;
+        this.autoTeamPurplePxl = autoTeamPurplePxl;
+        this.autoTeamYellowPxl = autoTeamYellowPxl;
+        this.autoPxlBackdrop = autoPxlBackdrop;
+        this.autoPxlBackstage = autoPxlBackstage;
+
+
+        this.teleOpPxlBackstage = teleOpPxlBackstage;
+        this.teleOpPxlBackdrop = teleOpPxlBackdrop;
+        this.teleOpArtist = teleOpArtist;
+        this.teleOpSet = teleOpSet;
+        this.teleOpDrop = teleOpDrop;
+
+        this.endParkBackstage = endParkBackstage;
+        this.endSuspended = endSuspended;
+        this.endLandingZone = endLandingZone;
+
         this.additionalNotes = additionalNotes;
         this.defenseCount = defenseCount;
     }
@@ -133,53 +166,45 @@ public class MatchResult {
         this.hasBeenSynced = hasBeenSynced;
     }
 
-    public boolean getParkBackstage(){ return parkBackstage; }
-    public void setParkBackstage(boolean taxiTarmac){ this.parkBackstage = parkBackstage; }
-
-    public int getAutoWhitePxlPurplePxl() { return autoWhitePxlPurplePxl; }
-    public void setAutoHighBalls(int autoWhitePxlPurplePxl ){
-        this.autoWhitePxlPurplePxl = autoWhitePxlPurplePxl;
+    public boolean getAutoParkBackstage(){ return autoParkBackstage; }
+    public void setAutoParkBackstage(boolean autoParkBackstage){ this.autoParkBackstage = autoParkBackstage; }
+    public boolean getAutoWhitePxlPurplePxl() { return autoWhitePxlPurplePxl; }
+    public void setAutoWhitePxlPurplePxl(boolean autoWhitePxlPurplePxl ){ this.autoWhitePxlPurplePxl = autoWhitePxlPurplePxl; }
+    public boolean getAutoWhitePxlYellowPxl(){ return autoWhitePxlYellowPxl; }
+    public void setAutoWhitePxlYellowPxl (boolean autoWhitePxlYellowPxl){ this.autoWhitePxlYellowPxl = autoWhitePxlYellowPxl; }
+    public boolean getAutoTeamPurplePxl(){ return autoTeamPurplePxl;}
+    public void setAutoTeamPurplePxl(boolean autoTeamPurplePxl){ this.autoTeamPurplePxl = autoTeamPurplePxl; }
+    public boolean getAutoTeamYellowPxl(){ return autoTeamPurplePxl;}
+    public void setAutoTeamYellowPxl(boolean autoTeamYellowPxl){ this.autoTeamYellowPxl = autoTeamYellowPxl; }
+    public int getAutoPxlBackdrop(){ return autoPxlBackdrop; }
+    public void setAutoPxlBackdrop(int autoPxlBackdrop) {
+        this.autoPxlBackdrop = autoPxlBackdrop;
     }
+    public int getAutoPxlBackstage(){ return autoPxlBackstage; }
+    public void setAutoPxlBackstage( int autoPxlBackstage ){ this.autoPxlBackstage = autoPxlBackstage; }
 
-    public int getAutoLowBalls(){ return autoLowBalls; }
-    public void setAutoLowBalls(int autoLowBalls){
-        this.autoLowBalls = autoLowBalls;
-    }
 
-    public int getAutoHumanPlayerShots(){ return autoHumanPlayerShots;}
-    public void setAutoHumanPlayerShots(int autoHumanPlayerShots){
-        this.autoHumanPlayerShots = autoHumanPlayerShots;
+    public int getTeleOpPxlBackstage(){ return teleOpPxlBackstage; }
+    public void setTeleOpPxlBackstage(int teleOpPxlBackstage){ this.teleOpPxlBackstage = teleOpPxlBackstage; }
+    public int getTeleOpPxlBackdrop(){ return teleOpPxlBackdrop;}
+    public void setTeleOpPxlBackdrop( int teleOpPxlBackdrop )   { this.teleOpPxlBackdrop = teleOpPxlBackdrop; }
+    public int getTeleOpArtist(){ return teleOpArtist; }
+    public void setTeleOpArtist( int teleOpArtist ){
+        this.teleOpArtist = teleOpArtist;
     }
+    public int getTeleOpSet(){ return teleOpSet; }
+    public void setTeleOpSet( int teleOpSet ){
+        this.teleOpSet = teleOpSet;
+    }
+    public int getTeleOpDrop(){ return teleOpDrop; }
+    public void setTeleOpDrop( int teleOpDrop){ this.teleOpDrop = teleOpDrop; }
 
-    public int getTeleOpHighBalls() { return teleOpHighBalls; }
-    public void setTeleOpHighBalls( int teleOpHighBalls ){
-        this.teleOpHighBalls = teleOpHighBalls;
-    }
-
-    public int getTeleOpLowBalls(){ return teleOpLowBalls; }
-    public void setTeleOpLowBalls( int teleOpLowBalls ){
-        this.teleOpLowBalls = teleOpLowBalls;
-    }
-
-    public boolean getEndHangLow(){ return endHangLow; }
-    public void setEndHangLow(boolean endHangLow){
-        this.endHangLow = endHangLow;
-    }
-
-    public boolean getEndHangMid(){ return endHangMid; }
-    public void setEndHangMid(boolean endHangMid){
-        this.endHangMid = endHangMid;
-    }
-
-    public boolean getEndHangHigh(){ return endHangHigh; }
-    public void setEndHangHigh(boolean endHangHigh){
-        this.endHangHigh = endHangHigh;
-    }
-
-    public boolean getEndHangTraverse(){ return endHangTraverse; }
-    public void setEndHangTraverse(boolean endHangTraverse){
-        this.endHangTraverse = endHangTraverse;
-    }
+    public boolean getEndParkBackstage(){ return endParkBackstage; }
+    public void setEndParkBackstage(boolean endParkBackstage ){  this.endParkBackstage = endParkBackstage; }
+    public boolean getEndSuspended(){ return endSuspended; }
+    public void setEndSuspended( boolean endSuspended){ this.endSuspended = endSuspended; }
+    public int getEndLandingZone(){ return endLandingZone; }
+    public void setEndLandingZone( int endLandingZone ){ this.endLandingZone = endLandingZone; }
 
     public String getAdditionalNotes(){ return additionalNotes; }
     public void setAdditionalNotes( String additionalNotes ){

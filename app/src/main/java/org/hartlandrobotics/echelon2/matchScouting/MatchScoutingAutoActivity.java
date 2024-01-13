@@ -85,10 +85,10 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
 
     public void populateControlsFromData(){
         topHubText.setText(String.valueOf(matchResult.getAutoWhitePxlPurplePxl()));
-        bottomHubText.setText(String.valueOf(matchResult.getAutoLowBalls()));
-        humanPlayerText.setText(String.valueOf(matchResult.getAutoHumanPlayerShots()));
+        bottomHubText.setText(String.valueOf(matchResult.getAutoWhitePxlYellowPxl()));
+        humanPlayerText.setText(String.valueOf(matchResult.getAutoTeamPurplePxl()));
 
-        if( matchResult.getParkBackstage() ){
+        if( matchResult.getAutoParkBackstage() ){
             exitTarmacButton.setImageResource(R.drawable.taxi_tarmac_green);
         } else {
             exitTarmacButton.setImageResource(tarmacButtonDrawable);
@@ -108,7 +108,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         topHubButton = findViewById(R.id.topHub);
         topHubButton.setImageResource(topHubButtonDrawable);
         topHubButton.setOnClickListener(v -> {
-            matchResult.setAutoHighBalls( matchResult.getAutoWhitePxlPurplePxl() + 1);
+            matchResult.setAutoWhitePxlPurplePxl( matchResult.getAutoWhitePxlPurplePxl());
             populateControlsFromData();
         });
 
@@ -116,7 +116,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         bottomHubButton = findViewById(R.id.bottomHub);
         bottomHubButton.setImageResource(bottomHubButtonDrawable);
         bottomHubButton.setOnClickListener(v -> {
-            matchResult.setAutoLowBalls( matchResult.getAutoLowBalls() + 1);
+            matchResult.setAutoWhitePxlYellowPxl( matchResult.getAutoWhitePxlYellowPxl());
             populateControlsFromData();
         });
 
@@ -124,14 +124,14 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         humanPlayerButton = findViewById(R.id.humanPlayer);
         humanPlayerButton.setImageResource(humanPlayoutButtonDrawable);
         humanPlayerButton.setOnClickListener(v -> {
-            matchResult.setAutoHumanPlayerShots( matchResult.getAutoHumanPlayerShots() + 1);
+            matchResult.setAutoTeamPurplePxl( matchResult.getAutoTeamPurplePxl());
             populateControlsFromData();
         });
 
         exitTarmacButton = findViewById(R.id.taxiTarmac);
         exitTarmacButton.setImageResource(humanPlayoutButtonDrawable);
         exitTarmacButton.setOnClickListener(v -> {
-            matchResult.setParkBackstage( !matchResult.getParkBackstage() );
+            matchResult.setAutoParkBackstage( !matchResult.getAutoParkBackstage() );
             populateControlsFromData();
         });
 

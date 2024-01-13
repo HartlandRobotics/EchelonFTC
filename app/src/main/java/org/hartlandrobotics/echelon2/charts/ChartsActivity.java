@@ -94,25 +94,32 @@ public class ChartsActivity extends EchelonActivity {
                 for( MatchResult matchResult : matchResults ){
                     Integer matchNumber = Integer.valueOf(matchResult.getMatchKey().replace( matchResult.getEventKey() + "_qm", ""));
                     int matchAuto = 0;
-                    matchAuto += matchResult.getAutoWhitePxlPurplePxl() * 10;
-                    matchAuto += matchResult.getAutoLowBalls() * 2;
-                    matchAuto += matchResult.getParkBackstage() ? 10 : 0;
+                    matchAuto += matchResult.getAutoParkBackstage() ? 5 : 0;
+                    matchAuto += matchResult.getAutoWhitePxlPurplePxl() ? 10 : 0 ;
+                    matchAuto += matchResult.getAutoWhitePxlYellowPxl() ? 10 : 0;
+                    matchAuto += matchResult.getAutoTeamPurplePxl() ? 20 : 0;
+                    matchAuto += matchResult.getAutoTeamYellowPxl() ? 20 : 0;
+                    matchAuto += matchResult.getAutoPxlBackstage()  * 3;
+                    matchAuto += matchResult.getAutoPxlBackdrop() * 5;
+
                     autoTotal += matchAuto;
                     autoScores.put(matchNumber, matchAuto);
 
 
                     int matchTeleOp = 0;
-                    matchTeleOp += matchResult.getTeleOpHighBalls() * 2;
-                    matchTeleOp += matchResult.getTeleOpLowBalls();
+                    matchTeleOp += matchResult.getTeleOpPxlBackstage();
+                    matchTeleOp += matchResult.getTeleOpPxlBackdrop() * 3;
+                    matchTeleOp += matchResult.getTeleOpArtist() * 10;
+                    matchTeleOp += matchResult.getTeleOpSet() * 10;
                     teleOpTotal += matchTeleOp;
                     teleOpScores.put(matchNumber, matchTeleOp);
 
 
                     int matchEndGame = 0;
-                    matchEndGame += matchResult.getEndHangLow() ? 4 : 0;
-                    matchEndGame += matchResult.getEndHangMid() ? 6 : 0;
-                    matchEndGame += matchResult.getEndHangHigh() ? 10 : 0;
-                    matchEndGame += matchResult.getEndHangTraverse() ? 15 : 0;
+
+                    matchEndGame += matchResult.getEndParkBackstage() ? 5 : 0;
+                    matchEndGame += matchResult.getEndSuspended() ? 20 : 0;
+                    matchEndGame += matchResult.getEndLandingZone() * 10;
                     endGameTotal += matchEndGame;
                     endGameScores.put(matchNumber, matchEndGame);
 
