@@ -69,7 +69,7 @@ public abstract class EchelonDatabase extends RoomDatabase {
             synchronized ( EchelonDatabase.class){
                 if(_instance == null){
                     _instance = Room.databaseBuilder(context.getApplicationContext(),
-                            EchelonDatabase.class, "echelon_database")
+                            EchelonDatabase.class, "echelon_ftc_database")
                             .fallbackToDestructiveMigration()
                             .addCallback(roomDatabaseCallback)
                             .build();

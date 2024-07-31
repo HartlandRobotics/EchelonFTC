@@ -8,6 +8,8 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hartlandrobotics.echelon2.database.currentGame.CurrentGamePoints;
+
 import java.util.UUID;
 
 @Entity(tableName="match_result")
@@ -32,50 +34,50 @@ public class MatchResult {
     @ColumnInfo(name = "has_been_synced")
     private boolean hasBeenSynced;
 
-    @ColumnInfo(name="auto_park_backstage")
-    private boolean autoParkBackstage;
+    @ColumnInfo(name="auto_flag_1")
+    private boolean autoFlag1;
 
-    @ColumnInfo(name = "auto_white_pxl_purple_pxl")
-    private boolean autoWhitePxlPurplePxl;
+    @ColumnInfo(name = "auto_flag_2")
+    private boolean autoFlag2;
 
-    @ColumnInfo( name = "auto_white_pxl_yellow_pxl")
-    private boolean autoWhitePxlYellowPxl ;
+    @ColumnInfo( name = "auto_flag_3")
+    private boolean autoFlag3 ;
 
-    @ColumnInfo( name = "auto_team_purple_pxl")
-    private boolean autoTeamPurplePxl;
+    @ColumnInfo( name = "auto_flag_4")
+    private boolean autoFlag4;
 
-    @ColumnInfo( name = "auto_team_yellow_pxl")
-    private boolean autoTeamYellowPxl;
+    @ColumnInfo( name = "auto_flag_5")
+    private boolean autoFlag5;
 
-    @ColumnInfo( name = "auto_pxl_backdrop")
-    private int autoPxlBackdrop;
+    @ColumnInfo( name = "auto_int_6")
+    private int autoInt6;
 
-    @ColumnInfo( name= "auto_pxl_backstage")
-    private int autoPxlBackstage;
+    @ColumnInfo( name= "auto_int_7")
+    private int autoInt7;
 
-    @ColumnInfo( name = "teleOp_Pxl_Backstage" )
-    private int teleOpPxlBackstage;
+    @ColumnInfo( name = "teleOp_int_1" )
+    private int teleOpInt1;
 
-    @ColumnInfo( name = "teleOp_Pxl_Backdrop" )
-    private int teleOpPxlBackdrop;
+    @ColumnInfo( name = "teleOp_int_2" )
+    private int teleOpInt2;
 
-    @ColumnInfo( name = "teleOp_Artist" )
-    private int teleOpArtist;
+    @ColumnInfo( name = "teleOp_int_3" )
+    private int teleOpInt3;
 
-    @ColumnInfo( name = "teleOp_Set" )
-    private int teleOpSet;
+    @ColumnInfo( name = "teleOp_int_4" )
+    private int teleOpInt4;
 
-    @ColumnInfo( name = "teleOp_Drop" )
-    private int teleOpDrop;
+    @ColumnInfo( name = "teleOp_int_5" )
+    private int teleOpInt5;
 
-    @ColumnInfo( name = "end_park_backstage" )
-    private boolean endParkBackstage;
+    @ColumnInfo( name = "end_flag_1" )
+    private boolean endFlag1;
 
-    @ColumnInfo( name = "end_suspended" )
-    private boolean endSuspended;
+    @ColumnInfo( name = "end_flag_2" )
+    private boolean endFlag2;
 
-    @ColumnInfo( name = "end_landing_zone" )
-    private int endLandingZone;
+    @ColumnInfo( name = "end_int_6" )
+    private int endInt6;
 
     @ColumnInfo(name = "additional_notes")
     private String additionalNotes;
@@ -93,19 +95,19 @@ public class MatchResult {
             @NonNull String teamKey,
             boolean hasBeenSynced,
 
-            boolean autoParkBackstage,
-            boolean autoWhitePxlPurplePxl,
-            boolean autoWhitePxlYellowPxl,
-            boolean autoTeamPurplePxl,
-            boolean autoTeamYellowPxl,
-            int autoPxlBackdrop,
-            int autoPxlBackstage,
+            boolean autoFlag1,
+            boolean autoFlag2,
+            boolean autoFlag3,
+            boolean autoFlag4,
+            boolean autoFlag5,
+            int autoInt6,
+            int autoInt7,
 
-            int teleOpPxlBackstage,
-            int teleOpPxlBackdrop,
-            int teleOpArtist,
-            int teleOpSet,
-            int teleOpDrop,
+            int teleOpInt1,
+            int teleOpInt2,
+            int teleOpInt3,
+            int teleOpInt4,
+            int teleOpInt5,
 
             boolean endParkBackstage,
             boolean endSuspended,
@@ -120,24 +122,25 @@ public class MatchResult {
         this.matchKey = matchKey;
         this.teamKey = teamKey;
         this.hasBeenSynced = hasBeenSynced;
-        this.autoParkBackstage = autoParkBackstage;
-        this.autoWhitePxlPurplePxl = autoWhitePxlPurplePxl;
-        this.autoWhitePxlYellowPxl = autoWhitePxlYellowPxl;
-        this.autoTeamPurplePxl = autoTeamPurplePxl;
-        this.autoTeamYellowPxl = autoTeamYellowPxl;
-        this.autoPxlBackdrop = autoPxlBackdrop;
-        this.autoPxlBackstage = autoPxlBackstage;
+
+        this.autoFlag1 = autoFlag1;
+        this.autoFlag2 = autoFlag2;
+        this.autoFlag3 = autoFlag3;
+        this.autoFlag4 = autoFlag4;
+        this.autoFlag5 = autoFlag5;
+        this.autoInt6 = autoInt6;
+        this.autoInt7 = autoInt7;
 
 
-        this.teleOpPxlBackstage = teleOpPxlBackstage;
-        this.teleOpPxlBackdrop = teleOpPxlBackdrop;
-        this.teleOpArtist = teleOpArtist;
-        this.teleOpSet = teleOpSet;
-        this.teleOpDrop = teleOpDrop;
+        this.teleOpInt1 = teleOpInt1;
+        this.teleOpInt2 = teleOpInt2;
+        this.teleOpInt3 = teleOpInt3;
+        this.teleOpInt4 = teleOpInt4;
+        this.teleOpInt5 = teleOpInt5;
 
-        this.endParkBackstage = endParkBackstage;
-        this.endSuspended = endSuspended;
-        this.endLandingZone = endLandingZone;
+        this.endFlag1 = endFlag1;
+        this.endFlag2 = endFlag2;
+        this.endInt6 = endInt6;
 
         this.additionalNotes = additionalNotes;
         this.defenseCount = defenseCount;
@@ -166,45 +169,45 @@ public class MatchResult {
         this.hasBeenSynced = hasBeenSynced;
     }
 
-    public boolean getAutoParkBackstage(){ return autoParkBackstage; }
-    public void setAutoParkBackstage(boolean autoParkBackstage){ this.autoParkBackstage = autoParkBackstage; }
-    public boolean getAutoWhitePxlPurplePxl() { return autoWhitePxlPurplePxl; }
-    public void setAutoWhitePxlPurplePxl(boolean autoWhitePxlPurplePxl ){ this.autoWhitePxlPurplePxl = autoWhitePxlPurplePxl; }
-    public boolean getAutoWhitePxlYellowPxl(){ return autoWhitePxlYellowPxl; }
-    public void setAutoWhitePxlYellowPxl (boolean autoWhitePxlYellowPxl){ this.autoWhitePxlYellowPxl = autoWhitePxlYellowPxl; }
-    public boolean getAutoTeamPurplePxl(){ return autoTeamPurplePxl;}
-    public void setAutoTeamPurplePxl(boolean autoTeamPurplePxl){ this.autoTeamPurplePxl = autoTeamPurplePxl; }
-    public boolean getAutoTeamYellowPxl(){ return autoTeamPurplePxl;}
-    public void setAutoTeamYellowPxl(boolean autoTeamYellowPxl){ this.autoTeamYellowPxl = autoTeamYellowPxl; }
-    public int getAutoPxlBackdrop(){ return autoPxlBackdrop; }
-    public void setAutoPxlBackdrop(int autoPxlBackdrop) {
-        this.autoPxlBackdrop = autoPxlBackdrop;
+    public boolean getAutoFlag1(){ return autoFlag1; }
+    public void setAutoFlag1(boolean autoFlag1){ this.autoFlag1 = autoFlag1; }
+    public boolean getAutoFlag2() { return autoFlag2; }
+    public void setAutoFlag2(boolean autoFlag2 ){ this.autoFlag2 = autoFlag2; }
+    public boolean getAutoFlag3(){ return autoFlag3; }
+    public void setAutoFlag3 (boolean autoFlag3){ this.autoFlag3 = autoFlag3; }
+    public boolean getAutoFlag4(){ return autoFlag4;}
+    public void setAutoFlag4(boolean autoTeamFlag4){ this.autoFlag4 = autoFlag4; }
+    public boolean getAutoFlag5(){ return autoFlag5;}
+    public void setAutoFlag5(boolean autoFlag5){ this.autoFlag5 = autoFlag5; }
+    public int getAutoInt6(){ return autoInt6; }
+    public void setAutoInt6(int autoInt6) {
+        this.autoInt6 = autoInt6;
     }
-    public int getAutoPxlBackstage(){ return autoPxlBackstage; }
-    public void setAutoPxlBackstage( int autoPxlBackstage ){ this.autoPxlBackstage = autoPxlBackstage; }
+    public int getAutoInt7(){ return autoInt7; }
+    public void setAutoInt7( int autoInt7 ){ this.autoInt7 = autoInt7; }
 
 
-    public int getTeleOpPxlBackstage(){ return teleOpPxlBackstage; }
-    public void setTeleOpPxlBackstage(int teleOpPxlBackstage){ this.teleOpPxlBackstage = teleOpPxlBackstage; }
-    public int getTeleOpPxlBackdrop(){ return teleOpPxlBackdrop;}
-    public void setTeleOpPxlBackdrop( int teleOpPxlBackdrop )   { this.teleOpPxlBackdrop = teleOpPxlBackdrop; }
-    public int getTeleOpArtist(){ return teleOpArtist; }
-    public void setTeleOpArtist( int teleOpArtist ){
-        this.teleOpArtist = teleOpArtist;
+    public int getTeleOpInt1(){ return teleOpInt1; }
+    public void setTeleOpInt1(int teleOpInt1){ this.teleOpInt1 = teleOpInt1; }
+    public int getTeleOpInt2(){ return teleOpInt2;}
+    public void setTeleOpInt2( int teleOpInt2 )   { this.teleOpInt2 = teleOpInt2; }
+    public int getTeleOpInt3(){ return teleOpInt3; }
+    public void setTeleOpInt3( int teleOpInt3 ){
+        this.teleOpInt3 = teleOpInt3;
     }
-    public int getTeleOpSet(){ return teleOpSet; }
-    public void setTeleOpSet( int teleOpSet ){
-        this.teleOpSet = teleOpSet;
+    public int getTeleOpInt4(){ return teleOpInt4; }
+    public void setTeleOpInt4( int teleOpInt4 ){
+        this.teleOpInt4 = teleOpInt4;
     }
-    public int getTeleOpDrop(){ return teleOpDrop; }
-    public void setTeleOpDrop( int teleOpDrop){ this.teleOpDrop = teleOpDrop; }
+    public int getTeleOpInt5(){ return teleOpInt5; }
+    public void setTeleOpInt5( int teleOpInt5 ){ this.teleOpInt5 = teleOpInt5; }
 
-    public boolean getEndParkBackstage(){ return endParkBackstage; }
-    public void setEndParkBackstage(boolean endParkBackstage ){  this.endParkBackstage = endParkBackstage; }
-    public boolean getEndSuspended(){ return endSuspended; }
-    public void setEndSuspended( boolean endSuspended){ this.endSuspended = endSuspended; }
-    public int getEndLandingZone(){ return endLandingZone; }
-    public void setEndLandingZone( int endLandingZone ){ this.endLandingZone = endLandingZone; }
+    public boolean getEndFlag1(){ return endFlag1; }
+    public void setEndFlag1(boolean endFlag1 ){  this.endFlag1 = endFlag1; }
+    public boolean getEndFlag2(){ return endFlag2; }
+    public void setEndFlag2( boolean endFlag2){ this.endFlag1 = endFlag2; }
+    public int getEndInt6(){ return endInt6; }
+    public void setEndInt6( int endInt6 ){ this.endInt6 = endInt6; }
 
     public String getAdditionalNotes(){ return additionalNotes; }
     public void setAdditionalNotes( String additionalNotes ){
@@ -214,5 +217,9 @@ public class MatchResult {
     public int getDefenseCount(){ return defenseCount; }
     public void setDefenseCount( int defenseCount ){
         this.defenseCount = defenseCount;
+    }
+
+    public static CurrentGamePoints toCurrentGamePoints(MatchResult matchResult){
+        return new CurrentGamePoints(matchResult);
     }
 }

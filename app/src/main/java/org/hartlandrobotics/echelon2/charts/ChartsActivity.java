@@ -11,6 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.hartlandrobotics.echelon2.EchelonActivity;
 import org.hartlandrobotics.echelon2.R;
+import org.hartlandrobotics.echelon2.database.currentGame.CurrentGamePoints;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.database.repositories.MatchResultRepo;
 import org.hartlandrobotics.echelon2.status.OrangeAllianceStatus;
@@ -92,43 +93,32 @@ public class ChartsActivity extends EchelonActivity {
                 int teamNumber = Integer.valueOf( entry.getKey().substring(3) );
                 List<MatchResult> matchResults = entry.getValue();
                 for( MatchResult matchResult : matchResults ){
+                    CurrentGamePoints currentGamePoints = MatchResult.toCurrentGamePoints(matchResult);
                     Integer matchNumber = Integer.valueOf(matchResult.getMatchKey().replace( matchResult.getEventKey() + "_qm", ""));
-                    int matchAuto = 0;
-                    matchAuto += matchResult.getAutoParkBackstage() ? 5 : 0;
-                    matchAuto += matchResult.getAutoWhitePxlPurplePxl() ? 10 : 0 ;
-                    matchAuto += matchResult.getAutoWhitePxlYellowPxl() ? 10 : 0;
-                    matchAuto += matchResult.getAutoTeamPurplePxl() ? 20 : 0;
-                    matchAuto += matchResult.getAutoTeamYellowPxl() ? 20 : 0;
-                    matchAuto += matchResult.getAutoPxlBackstage()  * 3;
-                    matchAuto += matchResult.getAutoPxlBackdrop() * 5;
 
-                    autoTotal += matchAuto;
+                    int matchAuto = 0;
+                    matchAuto += currentGamePoints.getAutoPoints();
                     autoScores.put(matchNumber, matchAuto);
+                    autoTotal += matchAuto;
 
 
                     int matchTeleOp = 0;
-                    matchTeleOp += matchResult.getTeleOpPxlBackstage();
-                    matchTeleOp += matchResult.getTeleOpPxlBackdrop() * 3;
-                    matchTeleOp += matchResult.getTeleOpArtist() * 10;
-                    matchTeleOp += matchResult.getTeleOpSet() * 10;
-                    teleOpTotal += matchTeleOp;
+                    matchTeleOp += currentGamePoints.getTeleOpPoints();
                     teleOpScores.put(matchNumber, matchTeleOp);
+                    teleOpTotal += matchTeleOp;
 
 
                     int matchEndGame = 0;
-
-                    matchEndGame += matchResult.getEndParkBackstage() ? 5 : 0;
-                    matchEndGame += matchResult.getEndSuspended() ? 20 : 0;
-                    matchEndGame += matchResult.getEndLandingZone() * 10;
-                    endGameTotal += matchEndGame;
+                    matchEndGame += currentGamePoints.getEndPoints();
                     endGameScores.put(matchNumber, matchEndGame);
+                    endGameTotal += matchEndGame;
 
                     total = autoTotal + teleOpTotal + endGameTotal;
                 }
 
                 // size is only used to calculate averages.
                 // 1 is default since it is multiplicitive identity
-                int size = matchResults.size() == 0 ? 1 : matchResults.size();
+                int size = matchResults.size();// == 0 ? 1 : matchResults.size();
                 TeamDataViewModel teamData = new TeamDataViewModel(
                         teamNumber,
                         autoTotal/size,
