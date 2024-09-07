@@ -18,6 +18,9 @@ public class CurrentGamePoints {
         autoPoints += this.getAuto5Points();
         autoPoints += this.getAuto6Points();
         autoPoints += this.getAuto7Points();
+        autoPoints += this.getAuto8Points();
+        autoPoints += this.getAuto9Points();
+        autoPoints += this.getAuto10Points();
         return autoPoints;
     }
     public int getAutoCounts() {
@@ -29,6 +32,9 @@ public class CurrentGamePoints {
         autoCounts += this.getAuto5Counts();
         autoCounts += this.getAuto6Counts();
         autoCounts += this.getAuto7Counts();
+        autoCounts += this.getAuto8Counts();
+        autoCounts += this.getAuto9Counts();
+        autoCounts += this.getAuto10Counts();
         return autoCounts;
     }
 
@@ -38,7 +44,7 @@ public class CurrentGamePoints {
     }
     public int getAuto1Points(){
         if( result == null ) return 0;
-        return result.getAutoFlag1()? 1:0;
+        return result.getAutoFlag1()? 3:0;
     }
 
     public int getAuto2Counts(){
@@ -47,7 +53,7 @@ public class CurrentGamePoints {
     }
     public int getAuto2Points(){
         if( result == null ) return 0;
-        return result.getAutoFlag2()? 1:0;
+        return result.getAutoFlag2()? 3:0;
     }
 
     public int getAuto3Counts(){
@@ -95,6 +101,32 @@ public class CurrentGamePoints {
         return result.getAutoInt7() * 1;
     }
 
+    public int getAuto8Points(){
+        if( result == null ) return 0;
+        return result.getAutoInt8() * 1;
+    }
+    public int getAuto8Counts(){
+        if( result == null ) return 0;
+        return result.getAutoInt8();
+    }
+
+    public int getAuto9Points(){
+        if( result == null ) return 0;
+        return result.getAutoInt9() * 1;
+    }
+    public int getAuto9Counts(){
+        if( result == null ) return 0;
+        return result.getAutoInt9();
+    }
+
+    public int getAuto10Points(){
+        if( result == null ) return 0;
+        return result.getAutoInt10() * 1;
+    }
+    public int getAuto10Counts(){
+        if( result == null ) return 0;
+        return result.getAutoInt10();
+    }
 
 
     public int getTeleOpPoints() {

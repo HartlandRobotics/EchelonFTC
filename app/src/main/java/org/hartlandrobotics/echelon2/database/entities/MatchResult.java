@@ -55,6 +55,15 @@ public class MatchResult {
     @ColumnInfo( name= "auto_int_7")
     private int autoInt7;
 
+    @ColumnInfo( name= "auto_int_8")
+    private int autoInt8;
+
+    @ColumnInfo( name= "auto_int_9")
+    private int autoInt9;
+
+    @ColumnInfo( name= "auto_int_10")
+    private int autoInt10;
+
     @ColumnInfo( name = "teleOp_int_1" )
     private int teleOpInt1;
 
@@ -102,6 +111,9 @@ public class MatchResult {
             boolean autoFlag5,
             int autoInt6,
             int autoInt7,
+            int autoInt8,
+            int autoInt9,
+            int autoInt10,
 
             int teleOpInt1,
             int teleOpInt2,
@@ -130,6 +142,9 @@ public class MatchResult {
         this.autoFlag5 = autoFlag5;
         this.autoInt6 = autoInt6;
         this.autoInt7 = autoInt7;
+        this.autoInt8 = autoInt8;
+        this.autoInt9 = autoInt9;
+        this.autoInt10 = autoInt10;
 
 
         this.teleOpInt1 = teleOpInt1;
@@ -185,6 +200,12 @@ public class MatchResult {
     }
     public int getAutoInt7(){ return autoInt7; }
     public void setAutoInt7( int autoInt7 ){ this.autoInt7 = autoInt7; }
+    public int getAutoInt8(){ return autoInt8; }
+    public void setAutoInt8( int autoInt8 ){ this.autoInt8 = autoInt8; }
+    public int getAutoInt9(){ return autoInt9; }
+    public void setAutoInt9( int autoInt9 ){ this.autoInt9 = autoInt9; }
+    public int getAutoInt10(){ return autoInt10; }
+    public void setAutoInt10( int autoInt10 ){ this.autoInt10 = autoInt10; }
 
 
     public int getTeleOpInt1(){ return teleOpInt1; }
