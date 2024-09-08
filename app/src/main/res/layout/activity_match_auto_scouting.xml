@@ -6,70 +6,173 @@
     android:layout_height="match_parent"
     tools:context=".matchScouting.MatchScoutingAutoActivity">
 
-    <ImageButton
-        android:id="@+id/topHub"
-        android:layout_width="500dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/frc_hub_top_blue"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/topHubText"
+        android:id="@+id/basket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/topHub"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/specimen"
         android:layout_marginTop="30dp"
         android:textSize="48sp"
-        tools:text="0"
+        tools:text="Basket"
         />
 
     <ImageButton
-        android:id="@+id/bottomHub"
-        android:layout_width="500dp"
+        android:id="@+id/topBasket"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/frc_hub_bottom_blue"
+        android:src="@drawable/sample_blue"
         android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/topHub"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/basket"
+        app:layout_constraintLeft_toLeftOf="@id/basket"
         />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/bottomHubText"
+        android:id="@+id/topBasketText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/bottomHub"
-        app:layout_constraintTop_toTopOf="@+id/bottomHub"
+        app:layout_constraintTop_toTopOf="@id/topBasket"
+        app:layout_constraintLeft_toRightOf="@+id/topBasket"
+        android:layout_marginLeft="30dp"
         android:textSize="48sp"
         tools:text="0"
         />
 
+    <ImageButton
+        android:id="@+id/midBasket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sample_blue"
+        android:background="@null"
+        app:layout_constraintTop_toBottomOf="@id/topBasket"
+        app:layout_constraintLeft_toLeftOf="@id/topBasket"
+        />
+
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/humanPlayerText"
+        android:id="@+id/midBasketText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/midBasket"
+        app:layout_constraintLeft_toLeftOf="@+id/topBasketText"
+        android:textSize="48sp"
+        tools:text="0"
+        />
+
+    <ImageButton
+        android:id="@+id/lowBasket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sample_blue"
+        android:background="@null"
+        app:layout_constraintTop_toBottomOf="@id/midBasket"
+        app:layout_constraintLeft_toLeftOf="@id/midBasket"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lowBasketText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/lowBasket"
+        app:layout_constraintLeft_toLeftOf="@+id/topBasketText"
+        android:textSize="48sp"
+        tools:text="0"
+        />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/specimen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/basket"
+        app:layout_constraintLeft_toRightOf="@id/basket"
+        app:layout_constraintRight_toLeftOf="@id/ascent"
+        android:textSize="48sp"
+        tools:text="Specimen"
+        />
+
+    <ImageButton
+        android:id="@+id/topSpecimen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sample_blue"
+        android:background="@null"
+        app:layout_constraintTop_toBottomOf="@id/specimen"
+        app:layout_constraintLeft_toLeftOf="@id/specimen"
+
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/topSpecimenText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/topSpecimen"
+        app:layout_constraintLeft_toRightOf="@id/topSpecimen"
+        android:layout_marginLeft="30dp"
+        android:textSize="48sp"
+        tools:text="0"
+        />
+
+    <ImageButton
+        android:id="@+id/lowSpecimen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sample_blue"
+        android:background="@null"
+        app:layout_constraintTop_toBottomOf="@id/topSpecimen"
+        app:layout_constraintLeft_toLeftOf="@id/topSpecimen"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/midSpecimenText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/lowSpecimen"
+        app:layout_constraintLeft_toLeftOf="@+id/topSpecimenText"
+        android:textSize="48sp"
+        tools:text="0"
+        />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ascent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/humanPlayer"
-        app:layout_constraintEnd_toEndOf="@+id/humanPlayer"
-        app:layout_constraintStart_toStartOf="@+id/humanPlayer"
+        app:layout_constraintLeft_toRightOf="@id/specimen"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
         android:textSize="48sp"
-        tools:text="0"
+        tools:text="Ascent"
         />
 
-    <ImageButton
-        android:id="@+id/humanPlayer"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:src="@drawable/human_player_blue"
-        android:scaleType="fitCenter"
-        android:background="@null"
-        app:layout_constraintTop_toBottomOf="@+id/humanPlayerText"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="50dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/lowAscent"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blueAlliance"
+        app:layout_constraintTop_toBottomOf="@+id/ascent"
+        app:layout_constraintStart_toStartOf="@+id/ascent"
+        android:layout_marginTop="20dp"
+        android:text="lo"
         />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <ImageButton
         android:id="@+id/taxiTarmac"
@@ -78,9 +181,9 @@
         android:src="@drawable/taxi_tarmac_blue"
         android:scaleType="fitCenter"
         android:background="@null"
-        app:layout_constraintTop_toBottomOf="@+id/humanPlayer"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/lowBasket"
+        app:layout_constraintLeft_toLeftOf="@id/lowBasket"
+
         />
 
     <com.google.android.material.button.MaterialButton

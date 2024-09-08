@@ -121,9 +121,9 @@ public class MatchResult {
             int teleOpInt4,
             int teleOpInt5,
 
-            boolean endParkBackstage,
-            boolean endSuspended,
-            int endLandingZone,
+            boolean endFlag1,
+            boolean endFlag2,
+            int endInt6,
 
             String additionalNotes,
             int defenseCount
