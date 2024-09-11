@@ -65,7 +65,7 @@
             app:layout_constraintEnd_toStartOf="@id/autoSampleHighIncrement"
             app:layout_constraintStart_toEndOf="@id/autoSampleHighDecrement"
             app:layout_constraintTop_toTopOf="@id/autoSampleHighDecrement"
-            tools:text="5" />
+            tools:text="1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/autoSampleHighIncrement"
@@ -109,7 +109,7 @@
             app:layout_constraintEnd_toStartOf="@id/autoSampleLowIncrement"
             app:layout_constraintTop_toTopOf="@id/autoSampleLowDecrement"
             app:layout_constraintBottom_toBottomOf="@id/autoSampleLowDecrement"
-            tools:text="5"
+            tools:text="2"
             />
 
         <com.google.android.material.button.MaterialButton
@@ -156,7 +156,7 @@
             app:layout_constraintEnd_toStartOf="@id/autoSampleNetZoneIncrement"
             app:layout_constraintTop_toTopOf="@id/autoSampleNetZoneDecrement"
             app:layout_constraintBottom_toBottomOf="@id/autoSampleNetZoneDecrement"
-            tools:text="5"
+            tools:text="3"
             />
 
         <com.google.android.material.button.MaterialButton
@@ -201,7 +201,7 @@
             app:layout_constraintEnd_toStartOf="@id/autoSpecimenHighIncrement"
             app:layout_constraintTop_toTopOf="@id/autoSpecimenHighDecrement"
             app:layout_constraintBottom_toBottomOf="@id/autoSpecimenHighDecrement"
-            tools:text="5"
+            tools:text="4"
             />
 
         <com.google.android.material.button.MaterialButton
@@ -280,137 +280,231 @@
         app:layout_constraintStart_toEndOf="@id/autoLayout"
         app:layout_constraintTop_toBottomOf="@+id/additionalNotes">
 
+        <!-- Auto High Sample -->
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpHighLabel"
+            android:id="@+id/teleOpSampleHighLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="60dp"
-            android:text="High:"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpHighDecrement"
+            android:minWidth="140dp"
+            android:text="High Sample:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/teleOpHighDecrement" />
+            app:layout_constraintEnd_toStartOf="@id/teleOpSampleHighDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpSampleHighDecrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpSampleHighDecrement"
+            />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpHighDecrement"
+            android:id="@+id/teleOpSampleHighDecrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-"
-            app:layout_constraintBottom_toTopOf="@id/teleOpLowDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpHighValue"
-            app:layout_constraintStart_toEndOf="@id/teleOpHighLabel"
+            app:layout_constraintEnd_toStartOf="@id/teleOpSampleHighValue"
+            app:layout_constraintStart_toEndOf="@id/teleOpSampleHighLabel"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpHighValue"
+            android:id="@+id/teleOpSampleHighValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpHighIncrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpHighIncrement"
-            app:layout_constraintStart_toEndOf="@id/teleOpHighDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpHighIncrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpSampleHighDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpSampleHighIncrement"
+            app:layout_constraintStart_toEndOf="@id/teleOpSampleHighDecrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpSampleHighDecrement"
             tools:text="1" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpHighIncrement"
+            android:id="@+id/teleOpSampleHighIncrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
-            app:layout_constraintBottom_toTopOf="@id/teleOpLowIncrement"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/teleOpHighValue"
+            app:layout_constraintStart_toEndOf="@id/teleOpSampleHighValue"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- End of teleOpHigh -->
 
+        <!-- Auto Sample Low -->
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpLowLabel"
+            android:id="@+id/teleOpSampleLowLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="60dp"
-            android:text="Low:"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpLowDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpLowDecrement"
+            android:minWidth="140dp"
+            android:text="Low Sample:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/teleOpLowDecrement" />
+            app:layout_constraintEnd_toStartOf="@id/teleOpSampleLowDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpSampleLowDecrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpSampleLowDecrement"
+            />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpLowDecrement"
+            android:id="@+id/teleOpSampleLowDecrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-"
-            app:layout_constraintBottom_toTopOf="@id/teleOpDefensesDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpLowValue"
-            app:layout_constraintStart_toEndOf="@id/teleOpLowLabel"
-            app:layout_constraintTop_toBottomOf="@id/teleOpHighDecrement" />
+            app:layout_constraintEnd_toStartOf="@id/teleOpSampleLowValue"
+            app:layout_constraintStart_toEndOf="@id/teleOpSampleLowLabel"
+            app:layout_constraintTop_toBottomOf="@id/teleOpSampleHighDecrement"
+            />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpLowValue"
+            android:id="@+id/teleOpSampleLowValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpLowDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpLowIncrement"
-            app:layout_constraintStart_toEndOf="@id/teleOpLowDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpLowDecrement"
-            tools:text="2" />
+            app:layout_constraintStart_toEndOf="@id/teleOpSampleLowDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpSampleLowIncrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpSampleLowDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpSampleLowDecrement"
+            tools:text="2"
+            />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpLowIncrement"
+            android:id="@+id/teleOpSampleLowIncrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
-            app:layout_constraintBottom_toTopOf="@id/teleOpDefensesIncrement"
+            app:layout_constraintStart_toEndOf="@id/teleOpSampleLowValue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/teleOpLowValue"
-            app:layout_constraintTop_toBottomOf="@id/teleOpHighIncrement" />
+            app:layout_constraintTop_toBottomOf="@id/teleOpSampleHighDecrement"
+            />
 
-        <!-- End of teleOpLow -->
-        `
+
+        <!-- Auto Sample Net zone -->
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpDefensesLabel"
+            android:id="@+id/teleOpSampleNetZoneLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="60dp"
-            android:text="Defense:"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpDefensesDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpDefensesDecrement"
+            android:minWidth="140dp"
+            android:text="Net Zone Sample:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/teleOpDefensesDecrement" />
+            app:layout_constraintEnd_toStartOf="@id/teleOpSampleNetZoneDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpSampleNetZoneDecrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpSampleNetZoneDecrement"
+            />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpDefensesDecrement"
+            android:id="@+id/teleOpSampleNetZoneDecrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/teleOpDefensesValue"
-            app:layout_constraintStart_toStartOf="@id/teleOpHighDecrement"
-            app:layout_constraintTop_toBottomOf="@id/teleOpLowDecrement" />
+            app:layout_constraintEnd_toStartOf="@id/teleOpSampleNetZoneValue"
+            app:layout_constraintStart_toEndOf="@id/teleOpSampleNetZoneLabel"
+            app:layout_constraintTop_toBottomOf="@id/teleOpSampleLowDecrement"
+            />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpDefensesValue"
+            android:id="@+id/teleOpSampleNetZoneValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/teleOpDefensesDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpDefensesIncrement"
-            app:layout_constraintStart_toEndOf="@id/teleOpDefensesDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpDefensesDecrement"
-            tools:text="2" />
+            app:layout_constraintStart_toEndOf="@id/teleOpSampleNetZoneDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpSampleNetZoneIncrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpSampleNetZoneDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpSampleNetZoneDecrement"
+            tools:text="3"
+            />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpDefensesIncrement"
+            android:id="@+id/teleOpSampleNetZoneIncrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/teleOpSampleNetZoneValue"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/teleOpSampleLowDecrement"
+            />
 
-            app:layout_constraintStart_toEndOf="@id/teleOpDefensesValue"
-            app:layout_constraintTop_toBottomOf="@id/teleOpLowIncrement" />
-        <!-- end of teleOp defenses -->
+        <!-- Auto Specimen High -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/teleOpSpecimenHighLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="140dp"
+            android:text="High Specimen:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/teleOpSpecimenHighDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpSpecimenHighDecrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpSpecimenHighDecrement"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/teleOpSpecimenHighDecrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            app:layout_constraintEnd_toStartOf="@id/teleOpSpecimenHighValue"
+            app:layout_constraintStart_toEndOf="@id/teleOpSpecimenHighLabel"
+            app:layout_constraintTop_toBottomOf="@id/teleOpSampleNetZoneDecrement"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/teleOpSpecimenHighValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintStart_toEndOf="@id/teleOpSpecimenHighDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpSpecimenHighIncrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpSpecimenHighDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpSpecimenHighDecrement"
+            tools:text="4"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/teleOpSpecimenHighIncrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            app:layout_constraintStart_toEndOf="@id/teleOpSpecimenHighValue"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/teleOpSampleNetZoneDecrement"
+            />
+
+        <!-- Auto Specimen Low -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/teleOpSpecimenLowLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="140dp"
+            android:text="Low Specimen:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/teleOpSpecimenLowDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpSpecimenLowDecrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpSpecimenLowDecrement"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/teleOpSpecimenLowDecrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            app:layout_constraintEnd_toStartOf="@id/teleOpSpecimenLowValue"
+            app:layout_constraintStart_toEndOf="@id/teleOpSpecimenLowLabel"
+            app:layout_constraintTop_toBottomOf="@id/teleOpSpecimenHighDecrement"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/teleOpSpecimenLowValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintStart_toEndOf="@id/teleOpSpecimenLowDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpSpecimenLowIncrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpSpecimenLowDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpSpecimenLowDecrement"
+            tools:text="5"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/teleOpSpecimenLowIncrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            app:layout_constraintStart_toEndOf="@id/teleOpSpecimenLowValue"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/teleOpSpecimenHighDecrement"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
