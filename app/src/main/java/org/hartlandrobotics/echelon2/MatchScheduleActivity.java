@@ -20,6 +20,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hartlandrobotics.echelon2.database.currentGame.CurrentGamePoints;
 import org.hartlandrobotics.echelon2.database.entities.Match;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.database.repositories.EventRepo;
@@ -146,7 +147,6 @@ public class MatchScheduleActivity extends EchelonActivity {
                 }
 
                 matchListAdapter.setMatches(viewModels);
-                System.out.println("break here");
             });
 
         });
@@ -157,55 +157,44 @@ public class MatchScheduleActivity extends EchelonActivity {
         if( teamMatchResults ==null) return 0;
         return teamMatchResults.size();
     }
-    private int getAverageAutoPointsByTeam(String teamKey){
+
+    private int getAverageAutoPointsByTeam(String teamKey) {
         List<MatchResult> teamMatchResults = matchResultsByTeam.get(teamKey);
-        if( teamMatchResults == null || teamMatchResults.size() == 0 ) return 0;
+        if (teamMatchResults == null || teamMatchResults.size() == 0) return 0;
 
-        int totalAutoCount = 0;
-        for(MatchResult matchResult : teamMatchResults ){
-            totalAutoCount +=
-                    (matchResult.getAutoWhitePxlYellowPxl() ? 1:0) +
-                    (matchResult.getAutoWhitePxlPurplePxl() ? 1:0) +
-                    (matchResult.getAutoTeamYellowPxl() ? 1:0) +
-                    (matchResult.getAutoTeamPurplePxl() ? 1:0) +
-                    matchResult.getAutoPxlBackdrop() +
-                    matchResult.getAutoPxlBackstage();
-
+        int totalPoints = 0;
+        for (MatchResult matchResult : teamMatchResults) {
+            CurrentGamePoints currentGamePoints = new CurrentGamePoints(matchResult);
+            totalPoints += currentGamePoints.getAutoPoints();
         }
-        int averageCargoCount = totalAutoCount / teamMatchResults.size();
-        return averageCargoCount;
+        int averagePoints = totalPoints / teamMatchResults.size();
+        return averagePoints;
     }
 
     private int getAverageTeleOpPointsByTeam(String teamKey){
         List<MatchResult> teamMatchResults = matchResultsByTeam.get(teamKey);
         if( teamMatchResults == null || teamMatchResults.size() == 0 ) return 0;
 
-        int totalTeleOpPoints = 0;
+        int totalPoints = 0;
         for(MatchResult matchResult : teamMatchResults ){
-            totalTeleOpPoints += (matchResult.getTeleOpPxlBackstage() ) * 4;
-            totalTeleOpPoints += (matchResult.getTeleOpPxlBackdrop() ) * 4;
-            totalTeleOpPoints += (matchResult.getTeleOpSet() ) * 4;
-            totalTeleOpPoints += (matchResult.getTeleOpArtist() ) * 4;
-
+            CurrentGamePoints currentGamePoints = new CurrentGamePoints(matchResult);
+            totalPoints += currentGamePoints.getTeleOpPoints();
         }
-        int averageTeleOpPoints = totalTeleOpPoints / teamMatchResults.size();
-        return averageTeleOpPoints;
+        int averagePoints = totalPoints / teamMatchResults.size();
+        return averagePoints;
     }
 
     private int getAverageEndPointsByTeam(String teamKey){
         List<MatchResult> teamMatchResults = matchResultsByTeam.get(teamKey);
         if( teamMatchResults == null || teamMatchResults.size() == 0 ) return 0;
 
-        int totalEndPoints = 0;
+        int totalPoints = 0;
         for(MatchResult matchResult : teamMatchResults ){
-            totalEndPoints += (matchResult.getEndParkBackstage() ? 1:0) * 5+
-                    (matchResult.getEndSuspended() ? 1:0) * 20+
-                    (matchResult.getEndLandingZone() * 10);
-
-
+            CurrentGamePoints currentGamePoints = new CurrentGamePoints(matchResult);
+            totalPoints += currentGamePoints.getEndPoints();
         }
-        int averageHangPoints = totalEndPoints / teamMatchResults.size();
-        return averageHangPoints;
+        int averagePoints = totalPoints / teamMatchResults.size();
+        return averagePoints;
     }
 
 
@@ -215,25 +204,12 @@ public class MatchScheduleActivity extends EchelonActivity {
 
         int totalScore = 0;
         for( MatchResult matchResult : teamMatchResults ){
+            CurrentGamePoints points = new CurrentGamePoints(matchResult);
+
             int matchScore = 0;
-
-            matchScore += matchResult.getAutoParkBackstage() ? 5 : 0;
-            matchScore += matchResult.getAutoWhitePxlPurplePxl()? 10 : 0;
-            matchScore += matchResult.getAutoWhitePxlYellowPxl() ? 10 : 0;
-            matchScore += matchResult.getAutoTeamPurplePxl() ? 20 : 0;
-            matchScore += matchResult.getAutoTeamYellowPxl() ? 20 : 0;
-            matchScore += matchResult.getAutoPxlBackdrop() * 5;
-            matchScore += matchResult.getAutoPxlBackstage() * 3;
-
-
-            matchScore += matchResult.getTeleOpPxlBackstage();
-            matchScore += matchResult.getTeleOpPxlBackdrop() * 3;
-            matchScore += matchResult.getTeleOpArtist() * 10;
-            matchScore += matchResult.getTeleOpSet() * 10;
-
-            matchScore += matchResult.getEndParkBackstage() ? 5 : 0;
-            matchScore += matchResult.getEndSuspended() ? 20 : 0;
-            matchScore += matchResult.getEndLandingZone() * 10;
+            matchScore += points.getAutoPoints();
+            matchScore += points.getTeleOpPoints();
+            matchScore += points.getEndPoints();
 
             totalScore += matchScore;
         }
@@ -249,24 +225,12 @@ public class MatchScheduleActivity extends EchelonActivity {
 
         int totalScore = 0;
         for( MatchResult matchResult : teamMatchResults ){
+            CurrentGamePoints currentGamePoints = new CurrentGamePoints(matchResult);
+
             int matchScore = 0;
-            matchScore += matchResult.getAutoParkBackstage() ? 5 : 0;
-            matchScore += matchResult.getAutoWhitePxlPurplePxl()? 10 : 0;
-            matchScore += matchResult.getAutoWhitePxlYellowPxl() ? 10 : 0;
-            matchScore += matchResult.getAutoTeamPurplePxl() ? 20 : 0;
-            matchScore += matchResult.getAutoTeamYellowPxl() ? 20 : 0;
-            matchScore += matchResult.getAutoPxlBackdrop() * 5;
-            matchScore += matchResult.getAutoPxlBackstage() * 3;
-
-
-            matchScore += matchResult.getTeleOpPxlBackstage();
-            matchScore += matchResult.getTeleOpPxlBackdrop() * 3;
-            matchScore += matchResult.getTeleOpArtist() * 10;
-            matchScore += matchResult.getTeleOpSet() * 10;
-
-            matchScore += matchResult.getEndParkBackstage() ? 5 : 0;
-            matchScore += matchResult.getEndSuspended() ? 20 : 0;
-            matchScore += matchResult.getEndLandingZone() * 10;
+            matchScore += currentGamePoints.getAutoPoints();
+            matchScore += currentGamePoints.getTeleOpPoints();
+            matchScore += currentGamePoints.getEndPoints();
 
             totalScore += matchScore;
         }
@@ -275,24 +239,12 @@ public class MatchScheduleActivity extends EchelonActivity {
 
         int totalDeviation = 0;
         for( MatchResult matchResult : teamMatchResults ){
+            CurrentGamePoints currentGamePoints = new CurrentGamePoints(matchResult);
             int matchScore = 0;
-            matchScore += matchResult.getAutoParkBackstage() ? 5 : 0;
-            matchScore += matchResult.getAutoWhitePxlPurplePxl()? 10 : 0;
-            matchScore += matchResult.getAutoWhitePxlYellowPxl() ? 10 : 0;
-            matchScore += matchResult.getAutoTeamPurplePxl() ? 20 : 0;
-            matchScore += matchResult.getAutoTeamYellowPxl() ? 20 : 0;
-            matchScore += matchResult.getAutoPxlBackdrop() * 5;
-            matchScore += matchResult.getAutoPxlBackstage() * 3;
+            matchScore += currentGamePoints.getAutoPoints();
+            matchScore += currentGamePoints.getTeleOpPoints();
+            matchScore += currentGamePoints.getEndPoints();
 
-
-            matchScore += matchResult.getTeleOpPxlBackstage();
-            matchScore += matchResult.getTeleOpPxlBackdrop() * 3;
-            matchScore += matchResult.getTeleOpArtist() * 10;
-            matchScore += matchResult.getTeleOpSet() * 10;
-
-            matchScore += matchResult.getEndParkBackstage() ? 5 : 0;
-            matchScore += matchResult.getEndSuspended() ? 20 : 0;
-            matchScore += matchResult.getEndLandingZone() * 10;
 
             totalDeviation += (matchScore - averageScore) * (matchScore - averageScore);
         }
@@ -300,7 +252,6 @@ public class MatchScheduleActivity extends EchelonActivity {
         double stdDeviation = Math.sqrt(totalDeviation / teamMatchResults.size());
 
         return stdDeviation;
-
     }
 
     public class MatchScheduleViewHolder extends RecyclerView.ViewHolder{

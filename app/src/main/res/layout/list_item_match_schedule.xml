@@ -28,37 +28,29 @@
                 android:id="@+id/red1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="100dp"
+                android:minWidth="90dp"
                 android:paddingHorizontal="2dp"
                 android:textColor="?attr/colorError"
-                tools:text="3536" />
+                tools:text="20000" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/red2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="100dp"
+                android:minWidth="90dp"
                 android:paddingHorizontal="2dp"
                 android:textColor="?attr/colorError"
-                tools:text="3536" />
+                tools:text="20000" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/red3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="100dp"
-                android:paddingHorizontal="2dp"
-                android:textColor="?attr/colorError"
-                tools:text="3536" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="2dp"
-                android:text="cargo: " />
+                android:text="auto: " />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/red_cargo_count"
+                android:id="@+id/red_auto_points"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:minWidth="40dp"
@@ -70,10 +62,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="5dp"
-                android:text="hang:" />
+                android:text="teleOp:" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/red_hang_points"
+                android:id="@+id/red_teleOp_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="40dp"
@@ -81,6 +73,20 @@
                 android:textColor="?attr/colorError"
                 tools:text="20" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
+                android:text="end:" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/red_end_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="40dp"
+                android:paddingHorizontal="2dp"
+                android:textColor="?attr/colorError"
+                tools:text="20" />
 
         </LinearLayout>
 
@@ -93,37 +99,28 @@
                 android:id="@+id/blue1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="100dp"
+                android:minWidth="90dp"
                 android:paddingHorizontal="2dp"
                 android:textColor="@color/design_default_color_primary_variant"
-                tools:text="3536" />
+                tools:text="20000" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/blue2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="100dp"
+                android:minWidth="90dp"
                 android:paddingHorizontal="2dp"
                 android:textColor="@color/design_default_color_primary_variant"
-                tools:text="3536" />
+                tools:text="20000" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/blue3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="100dp"
-                android:paddingHorizontal="2dp"
-                android:textColor="@color/design_default_color_primary_variant"
-                tools:text="3536" />
-
-            <com.google.android.material.textview.MaterialTextView
+                   <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="2dp"
-                android:text="cargo: " />
+                android:text="auto: " />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/blue_cargo_count"
+                android:id="@+id/blue_auto_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="40dp"
@@ -135,10 +132,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="5dp"
-                android:text="hang:" />
+                android:text="teleOp:" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/blue_hang_points"
+                android:id="@+id/blue_teleOp_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="40dp"
+                android:paddingHorizontal="2dp"
+                android:textColor="@color/design_default_color_primary_variant"
+                tools:text="20" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
+                android:text="end:" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/blue_end_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="40dp"

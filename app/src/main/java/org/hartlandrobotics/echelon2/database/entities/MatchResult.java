@@ -85,6 +85,10 @@ public class MatchResult {
     @ColumnInfo( name = "end_flag_2" )
     private boolean endFlag2;
 
+    @ColumnInfo( name = "end_flag_3" )
+    private boolean endFlag3;
+    @ColumnInfo( name = "end_flag_4" )
+    private boolean endFlag4;
     @ColumnInfo( name = "end_int_6" )
     private int endInt6;
 
@@ -123,6 +127,8 @@ public class MatchResult {
 
             boolean endFlag1,
             boolean endFlag2,
+            boolean endFlag3,
+            boolean endFlag4,
             int endInt6,
 
             String additionalNotes,
@@ -155,6 +161,9 @@ public class MatchResult {
 
         this.endFlag1 = endFlag1;
         this.endFlag2 = endFlag2;
+        this.endFlag3 = endFlag3;
+        this.endFlag4 = endFlag4;
+
         this.endInt6 = endInt6;
 
         this.additionalNotes = additionalNotes;
@@ -226,7 +235,13 @@ public class MatchResult {
     public boolean getEndFlag1(){ return endFlag1; }
     public void setEndFlag1(boolean endFlag1 ){  this.endFlag1 = endFlag1; }
     public boolean getEndFlag2(){ return endFlag2; }
-    public void setEndFlag2( boolean endFlag2){ this.endFlag1 = endFlag2; }
+    public void setEndFlag2( boolean endFlag2){ this.endFlag2 = endFlag2; }
+    public boolean getEndFlag3(){ return endFlag3; }
+    public void setEndFlag3(boolean endFlag3 ){  this.endFlag3 = endFlag3; }
+    public boolean getEndFlag4(){ return endFlag4; }
+    public void setEndFlag4( boolean endFlag4){ this.endFlag4 = endFlag4; }
+
+
     public int getEndInt6(){ return endInt6; }
     public void setEndInt6( int endInt6 ){ this.endInt6 = endInt6; }
 

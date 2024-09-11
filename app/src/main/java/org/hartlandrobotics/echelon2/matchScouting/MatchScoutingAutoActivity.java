@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
@@ -22,20 +23,29 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     private static final String MATCH_KEY = "auto_match_key_param";
     private static final String TEAM_KEY = "auto_team_key_param";
 
-    private ImageButton topHubButton;
-    private ImageButton bottomHubButton;
-    private ImageButton humanPlayerButton;
-    private ImageButton exitTarmacButton;
+    private ImageButton topBasketButton;
+    private ImageButton midBasketButton;
+    private ImageButton lowBasketButton;
 
-    private MaterialTextView topHubText;
-    private MaterialTextView bottomHubText;
-    private MaterialTextView humanPlayerText;
+    private ImageButton topSpecimenButton;
+    private ImageButton lowSpecimenButton;
+
+    private ImageButton observationZoneButton;
+    private MaterialButton levelAscentButton;
+
+
+    private MaterialTextView topBasketText;
+    private MaterialTextView midBasketText;
+    private MaterialTextView lowBasketText;
+    private MaterialTextView topSpecimenText;
+    private MaterialTextView lowSpecimenText;
     private MaterialTextView teamKeyText;
 
-    int topHubButtonDrawable;
-    int bottomHubButtonDrawable;
-    int humanPlayoutButtonDrawable;
-    int tarmacButtonDrawable;
+
+    int basketDrawable;
+    int ascentDrawable;
+    int observationZoneDrawable;
+    private int buttonColor;
 
     MatchResultViewModel matchResultViewModel;
     MatchResult matchResult;
@@ -84,15 +94,26 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     }
 
     public void populateControlsFromData(){
-        topHubText.setText(String.valueOf(matchResult.getAutoWhitePxlPurplePxl()));
-        bottomHubText.setText(String.valueOf(matchResult.getAutoWhitePxlYellowPxl()));
-        humanPlayerText.setText(String.valueOf(matchResult.getAutoTeamPurplePxl()));
+        topBasketText.setText(String.valueOf(matchResult.getAutoInt6()));
+        midBasketText.setText(String.valueOf(matchResult.getAutoInt7()));
+        lowBasketText.setText(String.valueOf(matchResult.getAutoInt8()));
 
-        if( matchResult.getAutoParkBackstage() ){
-            exitTarmacButton.setImageResource(R.drawable.taxi_tarmac_green);
+        topSpecimenText.setText(String.valueOf(matchResult.getAutoInt9()));
+        topSpecimenText.setText(String.valueOf(matchResult.getAutoInt10()));
+
+        if( matchResult.getAutoFlag1() ){
+            observationZoneButton.setImageResource(R.drawable.observation_zone_green);
         } else {
-            exitTarmacButton.setImageResource(tarmacButtonDrawable);
+            observationZoneButton.setImageResource(observationZoneDrawable);
         }
+
+        if (matchResult.getAutoFlag2()){
+            levelAscentButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.secondaryDarkColor)));
+        }
+        else {
+            levelAscentButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(buttonColor)));
+        }
+
 
     }
 
@@ -104,36 +125,59 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
             MatchScoutingTeleopActivity.launch(MatchScoutingAutoActivity.this, matchKey, teamKey );
         });
 
-        topHubText = findViewById(R.id.topHubText);
-        topHubButton = findViewById(R.id.topHub);
-        topHubButton.setImageResource(topHubButtonDrawable);
-        topHubButton.setOnClickListener(v -> {
-            matchResult.setAutoWhitePxlPurplePxl( matchResult.getAutoWhitePxlPurplePxl());
+        topBasketText = findViewById(R.id.topBasketText);
+        topBasketButton = findViewById(R.id.topBasket);
+        topBasketButton.setImageResource(basketDrawable);
+        topBasketButton.setOnClickListener(v -> {
+            matchResult.setAutoInt6( matchResult.getAutoInt6());
             populateControlsFromData();
         });
 
-        bottomHubText = findViewById(R.id.bottomHubText);
-        bottomHubButton = findViewById(R.id.bottomHub);
-        bottomHubButton.setImageResource(bottomHubButtonDrawable);
-        bottomHubButton.setOnClickListener(v -> {
-            matchResult.setAutoWhitePxlYellowPxl( matchResult.getAutoWhitePxlYellowPxl());
+        midBasketText = findViewById(R.id.midBasketText);
+        midBasketButton = findViewById(R.id.midBasket);
+        midBasketButton.setImageResource(basketDrawable);
+        midBasketButton.setOnClickListener(v -> {
+            matchResult.setAutoInt7( matchResult.getAutoInt7());
             populateControlsFromData();
         });
 
-        humanPlayerText = findViewById(R.id.humanPlayerText);
-        humanPlayerButton = findViewById(R.id.humanPlayer);
-        humanPlayerButton.setImageResource(humanPlayoutButtonDrawable);
-        humanPlayerButton.setOnClickListener(v -> {
-            matchResult.setAutoTeamPurplePxl( matchResult.getAutoTeamPurplePxl());
+        lowBasketText = findViewById(R.id.lowBasketText);
+        lowBasketButton = findViewById(R.id.lowBasket);
+        lowBasketButton.setImageResource(basketDrawable);
+        lowBasketButton.setOnClickListener(v -> {
+            matchResult.setAutoInt8( matchResult.getAutoInt8());
             populateControlsFromData();
         });
 
-        exitTarmacButton = findViewById(R.id.taxiTarmac);
-        exitTarmacButton.setImageResource(humanPlayoutButtonDrawable);
-        exitTarmacButton.setOnClickListener(v -> {
-            matchResult.setAutoParkBackstage( !matchResult.getAutoParkBackstage() );
+        topSpecimenText = findViewById(R.id.topSpecimenText);
+        topSpecimenButton = findViewById(R.id.topSpecimen);
+        topSpecimenButton.setImageResource(basketDrawable);
+        topSpecimenButton.setOnClickListener(v -> {
+            matchResult.setAutoInt9( matchResult.getAutoInt9());
             populateControlsFromData();
         });
+
+        lowSpecimenText = findViewById(R.id.lowSpecimenText);
+        lowSpecimenButton = findViewById(R.id.lowSpecimen);
+        lowSpecimenButton.setImageResource(basketDrawable);
+        lowSpecimenButton.setOnClickListener(v -> {
+            matchResult.setAutoInt9( matchResult.getAutoInt9());
+            populateControlsFromData();
+        });
+
+        observationZoneButton = findViewById(R.id.observationZone);
+        observationZoneButton.setImageResource(observationZoneDrawable);
+        observationZoneButton.setOnClickListener(v -> {
+            matchResult.setAutoFlag1( !matchResult.getAutoFlag1() );
+            populateControlsFromData();
+        });
+
+        levelAscentButton = findViewById(R.id.level1Ascent);
+        levelAscentButton.setOnClickListener(v -> {
+            matchResult.setAutoFlag2(!matchResult.getAutoFlag2());
+            populateControlsFromData();
+        });
+
 
     }
 
@@ -141,15 +185,15 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
         if (settings.getDeviceRole().startsWith("red")){
-            topHubButtonDrawable = R.drawable.frc_hub_top_red;
-            bottomHubButtonDrawable = R.drawable.frc_hub_bottom_red;
-            humanPlayoutButtonDrawable =R.drawable.human_player_red;
-            tarmacButtonDrawable = R.drawable.taxi_tarmac_red;
+            basketDrawable = R.drawable.sample_red;
+            ascentDrawable = R.drawable.bar_red;
+            observationZoneDrawable = R.drawable.observation_zone_red;
+            buttonColor = R.color.redAlliance;
         } else {
-            topHubButtonDrawable = R.drawable.frc_hub_top_blue;
-            bottomHubButtonDrawable = R.drawable.frc_hub_bottom_blue;
-            humanPlayoutButtonDrawable =R.drawable.human_player_blue;
-            tarmacButtonDrawable = R.drawable.taxi_tarmac_blue;
+            basketDrawable = R.drawable.sample_blue;
+            ascentDrawable = R.drawable.bar_blue;
+            observationZoneDrawable = R.drawable.observation_zone_blue;
+            buttonColor = R.color.blueAlliance;
         }
     }
 

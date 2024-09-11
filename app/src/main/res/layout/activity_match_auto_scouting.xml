@@ -124,7 +124,7 @@
         />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/midSpecimenText"
+        android:id="@+id/lowSpecimenText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/lowSpecimen"
@@ -147,38 +147,21 @@
         />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/lowAscent"
+        android:id="@+id/level1Ascent"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blueAlliance"
         app:layout_constraintTop_toBottomOf="@+id/ascent"
         app:layout_constraintStart_toStartOf="@+id/ascent"
         android:layout_marginTop="20dp"
-        android:text="lo"
+        android:text="park"
         />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <ImageButton
-        android:id="@+id/taxiTarmac"
+        android:id="@+id/observationZone"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/taxi_tarmac_blue"
+        android:src="@drawable/observation_zone_blue"
         android:scaleType="fitCenter"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@+id/lowBasket"
