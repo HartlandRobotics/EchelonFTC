@@ -33,33 +33,52 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     MatchResult matchResult;
 
     // auto
-    private MaterialButton autoHighDecrement;
-    private MaterialTextView autoHighValue;
-    private MaterialButton autoHighIncrement;
+    private MaterialButton autoSampleHighDecrement;
+    private MaterialTextView autoSampleHighValue;
+    private MaterialButton autoSampleHighIncrement;
 
-    private MaterialButton autoLowDecrement;
-    private MaterialTextView autoLowValue;
-    private MaterialButton autoLowIncrement;
+    private MaterialButton autoSampleLowDecrement;
+    private MaterialTextView autoSampleLowValue;
+    private MaterialButton autoSampleLowIncrement;
 
-    private MaterialButton autoHumanDecrement;
-    private MaterialTextView autoHumanValue;
-    private MaterialButton autoHumanIncrement;
+    private MaterialButton autoSampleNetZoneDecrement;
+    private MaterialTextView autoSampleNetZoneValue;
+    private MaterialButton autoSampleNetZoneIncrement;
 
-    private MaterialCheckBox autoTarmac;
+    private MaterialButton autoSpecimenHighDecrement;
+    private MaterialTextView autoSpecimenHighValue;
+    private MaterialButton autoSpecimenHighIncrement;
 
-    private MaterialButton teleOpHighDecrement;
-    private MaterialTextView teleOpHighValue;
-    private MaterialButton teleOpHighIncrement;
+    private MaterialButton autoSpecimenLowDecrement;
+    private MaterialTextView autoSpecimenLowValue;
+    private MaterialButton autoSpecimenLowIncrement;
 
-    private MaterialButton teleOpLowDecrement;
-    private MaterialTextView teleOpLowValue;
-    private MaterialButton teleOpLowIncrement;
+    private MaterialCheckBox autoObservationZone;
 
-    private MaterialButton teleOpDefensesDecrement;
-    private MaterialTextView teleOpDefensesValue;
-    private MaterialButton teleOpDefensesIncrement;
+    private MaterialButton teleOpSampleHighDecrement;
+    private MaterialTextView teleOpSampleHighValue;
+    private MaterialButton teleOpSampleHighIncrement;
 
-    private MaterialCheckBox endTraverseCheckbox;
+    private MaterialButton teleOpSampleLowDecrement;
+    private MaterialTextView teleOpSampleLowValue;
+    private MaterialButton teleOpLowSampleIncrement;
+
+    private MaterialButton teleOpSampleNetZoneDecrement;
+    private MaterialTextView teleOpSampleNetZoneValue;
+    private MaterialButton teleOpSampleNetZoneIncrement;
+    private MaterialButton teleOpSpecimenHighDecrement;
+    private MaterialTextView teleOpSpecimenHighValue;
+    private MaterialButton teleOpSpecimenHighIncrement;
+
+    private MaterialButton teleOpSpecimenLowDecrement;
+    private MaterialTextView teleOpSpecimenLowValue;
+    private MaterialButton teleOpLowSpecimenIncrement;
+
+
+    //private MaterialButton teleOpDefensesDecrement;
+    //private MaterialTextView teleOpDefensesValue;
+    //private MaterialButton teleOpDefensesIncrement;
+
     private MaterialCheckBox endHighCheckBox;
     private MaterialCheckBox endMidCheckBox;
     private MaterialCheckBox endLowCheckBox;
