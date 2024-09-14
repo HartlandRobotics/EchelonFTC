@@ -9,11 +9,10 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.room.ColumnInfo;
 
+//import org.hartlandrobotics.echelon2.database.currentGame.CurrentGameCounts;
 import org.hartlandrobotics.echelon2.database.entities.Match;
 import org.hartlandrobotics.echelon2.database.entities.MatchResult;
 import org.hartlandrobotics.echelon2.database.entities.MatchResultWithTeamMatch;
@@ -58,7 +57,8 @@ public class ExportActivity extends EchelonActivity {
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
 
         exportMatchResultsButton = findViewById(R.id.exportMatchResults);
-        exportMatchResults();
+        //exportMatchResults();
+        setupExportCSVButton();
         exportPitScoutResultsButton = findViewById(R.id.exportPitScouting);
         exportPitScoutResults();
         importCSVMatchButton = findViewById(R.id.importMatchCSV);
@@ -66,71 +66,86 @@ public class ExportActivity extends EchelonActivity {
 
     }
 
-    public void exportMatchResults(){
-        exportMatchResultsButton.setOnClickListener((view) -> {
-            Context appContext = getApplicationContext();
-            OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
-            File externalFilesDir = getFilePathForMatch();
-            externalFilesDir.mkdirs();
-            String path = externalFilesDir.getAbsolutePath();
-            File[] files = getFilePathsForMatch();
-            MatchResultViewModel matchResultViewModel = new MatchResultViewModel(getApplication());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm");
-            Date date = new Date();
-            String dateForFile = dateFormat.format(date);
-            String fileName = "Match_Data_" + dateForFile + ".csv";
-            File file = new File( externalFilesDir, fileName);
+    public void exportMatchResults() throws RuntimeException {
+        Context appContext = getApplicationContext();
+        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        File externalFilesDir = getFilePathForMatch();
+        externalFilesDir.mkdirs();
+        String path = externalFilesDir.getAbsolutePath();
+        File[] files = getFilePathsForMatch();
+        MatchResultViewModel matchResultViewModel = new MatchResultViewModel(getApplication());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm");
+        Date date = new Date();
+        String dateForFile = dateFormat.format(date);
+        String fileName = "Match_Data_" + dateForFile + ".csv";
+        File file = new File( externalFilesDir, fileName);
 
-            matchResultViewModel.getMatchResultsWithTeamMatchByEvent(status.getEventKey()).observe(this, matchResults -> {
-                try {
-                    FileOutputStream outputStream = new FileOutputStream(file);
-                    String header = "Event_Key,Match_Key,Team_Key,Match_Name,Team_Number," +
-                            "auto_park_backstage,auto_white_pxl_purple_pxl,auto_white_pxl_yellow_pxl,auto_team_purple-pxl,auto_team_yellow-pxl,auto_pxl_backdrop,auto_pxl_backstage," +
-                            "teleOp_Pxl_Backstage,teleOp_Pxl_Backdrop,teleOp_Artist,teleOp_Set,teleOp_Drop," +
-                            "end_park_backstage,end_suspended,end_landing_zone," +
-                            "Match_Result_Key\n";
+        matchResultViewModel.getMatchResultsWithTeamMatchByEvent(status.getEventKey()).observe(this, matchResults -> {
 
-                    outputStream.write(header.getBytes());
-                    for(MatchResultWithTeamMatch matchResultWithTeamMatch: matchResults){
-                        MatchResult mr = matchResultWithTeamMatch.matchResult;
-                        Match m = matchResultWithTeamMatch.match;
-                        Team t = matchResultWithTeamMatch.team;
+            try (FileOutputStream outputStream = new FileOutputStream(file)) {
+                String header = "Event_Key,Match_Key,Team_Key,Match_Name,Team_Number"
+                        + ",AutoFlag1 ,AutoFlag2, AutoFlag3, AutoFlag4, AutoFlag5"
+                        + ",AutoInt6 ,AutoInt7 ,AutoInt8 ,AutoInt9 ,AutoInt10"
+                        + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
+                        + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6"
+                        + ",DefensesCount,Match_Result_Key, AdditionalNotes\n";
+                outputStream.write(header.getBytes());
+                for (MatchResultWithTeamMatch matchResultWithTeamMatch : matchResults) {
 
-                        List<String> dataForFile = new ArrayList<>();
-                        dataForFile.add(mr.getEventKey());
-                        dataForFile.add(mr.getMatchKey());
-                        dataForFile.add(mr.getTeamKey());
-                        dataForFile.add(String.valueOf(m.getMatchName()));
-                        dataForFile.add(String.valueOf(t.getTeamNumber()));
+                    MatchResult mr = matchResultWithTeamMatch.matchResult;
+                    Match m = matchResultWithTeamMatch.match;
+                    Team t = matchResultWithTeamMatch.team;
 
-                        dataForFile.add(String.valueOf(mr.getAutoParkBackstage()));
-                        dataForFile.add(String.valueOf(mr.getAutoWhitePxlPurplePxl()));
-                        dataForFile.add(String.valueOf(mr.getAutoWhitePxlYellowPxl()));
-                        dataForFile.add(String.valueOf(mr.getAutoTeamPurplePxl()));
-                        dataForFile.add(String.valueOf(mr.getAutoTeamYellowPxl()));
-                        dataForFile.add(String.valueOf(mr.getAutoPxlBackdrop()));
-                        dataForFile.add(String.valueOf(mr.getAutoPxlBackstage()));
-                        dataForFile.add(String.valueOf(mr.getTeleOpPxlBackstage()));
-                        dataForFile.add(String.valueOf(mr.getTeleOpPxlBackdrop()));
-                        dataForFile.add(String.valueOf(mr.getTeleOpArtist()));
-                        dataForFile.add(String.valueOf(mr.getTeleOpSet()));
-                        dataForFile.add(String.valueOf(mr.getTeleOpDrop()));
-                        dataForFile.add(String.valueOf(mr.getEndParkBackstage()));
-                        dataForFile.add(String.valueOf(mr.getEndSuspended()));
-                        dataForFile.add(String.valueOf(mr.getEndLandingZone()));
+                    List<String> dataForFile = new ArrayList<>();
+                    dataForFile.add(mr.getEventKey());
+                    dataForFile.add(mr.getMatchKey());
+                    dataForFile.add(mr.getTeamKey());
+                    dataForFile.add(String.valueOf(m.getMatchName()));
+                    dataForFile.add(String.valueOf(t.getTeamNumber()));
 
+                    dataForFile.add(String.valueOf(mr.getAutoFlag1()));
+                    dataForFile.add(String.valueOf(mr.getAutoFlag2()));
+                    dataForFile.add(String.valueOf(mr.getAutoFlag3()));
+                    dataForFile.add(String.valueOf(mr.getAutoFlag4()));
+                    dataForFile.add(String.valueOf(mr.getAutoFlag5()));
 
-                        dataForFile.add(mr.getMatchResultKey());
-                        String outputString = dataForFile.stream().collect(Collectors.joining(",")) + "\n";
-                        outputStream.write(outputString.getBytes());
-                    }
-                    outputStream.close();
-                } catch (FileNotFoundException e) {
-                    Log.e("Try catch for outputstream", "Can't find Outputstream file");
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt1()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt2()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt3()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt4()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt5()));
+                    dataForFile.add(String.valueOf(mr.getDefenseCount()));
+
+                    dataForFile.add(String.valueOf(mr.getEndFlag1()));
+                    dataForFile.add(String.valueOf(mr.getEndFlag2()));
+                    dataForFile.add(String.valueOf(mr.getEndFlag3()));
+                    dataForFile.add(String.valueOf(mr.getEndFlag4()));
+                    dataForFile.add(String.valueOf(mr.getEndInt6()));
+                    dataForFile.add(mr.getMatchResultKey());
+                    dataForFile.add(mr.getAdditionalNotes());
+                    String outputString = dataForFile.stream().collect(Collectors.joining(",")) + "\n";
+                    outputStream.write(outputString.getBytes());
                 }
-            });
+                outputStream.close();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+    }
+
+    public void setupExportCSVButton(){
+        exportMatchResultsButton.setOnClickListener((view) -> {
+            try {
+                exportMatchResults();
+                Toast.makeText(this, "export Matches: ", Toast.LENGTH_LONG).show();
+
+            } catch (RuntimeException e) {
+                String message = e.getLocalizedMessage();
+                Toast.makeText(this, "export Matches error: " + message, Toast.LENGTH_LONG).show();
+            }
         });
     }
 
@@ -180,56 +195,17 @@ public class ExportActivity extends EchelonActivity {
                         outputStream.write(outputString.getBytes());
                     }
                     outputStream.close();
+
+                    Toast.makeText(this, "export Pit Scout: ", Toast.LENGTH_LONG).show();
                 }
                 catch(Exception e){
                     Log.e("In Catch for Pit Scout", "Exception trying to export pitscout data", e);
+                    String message = e.getLocalizedMessage();
+                    Toast.makeText(this, "export Pit Scout error: " + message, Toast.LENGTH_LONG).show();
                 }
             });
         });
     }
-
-    private static final int eventKeyIndex = 0;
-    private static final int matchKeyIndex = 1;
-    private static final int teamKeyIndex = 2;
-    private static final int matchNumIndex = 3;
-    private static final int teamNumIndex = 4;
-    private static final int autoParkBackstageIndex = 5;
-    private static final int autoWhitePxlPurplePxlIndex = 6;
-    private static final int autoWhitePxlYellowPxlIndex = 7;
-    private static final int autoTeamPurplePxlIndex = 8;
-    private static final int autoTeamYellowPxlIndex = 9;
-    private static final int autoPxlBackdropIndex = 10;
-    private static final int autoPxlBackstageIndex = 11;
-    private static final int teleOpPxlBackstageIndex = 12;
-    private static final int teleOpPxlBackdropIndex = 13;
-    private static final int teleOpSetIndex = 14;
-    private static final int teleOpArtistIndex = 15;
-    private static final int teleOpDropIndex = 16;
-    private static final int endParkBackstageIndex = 17;
-    private static final int endSuspendedIndex = 18;
-    private static final int endLandingZoneIndex = 19;
-    private static final int matchResultIndex = 20;
-
-    private static final int additionalNotesIndex = 21;
-    private static final int defenseCountIndex = 22;
-
-
-    private String getStr(String[] columns, int columnIndex){
-        return columns[columnIndex];
-    }
-
-    private int getInt(String[] columns, int columnIndex){
-        return Integer.parseInt(columns[columnIndex]);
-    }
-
-    private boolean getBool(String[] columns, int columnIndex){
-        boolean val = false;
-        if(columns[columnIndex].equalsIgnoreCase("TRUE")) {
-            val = true;
-        }
-        return val;
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void importCSVMatches() throws IOException {
         File importPath = getImportPath();
@@ -243,64 +219,74 @@ public class ExportActivity extends EchelonActivity {
             String currentLine = inputLines.get(lineIndex);
             String[] columns = currentLine.split(",");
 
-            String eventKey = getStr(columns, eventKeyIndex);
-            String matchKey = getStr(columns, matchKeyIndex);
-            String teamKey = getStr(columns, teamKeyIndex);
-            int matchNum = getInt(columns, matchNumIndex);
-            int teamNum = getInt(columns,teamNumIndex);
+            String header = "Event_Key,Match_Key,Team_Key,Match_Name,Team_Number"
+                    + ",AutoFlag1 ,AutoFlag2, AutoFlag3, AutoFlag4, AutoFlag5"
+                    + ",AutoInt6 ,AutoInt7 ,AutoInt8 ,AutoInt9 ,AutoInt10"
+                    + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
+                    + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6"
+                    + ",DefensesCount,Match_Result_Key, AdditionalNotes\n";
 
-            boolean autoParkBackstage = getBool(columns, autoParkBackstageIndex);
-            boolean autoWhitePxlPurplePxl = getBool(columns, autoWhitePxlPurplePxlIndex);
-            boolean autoWhitePxlYellowPxl = getBool(columns, autoWhitePxlYellowPxlIndex);
-            boolean autoTeamPurplePxl = getBool(columns, autoTeamPurplePxlIndex);
-            boolean autoTeamYellowPxl = getBool(columns, autoTeamYellowPxlIndex);
-            int autoPxlBackdrop = getInt(columns, autoPxlBackdropIndex);
-            int autoPxlBackstage = getInt(columns, autoPxlBackstageIndex);
+            String eventKey = columns[0];
+            String matchKey = columns[1];
+            String teamKey = columns[2];
+            int matchNum = Integer.parseInt(columns[3]);
+            int teamNum = Integer.parseInt(columns[4]);
 
-            int teleOpPxlBackstage = getInt(columns, teleOpPxlBackstageIndex);
-            int teleOpPxlBackdrop = getInt(columns, teleOpPxlBackdropIndex);
-            int teleOpArtist = getInt(columns, teleOpArtistIndex);
-            int teleOpSet = getInt(columns, teleOpSetIndex);
-            int teleOpDrop = getInt(columns, teleOpDropIndex);
+            String AutoFlag1 = columns[5];
+            String AutoFlag2 = columns[6];
+            String AutoFlag3 = columns[7];
+            String AutoFlag4 = columns[8];
+            String AutoFlag5 = columns[9];
 
-            boolean endParkBackstage = getBool(columns, endParkBackstageIndex);
-            boolean endSuspended = getBool(columns, endSuspendedIndex);
-            int endLandingZone = getInt(columns, endLandingZoneIndex);
-            String matchResultKey = getStr(columns, matchResultIndex);
+            String AutoInt6 = columns[5];
+            String AutoInt7 = columns[6];
+            String AutoInt8 = columns[7];
+            String AutoInt9 = columns[8];
+            String AutoInt10 = columns[9];
 
-            String additionalNotes = getStr(columns, additionalNotesIndex);
-            int defenseCount = getInt(columns, defenseCountIndex);
+            String TeleOpInt1 =columns[10];
+            String TeleOpint2 =columns[11];
+            String TeleOpInt3 =columns[12];
+            String TeleOp4 =columns[13];
+            String TeleOp5 =columns[14];
 
+            String End1 =columns[16];
+            String End2 =columns[17];
+            String End3 =columns[18];
+            String End4 =columns[19];
+            String End5 =columns[20];
 
-            MatchResult matchResult = new MatchResult( matchResultKey,
+            String teleDef =columns[15];
+            String matchResultKey = columns[21];
+            String AdditionalNotes = columns[22];
+
+            MatchResult matchResult = new MatchResult(
+                    matchResultKey,
                     eventKey,
                     matchKey,
                     teamKey,
                     false,
-                    autoParkBackstage,
-                    autoWhitePxlPurplePxl,
-                    autoWhitePxlYellowPxl,
-                    autoTeamPurplePxl,
-                    autoTeamYellowPxl,
-                    autoPxlBackdrop,
-                    autoPxlBackstage,
-                    teleOpPxlBackstage,
-                    teleOpPxlBackdrop,
-                    teleOpArtist,
-                    teleOpSet,
-                    teleOpDrop,
-                    endParkBackstage,
-                    endSuspended,
-                    endLandingZone,
-                   additionalNotes,
-                   defenseCount
+                    Auto1.equalsIgnoreCase("true"),
+                    Integer.parseInt(Auto2),
+                    Integer.parseInt(Auto3),
+                    Auto4,
+                    Auto5,
+                    Integer.parseInt(TeleOp1),
+                    Integer.parseInt(TeleOp2),
+                    Integer.parseInt(TeleOp3),
+                    TeleOp4,
+                    TeleOp5,
+                    End1.equalsIgnoreCase("true"),
+                    End2.equalsIgnoreCase("true"),
+                    Integer.parseInt(End3),
+                    End4.equalsIgnoreCase("true"),
+                    End5.equalsIgnoreCase("true"),
+                    AdditionalNotes,
+                    Integer.parseInt(teleDef)
             );
-
-
-
             matchResultViewModel.upsert(matchResult);
         }
-        Log.e("Test", "Times ran: " + timesRan);
+        Log.e(this.getLocalClassName(), "Times ran: " + timesRan);
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setupCSVImportButton(){
