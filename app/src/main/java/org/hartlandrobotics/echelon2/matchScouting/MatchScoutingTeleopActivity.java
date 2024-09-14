@@ -51,6 +51,8 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private MaterialTextView defensesText;
 
     int basketDrawable;
+
+    int specimemDrawable;
     int ascentDrawable;
     int observationZoneDrawable;
     private int buttonColor;
@@ -251,11 +253,13 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
         if (settings.getDeviceRole().startsWith("red")){
             basketDrawable = R.drawable.sample_red;
+            specimemDrawable = R.drawable.red_specimen;
             ascentDrawable = R.drawable.bar_red;
             observationZoneDrawable = R.drawable.observation_zone_red;
             buttonColor = R.color.redAlliance;
         } else {
             basketDrawable = R.drawable.sample_blue;
+            specimemDrawable = R.drawable.blue_specimen;
             ascentDrawable = R.drawable.bar_blue;
             observationZoneDrawable = R.drawable.observation_zone_blue;
             buttonColor = R.color.blueAlliance;
