@@ -245,16 +245,16 @@ public class ExportActivity extends EchelonActivity {
             String AutoInt10 = columns[9];
 
             String TeleOpInt1 =columns[10];
-            String TeleOpint2 =columns[11];
+            String TeleOpInt2 =columns[11];
             String TeleOpInt3 =columns[12];
-            String TeleOp4 =columns[13];
-            String TeleOp5 =columns[14];
+            String TeleOpInt4 =columns[13];
+            String TeleOpInt5 =columns[14];
 
-            String End1 =columns[16];
-            String End2 =columns[17];
-            String End3 =columns[18];
-            String End4 =columns[19];
-            String End5 =columns[20];
+            String EndFlag1 =columns[16];
+            String EndFlag2 =columns[17];
+            String EndFlag3 =columns[18];
+            String EndFlag4 =columns[19];
+            String EndInt6 =columns[20];
 
             String teleDef =columns[15];
             String matchResultKey = columns[21];
@@ -266,21 +266,31 @@ public class ExportActivity extends EchelonActivity {
                     matchKey,
                     teamKey,
                     false,
-                    Auto1.equalsIgnoreCase("true"),
-                    Integer.parseInt(Auto2),
-                    Integer.parseInt(Auto3),
-                    Auto4,
-                    Auto5,
-                    Integer.parseInt(TeleOp1),
-                    Integer.parseInt(TeleOp2),
-                    Integer.parseInt(TeleOp3),
-                    TeleOp4,
-                    TeleOp5,
-                    End1.equalsIgnoreCase("true"),
-                    End2.equalsIgnoreCase("true"),
-                    Integer.parseInt(End3),
-                    End4.equalsIgnoreCase("true"),
-                    End5.equalsIgnoreCase("true"),
+
+                    AutoFlag1.equalsIgnoreCase("true"),
+                    AutoFlag2.equalsIgnoreCase("true"),
+                    AutoFlag3.equalsIgnoreCase("true"),
+                    AutoFlag4.equalsIgnoreCase("true"),
+                    AutoFlag5.equalsIgnoreCase("true"),
+
+                    Integer.parseInt(AutoInt6),
+                    Integer.parseInt(AutoInt7),
+                    Integer.parseInt(AutoInt8),
+                    Integer.parseInt(AutoInt9),
+                    Integer.parseInt(AutoInt10),
+
+                    Integer.parseInt(TeleOpInt1),
+                    Integer.parseInt(TeleOpInt2),
+                    Integer.parseInt(TeleOpInt3),
+                    Integer.parseInt(TeleOpInt4),
+                    Integer.parseInt(TeleOpInt5),
+
+                    EndFlag1.equalsIgnoreCase("true"),
+                    EndFlag2.equalsIgnoreCase("true"),
+                    EndFlag3.equalsIgnoreCase("true"),
+                    EndFlag4.equalsIgnoreCase("true"),
+                    Integer.parseInt(EndInt6),
+
                     AdditionalNotes,
                     Integer.parseInt(teleDef)
             );

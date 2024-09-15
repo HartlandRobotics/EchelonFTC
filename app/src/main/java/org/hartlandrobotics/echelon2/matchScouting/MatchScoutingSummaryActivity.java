@@ -66,6 +66,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private MaterialButton teleOpSampleNetZoneDecrement;
     private MaterialTextView teleOpSampleNetZoneValue;
     private MaterialButton teleOpSampleNetZoneIncrement;
+
     private MaterialButton teleOpSpecimenHighDecrement;
     private MaterialTextView teleOpSpecimenHighValue;
     private MaterialButton teleOpSpecimenHighIncrement;
@@ -75,6 +76,9 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private MaterialButton teleOpLowSpecimenIncrement;
 
 
+
+
+
     //private MaterialButton teleOpDefensesDecrement;
     //private MaterialTextView teleOpDefensesValue;
     //private MaterialButton teleOpDefensesIncrement;
@@ -82,6 +86,8 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private MaterialCheckBox endHighCheckBox;
     private MaterialCheckBox endMidCheckBox;
     private MaterialCheckBox endLowCheckBox;
+
+    private MaterialCheckBox observationZoneCheckBox;
 
     private TextInputLayout additionalNotesLayout;
 
@@ -122,41 +128,68 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     }
 
     private void setupControls(){
-        autoHighValue = findViewById(R.id.autoHighValue);
-        autoHighDecrement = findViewById(R.id.autoHighDecrement);
-        autoHighDecrement.setOnClickListener(v -> {
-                matchResult.setAutoWhitePxlPurplePxl( false );
+        autoSampleHighValue = findViewById(R.id.autoSampleHighValue);
+        autoSampleHighDecrement = findViewById(R.id.autoSampleHighDecrement);
+        autoSampleHighDecrement.setOnClickListener(v -> {
+                matchResult.setAutoInt6(matchResult.getAutoInt6()-1);
                 populateControlsFromData();
                 });
-        autoHighIncrement = findViewById(R.id.autoHighIncrement);
-        autoHighIncrement.setOnClickListener(v -> {
-            matchResult.setAutoWhitePxlPurplePxl( true);
+        autoSampleHighIncrement = findViewById(R.id.autoSampleHighIncrement);
+        autoSampleHighIncrement.setOnClickListener(v -> {
+            matchResult.setAutoInt6( matchResult.getAutoInt6()+1);
             populateControlsFromData();
         });
 
-        autoLowValue = findViewById(R.id.autoLowValue);
-        autoLowDecrement = findViewById(R.id.autoLowDecrement);
-        autoLowDecrement.setOnClickListener(v -> {
-            matchResult.setAutoWhitePxlYellowPxl( false );
+        autoSampleLowValue = findViewById(R.id.autoSampleLowValue);
+        autoSampleLowDecrement = findViewById(R.id.autoSampleLowDecrement);
+        autoSampleLowDecrement.setOnClickListener(v -> {
+            matchResult.setAutoInt7( matchResult.getAutoInt7()-1 );
             populateControlsFromData();
         });
-        autoLowIncrement = findViewById(R.id.autoLowIncrement);
-        autoLowIncrement.setOnClickListener(v -> {
-            matchResult.setAutoWhitePxlYellowPxl( true );
+        autoSampleLowIncrement = findViewById(R.id.autoSampleLowIncrement);
+        autoSampleLowIncrement.setOnClickListener(v -> {
+            matchResult.setAutoInt7( matchResult.getAutoInt7()+1 );
             populateControlsFromData();
         });
 
-        autoHumanValue = findViewById(R.id.autoHumanValue);
-        autoHumanDecrement = findViewById(R.id.autoHumanDecrement);
-        autoHumanDecrement.setOnClickListener(v -> {
-            matchResult.setAutoTeamPurplePxl( Math.max( matchResult.getAutoTeamPurplePxl()-1,0));
+        autoSampleNetZoneValue = findViewById(R.id.autoSampleNetZoneValue);
+        autoSampleNetZoneDecrement = findViewById(R.id.autoSampleNetZoneDecrement);
+        autoSampleNetZoneDecrement.setOnClickListener(v -> {
+            matchResult.setAutoInt8( matchResult.getAutoInt8()-1 );
             populateControlsFromData();
         });
-        autoHumanIncrement = findViewById(R.id.autoHumanIncrement);
-        autoHumanIncrement.setOnClickListener(v -> {
-            matchResult.setAutoTeamPurplePxl( matchResult.getAutoTeamPurplePxl()+1);
+        autoSampleNetZoneIncrement = findViewById(R.id.autoSampleNetZoneIncrement);
+        autoSampleLowIncrement.setOnClickListener(v -> {
+            matchResult.setAutoInt8( matchResult.getAutoInt8()+1 );
             populateControlsFromData();
         });
+
+
+        autoSpecimenHighValue = findViewById(R.id.autoSampleNetZoneValue);
+        autoSampleNetZoneDecrement = findViewById(R.id.autoSampleNetZoneDecrement);
+        autoSampleNetZoneDecrement.setOnClickListener(v -> {
+            matchResult.setAutoInt8( matchResult.getAutoInt8()-1 );
+            populateControlsFromData();
+        });
+        autoSampleNetZoneIncrement = findViewById(R.id.autoSampleNetZoneIncrement);
+        autoSampleLowIncrement.setOnClickListener(v -> {
+            matchResult.setAutoInt8( matchResult.getAutoInt8()+1 );
+            populateControlsFromData();
+        });
+
+
+        autoSampleNetZoneValue = findViewById(R.id.autoSampleNetZoneValue);
+        autoSampleNetZoneDecrement = findViewById(R.id.autoSampleNetZoneDecrement);
+        autoSampleNetZoneDecrement.setOnClickListener(v -> {
+            matchResult.setAutoInt8( matchResult.getAutoInt8()-1 );
+            populateControlsFromData();
+        });
+        autoSampleNetZoneIncrement = findViewById(R.id.autoSampleNetZoneIncrement);
+        autoSampleLowIncrement.setOnClickListener(v -> {
+            matchResult.setAutoInt8( matchResult.getAutoInt8()+1 );
+            populateControlsFromData();
+        });
+
 
         autoTarmac = findViewById(R.id.autoTarmacCheckBox);
         autoTarmac.setOnCheckedChangeListener((buttonView, isChecked) -> {
