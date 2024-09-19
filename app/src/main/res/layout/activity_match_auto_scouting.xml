@@ -15,7 +15,7 @@
         app:layout_constraintRight_toLeftOf="@id/specimen"
         android:layout_marginTop="30dp"
         android:textSize="48sp"
-        tools:text="Basket"
+        android:text="Basket"
         />
 
     <ImageButton
@@ -84,11 +84,12 @@
         android:id="@+id/specimen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/basket"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@id/basket"
         app:layout_constraintRight_toLeftOf="@id/ascent"
         android:textSize="48sp"
-        tools:text="Specimen"
+        android:layout_marginTop="30dp"
+        android:text="Specimen"
         />
 
     <ImageButton
@@ -128,8 +129,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/lowSpecimen"
-        app:layout_constraintLeft_toLeftOf="@+id/topSpecimenText"
+        app:layout_constraintLeft_toRightOf="@id/lowSpecimen"
         android:textSize="48sp"
+        android:layout_marginLeft="30dp"
         tools:text="0"
         />
 
@@ -143,7 +145,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"
         android:textSize="48sp"
-        tools:text="Ascent"
+        android:text="Ascent"
         />
 
     <com.google.android.material.button.MaterialButton

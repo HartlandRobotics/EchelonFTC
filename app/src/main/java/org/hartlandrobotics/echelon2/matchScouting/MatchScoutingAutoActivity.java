@@ -99,8 +99,8 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         midBasketText.setText(String.valueOf(matchResult.getAutoInt7()));
         lowBasketText.setText(String.valueOf(matchResult.getAutoInt8()));
 
+        lowSpecimenText.setText(String.valueOf(matchResult.getAutoInt10()));
         topSpecimenText.setText(String.valueOf(matchResult.getAutoInt9()));
-        topSpecimenText.setText(String.valueOf(matchResult.getAutoInt10()));
 
         if( matchResult.getAutoFlag1() ){
             observationZoneButton.setImageResource(R.drawable.observation_zone_green);
@@ -138,7 +138,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         midBasketButton = findViewById(R.id.midBasket);
         midBasketButton.setImageResource(basketDrawable);
         midBasketButton.setOnClickListener(v -> {
-            matchResult.setAutoInt7( matchResult.getAutoInt7());
+            matchResult.setAutoInt7( matchResult.getAutoInt7() + 1);
             populateControlsFromData();
         });
 
@@ -146,23 +146,23 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         lowBasketButton = findViewById(R.id.lowBasket);
         lowBasketButton.setImageResource(basketDrawable);
         lowBasketButton.setOnClickListener(v -> {
-            matchResult.setAutoInt8( matchResult.getAutoInt8());
+            matchResult.setAutoInt8( matchResult.getAutoInt8() + 1);
             populateControlsFromData();
         });
 
         topSpecimenText = findViewById(R.id.topSpecimenText);
         topSpecimenButton = findViewById(R.id.topSpecimen);
-        topSpecimenButton.setImageResource(basketDrawable);
+        topSpecimenButton.setImageResource(specimemDrawable);
         topSpecimenButton.setOnClickListener(v -> {
-            matchResult.setAutoInt9( matchResult.getAutoInt9());
+            matchResult.setAutoInt9( matchResult.getAutoInt9() + 1);
             populateControlsFromData();
         });
 
         lowSpecimenText = findViewById(R.id.lowSpecimenText);
         lowSpecimenButton = findViewById(R.id.lowSpecimen);
-        lowSpecimenButton.setImageResource(basketDrawable);
+        lowSpecimenButton.setImageResource(specimemDrawable);
         lowSpecimenButton.setOnClickListener(v -> {
-            matchResult.setAutoInt9( matchResult.getAutoInt9());
+            matchResult.setAutoInt10( matchResult.getAutoInt10() + 1);
             populateControlsFromData();
         });
 
