@@ -130,7 +130,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         topBasketButton = findViewById(R.id.topBasket);
         topBasketButton.setImageResource(basketDrawable);
         topBasketButton.setOnClickListener(v -> {
-            matchResult.setAutoInt6( matchResult.getAutoInt6());
+            matchResult.setAutoInt6( matchResult.getAutoInt6() + 1);
             populateControlsFromData();
         });
 

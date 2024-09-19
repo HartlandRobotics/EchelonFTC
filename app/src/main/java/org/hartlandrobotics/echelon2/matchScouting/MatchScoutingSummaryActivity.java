@@ -165,93 +165,60 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         });
 
 
-        autoSpecimenHighValue = findViewById(R.id.autoSampleNetZoneValue);
-        autoSampleNetZoneDecrement = findViewById(R.id.autoSampleNetZoneDecrement);
-        autoSampleNetZoneDecrement.setOnClickListener(v -> {
-            matchResult.setAutoInt8( matchResult.getAutoInt8()-1 );
+        autoSpecimenHighValue = findViewById(R.id.autoSpecimenHighValue);
+        autoSpecimenHighDecrement = findViewById(R.id.autoSpecimenHighDecrement);
+        autoSpecimenHighDecrement.setOnClickListener(v -> {
+            matchResult.setAutoInt9( matchResult.getAutoInt9()-1 );
             populateControlsFromData();
         });
-        autoSampleNetZoneIncrement = findViewById(R.id.autoSampleNetZoneIncrement);
-        autoSampleLowIncrement.setOnClickListener(v -> {
-            matchResult.setAutoInt8( matchResult.getAutoInt8()+1 );
-            populateControlsFromData();
-        });
-
-
-        autoSampleNetZoneValue = findViewById(R.id.autoSampleNetZoneValue);
-        autoSampleNetZoneDecrement = findViewById(R.id.autoSampleNetZoneDecrement);
-        autoSampleNetZoneDecrement.setOnClickListener(v -> {
-            matchResult.setAutoInt8( matchResult.getAutoInt8()-1 );
-            populateControlsFromData();
-        });
-        autoSampleNetZoneIncrement = findViewById(R.id.autoSampleNetZoneIncrement);
-        autoSampleLowIncrement.setOnClickListener(v -> {
-            matchResult.setAutoInt8( matchResult.getAutoInt8()+1 );
+        autoSpecimenHighIncrement = findViewById(R.id.autoSpecimenHighIncrement);
+        autoSpecimenHighIncrement.setOnClickListener(v -> {
+            matchResult.setAutoInt9( matchResult.getAutoInt9()+1 );
             populateControlsFromData();
         });
 
 
-        autoTarmac = findViewById(R.id.autoTarmacCheckBox);
-        autoTarmac.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setAutoParkBackstage(isChecked);
+        autoSpecimenLowValue = findViewById(R.id.autoSpecimenLowValue);
+        autoSpecimenLowDecrement = findViewById(R.id.autoSpecimenLowDecrement);
+        autoSpecimenLowDecrement.setOnClickListener(v -> {
+            matchResult.setAutoInt10( matchResult.getAutoInt10()-1 );
             populateControlsFromData();
         });
-
-        teleOpHighValue = findViewById(R.id.teleOpHighValue);
-        teleOpHighDecrement = findViewById(R.id.teleOpHighDecrement);
-        teleOpHighDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpHighBalls( Math.max( matchResult.getTeleOpHighBalls() -1, 0));
-            populateControlsFromData();
-        });
-        teleOpHighIncrement = findViewById(R.id.teleOpHighIncrement);
-        teleOpHighIncrement.setOnClickListener(v -> {
-            matchResult.setTeleOpHighBalls( matchResult.getTeleOpHighBalls()+1);
-            populateControlsFromData();
-        });
-
-        teleOpLowValue = findViewById(R.id.teleOpLowValue);
-        teleOpLowDecrement = findViewById(R.id.teleOpLowDecrement);
-        teleOpLowDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpLowBalls(Math.max(matchResult.getTeleOpLowBalls()-1, 0));
-            populateControlsFromData();
-        });
-        teleOpLowIncrement = findViewById(R.id.teleOpLowIncrement);
-        teleOpLowIncrement.setOnClickListener(v -> {
-            matchResult.setTeleOpLowBalls(matchResult.getTeleOpLowBalls()+1);
-            populateControlsFromData();
-        });
-
-        teleOpDefensesValue = findViewById(R.id.teleOpDefensesValue);
-        teleOpDefensesDecrement = findViewById(R.id.teleOpDefensesDecrement);
-        teleOpDefensesDecrement.setOnClickListener(v -> {
-            matchResult.setDefenseCount(Math.max(matchResult.getDefenseCount()-1, 0));
-            populateControlsFromData();
-        });
-        teleOpDefensesIncrement = findViewById(R.id.teleOpDefensesIncrement);
-        teleOpDefensesIncrement.setOnClickListener(v -> {
-            matchResult.setDefenseCount(matchResult.getDefenseCount()+1);
+        autoSpecimenLowIncrement = findViewById(R.id.autoSpecimenLowIncrement);
+        autoSpecimenLowIncrement.setOnClickListener(v -> {
+            matchResult.setAutoInt10( matchResult.getAutoInt10()+1 );
             populateControlsFromData();
         });
 
 
-        endTraverseCheckbox = findViewById(R.id.endTraverseCheckbox);
-        endTraverseCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setEndHangTraverse(isChecked);
+        autoObservationZone = findViewById(R.id.autoObservationZoneCheckBox);
+        autoObservationZone.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            matchResult.setAutoFlag1(isChecked);
             populateControlsFromData();
         });
-        endHighCheckBox = findViewById(R.id.endHighCheckbox);
+
+
+
+
+
+
+
+
+
+
+        endHighCheckBox = findViewById(R.id.endHighAscentCheckbox);
         endHighCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setEndHangHigh(isChecked);
+            matchResult.setEndFlag1(isChecked);
             populateControlsFromData();
         });
-        endMidCheckBox = findViewById(R.id.endMidCheckbox);
+        endMidCheckBox = findViewById(R.id.endMidAscentCheckbox);
         endMidCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setEndHangMid(isChecked);
+            matchResult.setEndFlag2(isChecked);
             populateControlsFromData();
         });
-        endLowCheckBox = findViewById(R.id.endLowCheckbox);
+        endLowCheckBox = findViewById(R.id.endLowAscentCheckbox);
         endLowCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setEndHangLow(isChecked);
+            matchResult.setEndFlag3(isChecked);
             populateControlsFromData();
         });
 
@@ -287,20 +254,20 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private void populateControlsFromData() {
         if( matchResult == null ) return;
 
-        autoHighValue.setText( String.valueOf( matchResult.getAutoWhitePxlPurplePxl() ));
-        autoLowValue.setText( String.valueOf( matchResult.getAutoWhitePxlYellowPxl() ));
-        autoHumanValue.setText( String.valueOf( matchResult.getAutoTeamPurplePxl() ));
+        //autoHighValue.setText( String.valueOf( matchResult.getAutoWhitePxlPurplePxl() ));
+        //autoLowValue.setText( String.valueOf( matchResult.getAutoWhitePxlYellowPxl() ));
+        //autoHumanValue.setText( String.valueOf( matchResult.getAutoTeamPurplePxl() ));
 
-        autoTarmac.setChecked( matchResult.getParkBackstage() );
+        //autoTarmac.setChecked( matchResult.getParkBackstage() );
 
-        teleOpHighValue.setText( String.valueOf( matchResult.getTeleOpHighBalls() ));
-        teleOpLowValue.setText( String.valueOf( matchResult.getTeleOpLowBalls() ));
-        teleOpDefensesValue.setText( String.valueOf( matchResult.getDefenseCount() ));
+        //teleOpHighValue.setText( String.valueOf( matchResult.getTeleOpHighBalls() ));
+        //teleOpLowValue.setText( String.valueOf( matchResult.getTeleOpLowBalls() ));
+        //teleOpDefensesValue.setText( String.valueOf( matchResult.getDefenseCount() ));
 
-        endTraverseCheckbox.setChecked( matchResult.getEndHangTraverse() );
-        endHighCheckBox.setChecked( matchResult.getEndHangHigh() );
-        endMidCheckBox.setChecked( matchResult.getEndHangMid() );
-        endLowCheckBox.setChecked( matchResult.getEndHangLow() );
+        //endTraverseCheckbox.setChecked( matchResult.getEndHangTraverse() );
+        //endHighCheckBox.setChecked( matchResult.getEndHangHigh() );
+        //endMidCheckBox.setChecked( matchResult.getEndHangMid() );
+        //endLowCheckBox.setChecked( matchResult.getEndHangLow() );
 
         additionalNotesLayout.getEditText().setText(matchResult.getAdditionalNotes());
     }

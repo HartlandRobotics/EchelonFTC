@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Echelon</string>
+    <string name="app_name">Echelon FTC</string>
     <string-array name="scouting_years">
         <item>2022</item>
         <item>2023</item>
