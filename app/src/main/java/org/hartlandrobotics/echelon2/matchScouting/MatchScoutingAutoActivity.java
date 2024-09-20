@@ -187,13 +187,13 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
 
         if (settings.getDeviceRole().startsWith("red")){
             basketDrawable = R.drawable.sample_red;
-            specimemDrawable = R.drawable.red_specimen;
+            specimemDrawable = R.drawable.specimen_red;
             ascentDrawable = R.drawable.bar_red;
             observationZoneDrawable = R.drawable.observation_zone_red;
             buttonColor = R.color.redAlliance;
         } else {
             basketDrawable = R.drawable.sample_blue;
-            specimemDrawable = R.drawable.blue_specimen;
+            specimemDrawable = R.drawable.specimen_blue;
             ascentDrawable = R.drawable.bar_blue;
             observationZoneDrawable = R.drawable.observation_zone_blue;
             buttonColor = R.color.blueAlliance;
