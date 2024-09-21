@@ -61,7 +61,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
 
     private MaterialButton teleOpSampleLowDecrement;
     private MaterialTextView teleOpSampleLowValue;
-    private MaterialButton teleOpLowSampleIncrement;
+    private MaterialButton teleOpSampleLowIncrement;
 
     private MaterialButton teleOpSampleNetZoneDecrement;
     private MaterialTextView teleOpSampleNetZoneValue;
@@ -73,7 +73,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
 
     private MaterialButton teleOpSpecimenLowDecrement;
     private MaterialTextView teleOpSpecimenLowValue;
-    private MaterialButton teleOpLowSpecimenIncrement;
+    private MaterialButton teleOpSpecimenLowIncrement;
 
 
 
@@ -128,6 +128,8 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     }
 
     private void setupControls(){
+
+        //Auto
         autoSampleHighValue = findViewById(R.id.autoSampleHighValue);
         autoSampleHighDecrement = findViewById(R.id.autoSampleHighDecrement);
         autoSampleHighDecrement.setOnClickListener(v -> {
@@ -159,7 +161,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             populateControlsFromData();
         });
         autoSampleNetZoneIncrement = findViewById(R.id.autoSampleNetZoneIncrement);
-        autoSampleLowIncrement.setOnClickListener(v -> {
+        autoSampleNetZoneIncrement.setOnClickListener(v -> {
             matchResult.setAutoInt8( matchResult.getAutoInt8()+1 );
             populateControlsFromData();
         });
@@ -190,13 +192,76 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
-
         autoObservationZone = findViewById(R.id.autoObservationZoneCheckBox);
         autoObservationZone.setOnCheckedChangeListener((buttonView, isChecked) -> {
             matchResult.setAutoFlag1(isChecked);
             populateControlsFromData();
         });
 
+
+        //TeleOp
+        teleOpSampleHighValue = findViewById(R.id.teleOpSampleHighValue);
+        teleOpSampleHighDecrement = findViewById(R.id.teleOpSampleHighDecrement);
+        teleOpSampleHighDecrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt1(matchResult.getTeleOpInt1()-1);
+            populateControlsFromData();
+        });
+        teleOpSampleHighIncrement = findViewById(R.id.teleOpSampleHighIncrement);
+        teleOpSampleHighIncrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt1( matchResult.getTeleOpInt1()+1);
+            populateControlsFromData();
+        });
+
+        teleOpSampleLowValue = findViewById(R.id.teleOpSampleLowValue);
+        teleOpSampleLowDecrement = findViewById(R.id.teleOpSampleLowDecrement);
+        teleOpSampleLowDecrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt2( matchResult.getTeleOpInt2()-1 );
+            populateControlsFromData();
+        });
+        teleOpSampleLowIncrement = findViewById(R.id.teleOpSampleLowIncrement);
+        teleOpSampleLowIncrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt2( matchResult.getTeleOpInt2()+1 );
+            populateControlsFromData();
+        });
+
+
+        teleOpSampleNetZoneValue = findViewById(R.id.teleOpSampleNetZoneValue);
+        teleOpSampleNetZoneDecrement = findViewById(R.id.teleOpSampleNetZoneDecrement);
+        teleOpSampleNetZoneDecrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt3( matchResult.getTeleOpInt3()-1 );
+            populateControlsFromData();
+        });
+        teleOpSampleNetZoneIncrement = findViewById(R.id.teleOpSampleNetZoneIncrement);
+        teleOpSampleNetZoneIncrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt3( matchResult.getTeleOpInt3()+1 );
+            populateControlsFromData();
+        });
+
+
+        teleOpSpecimenHighValue = findViewById(R.id.teleOpSpecimenHighValue);
+        teleOpSpecimenHighDecrement = findViewById(R.id.teleOpSpecimenHighDecrement);
+        teleOpSpecimenHighDecrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt4( matchResult.getTeleOpInt4()-1 );
+            populateControlsFromData();
+        });
+        teleOpSpecimenHighIncrement = findViewById(R.id.teleOpSpecimenHighIncrement);
+        teleOpSpecimenHighIncrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt4( matchResult.getTeleOpInt4()+1 );
+            populateControlsFromData();
+        });
+
+
+        teleOpSpecimenLowValue = findViewById(R.id.teleOpSpecimenLowValue);
+        teleOpSpecimenLowDecrement = findViewById(R.id.teleOpSpecimenLowDecrement);
+        teleOpSpecimenLowDecrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt5( matchResult.getTeleOpInt5()-1 );
+            populateControlsFromData();
+        });
+        teleOpSpecimenLowIncrement = findViewById(R.id.teleOpSpecimenLowIncrement);
+        teleOpSpecimenLowIncrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt5( matchResult.getTeleOpInt5()+1 );
+            populateControlsFromData();
+        });
 
 
 
@@ -226,11 +291,15 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         submitButton.setOnClickListener(v -> {
             matchResultViewModel.upsert(matchResult);
             Log.i(TAG, "current match key is " + matchKey);
-            // 2020mimil_qm1
-            String[] tokens = matchKey.split("_qm");
-            String matchNumberStr = tokens[1];
-            Integer nextMatchNumber = Integer.valueOf(matchNumberStr) + 1;
-            MatchSelectionActivity.launch(MatchScoutingSummaryActivity.this, nextMatchNumber);
+            //2324-FIM-HAQ-Q001-1
+            try{
+                String[] tokens = matchKey.split("-");
+                String matchNumberStr = tokens[4];
+                Integer nextMatchNumber = Integer.valueOf(matchNumberStr) + 1;
+                MatchSelectionActivity.launch(MatchScoutingSummaryActivity.this, nextMatchNumber);
+            }
+            catch (Exception e){}
+
         });
 
         additionalNotesLayout = findViewById(R.id.additionalNotes);
@@ -254,20 +323,31 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private void populateControlsFromData() {
         if( matchResult == null ) return;
 
-        //autoHighValue.setText( String.valueOf( matchResult.getAutoWhitePxlPurplePxl() ));
-        //autoLowValue.setText( String.valueOf( matchResult.getAutoWhitePxlYellowPxl() ));
-        //autoHumanValue.setText( String.valueOf( matchResult.getAutoTeamPurplePxl() ));
+        autoSampleHighValue.setText( String.valueOf( matchResult.getAutoInt6() ));
+        autoSampleLowValue.setText( String.valueOf( matchResult.getAutoInt7() ));
+        autoSampleNetZoneValue.setText( String.valueOf( matchResult.getAutoInt8() ));
 
-        //autoTarmac.setChecked( matchResult.getParkBackstage() );
+        autoSpecimenHighValue.setText( String.valueOf( matchResult.getAutoInt9() ));
+        autoSpecimenLowValue.setText( String.valueOf( matchResult.getAutoInt10() ));
 
-        //teleOpHighValue.setText( String.valueOf( matchResult.getTeleOpHighBalls() ));
-        //teleOpLowValue.setText( String.valueOf( matchResult.getTeleOpLowBalls() ));
+        autoObservationZone.setChecked(matchResult.getAutoFlag1());
+
+
+        teleOpSampleHighValue.setText( String.valueOf( matchResult.getTeleOpInt1() ));
+        teleOpSampleLowValue.setText( String.valueOf( matchResult.getTeleOpInt2() ));
+        teleOpSampleNetZoneValue.setText( String.valueOf( matchResult.getTeleOpInt3() ));
+
+        teleOpSpecimenHighValue.setText( String.valueOf( matchResult.getTeleOpInt4() ));
+        teleOpSpecimenLowValue.setText( String.valueOf( matchResult.getTeleOpInt5() ));
+
+
+
+
         //teleOpDefensesValue.setText( String.valueOf( matchResult.getDefenseCount() ));
 
-        //endTraverseCheckbox.setChecked( matchResult.getEndHangTraverse() );
-        //endHighCheckBox.setChecked( matchResult.getEndHangHigh() );
-        //endMidCheckBox.setChecked( matchResult.getEndHangMid() );
-        //endLowCheckBox.setChecked( matchResult.getEndHangLow() );
+        endHighCheckBox.setChecked( matchResult.getEndFlag1() );
+        endMidCheckBox.setChecked( matchResult.getEndFlag2() );
+        endLowCheckBox.setChecked( matchResult.getEndFlag3() );
 
         additionalNotesLayout.getEditText().setText(matchResult.getAdditionalNotes());
     }
