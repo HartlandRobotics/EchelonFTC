@@ -5,7 +5,7 @@ Things that need to be done to use the app
         a. SDCARD
         b. ANDROID
         c. data
-        d. org.hartlandrobotics.echelon2
+        d. org.hartlandrobotics.echelonFTC
         e. files
         f. configuration
     4. Click on configuration and then right click it and select upload

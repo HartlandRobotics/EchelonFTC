@@ -6,7 +6,7 @@ android {
     compileSdk 28
 
     defaultConfig {
-        applicationId "org.hartlandrobotics.echelon2"
+        applicationId "org.hartlandrobotics.echelonFTC"
         minSdk 25
         targetSdk 28
         versionCode 1
@@ -25,7 +25,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    namespace 'org.hartlandrobotics.echelon2'
+    namespace 'org.hartlandrobotics.echelonFTC'
 }
 
 
