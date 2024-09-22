@@ -259,7 +259,11 @@ public class BluetoothSyncActivity extends EchelonActivity {
         String deviceName = bluetoothService.getCurrentDeviceName();
         deviceNameText.setText(deviceName);
 
-        if( deviceName.equals("captain_" + settings.getTeamNumber() ) ){
+
+        if(
+                deviceName.contains("aptain")
+                // deviceName.equals("captain_" + settings.getTeamNumber())
+        ){
             matchResultsUnsyncedLabel.setVisibility(View.GONE);
             matchResultsUnsyncedText.setVisibility(View.GONE);
             pitScoutUnsyncedLabel.setVisibility(View.GONE);
