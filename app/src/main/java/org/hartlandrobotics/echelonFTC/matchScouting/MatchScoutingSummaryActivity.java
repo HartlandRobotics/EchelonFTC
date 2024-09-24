@@ -294,11 +294,14 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             //2324-FIM-HAQ-Q001-1
             try{
                 String[] tokens = matchKey.split("-");
-                String matchNumberStr = tokens[4];
-                Integer nextMatchNumber = Integer.valueOf(matchNumberStr) + 1;
+                String matchNumberTokens = tokens[3];
+                String[] matchTokens = matchNumberTokens.split("Q");
+                Integer nextMatchNumber = Integer.valueOf(matchTokens[1]) + 1;
                 MatchSelectionActivity.launch(MatchScoutingSummaryActivity.this, nextMatchNumber);
             }
-            catch (Exception e){}
+            catch (Exception e){
+                MatchSelectionActivity.launch(MatchScoutingSummaryActivity.this, null);
+            }
 
         });
 
