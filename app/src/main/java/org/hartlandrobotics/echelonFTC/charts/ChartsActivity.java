@@ -76,7 +76,7 @@ public class ChartsActivity extends EchelonActivity {
 
             allTeamNumbers.addAll(
                     matchResultsByTeam.keySet().stream()
-                            .map( teamNumber -> new TeamListViewModel(teamNumber.substring(3)))
+                            .map( teamNumber -> new TeamListViewModel(teamNumber))
                             .sorted(Comparator.comparingInt(TeamListViewModel::getTeamInteger))
                             .collect(Collectors.toList()));
 
@@ -90,7 +90,7 @@ public class ChartsActivity extends EchelonActivity {
                 Map<Integer, Integer> teleOpScores = new HashMap<>();
                 Map<Integer, Integer> endGameScores = new HashMap<>();
                 String key = entry.getKey();
-                int teamNumber = Integer.valueOf( entry.getKey().substring(3) );
+                int teamNumber = Integer.valueOf( entry.getKey() );
                 List<MatchResult> matchResults = entry.getValue();
                 for( MatchResult matchResult : matchResults ){
                     CurrentGamePoints currentGamePoints = MatchResult.toCurrentGamePoints(matchResult);
