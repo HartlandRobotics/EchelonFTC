@@ -87,7 +87,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private MaterialCheckBox endMidCheckBox;
     private MaterialCheckBox endLowCheckBox;
 
-    private MaterialCheckBox observationZoneCheckBox;
+    private MaterialCheckBox endObservationZoneCheckBox;
 
     private TextInputLayout additionalNotesLayout;
 
@@ -287,6 +287,12 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
+        endObservationZoneCheckBox = findViewById(R.id.endObservationZoneCheckbox);
+        endObservationZoneCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            matchResult.setEndFlag4(isChecked);
+            populateControlsFromData();
+        });
+
         submitButton = findViewById(R.id.matchSummarySaveButton);
         submitButton.setOnClickListener(v -> {
             matchResultViewModel.upsert(matchResult);
@@ -351,6 +357,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         endHighCheckBox.setChecked( matchResult.getEndFlag1() );
         endMidCheckBox.setChecked( matchResult.getEndFlag2() );
         endLowCheckBox.setChecked( matchResult.getEndFlag3() );
+        endObservationZoneCheckBox.setChecked( matchResult.getEndFlag4() );
 
         additionalNotesLayout.getEditText().setText(matchResult.getAdditionalNotes());
     }

@@ -89,7 +89,7 @@ public class CurrentGamePoints {
     }
     public int getAuto6Points(){
         if( result == null ) return 0;
-        return result.getAutoInt6() * 1;
+        return result.getAutoInt6() * 8;
     }
 
     public int getAuto7Counts(){
@@ -98,12 +98,12 @@ public class CurrentGamePoints {
     }
     public int getAuto7Points(){
         if( result == null ) return 0;
-        return result.getAutoInt7() * 1;
+        return result.getAutoInt7() * 4;
     }
 
     public int getAuto8Points(){
         if( result == null ) return 0;
-        return result.getAutoInt8() * 1;
+        return result.getAutoInt8() * 2;
     }
     public int getAuto8Counts(){
         if( result == null ) return 0;
@@ -112,7 +112,7 @@ public class CurrentGamePoints {
 
     public int getAuto9Points(){
         if( result == null ) return 0;
-        return result.getAutoInt9() * 1;
+        return result.getAutoInt9() * 10;
     }
     public int getAuto9Counts(){
         if( result == null ) return 0;
@@ -121,7 +121,7 @@ public class CurrentGamePoints {
 
     public int getAuto10Points(){
         if( result == null ) return 0;
-        return result.getAutoInt10() * 1;
+        return result.getAutoInt10() * 6;
     }
     public int getAuto10Counts(){
         if( result == null ) return 0;
