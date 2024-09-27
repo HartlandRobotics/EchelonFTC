@@ -95,10 +95,10 @@ public class ChartsActivity extends EchelonActivity {
                 for( MatchResult matchResult : matchResults ){
                     CurrentGamePoints currentGamePoints = MatchResult.toCurrentGamePoints(matchResult);
                     // 2324-FIM-HAQ-Q001-1
-
                     Integer matchNumber = Integer.valueOf(
                             //matchResult.getMatchKey().replace( matchResult.getEventKey() + "_qm", "")
                             matchResult.getMatchKey().split("-")[3].split("Q")[1]
+
 
                     );
 

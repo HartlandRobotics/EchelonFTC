@@ -297,7 +297,10 @@ public class BluetoothSyncActivity extends EchelonActivity {
             }
             bluetoothService.start();
         } else {
-            bluetoothService.setData( matchResults, pitScoutResults);
+
+        //if (bluetoothService.isEnabled()) {
+            bluetoothService.setData(matchResults, pitScoutResults);
+        //}
         }
     }
 

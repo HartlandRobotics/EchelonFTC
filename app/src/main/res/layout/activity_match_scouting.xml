@@ -18,6 +18,17 @@
         android:text="Basket"
         />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/topBasketLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/topBasket"
+        app:layout_constraintRight_toLeftOf="@+id/topBasket"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:text="H"
+        />
+
     <ImageButton
         android:id="@+id/topBasket"
         android:layout_width="wrap_content"
@@ -39,6 +50,17 @@
         tools:text="0"
         />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/midBasketLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/midBasket"
+        app:layout_constraintRight_toLeftOf="@+id/midBasket"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:text="L"
+        />
+
     <ImageButton
         android:id="@+id/midBasket"
         android:layout_width="wrap_content"
@@ -57,6 +79,17 @@
         app:layout_constraintLeft_toLeftOf="@+id/topBasketText"
         android:textSize="48sp"
         tools:text="0"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lowBasketLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/lowBasket"
+        app:layout_constraintRight_toLeftOf="@id/lowBasket"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:text="NZ"
         />
 
     <ImageButton
@@ -91,6 +124,17 @@
         android:text="Specimen"
         />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/topSpecimenLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/topSpecimen"
+        app:layout_constraintRight_toLeftOf="@id/topSpecimen"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:text="H"
+        />
+
     <ImageButton
         android:id="@+id/topSpecimen"
         android:layout_width="wrap_content"
@@ -111,6 +155,17 @@
         android:layout_marginLeft="30dp"
         android:textSize="48sp"
         tools:text="0"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lowSpecimenLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/lowSpecimen"
+        app:layout_constraintRight_toLeftOf="@+id/lowSpecimen"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:text="L"
         />
 
     <ImageButton
