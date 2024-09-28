@@ -154,7 +154,7 @@ public class CurrentGamePoints {
     }
     public int getTeleOp1Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt1() * 1;
+        return result.getTeleOpInt1() * 8;
     }
 
     public int getTeleOp2Counts(){
@@ -163,7 +163,7 @@ public class CurrentGamePoints {
     }
     public int getTeleOp2Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt2() * 1;
+        return result.getTeleOpInt2() * 4;
     }
 
     public int getTeleOp3Counts(){
@@ -172,7 +172,7 @@ public class CurrentGamePoints {
     }
     public int getTeleOp3Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt3() * 1;
+        return result.getTeleOpInt3() * 2;
     }
 
 
@@ -182,7 +182,7 @@ public class CurrentGamePoints {
     }
     public int getTeleOp4Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt4() * 1;
+        return result.getTeleOpInt4() * 10;
     }
 
     public int getTeleOp5Counts(){
@@ -191,13 +191,16 @@ public class CurrentGamePoints {
     }
     public int getTeleOp5Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt5() * 1;
+        return result.getTeleOpInt5() * 6;
     }
 
     public int getEndPoints() {
         int endPoints = 0;
         endPoints += this.getEnd1Points();
         endPoints += this.getEnd2Points();
+        endPoints += this.getEnd3Points();
+        endPoints += this.getEnd4Points();
+
         endPoints += this.getEnd6Points();
         return endPoints;
     }
@@ -205,6 +208,8 @@ public class CurrentGamePoints {
         int endCounts = 0;
         endCounts += this.getEnd1Counts();
         endCounts += this.getEnd2Counts();
+        endCounts += this.getEnd3Counts();
+        endCounts += this.getEnd4Counts();
         endCounts += this.getEnd6Counts();
         return endCounts;
     }
@@ -215,7 +220,7 @@ public class CurrentGamePoints {
     }
     public int getEnd1Points(){
         if( result == null ) return 0;
-        return result.getEndFlag1() ? 1:0;
+        return result.getEndFlag1() ? 3:0;
     }
 
     public int getEnd2Counts(){
@@ -224,7 +229,23 @@ public class CurrentGamePoints {
     }
     public int getEnd2Points(){
         if( result == null ) return 0;
-        return result.getEndFlag2() ? 1:0;
+        return result.getEndFlag2() ? 3:0;
+    }
+    public int getEnd3Counts(){
+        if( result == null ) return 0;
+        return result.getEndFlag3() ? 1:0;
+    }
+    public int getEnd3Points(){
+        if( result == null ) return 0;
+        return result.getEndFlag3() ? 15:0;
+    }
+    public int getEnd4Counts(){
+        if( result == null ) return 0;
+        return result.getEndFlag4() ? 1:0;
+    }
+    public int getEnd4Points(){
+        if( result == null ) return 0;
+        return result.getEndFlag4() ? 30:0;
     }
 
     public int getEnd6Counts(){
