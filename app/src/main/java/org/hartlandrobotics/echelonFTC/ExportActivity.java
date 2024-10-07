@@ -83,25 +83,27 @@ public class ExportActivity extends EchelonActivity {
         matchResultViewModel.getMatchResultsWithTeamMatchByEvent(status.getEventKey()).observe(this, matchResults -> {
 
             try (FileOutputStream outputStream = new FileOutputStream(file)) {
-                String header = "Event_Key,Match_Key,Team_Key,Match_Name,Team_Number"
+                String header = "Match_Result_Key,Event_Key,Match_Key,Team_Key,has_been_synced"
                         + ",AutoFlag1 ,AutoFlag2, AutoFlag3, AutoFlag4, AutoFlag5"
                         + ",AutoInt6 ,AutoInt7 ,AutoInt8 ,AutoInt9 ,AutoInt10"
                         + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
                         + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6"
-                        + ",DefensesCount,Match_Result_Key, AdditionalNotes\n";
+                        + ",AdditionalNotes, DefensesCount\n";
                 outputStream.write(header.getBytes());
                 for (MatchResultWithTeamMatch matchResultWithTeamMatch : matchResults) {
 
                     MatchResult mr = matchResultWithTeamMatch.matchResult;
-                    Match m = matchResultWithTeamMatch.match;
-                    Team t = matchResultWithTeamMatch.team;
+                    //Match m = matchResultWithTeamMatch.match;
+                    //Team t = matchResultWithTeamMatch.team;
 
                     List<String> dataForFile = new ArrayList<>();
+                    dataForFile.add(mr.getMatchResultKey());
                     dataForFile.add(mr.getEventKey());
                     dataForFile.add(mr.getMatchKey());
                     dataForFile.add(mr.getTeamKey());
-                    dataForFile.add(String.valueOf(m.getMatchName()));
-                    dataForFile.add(String.valueOf(t.getTeamNumber()));
+                    dataForFile.add(String.valueOf(mr.getHasBeenSynced()));
+                    //dataForFile.add(String.valueOf(m.getMatchName()));
+                    //dataForFile.add(String.valueOf(t.getTeamNumber()));
 
                     dataForFile.add(String.valueOf(mr.getAutoFlag1()));
                     dataForFile.add(String.valueOf(mr.getAutoFlag2()));
@@ -109,20 +111,27 @@ public class ExportActivity extends EchelonActivity {
                     dataForFile.add(String.valueOf(mr.getAutoFlag4()));
                     dataForFile.add(String.valueOf(mr.getAutoFlag5()));
 
+                    dataForFile.add(String.valueOf(mr.getAutoInt6()));
+                    dataForFile.add(String.valueOf(mr.getAutoInt7()));
+                    dataForFile.add(String.valueOf(mr.getAutoInt8()));
+                    dataForFile.add(String.valueOf(mr.getAutoInt9()));
+                    dataForFile.add(String.valueOf(mr.getAutoInt10()));
+
                     dataForFile.add(String.valueOf(mr.getTeleOpInt1()));
                     dataForFile.add(String.valueOf(mr.getTeleOpInt2()));
                     dataForFile.add(String.valueOf(mr.getTeleOpInt3()));
                     dataForFile.add(String.valueOf(mr.getTeleOpInt4()));
                     dataForFile.add(String.valueOf(mr.getTeleOpInt5()));
-                    dataForFile.add(String.valueOf(mr.getDefenseCount()));
 
                     dataForFile.add(String.valueOf(mr.getEndFlag1()));
                     dataForFile.add(String.valueOf(mr.getEndFlag2()));
                     dataForFile.add(String.valueOf(mr.getEndFlag3()));
                     dataForFile.add(String.valueOf(mr.getEndFlag4()));
                     dataForFile.add(String.valueOf(mr.getEndInt6()));
-                    dataForFile.add(mr.getMatchResultKey());
-                    dataForFile.add(mr.getAdditionalNotes());
+
+                    dataForFile.add("test");//(mr.getAdditionalNotes());
+                    dataForFile.add(String.valueOf(mr.getDefenseCount()));
+
                     String outputString = dataForFile.stream().collect(Collectors.joining(",")) + "\n";
                     outputStream.write(outputString.getBytes());
                 }
@@ -218,19 +227,21 @@ public class ExportActivity extends EchelonActivity {
             timesRan++;
             String currentLine = inputLines.get(lineIndex);
             String[] columns = currentLine.split(",");
+            //String header = "Event_Key,Match_Key,Team_Key"
 
-            String header = "Event_Key,Match_Key,Team_Key,Match_Name,Team_Number"
+            String header = "Match_Result_Key, Event_Key,Match_Key,Team_Key,has_been_synced"
                     + ",AutoFlag1 ,AutoFlag2, AutoFlag3, AutoFlag4, AutoFlag5"
                     + ",AutoInt6 ,AutoInt7 ,AutoInt8 ,AutoInt9 ,AutoInt10"
                     + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
                     + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6"
-                    + ",DefensesCount,Match_Result_Key, AdditionalNotes\n";
+                    //+ ",DefensesCount,Match_Result_Key"
+                    + ", AdditionalNotes\n";
 
-            String eventKey = columns[0];
-            String matchKey = columns[1];
-            String teamKey = columns[2];
-            int matchNum = Integer.parseInt(columns[3]);
-            int teamNum = Integer.parseInt(columns[4]);
+            String matchResultKey = columns[0];
+            String eventKey = columns[1];
+            String matchKey = columns[2];
+            String teamKey = columns[3];
+            String has_been_synced = columns[4];
 
             String AutoFlag1 = columns[5];
             String AutoFlag2 = columns[6];
@@ -238,27 +249,27 @@ public class ExportActivity extends EchelonActivity {
             String AutoFlag4 = columns[8];
             String AutoFlag5 = columns[9];
 
-            String AutoInt6 = columns[5];
-            String AutoInt7 = columns[6];
-            String AutoInt8 = columns[7];
-            String AutoInt9 = columns[8];
-            String AutoInt10 = columns[9];
+            String AutoInt6 = columns[10];
+            String AutoInt7 = columns[11];
+            String AutoInt8 = columns[12];
+            String AutoInt9 = columns[13];
+            String AutoInt10 = columns[14];
 
-            String TeleOpInt1 =columns[10];
-            String TeleOpInt2 =columns[11];
-            String TeleOpInt3 =columns[12];
-            String TeleOpInt4 =columns[13];
-            String TeleOpInt5 =columns[14];
+            String TeleOpInt1 =columns[15];
+            String TeleOpInt2 =columns[16];
+            String TeleOpInt3 =columns[17];
+            String TeleOpInt4 =columns[18];
+            String TeleOpInt5 =columns[19];
 
-            String EndFlag1 =columns[16];
-            String EndFlag2 =columns[17];
-            String EndFlag3 =columns[18];
-            String EndFlag4 =columns[19];
-            String EndInt6 =columns[20];
+            String EndFlag1 =columns[20];
+            String EndFlag2 =columns[21];
+            String EndFlag3 =columns[22];
+            String EndFlag4 =columns[23];
+            String EndInt6 =columns[24];
 
-            String teleDef =columns[15];
-            String matchResultKey = columns[21];
-            String AdditionalNotes = columns[22];
+            String teleDef = "0";
+            //String matchResultKey = columns[26];
+            String AdditionalNotes = columns[25];
 
             MatchResult matchResult = new MatchResult(
                     matchResultKey,
@@ -291,7 +302,9 @@ public class ExportActivity extends EchelonActivity {
                     EndFlag4.equalsIgnoreCase("true"),
                     Integer.parseInt(EndInt6),
 
+
                     AdditionalNotes,
+                    //,
                     Integer.parseInt(teleDef)
             );
             matchResultViewModel.upsert(matchResult);
