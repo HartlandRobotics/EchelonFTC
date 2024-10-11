@@ -74,14 +74,14 @@ public class PitScout {
     @ColumnInfo(name = "side_swing")
     private int sideSwing;
 
-    @ColumnInfo(name = "driver_experience")
-    private int driverExperience;
+    @ColumnInfo(name="robot_drive_train")
+    private String robotDriveTrain;
 
-    @ColumnInfo(name = "operator_experience")
-    private int operatorExperience;
+    @ColumnInfo(name="robot_ingest")
+    private String robotIngest;
 
-    @ColumnInfo(name = "human_player_accuracy")
-    private double humanPlayerAccuracy;
+    @ColumnInfo(name="robot_outgest")
+    private String robotOutgest;
 
     @ColumnInfo(name = "extra_notes")
     private String extraNotes;
@@ -90,7 +90,11 @@ public class PitScout {
     public PitScout(){
     }
 
-    public PitScout(@NonNull String pitScoutKey, @NonNull String eventKey, @NonNull String teamKey, boolean hasBeenSynced, boolean hasAutonomous, boolean helpCreatingAuto, @NonNull String codingLanguage, boolean shootsInAuto, double percentAutoShots, int ballsPickedOrShotInAuto, boolean canShoot, double shootingAccuracy, @NonNull String preferredGoal, boolean canPlayDefense, boolean canRobotHang, int highestHangBar, int hangTime, @NonNull String preferredHangingSpot, int sideSwing, int driverExperience, int operatorExperience, double humanPlayerAccuracy, @NonNull String extraNotes) {
+    public PitScout(@NonNull String pitScoutKey, @NonNull String eventKey, @NonNull String teamKey, boolean hasBeenSynced,
+                    boolean hasAutonomous, boolean helpCreatingAuto, @NonNull String codingLanguage, boolean shootsInAuto, double percentAutoShots, int ballsPickedOrShotInAuto,
+                    boolean canShoot, double shootingAccuracy, @NonNull String preferredGoal,
+                    boolean canPlayDefense, boolean canRobotHang, int highestHangBar, int hangTime, @NonNull String preferredHangingSpot, int sideSwing,
+                    @NonNull String robotDriveTrain, @NonNull String robotIngest, @NonNull String robotOutgest, @NonNull String extraNotes) {
         if(StringUtils.isBlank(pitScoutKey)){
             pitScoutKey = UUID.randomUUID().toString();
         }
@@ -114,9 +118,10 @@ public class PitScout {
         this.hangTime = hangTime;
         this.preferredHangingSpot = preferredHangingSpot;
         this.sideSwing = sideSwing;
-        this.driverExperience = driverExperience;
-        this.operatorExperience = operatorExperience;
-        this.humanPlayerAccuracy = humanPlayerAccuracy;
+
+        this.robotDriveTrain = robotDriveTrain;
+        this.robotIngest = robotIngest;
+        this.robotOutgest = robotOutgest;
         this.extraNotes = extraNotes;
     }
 
@@ -278,25 +283,28 @@ public class PitScout {
         this.sideSwing = sideSwing;
     }
 
-    public int getDriverExperience() {
-        return driverExperience;
+    @NonNull
+    public String getRobotDriveTrain() {
+        return robotDriveTrain;
+    }
+    public void setRobotDriveTrain(@NonNull String robotDriveTrain) {
+        this.robotDriveTrain = robotDriveTrain;
     }
 
-    public void setDriverExperience(int driverExperience) {
-        this.driverExperience = driverExperience;
+    @NonNull
+    public String getRobotIngest() {
+        return robotIngest;
+    }
+    public void setRobotIngest(@NonNull String robotIngest) {
+        this.robotIngest = robotIngest;
     }
 
-    public int getOperatorExperience() {
-        return operatorExperience;
+    @NonNull
+    public String getRobotOutgest() {
+        return robotOutgest;
     }
-
-    public void setOperatorExperience(int operatorExperience) {
-        this.operatorExperience = operatorExperience;
-    }
-
-    public double getHumanPlayerAccuracy() { return humanPlayerAccuracy; }
-    public void setHumanPlayerAccuracy( double humanPlayerAccuracy ){
-        this.humanPlayerAccuracy = humanPlayerAccuracy;
+    public void setRobotOutgest(@NonNull String robotOutgest) {
+        this.robotOutgest = robotOutgest;
     }
 
     @NonNull

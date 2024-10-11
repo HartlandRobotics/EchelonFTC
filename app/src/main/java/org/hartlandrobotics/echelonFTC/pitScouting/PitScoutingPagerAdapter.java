@@ -19,10 +19,10 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
 
     private PitScout data;
 
-    private static final int AUTO_POSITION = 0;
-    private static final int TELEOP_POSITION = 1;
-    private static final int ENDGAME_POSITION = 2;
-    private static final int TEAM_POSITION = 3;
+    private static final int TEAM_POSITION = 0;
+    private static final int AUTO_POSITION = 1;
+    private static final int TELEOP_POSITION = 2;
+    private static final int ENDGAME_POSITION = 3;
     private static final int PHOTOS_POSITION = 4;
 
     private PitScoutAutoFragment autoFragment;
@@ -64,10 +64,11 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
     private Map<Integer, String> titleByPosition = new HashMap<>();
     public String getTabTitle(int position){
         if( titleByPosition.size() == 0 ){
-            titleByPosition.put(0,"Auto");
-            titleByPosition.put(1,"Tele Op");
-            titleByPosition.put(2, "End  Game");
-            titleByPosition.put(3, "Team");
+            titleByPosition.put(0, "Robot");
+
+            titleByPosition.put(1,"Auto");
+            titleByPosition.put(2,"Tele Op");
+            titleByPosition.put(3, "End  Game");
             titleByPosition.put(4, "Photos");
         }
         return titleByPosition.get(position);

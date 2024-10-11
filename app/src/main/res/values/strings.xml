@@ -7,10 +7,31 @@
         <item>2025</item>
     </string-array>
     <string-array name="programming_languages">
-        <item>LabView</item>
         <item>Java</item>
+        <item>Labview</item>
         <item>C++</item>
     </string-array>
+    <string-array name="drive_train">
+        <item></item>
+        <item>2wd</item>
+        <item>4wd</item>
+        <item>6wd</item>
+        <item>mecanum</item>
+        <item>x</item>
+        <item>h</item>
+        <item>swerve</item>
+    </string-array>
+    <string-array name="ingest_types">
+        <item></item>
+        <item>claw</item>
+        <item>active</item>
+    </string-array>
+    <string-array name="outgest_types">
+        <item></item>
+        <item>arm</item>
+        <item>lift</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -15,11 +17,21 @@ import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
 
 public class PitScoutTeamFragment extends Fragment {
-    TextInputLayout seasonNumberLayout;
-    TextInputLayout competitionsThisSeasonLayout;
-    TextInputLayout driverSeasonNumberLayout;
-    TextInputLayout operatorSeasonNumberLayout;
-    TextInputLayout humanAccuracyLayout;
+
+    TextInputLayout driveTrainLayout;
+    AutoCompleteTextView driveTrainAutoComplete;
+    String defaultDriveTrain;
+
+    TextInputLayout ingestLayout;
+    AutoCompleteTextView ingestAutoComplete;
+    String defaultIngest;
+
+    TextInputLayout outgestLayout;
+    AutoCompleteTextView outgestAutoComplete;
+    String defaultOutgest;
+
+
+
     TextInputLayout additionalNotesLayout;
 
     PitScout data;
@@ -62,24 +74,43 @@ public class PitScoutTeamFragment extends Fragment {
     }
 
     private void setupControls(View view){
-        driverSeasonNumberLayout = view.findViewById(R.id.driverSeasonNumber);
-        operatorSeasonNumberLayout = view.findViewById(R.id.operatorSeasonNumber);
-        humanAccuracyLayout = view.findViewById(R.id.humanShotAccuracy);
+        driveTrainLayout = view.findViewById(R.id.driveTrain);
+        driveTrainAutoComplete = view.findViewById(R.id.driveTrainAutoComplete);
+        String[] driveTrains = getResources().getStringArray(R.array.drive_train);
+        defaultDriveTrain = driveTrains[0];
+        ArrayAdapter adapterDriveTrain = new ArrayAdapter(getActivity(), R.layout.dropdown_item, driveTrains);
+        driveTrainAutoComplete.setAdapter(adapterDriveTrain);
+
+        ingestLayout = view.findViewById(R.id.robotIngest);
+        ingestAutoComplete = view.findViewById(R.id.robotIngestAutoComplete);
+        String[] ingests = getResources().getStringArray(R.array.ingest_types);
+        defaultIngest = ingests[0];
+        ArrayAdapter adapterIngest = new ArrayAdapter(getActivity(), R.layout.dropdown_item, ingests);
+        ingestAutoComplete.setAdapter(adapterIngest);
+
+        outgestLayout = view.findViewById(R.id.robotOutgest);
+        outgestAutoComplete = view.findViewById(R.id.robotOutgestAutoComplete);
+        String[] outgests = getResources().getStringArray(R.array.outgest_types);
+        defaultOutgest = outgests[0];
+        ArrayAdapter adapterOutgest = new ArrayAdapter(getActivity(), R.layout.dropdown_item, outgests);
+        outgestAutoComplete.setAdapter(adapterOutgest);
+
         additionalNotesLayout = view.findViewById(R.id.additionalNotes);
+
     }
 
     public void populateControlsFromData(){
         if( data == null ) return;
-        if( driverSeasonNumberLayout == null ) return;
+        if( driveTrainLayout == null ) return;
 
-        String driverExperienceText = String.valueOf(data.getDriverExperience());
-        driverSeasonNumberLayout.getEditText().setText(driverExperienceText);
+        String driveType = StringUtils.defaultIfBlank(data.getRobotDriveTrain(), defaultDriveTrain);
+        driveTrainAutoComplete.setText(driveType, false);
 
-        String operatorExperienceText = String.valueOf(data.getOperatorExperience());
-        operatorSeasonNumberLayout.getEditText().setText(operatorExperienceText);
+        String ingestType = StringUtils.defaultIfBlank(data.getRobotIngest(), defaultIngest);
+        driveTrainAutoComplete.setText(ingestType, false);
 
-        String humanAccuracyText = String.valueOf(data.getHumanPlayerAccuracy());
-        humanAccuracyLayout.getEditText().setText(humanAccuracyText);
+        String outgestType = StringUtils.defaultIfBlank(data.getRobotOutgest(), defaultOutgest);
+        driveTrainAutoComplete.setText(outgestType, false);
 
         String additionalNotes = StringUtils.defaultIfBlank(data.getExtraNotes(), StringUtils.EMPTY);
         additionalNotesLayout.getEditText().setText(additionalNotes);
@@ -87,16 +118,16 @@ public class PitScoutTeamFragment extends Fragment {
 
     public void populateDataFromControls(){
         if( data == null ) return;
-        if( driverSeasonNumberLayout == null ) return;
+        if( driveTrainLayout == null ) return;
 
-        int driverExperience= Integer.valueOf( driverSeasonNumberLayout.getEditText().getText().toString());
-        data.setDriverExperience(driverExperience);
+        String driveTrain = StringUtils.defaultIfBlank(driveTrainLayout.getEditText().toString(), StringUtils.EMPTY);
+        data.setRobotDriveTrain(driveTrain);
 
-        int operatorExperience = Integer.valueOf( operatorSeasonNumberLayout.getEditText().getText().toString());
-        data.setOperatorExperience(operatorExperience);
+        String outgest = StringUtils.defaultIfBlank(outgestLayout.getEditText().toString(), StringUtils.EMPTY);
+        data.setRobotOutgest(outgest);
 
-        double humanAccuracy = Double.valueOf( humanAccuracyLayout.getEditText().getText().toString());
-        data.setHumanPlayerAccuracy(humanAccuracy);
+        String ingest = StringUtils.defaultIfBlank(ingestLayout.getEditText().toString(), StringUtils.EMPTY);
+        data.setRobotIngest(ingest);
 
         String additionalNotes = additionalNotesLayout.getEditText().getText().toString();
         data.setExtraNotes(additionalNotes);
