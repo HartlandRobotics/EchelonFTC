@@ -186,11 +186,7 @@ public class ExportActivity extends EchelonActivity {
                         List<String> psData = new ArrayList<>();
                         psData.add(ps.getTeamKey());
                         psData.add(String.valueOf(ps.getHasAutonomous()));
-                        psData.add(String.valueOf(ps.getHelpCreatingAuto()));
-                        psData.add(ps.getCodingLanguage());
-                        psData.add(String.valueOf(ps.getShootsInAuto()));
-                        psData.add(String.valueOf(ps.getPercentAutoShots()));
-                        psData.add(String.valueOf(ps.getBallsPickedOrShotInAuto()));
+
                         psData.add(String.valueOf(ps.getCanShoot()));
                         psData.add(String.valueOf(ps.getShootingAccuracy()));
                         psData.add(ps.getPreferredGoal());

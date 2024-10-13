@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
 
-public class PitScoutTeamFragment extends Fragment {
+public class PitScoutRobotFragment extends Fragment {
 
     TextInputLayout driveTrainLayout;
     AutoCompleteTextView driveTrainAutoComplete;
@@ -41,7 +41,7 @@ public class PitScoutTeamFragment extends Fragment {
         populateControlsFromData();
     }
 
-    public PitScoutTeamFragment() {
+    public PitScoutRobotFragment() {
         // Required empty public constructor
     }
 
@@ -54,7 +54,7 @@ public class PitScoutTeamFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pitscout_team, container, false);
+        View view = inflater.inflate(R.layout.fragment_pitscout_robot, container, false);
 
         setupControls(view);
 

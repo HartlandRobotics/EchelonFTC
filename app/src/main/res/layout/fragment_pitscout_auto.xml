@@ -42,56 +42,6 @@
             </RadioGroup>
         </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/missingAutoLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <RadioGroup
-            android:id="@+id/helpAutoGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:checkedButton="@id/helpAutoNo"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Would you like help creating a basic one?" />
-
-            <RadioButton
-                android:id="@+id/helpAutoYes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yes" />
-
-            <RadioButton
-                android:id="@+id/helpAutoNo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No" />
-
-        </RadioGroup>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/autoLanguage"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Programming Language"
-            >
-
-            <AutoCompleteTextView
-                android:id="@+id/autoLanguageAutoComplete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/hasAutoLayout"
@@ -99,11 +49,28 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/autoBallCount"
+            android:id="@+id/preferred"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How much cargo do you shoot?"
+            android:hint="Preferred Starting Position"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/preferredAutoComplete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/autoPoints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="How many points in auto?"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
 
@@ -118,21 +85,37 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/shootingPercentage"
+            android:id="@+id/prioritize"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How many shots do you make out of 10?"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="What are you priorizing"
             >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:inputType="number"
-            />
-
+            <AutoCompleteTextView
+                android:id="@+id/prioritizeAutoComplete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                />
         </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/shootingPercentage"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="How many shots do you make out of 10?"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--            >-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="0"-->
+<!--            android:inputType="number"-->
+<!--            />-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
 
     </LinearLayout>

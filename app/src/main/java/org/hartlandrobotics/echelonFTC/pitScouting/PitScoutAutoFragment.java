@@ -24,15 +24,20 @@ public class PitScoutAutoFragment extends Fragment {
     private static final String TAG = "PitScoutAutoFragment";
 
     RadioGroup hasAutoGroup;
-    RadioGroup helpAutoGroup;
-    TextInputLayout programmingLanguageLayout;
-    AutoCompleteTextView programmingLanguageAutoComplete;
-    String defaultProgrammingLanguage;
-    LinearLayout missingAutoLayout;
+    //RadioGroup helpAutoGroup;
+
+    TextInputLayout preferredLayout;
+    AutoCompleteTextView preferredAutoComplete;
+    String defaultPreferred;
+
+    TextInputLayout autoPointsLayout;
+
+    TextInputLayout prioritizedLayout;
+    AutoCompleteTextView prioritizedAutoComplete;
+    String defaultPrioritization;
+
     LinearLayout hasAutoLayout;
     TextInputLayout autoLanguage;
-    TextInputLayout shotCount;
-    TextInputLayout shootingPercentage;
 
 
     PitScout data;
@@ -84,25 +89,43 @@ public class PitScoutAutoFragment extends Fragment {
             setVisibility();
         });
 
-        shotCount = view.findViewById(R.id.autoBallCount);
+        //shotCount = view.findViewById(R.id.autoBallCount);
 
-        shootingPercentage = view.findViewById(R.id.shootingPercentage);
+        //shootingPercentage = view.findViewById(R.id.shootingPercentage);
 
-        missingAutoLayout = view.findViewById(R.id.missingAutoLayout);
+        //missingAutoLayout = view.findViewById(R.id.missingAutoLayout);
 
-        helpAutoGroup = view.findViewById(R.id.helpAutoGroup);
-        helpAutoGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            setVisibility();
-        });
+        //helpAutoGroup = view.findViewById(R.id.helpAutoGroup);
+        //helpAutoGroup.setOnCheckedChangeListener((group, checkedId) -> {
+        //    setVisibility();
+        //});
 
-        autoLanguage = view.findViewById(R.id.autoLanguage);
+        //autoLanguage = view.findViewById(R.id.autoLanguage);
 
-        programmingLanguageLayout = view.findViewById(R.id.autoLanguage);
-        programmingLanguageAutoComplete = view.findViewById(R.id.autoLanguageAutoComplete);
-        String[] languages = getResources().getStringArray(R.array.programming_languages);
-        defaultProgrammingLanguage = languages[0];
-        ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.dropdown_item, languages);
-        programmingLanguageAutoComplete.setAdapter(adapter);
+        //programmingLanguageLayout = view.findViewById(R.id.autoLanguage);
+        //programmingLanguageAutoComplete = view.findViewById(R.id.autoLanguageAutoComplete);
+        //String[] languages = getResources().getStringArray(R.array.programming_languages);
+        //defaultProgrammingLanguage = languages[0];
+        //ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.dropdown_item, languages);
+        //programmingLanguageAutoComplete.setAdapter(adapter);
+
+        preferredLayout = view.findViewById(R.id.preferred);
+        preferredAutoComplete = view.findViewById(R.id.preferredAutoComplete);
+        String[] startingPositions = getResources().getStringArray(R.array.starting_position_types);
+        defaultPreferred = startingPositions[0];
+        ArrayAdapter<String> startingPositionAdapter = new ArrayAdapter<String>(requireActivity(), R.layout.dropdown_item, startingPositions);
+        preferredAutoComplete.setAdapter(startingPositionAdapter);
+
+        autoPointsLayout = view.findViewById(R.id.autoPoints);
+
+        prioritizedLayout = view.findViewById(R.id.prioritize);
+        prioritizedAutoComplete = view.findViewById(R.id.prioritizeAutoComplete);
+        String[] startingPrioritization = getResources().getStringArray(R.array.prioritization);
+        defaultPrioritization = startingPrioritization[0];
+        ArrayAdapter<String> startingPrioritizationAdapter = new ArrayAdapter<String>(requireActivity(), R.layout.dropdown_item, startingPrioritization);
+        prioritizedAutoComplete.setAdapter(startingPrioritizationAdapter);
+
+
 
     }
 
@@ -115,18 +138,20 @@ public class PitScoutAutoFragment extends Fragment {
         boolean hasAuto = hasAutoGroup.getCheckedRadioButtonId() == R.id.hasAutoYes;
         data.setHasAutonomous(hasAuto);
 
-        String ballCountString = StringUtils.defaultIfBlank(shotCount.getEditText().getText().toString(), "0");
-        int ballCount = Integer.parseInt(ballCountString.toString());
-        data.setBallsPickedOrShotInAuto(ballCount);
+        String autoPreferredString = StringUtils.defaultIfBlank(preferredLayout.getEditText().getText().toString(), defaultPreferred.toString());
+        data.setAutoPreferred(autoPreferredString);
 
-        double shootingPercentageText = Double.valueOf(StringUtils.defaultIfBlank(shootingPercentage.getEditText().getText().toString(), "0"));
-        data.setPercentAutoShots(shootingPercentageText);
+        String autoPointsString = StringUtils.defaultIfBlank(autoPointsLayout.getEditText().getText().toString(), "0");
+        int autoPoints = Integer.parseInt(autoPointsString.toString());
+        data.setAutoPoints(autoPoints);
 
-        boolean wantsHelp = hasAutoGroup.getCheckedRadioButtonId() == R.id.helpAutoYes;
-        data.setHelpCreatingAuto(wantsHelp);
+        String autoPrioritizationString = StringUtils.defaultIfBlank(prioritizedLayout.getEditText().getText().toString(), defaultPrioritization.toString());
+        data.setAutoPrioritized(autoPrioritizationString);
 
-        String codingLanguage = StringUtils.defaultIfBlank(programmingLanguageAutoComplete.getEditableText().toString(), StringUtils.EMPTY);
-        data.setCodingLanguage(codingLanguage);
+        //double shootingPercentageText = Double.valueOf(StringUtils.defaultIfBlank(shootingPercentage.getEditText().getText().toString(), "0"));
+        //data.setPercentAutoShots(shootingPercentageText);
+
+
     }
 
     public void populateControlsFromData() {
@@ -140,37 +165,36 @@ public class PitScoutAutoFragment extends Fragment {
         int hasAutoCheckedButtonId = data.getHasAutonomous() ? R.id.hasAutoYes : R.id.hasAutoNo;
         hasAutoGroup.check(hasAutoCheckedButtonId);
 
-        double shootingPercentageValue = data.getPercentAutoShots();
-        shootingPercentage.getEditText().setText( String.valueOf(shootingPercentageValue));
+        String preferred = StringUtils.defaultIfBlank(data.getAutoPreferred(), defaultPreferred);
+        preferredAutoComplete.setText(preferred, false);
 
-        String ballsShotInAuto = StringUtils.defaultIfBlank(String.valueOf(data.getBallsPickedOrShotInAuto()), "0");
-        shotCount.getEditText().setText(ballsShotInAuto);
+        //double shootingPercentageValue = data.getPercentAutoShots();
+        //shootingPercentage.getEditText().setText( String.valueOf(shootingPercentageValue));
 
-        boolean wantsHelpWithAuto = data.getHelpCreatingAuto();
-        int wantsHelpCheckedButtonId = wantsHelpWithAuto ? R.id.helpAutoYes : R.id.helpAutoNo;
-        helpAutoGroup.check(wantsHelpCheckedButtonId);
+        String autoPointsString = StringUtils.defaultIfBlank(String.valueOf(data.getAutoPoints()), "0");
+        autoPointsLayout.getEditText().setText(autoPointsString);
 
-        String programmingLanguage = StringUtils.defaultIfBlank(data.getCodingLanguage(), defaultProgrammingLanguage);
-        programmingLanguageAutoComplete.setText(programmingLanguage, false);
+        String prioritize = StringUtils.defaultIfBlank(data.getAutoPrioritized(), defaultPrioritization);
+        prioritizedAutoComplete.setText(prioritize, false);
 
         setVisibility();
     }
 
     public void setVisibility() {
         if (hasAutoGroup.getCheckedRadioButtonId() == R.id.hasAutoYes) {
-            missingAutoLayout.setVisibility(View.GONE);
+            //missingAutoLayout.setVisibility(View.GONE);
             hasAutoLayout.setVisibility(View.VISIBLE);
-            autoLanguage.setVisibility(View.GONE);
+            //autoLanguage.setVisibility(View.GONE);
         } else {
-            missingAutoLayout.setVisibility(View.VISIBLE);
+            //missingAutoLayout.setVisibility(View.VISIBLE);
             hasAutoLayout.setVisibility(View.GONE);
-            autoLanguage.setVisibility(View.VISIBLE);
+            //autoLanguage.setVisibility(View.VISIBLE);
         }
 
-        if (helpAutoGroup.getCheckedRadioButtonId() == R.id.helpAutoNo) {
-            autoLanguage.setVisibility(View.GONE);
-        } else {
-            autoLanguage.setVisibility(View.VISIBLE);
-        }
+        //if (helpAutoGroup.getCheckedRadioButtonId() == R.id.helpAutoNo) {
+        //    autoLanguage.setVisibility(View.GONE);
+        //} else {
+        //    autoLanguage.setVisibility(View.VISIBLE);
+        //}
     }
 }

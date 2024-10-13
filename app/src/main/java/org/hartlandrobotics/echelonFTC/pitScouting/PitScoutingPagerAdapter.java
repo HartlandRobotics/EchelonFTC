@@ -28,7 +28,7 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
     private PitScoutAutoFragment autoFragment;
     private PitScoutTeleOpFragment teleOpFragment;
     private PitScoutEndGameFragment endGameFragment;
-    private PitScoutTeamFragment teamFragment;
+    private PitScoutRobotFragment teamFragment;
     private PitScoutPhotosFragment photosFragment;
 
     public PitScoutingPagerAdapter(
@@ -117,7 +117,7 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
                 return endGameFragment;
             case TEAM_POSITION:
                 Log.i(TAG, "creating new Team Fragment");
-                teamFragment = new PitScoutTeamFragment();
+                teamFragment = new PitScoutRobotFragment();
                 teamFragment.setData(data);
                 return teamFragment;
             case PHOTOS_POSITION:

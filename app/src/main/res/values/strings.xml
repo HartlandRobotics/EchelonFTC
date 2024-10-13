@@ -31,7 +31,12 @@
         <item>arm</item>
         <item>lift</item>
     </string-array>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="starting_position_types">
+        <item>Observation Zone</item>
+        <item>Net Zone</item>
+    </string-array>
+    <string-array name="prioritization">
+        <item>Samples</item>
+        <item>Specimen</item>
+    </string-array>
 </resources>

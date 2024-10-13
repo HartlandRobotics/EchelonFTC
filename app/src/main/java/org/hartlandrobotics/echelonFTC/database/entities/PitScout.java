@@ -32,20 +32,14 @@ public class PitScout {
     @ColumnInfo(name = "has_autonomous")
     private boolean hasAutonomous;
 
-    @ColumnInfo(name = "help_creating_auto")
-    private boolean helpCreatingAuto;
+    @ColumnInfo(name="auto_preferred")
+    private String autoPreferred;
 
-    @ColumnInfo(name = "coding_language")
-    private String codingLanguage;
+    @ColumnInfo(name = "auto_points")
+    private int autoPoints;
 
-    @ColumnInfo(name = "shoots_in_auto")
-    private boolean shootsInAuto;
-
-    @ColumnInfo(name = "percent_auto_shots")
-    private double percentAutoShots;
-
-    @ColumnInfo(name = "balls_picked_or_shot_in_auto")
-    private int ballsPickedOrShotInAuto;
+    @ColumnInfo(name="auto_prioritized")
+    private String autoPrioritized;
 
     @ColumnInfo(name = "can_shoot")
     private boolean canShoot;
@@ -91,7 +85,7 @@ public class PitScout {
     }
 
     public PitScout(@NonNull String pitScoutKey, @NonNull String eventKey, @NonNull String teamKey, boolean hasBeenSynced,
-                    boolean hasAutonomous, boolean helpCreatingAuto, @NonNull String codingLanguage, boolean shootsInAuto, double percentAutoShots, int ballsPickedOrShotInAuto,
+                    boolean hasAutonomous, String autoPreferred, int autoPoints, String autoPrioritized,
                     boolean canShoot, double shootingAccuracy, @NonNull String preferredGoal,
                     boolean canPlayDefense, boolean canRobotHang, int highestHangBar, int hangTime, @NonNull String preferredHangingSpot, int sideSwing,
                     @NonNull String robotDriveTrain, @NonNull String robotIngest, @NonNull String robotOutgest, @NonNull String extraNotes) {
@@ -104,11 +98,10 @@ public class PitScout {
         this.teamKey = teamKey;
         this.hasBeenSynced = hasBeenSynced;
         this.hasAutonomous = hasAutonomous;
-        this.helpCreatingAuto = helpCreatingAuto;
-        this.codingLanguage = codingLanguage;
-        this.shootsInAuto = shootsInAuto;
-        this.percentAutoShots = percentAutoShots;
-        this.ballsPickedOrShotInAuto = ballsPickedOrShotInAuto;
+        this.autoPreferred = autoPreferred;
+        this.autoPoints = autoPoints;
+        this.autoPrioritized = autoPrioritized;
+
         this.canShoot = canShoot;
         this.shootingAccuracy = shootingAccuracy;
         this.preferredGoal = preferredGoal;
@@ -168,46 +161,15 @@ public class PitScout {
         this.hasAutonomous = hasAutonomous;
     }
 
-    public boolean getHelpCreatingAuto() {
-        return helpCreatingAuto;
-    }
+    public String getAutoPreferred(){ return autoPreferred; }
+    public void setAutoPreferred(String autoPreferred){ this.autoPreferred = autoPreferred; }
 
-    public void setHelpCreatingAuto(boolean helpCreatingAuto) {
-        this.helpCreatingAuto = helpCreatingAuto;
-    }
+    public int getAutoPoints(){ return autoPoints; }
+    public void setAutoPoints(int autoPoints){ this.autoPoints = autoPoints; }
 
-    @NonNull
-    public String getCodingLanguage() {
-        return codingLanguage;
-    }
+    public String getAutoPrioritized(){ return autoPrioritized; }
+    public void setAutoPrioritized(String autoPrioritized){ this.autoPrioritized = autoPrioritized; }
 
-    public void setCodingLanguage(@NonNull String codingLanguage) {
-        this.codingLanguage = codingLanguage;
-    }
-
-    public boolean getShootsInAuto() {
-        return shootsInAuto;
-    }
-
-    public void setShootsInAuto(boolean shootsInAuto) {
-        this.shootsInAuto = shootsInAuto;
-    }
-
-    public double getPercentAutoShots() {
-        return percentAutoShots;
-    }
-
-    public void setPercentAutoShots(double percentAutoShots) {
-        this.percentAutoShots = percentAutoShots;
-    }
-
-    public int getBallsPickedOrShotInAuto() {
-        return ballsPickedOrShotInAuto;
-    }
-
-    public void setBallsPickedOrShotInAuto(int ballsPickedOrShotInAuto) {
-        this.ballsPickedOrShotInAuto = ballsPickedOrShotInAuto;
-    }
 
     public boolean getCanShoot() {
         return canShoot;
