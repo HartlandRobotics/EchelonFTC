@@ -97,7 +97,7 @@ public class PitScoutAutoFragment extends Fragment {
 
         prioritizedLayout = view.findViewById(R.id.prioritize);
         prioritizedAutoComplete = view.findViewById(R.id.prioritizeAutoComplete);
-        String[] startingPrioritization = getResources().getStringArray(R.array.prioritization);
+        String[] startingPrioritization = getResources().getStringArray(R.array.scoring);
         defaultPrioritization = startingPrioritization[0];
         ArrayAdapter<String> startingPrioritizationAdapter = new ArrayAdapter<String>(requireActivity(), R.layout.dropdown_item, startingPrioritization);
         prioritizedAutoComplete.setAdapter(startingPrioritizationAdapter);
@@ -128,6 +128,7 @@ public class PitScoutAutoFragment extends Fragment {
 
         int hasAutoCheckedButtonId = data.getHasAutonomous() ? R.id.hasAutoYes : R.id.hasAutoNo;
         hasAutoGroup.check(hasAutoCheckedButtonId);
+
 
         String preferred = StringUtils.defaultIfBlank(data.getAutoPreferred(), defaultPreferred);
         preferredAutoComplete.setText(preferred, false);

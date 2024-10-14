@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.RadioGroup;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -18,6 +20,16 @@ import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
 
 public class PitScoutTeleOpFragment extends Fragment {
     public static final String TAG = "PitScoutTeleOpFragment";
+
+    TextInputLayout preferredRoleLayout;
+    AutoCompleteTextView preferredRoleAutoComplete;
+    String defaultPreferredRole;
+
+    TextInputLayout preferredScoringLayout;
+    AutoCompleteTextView preferredScoringAutoComplete;
+    String defaultPreferredScoring;
+
+    TextInputLayout teleOpPointsLayout;
 
 
     RadioGroup doesShootGroup;
@@ -67,35 +79,40 @@ public class PitScoutTeleOpFragment extends Fragment {
     }
 
     private void setupControls(View view) {
-        doesShootGroup = view.findViewById(R.id.doesRobotShoot);
-        doesShootGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                boolean canShoot = checkedId == R.id.robotShootYes;
-                data.setCanShoot(canShoot);
-            }
-        });
+        preferredRoleLayout = view.findViewById(R.id.preferredRole);
+        preferredRoleAutoComplete = view.findViewById(R.id.preferredRoleAutoComplete);
+        String[] roles = getResources().getStringArray(R.array.preferred_role);
+        defaultPreferredRole = roles[0];
+        ArrayAdapter<String> roleAdapter = new ArrayAdapter<String>(requireActivity(), R.layout.dropdown_item, roles);
+        preferredRoleAutoComplete.setAdapter(roleAdapter);
 
-        shootingAccuracyLayout = view.findViewById(R.id.shootingAccuracy);
-        goalPreferenceGroup = view.findViewById(R.id.goalPreference);
-        defenseGroup = view.findViewById(R.id.robotDefense);
+        preferredScoringLayout = view.findViewById(R.id.preferredScoring);
+        preferredScoringAutoComplete = view.findViewById(R.id.preferredScoringAutoComplete);
+        String[] scoring = getResources().getStringArray(R.array.scoring);
+        defaultPreferredScoring = scoring[0];
+        ArrayAdapter<String> scoringAdapter = new ArrayAdapter<String>(requireActivity(), R.layout.dropdown_item, scoring);
+        preferredScoringAutoComplete.setAdapter(scoringAdapter);
+
+        teleOpPointsLayout = view.findViewById(R.id.teleOpPoints);
+
+
+
 
         areControlsSetup = true;
     }
 
     public void populateDataFromControls() {
         Log.i(TAG, "populate data from controls");
-        boolean doesShoot = doesShootGroup.getCheckedRadioButtonId() == R.id.robotShootYes;
-        data.setCanShoot(doesShoot);
+        String teleOpPreferredRoleString = StringUtils.defaultIfBlank(preferredRoleLayout.getEditText().getText().toString(), defaultPreferredRole.toString());
+        data.setTeleOpPreferredRole(teleOpPreferredRoleString);
 
-        String shootingPercentageText = StringUtils.defaultIfBlank(shootingAccuracyLayout.getEditText().getEditableText().toString(), "0");
-        data.setShootingAccuracy(Double.valueOf(shootingPercentageText));
+        String teleOpPreferredScoringString = StringUtils.defaultIfBlank(preferredScoringLayout.getEditText().getText().toString(), defaultPreferredScoring.toString());
+        data.setTeleOpPreferredScoring(teleOpPreferredScoringString);
 
-        String preferredGoal = goalPreferenceGroup.getCheckedRadioButtonId() == R.id.goalPreferenceHigh ? "high" : "low";
-        data.setPreferredGoal(preferredGoal);
+        String teleOpPointsString = StringUtils.defaultIfBlank(teleOpPointsLayout.getEditText().getText().toString(), "0");
+        int teleOpPoints = Integer.parseInt(teleOpPointsString.toString());
+        data.setAutoPoints(teleOpPoints);
 
-        boolean canPlayDefense = defenseGroup.getCheckedRadioButtonId() == R.id.robotDefenseYes;
-        data.setCanPlayDefense(canPlayDefense);
     }
 
     private void populateControlsFromData() {
@@ -109,19 +126,15 @@ public class PitScoutTeleOpFragment extends Fragment {
 
 
         Log.i(TAG, "populate controls from data");
-        boolean canShoot = data.getCanShoot();
-        int canShootSelection = canShoot ? R.id.robotShootYes : R.id.robotShootNo;
-        doesShootGroup.check(canShootSelection);
+        String preferredRole = StringUtils.defaultIfBlank(data.getTeleOpPreferredRole(), defaultPreferredRole);
+        preferredRoleAutoComplete.setText(preferredRole, false);
 
-        String shootingPercentageText = String.valueOf( data.getShootingAccuracy());
-        shootingAccuracyLayout.getEditText().setText(shootingPercentageText);
+        String preferredScoring = StringUtils.defaultIfBlank(data.getTeleOpPreferredScoring(), defaultPreferredScoring);
+        preferredScoringAutoComplete.setText(preferredScoring, false);
 
-        String preferredGoalText = StringUtils.defaultIfBlank( data.getPreferredGoal(), "low");
-        int preferredGoalSelection = preferredGoalText.equals("high") ? R.id.goalPreferenceHigh : R.id.goalPreferenceLow;
-        goalPreferenceGroup.check(preferredGoalSelection);
+        String teleOpPointsString = StringUtils.defaultIfBlank(String.valueOf(data.getTeleOpPoints()), "0");
+        teleOpPointsLayout.getEditText().setText(teleOpPointsString);
 
-        boolean canPlayDefense = data.getCanPlayDefense();
-        int canPlayDefenseSelection = canPlayDefense ? R.id.robotDefenseYes : R.id.robotDefenseNo;
-        defenseGroup.check(canPlayDefenseSelection);
+
     }
 }

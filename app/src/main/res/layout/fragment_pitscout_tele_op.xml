@@ -11,100 +11,57 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RadioGroup
-            android:id="@+id/doesRobotShoot"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/preferredRole"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checkedButton="@id/robotShootNo"
-            android:orientation="horizontal">
+            android:hint="What is your preferred role"
+            >
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
+            <AutoCompleteTextView
+                android:id="@+id/preferredRoleAutoComplete"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Can your robot shoot?"
+                android:inputType="none"
                 />
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/robotShootYes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yes" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/robotShootNo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No" />
-
-        </RadioGroup>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/shootingAccuracy"
+            android:id="@+id/preferredScoring"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How many shots do you make out of 10?"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:hint="What is your preferred scoring"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/preferredScoringAutoComplete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/teleOpPoints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="How many points in teleOp?"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="0"
                 android:inputType="number"
+
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <RadioGroup
-            android:id="@+id/goalPreference"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checkedButton="@id/goalPreferenceLow"
-            android:orientation="horizontal">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Which goal do you prefer to shoot in?"
-                />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/goalPreferenceHigh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="High" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/goalPreferenceLow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Low" />
-
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/robotDefense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checkedButton="@id/robotDefenseNo"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Are you willing to play defense?"
-                />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/robotDefenseYes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yes" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/robotDefenseNo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No" />
-
-        </RadioGroup>
 
     </LinearLayout>
 </LinearLayout>

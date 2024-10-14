@@ -41,17 +41,14 @@ public class PitScout {
     @ColumnInfo(name="auto_prioritized")
     private String autoPrioritized;
 
-    @ColumnInfo(name = "can_shoot")
-    private boolean canShoot;
+    @ColumnInfo(name="teleOp_preferred_role")
+    private String teleOpPreferredRole;
 
-    @ColumnInfo(name = "shooting_accuracy")
-    private double shootingAccuracy;
+    @ColumnInfo(name = "teleOp_preferred_scoring")
+    private String teleOpPreferredScoring;
 
-    @ColumnInfo(name = "preferred_goal")
-    private String preferredGoal;
-
-    @ColumnInfo(name = "can_play_defense")
-    private boolean canPlayDefense;
+    @ColumnInfo(name = "teleOp_points")
+    private int teleOpPoints;
 
     @ColumnInfo(name = "can_robot_hang")
     private boolean canRobotHang;
@@ -86,8 +83,8 @@ public class PitScout {
 
     public PitScout(@NonNull String pitScoutKey, @NonNull String eventKey, @NonNull String teamKey, boolean hasBeenSynced,
                     boolean hasAutonomous, String autoPreferred, int autoPoints, String autoPrioritized,
-                    boolean canShoot, double shootingAccuracy, @NonNull String preferredGoal,
-                    boolean canPlayDefense, boolean canRobotHang, int highestHangBar, int hangTime, @NonNull String preferredHangingSpot, int sideSwing,
+                    String teleOpPreferredRole, String teleOpPreferredScoring, int teleOpPoints,
+                    boolean canRobotHang, int highestHangBar, int hangTime, @NonNull String preferredHangingSpot, int sideSwing,
                     @NonNull String robotDriveTrain, @NonNull String robotIngest, @NonNull String robotOutgest, @NonNull String extraNotes) {
         if(StringUtils.isBlank(pitScoutKey)){
             pitScoutKey = UUID.randomUUID().toString();
@@ -102,10 +99,11 @@ public class PitScout {
         this.autoPoints = autoPoints;
         this.autoPrioritized = autoPrioritized;
 
-        this.canShoot = canShoot;
-        this.shootingAccuracy = shootingAccuracy;
-        this.preferredGoal = preferredGoal;
-        this.canPlayDefense = canPlayDefense;
+        this.teleOpPreferredRole = teleOpPreferredRole;
+        this.teleOpPreferredScoring = teleOpPreferredScoring;
+        this.teleOpPoints = teleOpPoints;
+
+
         this.canRobotHang = canRobotHang;
         this.highestHangBar = highestHangBar;
         this.hangTime = hangTime;
@@ -171,38 +169,15 @@ public class PitScout {
     public void setAutoPrioritized(String autoPrioritized){ this.autoPrioritized = autoPrioritized; }
 
 
-    public boolean getCanShoot() {
-        return canShoot;
-    }
+    public String getTeleOpPreferredRole(){ return teleOpPreferredRole; }
+    public void setTeleOpPreferredRole(String teleOpPreferredRole){ this.teleOpPreferredRole = teleOpPreferredRole; }
 
-    public void setCanShoot(boolean canShoot) {
-        this.canShoot = canShoot;
-    }
+    public String getTeleOpPreferredScoring(){ return teleOpPreferredScoring; }
+    public void setTeleOpPreferredScoring(String teleOpPreferredScoring){ this.teleOpPreferredScoring = teleOpPreferredScoring; }
 
-    public double getShootingAccuracy() {
-        return shootingAccuracy;
-    }
+    public int getTeleOpPoints(){ return teleOpPoints; }
+    public void setTeleOpPoints(int teleOpPoints){ this.teleOpPoints = teleOpPoints; }
 
-    public void setShootingAccuracy(double shootingAccuracy) {
-        this.shootingAccuracy = shootingAccuracy;
-    }
-
-    @NonNull
-    public String getPreferredGoal() {
-        return preferredGoal;
-    }
-
-    public void setPreferredGoal(@NonNull String preferredGoal) {
-        this.preferredGoal = preferredGoal;
-    }
-
-    public boolean getCanPlayDefense() {
-        return canPlayDefense;
-    }
-
-    public void setCanPlayDefense(boolean canPlayDefense) {
-        this.canPlayDefense = canPlayDefense;
-    }
 
     public boolean getCanRobotHang() {
         return canRobotHang;

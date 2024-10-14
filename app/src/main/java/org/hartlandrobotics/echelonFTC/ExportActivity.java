@@ -187,10 +187,6 @@ public class ExportActivity extends EchelonActivity {
                         psData.add(ps.getTeamKey());
                         psData.add(String.valueOf(ps.getHasAutonomous()));
 
-                        psData.add(String.valueOf(ps.getCanShoot()));
-                        psData.add(String.valueOf(ps.getShootingAccuracy()));
-                        psData.add(ps.getPreferredGoal());
-                        psData.add(String.valueOf(ps.getCanPlayDefense()));
                         psData.add(String.valueOf(ps.getCanRobotHang()));
                         psData.add(String.valueOf(ps.getHighestHangBar()));
                         psData.add(String.valueOf(ps.getHangTime()));

@@ -35,8 +35,13 @@
         <item>Observation Zone</item>
         <item>Net Zone</item>
     </string-array>
-    <string-array name="prioritization">
+    <string-array name="scoring">
         <item>Samples</item>
         <item>Specimen</item>
     </string-array>
+    <string-array name="preferred_role">
+        <item>Runner</item>
+        <item>Scorer</item>
+    </string-array>
+
 </resources>

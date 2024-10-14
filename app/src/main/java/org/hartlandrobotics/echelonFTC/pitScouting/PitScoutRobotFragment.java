@@ -107,10 +107,10 @@ public class PitScoutRobotFragment extends Fragment {
         driveTrainAutoComplete.setText(driveType, false);
 
         String ingestType = StringUtils.defaultIfBlank(data.getRobotIngest(), defaultIngest);
-        driveTrainAutoComplete.setText(ingestType, false);
+        ingestAutoComplete.setText(ingestType, false);
 
         String outgestType = StringUtils.defaultIfBlank(data.getRobotOutgest(), defaultOutgest);
-        driveTrainAutoComplete.setText(outgestType, false);
+        outgestAutoComplete.setText(outgestType, false);
 
         String additionalNotes = StringUtils.defaultIfBlank(data.getExtraNotes(), StringUtils.EMPTY);
         additionalNotesLayout.getEditText().setText(additionalNotes);
@@ -120,13 +120,13 @@ public class PitScoutRobotFragment extends Fragment {
         if( data == null ) return;
         if( driveTrainLayout == null ) return;
 
-        String driveTrain = StringUtils.defaultIfBlank(driveTrainLayout.getEditText().toString(), StringUtils.EMPTY);
+        String driveTrain = StringUtils.defaultIfBlank(driveTrainLayout.getEditText().getText().toString(), StringUtils.EMPTY);
         data.setRobotDriveTrain(driveTrain);
 
-        String outgest = StringUtils.defaultIfBlank(outgestLayout.getEditText().toString(), StringUtils.EMPTY);
+        String outgest = StringUtils.defaultIfBlank(outgestLayout.getEditText().getText().toString(), StringUtils.EMPTY);
         data.setRobotOutgest(outgest);
 
-        String ingest = StringUtils.defaultIfBlank(ingestLayout.getEditText().toString(), StringUtils.EMPTY);
+        String ingest = StringUtils.defaultIfBlank(ingestLayout.getEditText().getText().toString(), StringUtils.EMPTY);
         data.setRobotIngest(ingest);
 
         String additionalNotes = additionalNotesLayout.getEditText().getText().toString();
