@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.RadioGroup;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -18,8 +20,9 @@ import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
 public class PitScoutEndGameFragment extends Fragment {
 
     TextInputLayout hangTimeLayout;
-    RadioGroup hangPreferenceGroup;
-    TextInputLayout robotSwingLayout;
+    TextInputLayout hangLayout;
+    AutoCompleteTextView hangAutoComplete;
+    String defaultHang;
 
     public PitScoutEndGameFragment() {
         // Required empty public constructor
@@ -61,8 +64,14 @@ public class PitScoutEndGameFragment extends Fragment {
 
     private void setupControls(View view){
         hangTimeLayout = view.findViewById(R.id.hangTime);
-        hangPreferenceGroup = view.findViewById(R.id.hangPreference);
-        robotSwingLayout = view.findViewById(R.id.robotSwing);
+
+        hangLayout = view.findViewById(R.id.hang);
+        hangAutoComplete = view.findViewById(R.id.hangAutoComplete);
+        String[] hangPositions = getResources().getStringArray(R.array.hang_park_types);
+        defaultHang = hangPositions[0];
+        ArrayAdapter<String> hangAdapter = new ArrayAdapter<String>(requireActivity(), R.layout.dropdown_item, hangPositions);
+        hangAutoComplete.setAdapter(hangAdapter);
+
     }
 
     public void populateDataFromControls(){
@@ -70,28 +79,11 @@ public class PitScoutEndGameFragment extends Fragment {
         if( hangTimeLayout == null ) return;
 
         String hangTimeText = StringUtils.defaultIfBlank(hangTimeLayout.getEditText().getText().toString(), "0");
-        data.setHangTime(Integer.valueOf(hangTimeText));
+        data.setEndHangTime(Integer.valueOf(hangTimeText));
 
-        String hangPreference = "none";
-        int hangPreferenceSelection = hangPreferenceGroup.getCheckedRadioButtonId();
-        switch( hangPreferenceSelection ){
-            case R.id.hangPreferenceLeft:
-                hangPreference = "left";
-                break;
-            case R.id.hangPreferenceCenter:
-                hangPreference = "center";
-                break;
-            case R.id.hangPreferenceRight:
-                hangPreference = "right";
-                break;
-            default:
-                hangPreference = "none";
-        }
-        data.setPreferredHangingSpot(hangPreference);
+        String hangString = StringUtils.defaultIfBlank(hangLayout.getEditText().getText().toString(), defaultHang.toString());
+        data.setEndHang(hangString);
 
-        String swingInchesText = StringUtils.defaultIfBlank(robotSwingLayout.getEditText().getText().toString(), "0");
-        int swingInches = Integer.valueOf( swingInchesText );
-        data.setSideSwing(swingInches);
     }
 
     private void populateControlsFromData(){
@@ -101,27 +93,11 @@ public class PitScoutEndGameFragment extends Fragment {
 
         if( hangTimeLayout == null ) return;
 
-        String hangTimeText = String.valueOf(data.getHangTime());
+        String hangTimeText = String.valueOf(data.getEndHangTime());
         hangTimeLayout.getEditText().setText(hangTimeText);
 
-        int hangPreferenceSelection = R.id.hangPreferenceNo;
-        String hangingPreference = StringUtils.defaultIfBlank(data.getPreferredHangingSpot(), "none");
-        switch( hangingPreference ){
-            case "left":
-                hangPreferenceSelection = R.id.hangPreferenceLeft;
-                break;
-            case "center":
-                hangPreferenceSelection = R.id.hangPreferenceCenter;
-                break;
-            case "right":
-                hangPreferenceSelection = R.id.hangPreferenceRight;
-                break;
-            default:
-                hangPreferenceSelection = R.id.hangPreferenceNo;
-        }
-        hangPreferenceGroup.check(hangPreferenceSelection);
+        String endHabg = StringUtils.defaultIfBlank(data.getAutoPreferred(), defaultHang);
+        hangAutoComplete.setText(endHabg, false);
 
-        String sideSwingSeconds = String.valueOf( data.getSideSwing());
-        robotSwingLayout.getEditText().setText(sideSwingSeconds);
     }
 }

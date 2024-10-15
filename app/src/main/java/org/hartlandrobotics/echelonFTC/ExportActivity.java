@@ -187,11 +187,8 @@ public class ExportActivity extends EchelonActivity {
                         psData.add(ps.getTeamKey());
                         psData.add(String.valueOf(ps.getHasAutonomous()));
 
-                        psData.add(String.valueOf(ps.getCanRobotHang()));
-                        psData.add(String.valueOf(ps.getHighestHangBar()));
-                        psData.add(String.valueOf(ps.getHangTime()));
-                        psData.add(ps.getPreferredHangingSpot());
-                        psData.add(String.valueOf(ps.getSideSwing()));
+                        psData.add(String.valueOf(ps.getEndHangTime()));
+
                         psData.add(ps.getExtraNotes());
                         String outputString = psData.stream().collect(Collectors.joining(",")) + "\n";
                         outputStream.write(outputString.getBytes());

@@ -103,6 +103,9 @@ public class PitScoutTeleOpFragment extends Fragment {
 
     public void populateDataFromControls() {
         Log.i(TAG, "populate data from controls");
+        if( data == null ) return;
+        if( preferredRoleLayout == null ) return;
+
         String teleOpPreferredRoleString = StringUtils.defaultIfBlank(preferredRoleLayout.getEditText().getText().toString(), defaultPreferredRole.toString());
         data.setTeleOpPreferredRole(teleOpPreferredRoleString);
 

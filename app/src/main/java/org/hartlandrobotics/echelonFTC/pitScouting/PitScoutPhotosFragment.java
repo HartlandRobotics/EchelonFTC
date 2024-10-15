@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,12 +43,15 @@ public class PitScoutPhotosFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
+
 
     public void setData(PitScout data){
         this.data = data;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,6 +65,10 @@ public class PitScoutPhotosFragment extends Fragment {
         setupNextAndBackButton();
 
         return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private String trimTeamNumber(String teamKey){

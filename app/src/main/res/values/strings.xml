@@ -43,5 +43,12 @@
         <item>Runner</item>
         <item>Scorer</item>
     </string-array>
+    <string-array name="hang_park_types">
+        <item></item>
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Observation Zone</item>
+    </string-array>
 
 </resources>

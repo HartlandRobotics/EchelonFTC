@@ -26,59 +26,22 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <RadioGroup
-            android:id="@+id/hangPreference"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checkedButton="@id/hangPreferenceNo"
-            android:orientation="horizontal">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hanging preference?"
-            />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/hangPreferenceLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Left" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/hangPreferenceRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Right" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/hangPreferenceCenter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Center" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/hangPreferenceNo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="None" />
-
-        </RadioGroup>
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/robotSwing"
+            android:id="@+id/hang"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How many inches does your robot swing side to side?"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:hint="Preferred hang"
+            >
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
+                android:id="@+id/hangAutoComplete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="none"
                 />
-
         </com.google.android.material.textfield.TextInputLayout>
+
 
     </LinearLayout>
 </LinearLayout>

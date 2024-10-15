@@ -56,20 +56,11 @@ public class PitScout {
     @ColumnInfo(name = "teleOp_points")
     private int teleOpPoints;
 
-    @ColumnInfo(name = "can_robot_hang")
-    private boolean canRobotHang;
+    @ColumnInfo(name = "end_hang_time")
+    private int endHangTime;
 
-    @ColumnInfo(name = "highest_hang_bar")
-    private int highestHangBar;
-
-    @ColumnInfo(name = "hang_time")
-    private int hangTime;
-
-    @ColumnInfo(name = "preferred_hanging_spot")
-    private String preferredHangingSpot;
-
-    @ColumnInfo(name = "side_swing")
-    private int sideSwing;
+    @ColumnInfo(name="end_hang")
+    private String endHang;
 
     @ColumnInfo(name="robot_drive_train")
     private String robotDriveTrain;
@@ -91,7 +82,7 @@ public class PitScout {
                     boolean hasAutonomous, boolean autoHasPossibleStartingPositionNetZone, boolean autoHasPossibleStartingPositionObservationZone,
                     String autoPreferred, int autoPoints, String autoPrioritized,
                     String teleOpPreferredRole, String teleOpPreferredScoring, int teleOpPoints,
-                    boolean canRobotHang, int highestHangBar, int hangTime, @NonNull String preferredHangingSpot, int sideSwing,
+                    int endHangTime, String endHang,
                     @NonNull String robotDriveTrain, @NonNull String robotIngest, @NonNull String robotOutgest, @NonNull String extraNotes) {
         if(StringUtils.isBlank(pitScoutKey)){
             pitScoutKey = UUID.randomUUID().toString();
@@ -113,11 +104,8 @@ public class PitScout {
         this.teleOpPoints = teleOpPoints;
 
 
-        this.canRobotHang = canRobotHang;
-        this.highestHangBar = highestHangBar;
-        this.hangTime = hangTime;
-        this.preferredHangingSpot = preferredHangingSpot;
-        this.sideSwing = sideSwing;
+        this.endHangTime = endHangTime;
+        this.endHang = endHang;
 
         this.robotDriveTrain = robotDriveTrain;
         this.robotIngest = robotIngest;
@@ -194,45 +182,20 @@ public class PitScout {
     public void setTeleOpPoints(int teleOpPoints){ this.teleOpPoints = teleOpPoints; }
 
 
-    public boolean getCanRobotHang() {
-        return canRobotHang;
+    public int getEndHangTime() {
+        return endHangTime;
     }
 
-    public void setCanRobotHang(boolean canRobotHang) {
-        this.canRobotHang = canRobotHang;
+    public void setEndHangTime(int endHangTime) {
+        this.endHangTime = endHangTime;
     }
 
-    public int getHighestHangBar() {
-        return highestHangBar;
+    public String getEndHang() {
+        return endHang;
     }
 
-    public void setHighestHangBar(int highestHangBar) {
-        this.highestHangBar = highestHangBar;
-    }
-
-    public int getHangTime() {
-        return hangTime;
-    }
-
-    public void setHangTime(int hangTime) {
-        this.hangTime = hangTime;
-    }
-
-    @NonNull
-    public String getPreferredHangingSpot() {
-        return preferredHangingSpot;
-    }
-
-    public void setPreferredHangingSpot(@NonNull String preferredHangingSpot) {
-        this.preferredHangingSpot = preferredHangingSpot;
-    }
-
-    public int getSideSwing() {
-        return sideSwing;
-    }
-
-    public void setSideSwing(int sideSwing) {
-        this.sideSwing = sideSwing;
+    public void setEndHang(String endHang) {
+        this.endHang = endHang;
     }
 
     @NonNull

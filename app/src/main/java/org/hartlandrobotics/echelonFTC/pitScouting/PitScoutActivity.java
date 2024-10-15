@@ -110,6 +110,7 @@ public class PitScoutActivity extends EchelonActivity {
                                 }
                                 viewPagerAdapter.setData(data);
                                 viewPagerAdapter.notifyDataSetChanged();
+
                             });
                 }
             });
