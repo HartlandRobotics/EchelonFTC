@@ -13,6 +13,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +25,10 @@ public class PitScoutAutoFragment extends Fragment {
     private static final String TAG = "PitScoutAutoFragment";
     LinearLayout hasAutoLayout;
     RadioGroup hasAutoGroup;
+
+    MaterialCheckBox autoPossibleStartingPositionObservationZone;
+    MaterialCheckBox autoPossibleStartingPositionNetZone;
+
 
     TextInputLayout preferredLayout;
     AutoCompleteTextView preferredAutoComplete;
@@ -86,6 +91,15 @@ public class PitScoutAutoFragment extends Fragment {
             setVisibility();
         });
 
+        autoPossibleStartingPositionObservationZone = view.findViewById(R.id.autoPossibleStartingPositionObservationZone);
+        autoPossibleStartingPositionObservationZone.setOnCheckedChangeListener(((buttonView, isChecked) -> {
+           data.setAutoHasPossibleStartingPositionObservationZone(isChecked);
+        }));
+        autoPossibleStartingPositionNetZone = view.findViewById(R.id.autoPossibleStartingPositionNetZone);
+        autoPossibleStartingPositionNetZone.setOnCheckedChangeListener(((buttonView, isChecked) -> {
+            data.setAutoHasPossibleStartingPositionNetZone(isChecked);
+        }));
+
         preferredLayout = view.findViewById(R.id.preferred);
         preferredAutoComplete = view.findViewById(R.id.preferredAutoComplete);
         String[] startingPositions = getResources().getStringArray(R.array.starting_position_types);
@@ -111,6 +125,8 @@ public class PitScoutAutoFragment extends Fragment {
         boolean hasAuto = hasAutoGroup.getCheckedRadioButtonId() == R.id.hasAutoYes;
         data.setHasAutonomous(hasAuto);
 
+
+
         String autoPreferredString = StringUtils.defaultIfBlank(preferredLayout.getEditText().getText().toString(), defaultPreferred.toString());
         data.setAutoPreferred(autoPreferredString);
 
@@ -129,6 +145,8 @@ public class PitScoutAutoFragment extends Fragment {
         int hasAutoCheckedButtonId = data.getHasAutonomous() ? R.id.hasAutoYes : R.id.hasAutoNo;
         hasAutoGroup.check(hasAutoCheckedButtonId);
 
+        autoPossibleStartingPositionNetZone.setChecked(data.getAutoHasPossibleStartingPositionNetZone());
+        autoPossibleStartingPositionObservationZone.setChecked(data.getAutoHasPossibleStartingPositionObservationZone());
 
         String preferred = StringUtils.defaultIfBlank(data.getAutoPreferred(), defaultPreferred);
         preferredAutoComplete.setText(preferred, false);

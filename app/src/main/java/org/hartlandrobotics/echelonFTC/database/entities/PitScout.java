@@ -32,6 +32,12 @@ public class PitScout {
     @ColumnInfo(name = "has_autonomous")
     private boolean hasAutonomous;
 
+    @ColumnInfo(name = "auto_hasPossibleStartingPositionNetZone")
+    private boolean autoHasPossibleStartingPositionNetZone;
+
+    @ColumnInfo(name = "auto_hasPossibleStartingPositionObservationZone")
+    private boolean autoHasPossibleStartingPositionObservationZone;
+
     @ColumnInfo(name="auto_preferred")
     private String autoPreferred;
 
@@ -82,7 +88,8 @@ public class PitScout {
     }
 
     public PitScout(@NonNull String pitScoutKey, @NonNull String eventKey, @NonNull String teamKey, boolean hasBeenSynced,
-                    boolean hasAutonomous, String autoPreferred, int autoPoints, String autoPrioritized,
+                    boolean hasAutonomous, boolean autoHasPossibleStartingPositionNetZone, boolean autoHasPossibleStartingPositionObservationZone,
+                    String autoPreferred, int autoPoints, String autoPrioritized,
                     String teleOpPreferredRole, String teleOpPreferredScoring, int teleOpPoints,
                     boolean canRobotHang, int highestHangBar, int hangTime, @NonNull String preferredHangingSpot, int sideSwing,
                     @NonNull String robotDriveTrain, @NonNull String robotIngest, @NonNull String robotOutgest, @NonNull String extraNotes) {
@@ -95,6 +102,8 @@ public class PitScout {
         this.teamKey = teamKey;
         this.hasBeenSynced = hasBeenSynced;
         this.hasAutonomous = hasAutonomous;
+        this.autoHasPossibleStartingPositionNetZone = autoHasPossibleStartingPositionNetZone;
+        this.autoHasPossibleStartingPositionObservationZone = autoHasPossibleStartingPositionObservationZone;
         this.autoPreferred = autoPreferred;
         this.autoPoints = autoPoints;
         this.autoPrioritized = autoPrioritized;
@@ -158,6 +167,12 @@ public class PitScout {
     public void setHasAutonomous(boolean hasAutonomous) {
         this.hasAutonomous = hasAutonomous;
     }
+
+    public boolean getAutoHasPossibleStartingPositionNetZone(){ return autoHasPossibleStartingPositionNetZone; }
+    public void setAutoHasPossibleStartingPositionNetZone(boolean autoHasPossibleStartingPositionNetZone){ this.autoHasPossibleStartingPositionNetZone = autoHasPossibleStartingPositionNetZone; }
+
+    public boolean getAutoHasPossibleStartingPositionObservationZone(){ return autoHasPossibleStartingPositionObservationZone; }
+    public void setAutoHasPossibleStartingPositionObservationZone(boolean autoHasPossibleStartingPositionObservationZone){ this.autoHasPossibleStartingPositionObservationZone = autoHasPossibleStartingPositionObservationZone; }
 
     public String getAutoPreferred(){ return autoPreferred; }
     public void setAutoPreferred(String autoPreferred){ this.autoPreferred = autoPreferred; }
