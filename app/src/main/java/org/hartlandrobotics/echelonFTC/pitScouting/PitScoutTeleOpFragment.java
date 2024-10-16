@@ -32,16 +32,13 @@ public class PitScoutTeleOpFragment extends Fragment {
     TextInputLayout teleOpPointsLayout;
 
 
-    RadioGroup doesShootGroup;
-    TextInputLayout shootingAccuracyLayout;
-    RadioGroup goalPreferenceGroup;
-    RadioGroup defenseGroup;
-    PitScout data;
+      PitScout data;
 
     boolean areControlsSetup = false;
 
     public void setData( PitScout data) {
         this.data = data;
+
         populateControlsFromData();
     }
 
@@ -67,14 +64,12 @@ public class PitScoutTeleOpFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        Log.i(TAG, "on Resume");
         populateControlsFromData();
     }
 
     @Override
     public void onPause(){
         super.onPause();
-        Log.i(TAG, "on Pause");
         populateDataFromControls();
     }
 
@@ -95,14 +90,10 @@ public class PitScoutTeleOpFragment extends Fragment {
 
         teleOpPointsLayout = view.findViewById(R.id.teleOpPoints);
 
-
-
-
         areControlsSetup = true;
     }
 
     public void populateDataFromControls() {
-        Log.i(TAG, "populate data from controls");
         if( data == null ) return;
         if( preferredRoleLayout == null ) return;
 
@@ -114,21 +105,18 @@ public class PitScoutTeleOpFragment extends Fragment {
 
         String teleOpPointsString = StringUtils.defaultIfBlank(teleOpPointsLayout.getEditText().getText().toString(), "0");
         int teleOpPoints = Integer.parseInt(teleOpPointsString.toString());
-        data.setAutoPoints(teleOpPoints);
-
+        data.setTeleOpPoints(teleOpPoints);
     }
 
-    private void populateControlsFromData() {
+    public void populateControlsFromData() {
         if (data == null) {
             Log.i(TAG, "no data to bind");
             return;
         }
 
         // check that controls have been established
-        if(doesShootGroup == null) return;
+        if(preferredRoleLayout == null) return;
 
-
-        Log.i(TAG, "populate controls from data");
         String preferredRole = StringUtils.defaultIfBlank(data.getTeleOpPreferredRole(), defaultPreferredRole);
         preferredRoleAutoComplete.setText(preferredRole, false);
 

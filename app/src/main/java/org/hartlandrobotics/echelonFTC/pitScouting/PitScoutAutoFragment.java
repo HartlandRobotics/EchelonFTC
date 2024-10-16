@@ -72,13 +72,11 @@ public class PitScoutAutoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.i(TAG, "OnResume running");
         populateControlsFromData();
     }
 
     @Override
     public void onPause() {
-        Log.i(TAG, "OnPause running");
         super.onPause();
         populateDataFromControls();
     }

@@ -77,6 +77,7 @@ public class PitScoutingPagerAdapter extends FragmentStateAdapter {
     public void updatePitScoutData(){
         if( autoFragment != null ){
             Log.i(TAG, "populating auto fragment data");
+
             autoFragment.populateDataFromControls();
         }
         if( teleOpFragment != null ){
