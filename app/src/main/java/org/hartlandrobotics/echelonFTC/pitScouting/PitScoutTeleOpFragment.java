@@ -38,7 +38,6 @@ public class PitScoutTeleOpFragment extends Fragment {
 
     public void setData( PitScout data) {
         this.data = data;
-
         populateControlsFromData();
     }
 

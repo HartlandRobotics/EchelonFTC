@@ -32,6 +32,7 @@ public class PitScoutEndGameFragment extends Fragment {
 
     public void setData( PitScout data) {
         this.data = data;
+        populateControlsFromData();
     }
 
     @Override
