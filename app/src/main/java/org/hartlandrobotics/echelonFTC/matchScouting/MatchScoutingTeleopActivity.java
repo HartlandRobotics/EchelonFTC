@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageButton;
 
 import com.google.android.material.button.MaterialButton;
@@ -20,6 +21,8 @@ import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
 import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 
 public class MatchScoutingTeleopActivity extends AppCompatActivity {
+    private static final String TAG = "MatchScoutingTeleopActivity";
+
     private static final String MATCH_KEY = "auto_match_key_param";
     private static final String TEAM_KEY = "auto_team_key_param";
 
@@ -103,6 +106,8 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
 
     public void populateControlsFromData(){
+        Log.e(TAG, "populate test");
+
         topBasketText.setText(String.valueOf(matchResult.getTeleOpInt1()));
         midBasketText.setText(String.valueOf(matchResult.getTeleOpInt2()));
         lowBasketText.setText(String.valueOf(matchResult.getTeleOpInt3()));
@@ -149,6 +154,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private void setupControls(){
         scoutingDoneButton = findViewById(R.id.summary);
         scoutingDoneButton.setOnClickListener(v -> {
+            Log.e(TAG, "set for summary");
             matchResultViewModel.upsert(matchResult);
             MatchScoutingSummaryActivity.launch(MatchScoutingTeleopActivity.this, matchKey, teamKey);
         });
@@ -196,6 +202,8 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         observationZoneButton = findViewById(R.id.observationZone);
         observationZoneButton.setImageResource(observationZoneDrawable);
         observationZoneButton.setOnClickListener(v -> {
+            Log.e(TAG, "obs zone check");
+
             matchResult.setEndFlag1( !matchResult.getEndFlag1() );
             populateControlsFromData();
         });

@@ -273,23 +273,23 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
 
         endHighCheckBox = findViewById(R.id.endHighAscentCheckbox);
         endHighCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setEndFlag1(isChecked);
+            matchResult.setEndFlag4(isChecked);
             populateControlsFromData();
         });
         endMidCheckBox = findViewById(R.id.endMidAscentCheckbox);
         endMidCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setEndFlag2(isChecked);
+            matchResult.setEndFlag3(isChecked);
             populateControlsFromData();
         });
         endLowCheckBox = findViewById(R.id.endLowAscentCheckbox);
         endLowCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setEndFlag3(isChecked);
+            matchResult.setEndFlag2(isChecked);
             populateControlsFromData();
         });
 
         endObservationZoneCheckBox = findViewById(R.id.endObservationZoneCheckbox);
         endObservationZoneCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            matchResult.setEndFlag4(isChecked);
+            matchResult.setEndFlag1(isChecked);
             populateControlsFromData();
         });
 
@@ -329,8 +329,13 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             }
         });
     }
+
+    volatile boolean populating = false;
     private void populateControlsFromData() {
         if( matchResult == null ) return;
+        if( populating == true ) return;
+
+        populating = true;
 
         autoSampleHighValue.setText( String.valueOf( matchResult.getAutoInt6() ));
         autoSampleLowValue.setText( String.valueOf( matchResult.getAutoInt7() ));
@@ -353,12 +358,15 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
 
 
         //teleOpDefensesValue.setText( String.valueOf( matchResult.getDefenseCount() ));
+        endObservationZoneCheckBox.setChecked( matchResult.getEndFlag1() );
 
-        endHighCheckBox.setChecked( matchResult.getEndFlag1() );
-        endMidCheckBox.setChecked( matchResult.getEndFlag2() );
-        endLowCheckBox.setChecked( matchResult.getEndFlag3() );
-        endObservationZoneCheckBox.setChecked( matchResult.getEndFlag4() );
+        endHighCheckBox.setChecked( matchResult.getEndFlag4() );
+        endMidCheckBox.setChecked( matchResult.getEndFlag3() );
+        endLowCheckBox.setChecked( matchResult.getEndFlag2() );
 
         additionalNotesLayout.getEditText().setText(matchResult.getAdditionalNotes());
+
+        populating = false;
+
     }
 }
