@@ -264,10 +264,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Observation Zone"
+            android:text="Observation Zone Park"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/autoSpecimenLowDecrement"
+            android:layout_marginTop="10dp"
+            />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/autoLevel1CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Level 1 Park"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/autoSpecimenLowDecrement" />
+            app:layout_constraintTop_toBottomOf="@id/autoObservationZoneCheckBox" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -522,7 +533,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="High Ascent"
+            android:text="Level 3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -533,7 +544,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Mid Ascent"
+            android:text="Level 2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/endHighAscentCheckbox" />
 
@@ -544,7 +555,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Low Ascent"
+            android:text="Level 1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/endMidAscentCheckbox" />
 

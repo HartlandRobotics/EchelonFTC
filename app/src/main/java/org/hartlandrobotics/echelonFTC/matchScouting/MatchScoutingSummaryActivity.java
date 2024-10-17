@@ -54,6 +54,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private MaterialButton autoSpecimenLowIncrement;
 
     private MaterialCheckBox autoObservationZone;
+    private MaterialCheckBox autoLevel1;
 
     private MaterialButton teleOpSampleHighDecrement;
     private MaterialTextView teleOpSampleHighValue;
@@ -197,6 +198,13 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             matchResult.setAutoFlag1(isChecked);
             populateControlsFromData();
         });
+        autoLevel1 = findViewById(R.id.autoLevel1CheckBox);
+        autoLevel1.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            matchResult.setAutoFlag2(isChecked);
+            populateControlsFromData();
+        });
+
+
 
 
         //TeleOp
@@ -345,6 +353,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         autoSpecimenLowValue.setText( String.valueOf( matchResult.getAutoInt10() ));
 
         autoObservationZone.setChecked(matchResult.getAutoFlag1());
+        autoLevel1.setChecked(matchResult.getAutoFlag2());
 
 
         teleOpSampleHighValue.setText( String.valueOf( matchResult.getTeleOpInt1() ));
