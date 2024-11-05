@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -89,6 +90,8 @@ public class BluetoothSyncService {
 
     public Map<String, BluetoothDevice> getDevices() {
         if ( devices != null ) return devices;
+
+        java.util.Set<BluetoothDevice> dev = bluetoothAdapter.getBondedDevices();
 
         devices = bluetoothAdapter.getBondedDevices()
                 .stream()
@@ -359,7 +362,7 @@ public class BluetoothSyncService {
             // Keep listening to the InputStream while connected
             while ( currentState == STATE_CONNECTED ) {
                 try {
-                    if( getCurrentDeviceName().equals( "captain_" + teamNumber )) {
+                    if( getCurrentDeviceName().contains( "captain_" + teamNumber )) {
                        // captain tablet consuming data sent from scouting tablet
                         String result = "";
                         boolean isDone = false;

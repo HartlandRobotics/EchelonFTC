@@ -66,7 +66,12 @@ public class AdminSettingsActivity extends EchelonActivity {
 
     public void initializeBlueAllianceKey(AdminSettingsViewModel vm){
         blueAllianceText = this.findViewById(R.id.blueAllianceApiText);
-        setDisplayText( blueAllianceText, vm.getOrangeAllianceApiKey(), vm.getFileSettings().getOrangeAllianceApiKey() );
+        if( vm.getFileSettings() != null) {
+            setDisplayText(blueAllianceText, vm.getOrangeAllianceApiKey(), vm.getFileSettings().getOrangeAllianceApiKey());
+        } else {
+            setDisplayText(blueAllianceText, vm.getOrangeAllianceApiKey(), "Blue Alliance Key");
+
+        }
 
         apiKeySaveButton = this.findViewById(R.id.apiKeySaveButton);
         apiKeySaveButton.setOnClickListener(v -> {
@@ -84,7 +89,12 @@ public class AdminSettingsActivity extends EchelonActivity {
 
     public void initializeTeamNumText(AdminSettingsViewModel vm){
         teamNumText = this.findViewById(R.id.teamNumText);
+if(vm.getFileSettings() != null){
         setDisplayText(teamNumText, vm.getTeamNumber(), vm.getFileSettings().getTeamNumber());
+} else {
+    setDisplayText(teamNumText, vm.getTeamNumber(), "Team Number");
+
+}
 
         teamNumSaveButton = this.findViewById(R.id.teamNumberSaveButton);
         teamNumSaveButton.setOnClickListener(v -> {
@@ -135,7 +145,9 @@ public class AdminSettingsActivity extends EchelonActivity {
 
     private void setDisplayText(TextInputLayout layout, String displayText, String fileText){
         layout.getEditText().setText(displayText);
-        layout.setHelperText( fileText );
+        if( fileText != null ) {
+            layout.setHelperText(fileText);
+        }
     }
 
     private void showError( String errorMessage ){

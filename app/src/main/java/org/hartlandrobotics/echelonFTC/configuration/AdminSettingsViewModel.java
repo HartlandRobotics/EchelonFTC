@@ -22,17 +22,33 @@ public class AdminSettingsViewModel extends AdminSettings {
         this.setBlueAllianceApiKey(StringUtils.defaultIfBlank(prefBlueAllianceApiKey, fileSettings.getBlueAllianceApiKey()));
         */
 
-        String prefApiKey = prefSettings.getOrangeAllianceApiKey();
-        this.setOrangeAllianceApiKey(StringUtils.defaultIfBlank(prefApiKey, fileSettings.getOrangeAllianceApiKey()));
+        String prefApiKey = StringUtils.defaultIfBlank(prefSettings.getOrangeAllianceApiKey(), StringUtils.EMPTY);
+        String fileApiKey = StringUtils.EMPTY;
+        if (fileSettings != null ){
+            fileApiKey = StringUtils.defaultIfBlank(fileSettings.getOrangeAllianceApiKey(), StringUtils.EMPTY);
+        }
+        this.setOrangeAllianceApiKey(StringUtils.defaultIfBlank(prefApiKey, fileApiKey));
 
         String prefScoutingSeason = prefSettings.getScoutingSeason();
-        this.setScoutingSeason( StringUtils.isEmpty(prefScoutingSeason) ? fileSettings.getScoutingSeason() : prefScoutingSeason );
+        String fileScoutingSeason = StringUtils.EMPTY;
+        if( fileSettings != null ) {
+            fileScoutingSeason = StringUtils.defaultIfBlank(fileSettings.getScoutingSeason(), StringUtils.EMPTY);
+        }
+        this.setScoutingSeason(StringUtils.defaultIfBlank(prefScoutingSeason, fileScoutingSeason));
 
         String prefDeviceRole = prefSettings.getDeviceRole();
-        this.setDeviceRole( StringUtils.defaultIfBlank(prefDeviceRole, fileSettings.getDeviceRole()));
+        String fileDeviceRole = StringUtils.EMPTY;
+        if( fileSettings != null ){
+            fileDeviceRole = StringUtils.defaultIfBlank(fileSettings.getDeviceRole(),StringUtils.EMPTY);
+        }
+        this.setDeviceRole( StringUtils.defaultIfBlank(prefDeviceRole, fileDeviceRole));
 
         String prefTeamNum = prefSettings.getTeamNumber();
-        this.setTeamNumber(StringUtils.defaultIfBlank(prefTeamNum, fileSettings.getTeamNumber()));
+        String fileTeamNum = StringUtils.EMPTY;
+        if( fileSettings != null ){
+            fileTeamNum = StringUtils.defaultIfBlank( fileSettings.getTeamNumber(), StringUtils.EMPTY);
+        }
+        this.setTeamNumber(StringUtils.defaultIfBlank(prefTeamNum, fileTeamNum));
     }
 
     public boolean isApikeySynced(){

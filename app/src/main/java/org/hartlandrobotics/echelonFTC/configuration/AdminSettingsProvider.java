@@ -32,9 +32,9 @@ public class AdminSettingsProvider {
         AdminSettings fileSettings = settingsFromFile(appContext);
         AdminSettings prefSettings = settingsFromPrefs(appContext,fileSettings);
 
-        if( prefSettings == null || fileSettings == null ){
-            return null;
-        }
+        //if( prefSettings == null || fileSettings == null ){
+        //    return null;
+        //}
 
         return new AdminSettingsViewModel(fileSettings, prefSettings);
     }
@@ -43,7 +43,7 @@ public class AdminSettingsProvider {
         File configFile = FileUtilities.getFile(appContext, CONFIG_DIRECTORY, CONFIG_FILE_NAME );
         if( configFile == null ) {
             Log.e(LOG_TAG, "Missing Config File");
-            Toast.makeText(appContext, "Missing Config File", Toast.LENGTH_LONG).show();
+            //Toast.makeText(appContext, "Missing Config File", Toast.LENGTH_LONG).show();
             return null;
         }
 
@@ -54,13 +54,13 @@ public class AdminSettingsProvider {
         }
         catch( JsonParseException parseException ){
             Log.e(LOG_TAG, "Invalid Config File " + parseException.getMessage());
-            Toast.makeText(appContext, "Invalid Config File", Toast.LENGTH_LONG).show();
+            //Toast.makeText(appContext, "Invalid Config File", Toast.LENGTH_LONG).show();
         } catch (JsonMappingException e) {
             Log.e(LOG_TAG, "Could not map config File");
-            Toast.makeText(appContext, "Could not map config File", Toast.LENGTH_LONG).show();
+            //Toast.makeText(appContext, "Could not map config File", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             Log.e(LOG_TAG, "Could not read config File");
-            Toast.makeText(appContext, "Could not read config File", Toast.LENGTH_LONG).show();
+            //Toast.makeText(appContext, "Could not read config File", Toast.LENGTH_LONG).show();
         }
 
         return settings;

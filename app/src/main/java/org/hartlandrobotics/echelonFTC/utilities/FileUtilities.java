@@ -14,7 +14,7 @@ public class FileUtilities {
 
         File configFile = new File(directory.getAbsolutePath(), fileName);
         if( !configFile.exists() ){
-            Toast.makeText(applicationContext, configFile + " is not on this tablet!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(applicationContext, configFile + " is not on this tablet!", Toast.LENGTH_LONG).show();
             return null;
         }
 
