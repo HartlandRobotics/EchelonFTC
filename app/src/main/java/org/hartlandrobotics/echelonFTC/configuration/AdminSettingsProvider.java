@@ -32,9 +32,9 @@ public class AdminSettingsProvider {
         AdminSettings fileSettings = settingsFromFile(appContext);
         AdminSettings prefSettings = settingsFromPrefs(appContext,fileSettings);
 
-        //if( prefSettings == null || fileSettings == null ){
-        //    return null;
-        //}
+        if( prefSettings == null || fileSettings == null ){
+            return null;
+        }
 
         return new AdminSettingsViewModel(fileSettings, prefSettings);
     }
@@ -43,7 +43,7 @@ public class AdminSettingsProvider {
         File configFile = FileUtilities.getFile(appContext, CONFIG_DIRECTORY, CONFIG_FILE_NAME );
         if( configFile == null ) {
             Log.e(LOG_TAG, "Missing Config File");
-            //Toast.makeText(appContext, "Missing Config File", Toast.LENGTH_LONG).show();
+            Toast.makeText(appContext, "Missing Config File", Toast.LENGTH_LONG).show();
             return null;
         }
 
@@ -69,12 +69,8 @@ public class AdminSettingsProvider {
     private static AdminSettings settingsFromPrefs(Context appContext, AdminSettings fileSettings){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
 
-        //String blueAllianceKey = preferences.getString(BLUE_ALLIANCE_KEY, null);
         String orangeAllianceKey = preferences.getString(ORANGE_ALLIANCE_KEY, null);
-        /*
-        if(StringUtils.isEmpty(blueAllianceKey)){
-        }
-        */
+
         String scoutingYear = preferences.getString(SCOUTING_YEAR, null);
 
         String deviceRole = preferences.getString(DEVICE_ROLE, null);

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
+import org.hartlandrobotics.echelonFTC.utilities.FileUtilities;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,6 +34,7 @@ public class PitScoutPhotosFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private static String TAG = "PitScoutPhotosFragment";
     private Button cameraButton;
     private Button nextPicture;
     private Button backPicture;
@@ -50,6 +52,8 @@ public class PitScoutPhotosFragment extends Fragment {
 
     public void setData(PitScout data){
         this.data = data;
+
+        populateImagesArea();
     }
 
     @Override
@@ -96,14 +100,7 @@ public class PitScoutPhotosFragment extends Fragment {
 
     private void SetupImagesArea(View view){
         cameraButton = view.findViewById(R.id.photoButton);
-        robotImagesPager = view.findViewById(R.id.picture_view_pager);
-        robotImageAdapter = new RobotImage(getActivity().getApplicationContext(), teamNumber);
-    }
-
-    private void populateImagesArea(){
-        robotImagesPager.setAdapter(robotImageAdapter);
-
-        cameraButton.setOnClickListener(view -> {
+        cameraButton.setOnClickListener(vw -> {
             try{
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
@@ -113,6 +110,19 @@ public class PitScoutPhotosFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(), "Couldn't load photo", Toast.LENGTH_LONG).show();
             }
         });
+
+        robotImagesPager = view.findViewById(R.id.picture_view_pager);
+        robotImageAdapter = new RobotImage(getActivity().getApplicationContext(), teamNumber);
+    }
+
+    private void populateImagesArea(){
+        if(robotImageAdapter == null) return;
+
+        teamNumber = Integer.parseInt(trimTeamNumber(data.getTeamKey()));
+
+        robotImageAdapter = new RobotImage(getActivity().getApplicationContext(), teamNumber);
+        robotImagesPager.setAdapter(robotImageAdapter);
+        robotImageAdapter.notifyDataSetChanged();
     }
 
     private static final int CAMERA_PIC_REQUEST = 22;
@@ -194,8 +204,9 @@ public class PitScoutPhotosFragment extends Fragment {
     }
 
     private File getImageFilePath(int teamNumber) {
-        ContextWrapper cw = new ContextWrapper( getActivity().getApplicationContext() );
-        return cw.getExternalFilesDir( "scouting_images/team_" + teamNumber );
+        File fw = FileUtilities.ensureDirectory(getActivity().getApplicationContext(), "scouting_images/team_" + teamNumber );
+        return fw;
+
     }
 
 }

@@ -17,11 +17,6 @@ public class AdminSettingsViewModel extends AdminSettings {
         this.fileSettings = fileSettings;
         this.prefSettings = prefSettings;
 
-        /*
-        String prefBlueAllianceApiKey = prefSettings.getBlueAllianceApiKey();
-        this.setBlueAllianceApiKey(StringUtils.defaultIfBlank(prefBlueAllianceApiKey, fileSettings.getBlueAllianceApiKey()));
-        */
-
         String prefApiKey = StringUtils.defaultIfBlank(prefSettings.getOrangeAllianceApiKey(), StringUtils.EMPTY);
         String fileApiKey = StringUtils.EMPTY;
         if (fileSettings != null ){

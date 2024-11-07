@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,18 +12,21 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import org.hartlandrobotics.echelonFTC.utilities.FileUtilities;
+
 import java.io.File;
 import java.util.ArrayList;
 
 public class RobotImage extends PagerAdapter {
+   private String TAG = "RobotImage";
    private Context context;
    private ArrayList<String> fileNames = new ArrayList<String>();
    private int teamNumber;
    private File filePath;
 
    RobotImage(Context context, int teamNum){
-      ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
-      filePath = cw.getExternalFilesDir("scouting_images/team_" + teamNumber);
+      Log.e(TAG, String.valueOf(teamNum));
+      filePath = FileUtilities.ensureDirectory(context.getApplicationContext(), "scouting_images/team_" + teamNumber);
       File[] files = filePath.listFiles();
       for(File file: files){
          fileNames.add(file.getAbsolutePath());
@@ -34,8 +38,7 @@ public class RobotImage extends PagerAdapter {
    static int lastCount = 0;
    @Override
    public int getCount(){
-      ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
-      filePath = cw.getExternalFilesDir("scouting_images/team_" + teamNumber);
+      filePath = FileUtilities.ensureDirectory(context.getApplicationContext(), "scouting_images/team_" + teamNumber);
       File[] files = filePath.listFiles();
          fileNames.clear();
          for(File file: files){
