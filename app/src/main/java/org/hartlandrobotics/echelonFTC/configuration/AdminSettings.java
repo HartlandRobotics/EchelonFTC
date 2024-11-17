@@ -43,7 +43,7 @@ public class AdminSettings {
 
     public String getDeviceRole() { return deviceRole; }
     public void setDeviceRole(String deviceRole){
-        this.deviceRole = defaultString(deviceRole);
+        this.deviceRole = StringUtils.defaultIfBlank(deviceRole, "red1");
     }
 
     public String getTeamNumber() { return teamNumber; }

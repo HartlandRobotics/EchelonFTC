@@ -25,7 +25,7 @@ public class RobotImage extends PagerAdapter {
    private File filePath;
 
    RobotImage(Context context, int teamNum){
-      Log.e(TAG, String.valueOf(teamNum));
+      //Log.e(TAG, String.valueOf(teamNum));
       filePath = FileUtilities.ensureDirectory(context.getApplicationContext(), "scouting_images/team_" + teamNumber);
       File[] files = filePath.listFiles();
       for(File file: files){

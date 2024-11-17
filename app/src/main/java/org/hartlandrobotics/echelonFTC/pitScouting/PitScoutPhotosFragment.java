@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.provider.MediaStore;
@@ -53,6 +54,8 @@ public class PitScoutPhotosFragment extends Fragment {
     public void setData(PitScout data){
         this.data = data;
 
+        Log.e(TAG, "setData " + data.getTeamKey());
+        teamNumber = Integer.parseInt(data.getTeamKey());
         populateImagesArea();
     }
 
@@ -64,12 +67,15 @@ public class PitScoutPhotosFragment extends Fragment {
         nextPicture = view.findViewById(R.id.nextPic);
         backPicture = view.findViewById(R.id.backPic);
 
-        teamNumber = Integer.parseInt(trimTeamNumber(data.getTeamKey()));
-        SetupImagesArea(view);
-        setupNextAndBackButton();
+        if(data != null) {
+            teamNumber = Integer.parseInt(trimTeamNumber(data.getTeamKey()));
+            SetupImagesArea(view);
+            setupNextAndBackButton();
+        }
 
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -130,13 +136,23 @@ public class PitScoutPhotosFragment extends Fragment {
     @Override
     public void onActivityResult(final int requestCode, int resultCode, Intent data) {
         super.onActivityResult( requestCode, resultCode, data );
+        Log.e(TAG, "onActivityResult " + String.valueOf(requestCode) );
+        Log.e(TAG, "onActivityResult " + String.valueOf(requestCode) +" "+ CAMERA_PIC_REQUEST);
+        Log.e(TAG, "onActivityResult " + String.valueOf(resultCode) +" "+ RESULT_OK);
+
+
         try {
             switch ( requestCode ) {
                 case CAMERA_PIC_REQUEST:
                     if ( resultCode == RESULT_OK ) {
                         try {
+                            Log.e(TAG, "onActivityResult " + "before photo" );
                             Bitmap photo = (Bitmap) data.getExtras().get( "data" );
+                            Log.e(TAG, "onActivityResult " + "before save " + photo.getByteCount() );
+
                             SaveImage( photo );
+                            Log.e(TAG, "onActivityResult " + "after save" );
+
                         } catch ( Exception e ) {
                         }
                     }
@@ -145,12 +161,20 @@ public class PitScoutPhotosFragment extends Fragment {
                     break;
             }
         } catch ( Exception e ) {
-            Toast.makeText( getActivity(), e.getMessage(), Toast.LENGTH_LONG );
+            Toast.makeText( getActivity(), e.getMessage(), Toast.LENGTH_LONG ).show();
         }
     }
 
 
     private void SaveImage(Bitmap finalBitmap) {
+        Log.e(TAG ,"SaveImage " + "first line");
+
+        PitScoutActivity fa = (PitScoutActivity)this.getActivity();
+        //teamNumber = Integer.parseInt(data.getTeamKey());
+        Log.e(TAG, "SaveImage data" + String.valueOf(data));
+
+        Log.e(TAG, "SaveImage team n number" + String.valueOf(teamNumber));
+
         if( teamNumber == 0 ){
             Toast.makeText( getActivity(), "Please Select team first...", Toast.LENGTH_LONG).show();
             return;

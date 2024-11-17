@@ -138,7 +138,7 @@ if(vm.getFileSettings() != null){
             }
         });
 
-        int currentButtonId = buttonRoleByText.get(StringUtils.defaultIfBlank(vm.getDeviceRole(),"red1"));
+        int currentButtonId = buttonRoleByText.get(StringUtils.defaultIfEmpty(vm.getDeviceRole(),"red1"));
         MaterialButton currentButton = deviceRoleGroup.findViewById(currentButtonId);
         currentButton.toggle();
     }

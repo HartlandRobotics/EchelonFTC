@@ -21,6 +21,7 @@ import org.hartlandrobotics.echelonFTC.database.entities.Team;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
 import org.hartlandrobotics.echelonFTC.models.PitScoutViewModel;
 import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.utilities.FileUtilities;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -316,8 +317,7 @@ public class ExportActivity extends EchelonActivity {
     }
 
     public File getImportPath(){
-        ContextWrapper cw = new ContextWrapper( getApplicationContext() );
-        return cw.getExternalFilesDir( "imports");
+        return FileUtilities.ensureDirectory(getApplicationContext(), "imports");
     }
 
     private File[] getFilePathsForMatch() {
@@ -325,8 +325,7 @@ public class ExportActivity extends EchelonActivity {
     }
 
     private File getFilePathForMatch() {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext() );
-        return cw.getExternalFilesDir( "match_data");
+        return FileUtilities.ensureDirectory(getApplicationContext(), "match_data");
     }
 
     private File[] getFilePathsForPitScout(){
@@ -334,7 +333,6 @@ public class ExportActivity extends EchelonActivity {
     }
 
     private File getFilePathForPitScout(){
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        return cw.getExternalFilesDir("pitscout_data");
+        return FileUtilities.ensureDirectory(getApplicationContext(), "pitscout_data");
     }
 }
