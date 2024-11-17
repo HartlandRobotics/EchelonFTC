@@ -2,26 +2,35 @@ package org.hartlandrobotics.echelonFTC.pitScouting;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.nsd.NsdManager;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
+import org.hartlandrobotics.echelonFTC.database.entities.Team;
 import org.hartlandrobotics.echelonFTC.utilities.FileUtilities;
 
 import java.io.File;
@@ -43,6 +52,8 @@ public class PitScoutPhotosFragment extends Fragment {
     RobotImage robotImageAdapter;
     PitScout data;
     private int teamNumber;
+
+    ActivityResultLauncher<Intent> cameraActivityResultLauncher;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,11 +78,32 @@ public class PitScoutPhotosFragment extends Fragment {
         nextPicture = view.findViewById(R.id.nextPic);
         backPicture = view.findViewById(R.id.backPic);
 
+        cameraActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    int resultCode = result.getResultCode();
+
+                    if (resultCode == RESULT_OK) {
+                                                    Log.e(TAG, "onActivityResult " + "before photo" );
+                                                    Bitmap photo = (Bitmap) (result.getData().getExtras().get("data"));
+                        Log.e(TAG, "onActivityResult " + photo );
+                                                  SaveImage( photo );
+                                                  //populateImagesArea();
+
+
+
+                        //Bitmap photo = (Bitmap) data.getExtras().get( "data" );
+                            //Log.e(TAG, "onActivityResult " + "before save " + photo.getByteCount() );
+
+
+                    }
+                });
         if(data != null) {
             teamNumber = Integer.parseInt(trimTeamNumber(data.getTeamKey()));
             SetupImagesArea(view);
             setupNextAndBackButton();
         }
+
 
         return view;
     }
@@ -84,9 +116,7 @@ public class PitScoutPhotosFragment extends Fragment {
     private String trimTeamNumber(String teamKey){
         String safeTeamKey = StringUtils.defaultIfBlank(teamKey,StringUtils.EMPTY);
 
-        String teamNumber = safeTeamKey.startsWith("frc") ? safeTeamKey.substring(3) : safeTeamKey;
-
-        return teamNumber;
+        return safeTeamKey.startsWith("frc") ? safeTeamKey.substring(3) : safeTeamKey;
     }
 
     public void setupNextAndBackButton(){
@@ -109,7 +139,8 @@ public class PitScoutPhotosFragment extends Fragment {
         cameraButton.setOnClickListener(vw -> {
             try{
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+                cameraActivityResultLauncher.launch(cameraIntent);
+                //startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
             }
             catch(Exception e){
                 e.printStackTrace();
@@ -133,43 +164,50 @@ public class PitScoutPhotosFragment extends Fragment {
 
     private static final int CAMERA_PIC_REQUEST = 22;
 
-    @Override
-    public void onActivityResult(final int requestCode, int resultCode, Intent data) {
-        super.onActivityResult( requestCode, resultCode, data );
-        Log.e(TAG, "onActivityResult " + String.valueOf(requestCode) );
-        Log.e(TAG, "onActivityResult " + String.valueOf(requestCode) +" "+ CAMERA_PIC_REQUEST);
-        Log.e(TAG, "onActivityResult " + String.valueOf(resultCode) +" "+ RESULT_OK);
-
-
-        try {
-            switch ( requestCode ) {
-                case CAMERA_PIC_REQUEST:
-                    if ( resultCode == RESULT_OK ) {
-                        try {
-                            Log.e(TAG, "onActivityResult " + "before photo" );
-                            Bitmap photo = (Bitmap) data.getExtras().get( "data" );
-                            Log.e(TAG, "onActivityResult " + "before save " + photo.getByteCount() );
-
-                            SaveImage( photo );
-                            Log.e(TAG, "onActivityResult " + "after save" );
-
-                        } catch ( Exception e ) {
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-        } catch ( Exception e ) {
-            Toast.makeText( getActivity(), e.getMessage(), Toast.LENGTH_LONG ).show();
-        }
-    }
+//    @Override
+//    public void onActivityResult(final int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult( requestCode, resultCode, data );
+//        Log.e(TAG, "onActivityResult " + String.valueOf(requestCode) );
+//        Log.e(TAG, "onActivityResult " + String.valueOf(requestCode) +" "+ CAMERA_PIC_REQUEST);
+//        Log.e(TAG, "onActivityResult " + String.valueOf(resultCode) +" "+ RESULT_OK);
+//
+//
+//        try {
+//            switch ( requestCode ) {
+//                case CAMERA_PIC_REQUEST:
+//                    if ( resultCode == RESULT_OK ) {
+//                        try {
+//                            Log.e(TAG, "onActivityResult " + "before photo" );
+//                            Bitmap photo = (Bitmap) data.getExtras().get( "data" );
+//                            Log.e(TAG, "onActivityResult " + "before save " + photo.getByteCount() );
+//
+//                            SaveImage( photo );
+//                            Log.e(TAG, "onActivityResult " + "after save" );
+//
+//                        } catch ( Exception e ) {
+//                        }
+//                    }
+//                    break;
+//                default:
+//                    break;
+//            }
+//        } catch ( Exception e ) {
+//            Toast.makeText( getActivity(), e.getMessage(), Toast.LENGTH_LONG ).show();
+//        }
+//    }
 
 
     private void SaveImage(Bitmap finalBitmap) {
         Log.e(TAG ,"SaveImage " + "first line");
 
         PitScoutActivity fa = (PitScoutActivity)this.getActivity();
+        AutoCompleteTextView teamNumberAutoComplete = fa.findViewById(R.id.teamSelectionAutoComplete);
+        Editable et = teamNumberAutoComplete.getEditableText();
+        String st = et.toString().split(" - ")[0];
+        teamNumber = Integer.parseInt(st);
+
+
+        //Team team = fa.currentTeam;
         //teamNumber = Integer.parseInt(data.getTeamKey());
         Log.e(TAG, "SaveImage data" + String.valueOf(data));
 
@@ -202,7 +240,13 @@ public class PitScoutPhotosFragment extends Fragment {
             t.show();
 
         }
-        robotImagesPager.getAdapter().notifyDataSetChanged();
+
+        //robotImagesPager = this.getView().findViewById(R.id.picture_view_pager);
+        //robotImageAdapter = new RobotImage(getActivity().getApplicationContext(), teamNumber);
+
+        populateImagesArea();
+
+        //robotImageAdapter.notifyDataSetChanged();
     }
 
     private int getNextFileNumber(File[] files) {
