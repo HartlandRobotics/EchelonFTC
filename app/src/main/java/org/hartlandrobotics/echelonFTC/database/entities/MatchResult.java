@@ -170,19 +170,23 @@ public class MatchResult {
         this.defenseCount = defenseCount;
     }
 
+    @NonNull
     public String getMatchResultKey() { return matchResultKey; }
     public void setMatchResultKey(String matchResultKey){
         this.matchResultKey = matchResultKey;
     }
 
+    @NonNull
     public String getEventKey(){ return eventKey; }
     public void setEventKey(String eventKey){
         this.eventKey = eventKey;
     }
 
+    @NonNull
     public String getMatchKey(){ return matchKey; }
     public void setMatchKey(String matchKey){ this.matchKey = matchKey; }
 
+    @NonNull
     public String getTeamKey(){ return teamKey; }
     public void setTeamKey(String teamKey){
         this.teamKey = teamKey;

@@ -23,6 +23,7 @@ public class Api {
     public static ApiInterface getApiClient(Context context) {
         if(api == null) {
             AdminSettingsViewModel vm = AdminSettingsProvider.getAdminSettings(context);
+            assert vm != null;
             String userAgent = userAgentPrefix + " " + vm.getTeamNumber();
             apiKey = vm.getOrangeAllianceApiKey();
             //tbaApiKey = vm.getBlueAllianceApiKey();
@@ -34,8 +35,9 @@ public class Api {
                         .header("Accept", "application/json")
                         .header("User-Agent", userAgent)
                         //.header("X-TBA-Auth-Key", tbaApiKey)
-                        .header("X-TOA-Key", apiKey)
-                        .header("X-Application-Origin", apiKey)
+                        //.header("X-TOA-Key", apiKey)
+                        //.header("X-Application-Origin", apiKey)
+                        .header("Authorization", "Basic "+ apiKey)
                         .build();
                 return chain.proceed(request);
             });
@@ -44,7 +46,8 @@ public class Api {
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://theorangealliance.org/api/")
+                    .baseUrl("http://ftc-api.firstinspires.org/v2.0/")
+                    //.baseUrl("https://theorangealliance.org/api/")
                     //.baseUrl("https://thebluealliance.com/api/v3/")
                     .addConverterFactory(JacksonConverterFactory.create(mapper))
                     .client(client)
