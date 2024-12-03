@@ -86,11 +86,11 @@ public abstract class EchelonDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
 
-            databaseWriteExecutor.execute(() -> {
-                Season intoTheDeepSeason = new Season("Center Stage", 2324);
-                SeasonDao sd = _instance.seasonDao();
-                sd.insert(intoTheDeepSeason);
-            });
+            //databaseWriteExecutor.execute(() -> {
+             //   Season intoTheDeepSeason = new Season("Center Stage", 2324);
+             //   SeasonDao sd = _instance.seasonDao();
+             //   sd.insert(intoTheDeepSeason);
+            //});
 
 
             databaseWriteExecutor.execute(() -> {

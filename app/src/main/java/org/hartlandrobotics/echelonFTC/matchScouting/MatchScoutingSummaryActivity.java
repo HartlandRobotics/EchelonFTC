@@ -15,6 +15,7 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
@@ -134,7 +135,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         autoSampleHighValue = findViewById(R.id.autoSampleHighValue);
         autoSampleHighDecrement = findViewById(R.id.autoSampleHighDecrement);
         autoSampleHighDecrement.setOnClickListener(v -> {
-                matchResult.setAutoInt6(matchResult.getAutoInt6()-1);
+                matchResult.setAutoInt6(Math.max(matchResult.getAutoInt6()-1,0));
                 populateControlsFromData();
                 });
         autoSampleHighIncrement = findViewById(R.id.autoSampleHighIncrement);
@@ -146,7 +147,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         autoSampleLowValue = findViewById(R.id.autoSampleLowValue);
         autoSampleLowDecrement = findViewById(R.id.autoSampleLowDecrement);
         autoSampleLowDecrement.setOnClickListener(v -> {
-            matchResult.setAutoInt7( matchResult.getAutoInt7()-1 );
+            matchResult.setAutoInt7( Math.max(matchResult.getAutoInt7()-1,0) );
             populateControlsFromData();
         });
         autoSampleLowIncrement = findViewById(R.id.autoSampleLowIncrement);
@@ -158,7 +159,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         autoSampleNetZoneValue = findViewById(R.id.autoSampleNetZoneValue);
         autoSampleNetZoneDecrement = findViewById(R.id.autoSampleNetZoneDecrement);
         autoSampleNetZoneDecrement.setOnClickListener(v -> {
-            matchResult.setAutoInt8( matchResult.getAutoInt8()-1 );
+            matchResult.setAutoInt8( Math.max(matchResult.getAutoInt8()-1, 0) );
             populateControlsFromData();
         });
         autoSampleNetZoneIncrement = findViewById(R.id.autoSampleNetZoneIncrement);
@@ -171,7 +172,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         autoSpecimenHighValue = findViewById(R.id.autoSpecimenHighValue);
         autoSpecimenHighDecrement = findViewById(R.id.autoSpecimenHighDecrement);
         autoSpecimenHighDecrement.setOnClickListener(v -> {
-            matchResult.setAutoInt9( matchResult.getAutoInt9()-1 );
+            matchResult.setAutoInt9(Math.max( matchResult.getAutoInt9()-1,0) );
             populateControlsFromData();
         });
         autoSpecimenHighIncrement = findViewById(R.id.autoSpecimenHighIncrement);
@@ -184,7 +185,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         autoSpecimenLowValue = findViewById(R.id.autoSpecimenLowValue);
         autoSpecimenLowDecrement = findViewById(R.id.autoSpecimenLowDecrement);
         autoSpecimenLowDecrement.setOnClickListener(v -> {
-            matchResult.setAutoInt10( matchResult.getAutoInt10()-1 );
+            matchResult.setAutoInt10( Math.max(matchResult.getAutoInt10()-1,0) );
             populateControlsFromData();
         });
         autoSpecimenLowIncrement = findViewById(R.id.autoSpecimenLowIncrement);
@@ -211,7 +212,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         teleOpSampleHighValue = findViewById(R.id.teleOpSampleHighValue);
         teleOpSampleHighDecrement = findViewById(R.id.teleOpSampleHighDecrement);
         teleOpSampleHighDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt1(matchResult.getTeleOpInt1()-1);
+            matchResult.setTeleOpInt1(Math.max(matchResult.getTeleOpInt1()-1,0));
             populateControlsFromData();
         });
         teleOpSampleHighIncrement = findViewById(R.id.teleOpSampleHighIncrement);
@@ -223,7 +224,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         teleOpSampleLowValue = findViewById(R.id.teleOpSampleLowValue);
         teleOpSampleLowDecrement = findViewById(R.id.teleOpSampleLowDecrement);
         teleOpSampleLowDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt2( matchResult.getTeleOpInt2()-1 );
+            matchResult.setTeleOpInt2( Math.max(matchResult.getTeleOpInt2()-1,0) );
             populateControlsFromData();
         });
         teleOpSampleLowIncrement = findViewById(R.id.teleOpSampleLowIncrement);
@@ -236,7 +237,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         teleOpSampleNetZoneValue = findViewById(R.id.teleOpSampleNetZoneValue);
         teleOpSampleNetZoneDecrement = findViewById(R.id.teleOpSampleNetZoneDecrement);
         teleOpSampleNetZoneDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt3( matchResult.getTeleOpInt3()-1 );
+            matchResult.setTeleOpInt3( Math.max(matchResult.getTeleOpInt3()-1,0) );
             populateControlsFromData();
         });
         teleOpSampleNetZoneIncrement = findViewById(R.id.teleOpSampleNetZoneIncrement);
@@ -249,7 +250,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         teleOpSpecimenHighValue = findViewById(R.id.teleOpSpecimenHighValue);
         teleOpSpecimenHighDecrement = findViewById(R.id.teleOpSpecimenHighDecrement);
         teleOpSpecimenHighDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt4( matchResult.getTeleOpInt4()-1 );
+            matchResult.setTeleOpInt4( Math.max(matchResult.getTeleOpInt4()-1,0) );
             populateControlsFromData();
         });
         teleOpSpecimenHighIncrement = findViewById(R.id.teleOpSpecimenHighIncrement);
@@ -262,7 +263,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         teleOpSpecimenLowValue = findViewById(R.id.teleOpSpecimenLowValue);
         teleOpSpecimenLowDecrement = findViewById(R.id.teleOpSpecimenLowDecrement);
         teleOpSpecimenLowDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt5( matchResult.getTeleOpInt5()-1 );
+            matchResult.setTeleOpInt5( Math.max(matchResult.getTeleOpInt5()-1,0) );
             populateControlsFromData();
         });
         teleOpSpecimenLowIncrement = findViewById(R.id.teleOpSpecimenLowIncrement);
@@ -328,7 +329,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                matchResult.setAdditionalNotes(s.toString());
+                matchResult.setAdditionalNotes( s.toString());
             }
 
             @Override
