@@ -1,5 +1,7 @@
 package org.hartlandrobotics.echelonFTC;
 
+import static java.util.Collections.sort;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +31,7 @@ import org.hartlandrobotics.echelonFTC.database.repositories.MatchResultRepo;
 import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +39,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MatchScheduleActivity extends EchelonActivity {
+
+    static String TAG = "MatchScheduleActivity";
     EventRepo eventRepo;
     MatchResultRepo matchResultRepo;
     Map<String, List<MatchResult>> matchResultsByTeam =  new HashMap<>();
@@ -98,10 +104,16 @@ public class MatchScheduleActivity extends EchelonActivity {
             eventRepo.getMatchesForEvent(currentEvent).observe(this, event -> {
                 List<Match> matches = event.matches;
 
+                matches.sort(Comparator.comparingInt(Match::getMatchNumber));
+                Log.e(TAG, "" + matches.get(0).getMatchNumber());
+                Log.e(TAG, "" + matches.get(1).getMatchNumber());
+
+
                 for( Match match : matches ){
                     MatchScheduleViewModel matchScheduleViewModel = new MatchScheduleViewModel();
 
-                    matchScheduleViewModel.setMatchName( match.getMatchName() );
+                    //String mn = match.getMatchName();
+                    matchScheduleViewModel.setMatchName(  String.format("%3d",match.getMatchNumber() ));// match.getMatchName() );
 
                     int red1Average = getAverageByTeam(match.getRed1TeamKey());
                     matchScheduleViewModel.setRed1(match.getRed1TeamKey());

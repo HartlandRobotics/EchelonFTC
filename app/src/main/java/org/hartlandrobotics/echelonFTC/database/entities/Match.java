@@ -87,4 +87,8 @@ public class Match {
    public String getBlue2TeamKey(){
       return blue2TeamKey;
    }
+
+   public Integer getMatchNumber(){
+      return Integer.parseInt( matchName.split(" ")[1]);
+   }
 }

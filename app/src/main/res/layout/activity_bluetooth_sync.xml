@@ -140,6 +140,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight=".33"
+            android:visibility="invisible"
             >
 
             <com.google.android.material.button.MaterialButton
@@ -206,6 +207,8 @@
                 android:text="Fetch Blue3 Data"
                 app:icon="@drawable/outline_download_24"
                 android:layout_gravity="center"
+                android:visibility="invisible"
+
                 />
 
         </LinearLayout>
@@ -244,6 +247,7 @@
                 android:text="Fetch Alt3 Data"
                 app:icon="@drawable/outline_download_24"
                 android:layout_gravity="center"
+                android:visibility="invisible"
                 />
 
         </LinearLayout>
