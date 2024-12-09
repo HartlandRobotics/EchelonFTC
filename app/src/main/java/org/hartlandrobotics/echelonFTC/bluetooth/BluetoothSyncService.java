@@ -95,11 +95,13 @@ public class BluetoothSyncService {
 
         devices = bluetoothAdapter.getBondedDevices()
                 .stream()
-                .filter( bluetoothDevice -> bluetoothDevice.getName().startsWith( "red" ) ||
+                .filter( bluetoothDevice ->
+                        bluetoothDevice.getName().startsWith( "red" ) ||
                         bluetoothDevice.getName().startsWith( "blue" ) ||
                         bluetoothDevice.getName().startsWith( "alt" ) ||
                         bluetoothDevice.getName().startsWith( "video" ) ||
-                        bluetoothDevice.getName().contains("captain"))
+                        bluetoothDevice.getName().contains("captain")
+                )
                 .collect( Collectors.toMap( BluetoothDevice::getName, Function.identity() ) );
 
         return devices;
@@ -371,7 +373,7 @@ public class BluetoothSyncService {
             // Keep listening to the InputStream while connected
             while ( currentState == STATE_CONNECTED ) {
                 try {
-                    if( getCurrentDeviceName().contains( "captain_" + teamNumber )) {
+                    if( getCurrentDeviceName().contains( "captain_" )) {
                        // captain tablet consuming data sent from scouting tablet
                         String result = "";
                         boolean isDone = false;

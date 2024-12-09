@@ -54,17 +54,17 @@ public class BluetoothSyncActivity extends EchelonActivity {
 
     MaterialButton red1SyncButton;
     MaterialButton red2SyncButton;
-    MaterialButton red3SyncButton;
+    MaterialButton red5SyncButton;
+    MaterialButton red4SyncButton;
+
 
     MaterialButton blue1SyncButton;
     MaterialButton blue2SyncButton;
-    MaterialButton blue3SyncButton;
+    MaterialButton blue5SyncButton;
+    MaterialButton blue4SyncButton;
 
-    MaterialButton alt1SyncButton;
-    MaterialButton alt2SyncButton;
-    MaterialButton alt3SyncButton;
 
-    RecyclerView logRecyclerView;
+     RecyclerView logRecyclerView;
     LogLinesAdapter logLinesAdapter;
 
     private MaterialTextView deviceNameText;
@@ -153,31 +153,24 @@ public class BluetoothSyncActivity extends EchelonActivity {
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(this);
         String teamNumber = settings.getTeamNumber();
 
+
+
         deviceNameByRole = new HashMap<>();
-        deviceNameByRole.put("red1", "red_1_" + teamNumber);
-        deviceNameByRole.put("red2", "red_2_" + teamNumber);
-        deviceNameByRole.put("red3", "red_3_" + teamNumber);
 
-        deviceNameByRole.put("blue1", "blue_1_" + teamNumber);
-        deviceNameByRole.put("blue2", "blue_2_" + teamNumber);
-        deviceNameByRole.put("blue3", "blue_3_" + teamNumber);
 
-        deviceNameByRole.put("alt1", "alt_1_" + teamNumber);
-        deviceNameByRole.put("alt2", "alt_2_" + teamNumber);
-        deviceNameByRole.put("alt3", "alt_3_" + teamNumber);
+
 
         buttonsByDeviceName = new HashMap<>();
         buttonsByDeviceName.put("red_1_" + teamNumber, red1SyncButton);
         buttonsByDeviceName.put("red_2_" + teamNumber, red2SyncButton);
-        buttonsByDeviceName.put("red_3_" + teamNumber, red3SyncButton);
+        buttonsByDeviceName.put("red_5_" + teamNumber, red5SyncButton);
+        buttonsByDeviceName.put("red_4_" + teamNumber, red4SyncButton);
+
 
         buttonsByDeviceName.put("blue_1_" + teamNumber, blue1SyncButton);
         buttonsByDeviceName.put("blue_2_" + teamNumber, blue2SyncButton);
-        buttonsByDeviceName.put("blue_3_" + teamNumber, blue3SyncButton);
-
-        buttonsByDeviceName.put("alt_1_" + teamNumber, alt1SyncButton);
-        buttonsByDeviceName.put("alt_2_" + teamNumber, alt2SyncButton);
-        buttonsByDeviceName.put("alt_3_" + teamNumber, alt3SyncButton);
+        buttonsByDeviceName.put("blue_5_" + teamNumber, blue5SyncButton);
+        buttonsByDeviceName.put("blue_4_" + teamNumber, blue4SyncButton);
     }
 
     private void setupControls(){
@@ -215,11 +208,15 @@ public class BluetoothSyncActivity extends EchelonActivity {
                 pullDeviceData("red2", red2SyncButton)
         );
 
-        red3SyncButton = findViewById(R.id.red3SyncButton);
-        red3SyncButton.setOnClickListener(v ->
-                pullDeviceData("red3", red3SyncButton)
+        red5SyncButton = findViewById(R.id.red3SyncButton);
+        red5SyncButton.setOnClickListener(v ->
+                pullDeviceData("red1", red5SyncButton)
         );
 
+        red4SyncButton = findViewById(R.id.red4SyncButton);
+        red4SyncButton.setOnClickListener(v ->
+                pullDeviceData("red2", red4SyncButton)
+        );
 
 
         blue1SyncButton = findViewById(R.id.blue1SyncButton);
@@ -232,26 +229,14 @@ public class BluetoothSyncActivity extends EchelonActivity {
                 pullDeviceData("blue2", blue2SyncButton)
         );
 
-        blue3SyncButton = findViewById(R.id.blue3SyncButton);
-        blue3SyncButton.setOnClickListener(v ->
-                pullDeviceData("blue3", blue3SyncButton)
+        blue5SyncButton = findViewById(R.id.blue3SyncButton);
+        blue5SyncButton.setOnClickListener(v ->
+                pullDeviceData("blue1", blue5SyncButton)
         );
 
-
-
-        alt1SyncButton = findViewById(R.id.alt1SyncButton);
-        alt1SyncButton.setOnClickListener(v ->
-                pullDeviceData("alt1", alt1SyncButton)
-        );
-
-        alt2SyncButton = findViewById(R.id.alt2SyncButton);
-        alt2SyncButton.setOnClickListener(v ->
-                pullDeviceData("alt2", alt2SyncButton)
-        );
-
-        alt3SyncButton = findViewById(R.id.alt3SyncButton);
-        alt3SyncButton.setOnClickListener(v ->
-                pullDeviceData("alt3", alt3SyncButton)
+        blue4SyncButton = findViewById(R.id.blue4SyncButton);
+        blue4SyncButton.setOnClickListener(v ->
+                pullDeviceData("blue2", blue4SyncButton)
         );
 
         logRecyclerView = findViewById(R.id.sync_log_text);
@@ -262,15 +247,32 @@ public class BluetoothSyncActivity extends EchelonActivity {
 
     private void setVisibility(){
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
+        String teamNumber = settings.getTeamNumber();
 
         String deviceName = bluetoothService.getCurrentDeviceName();
-        deviceNameText.setText(deviceName);
+        if( deviceName.contains("aptain") ) {
+            if (deviceName.contains("aptain_1")) {
+                red5SyncButton.setVisibility(View.GONE);
+                red4SyncButton.setVisibility(View.GONE);
+                blue5SyncButton.setVisibility(View.GONE);
+                blue4SyncButton.setVisibility(View.GONE);
 
+                deviceNameByRole.put("blue1", "blue_1_" + teamNumber);
+                deviceNameByRole.put("blue2", "blue_2_" + teamNumber);
+                deviceNameByRole.put("red1", "red_1_" + teamNumber);
+                deviceNameByRole.put("red2", "red_2_" + teamNumber);
+            }
+            if (deviceName.contains("aptain_2")) {
+                red1SyncButton.setVisibility(View.GONE);
+                red2SyncButton.setVisibility(View.GONE);
+                blue1SyncButton.setVisibility(View.GONE);
+                blue2SyncButton.setVisibility(View.GONE);
 
-        if(
-                deviceName.contains("aptain")
-                // deviceName.equals("captain_" + settings.getTeamNumber())
-        ){
+                deviceNameByRole.put("blue1", "blue_5_" + teamNumber);
+                deviceNameByRole.put("blue2", "blue_4_" + teamNumber);
+                deviceNameByRole.put("red1", "red_5_" + teamNumber);
+                deviceNameByRole.put("red2", "red_4_" + teamNumber);
+            }
             matchResultsUnsyncedLabel.setVisibility(View.GONE);
             matchResultsUnsyncedText.setVisibility(View.GONE);
             pitScoutUnsyncedLabel.setVisibility(View.GONE);

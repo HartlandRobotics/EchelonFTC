@@ -140,14 +140,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight=".33"
-            android:visibility="invisible"
             >
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/red1SyncButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fetch Red1 Data"
+                android:text="Fetch Red 1 Data"
                 app:icon="@drawable/outline_download_24"
                 android:layout_gravity="center"
                 />
@@ -156,7 +155,7 @@
                 android:id="@+id/red2SyncButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fetch Red2 Data"
+                android:text="Fetch Red 2 Data"
                 app:icon="@drawable/outline_download_24"
                 android:layout_gravity="center"
                 />
@@ -165,7 +164,16 @@
                 android:id="@+id/red3SyncButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fetch Red3 Data"
+                android:text="Fetch Red 3 Data"
+                app:icon="@drawable/outline_download_24"
+                android:layout_gravity="center"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/red4SyncButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fetch Red 4 Data"
                 app:icon="@drawable/outline_download_24"
                 android:layout_gravity="center"
                 />
@@ -186,7 +194,7 @@
                 android:id="@+id/blue1SyncButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fetch Blue1 Data"
+                android:text="Fetch Blue 1 Data"
                 app:icon="@drawable/outline_download_24"
                 android:layout_gravity="center"
                 />
@@ -195,7 +203,7 @@
                 android:id="@+id/blue2SyncButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fetch Blue2 Data"
+                android:text="Fetch Blue 2 Data"
                 app:icon="@drawable/outline_download_24"
                 android:layout_gravity="center"
                 />
@@ -204,16 +212,24 @@
                 android:id="@+id/blue3SyncButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fetch Blue3 Data"
+                android:text="Fetch Blue 3 Data"
                 app:icon="@drawable/outline_download_24"
                 android:layout_gravity="center"
-                android:visibility="invisible"
-
                 />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/blue4SyncButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fetch Blue 4 Data"
+                app:icon="@drawable/outline_download_24"
+                android:layout_gravity="center"
+                />
+
 
         </LinearLayout>
 
-        <!-- Sub Devices -->
+        <!-- Sub Devices
         <LinearLayout
             android:id="@+id/altLayout"
             android:layout_width="wrap_content"
@@ -251,6 +267,8 @@
                 />
 
         </LinearLayout>
+
+        -->
 
 
 
