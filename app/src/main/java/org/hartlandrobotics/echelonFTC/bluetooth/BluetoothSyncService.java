@@ -107,7 +107,8 @@ public class BluetoothSyncService {
         return devices;
     }
 
-    public synchronized void updateState(){       if( bluetoothAdapter != null ){
+    public synchronized void updateState(){
+        if( bluetoothAdapter != null ){
             Log.e(TAG, "getting state " + String.valueOf(currentState) + " " + String.valueOf(bluetoothAdapter.getState()));
             //currentState = bluetoothAdapter.getState();
         }
@@ -145,9 +146,9 @@ public class BluetoothSyncService {
         if ( connectedThread != null ) {
             connectedThread.cancel();
             connectedThread = null;
-            Log.e(TAG, "connecting tread is not null");
+            Log.e(TAG, "connecting thread is not null");
         } else {
-            Log.e(TAG, "connecting tread is null");
+            Log.e(TAG, "connecting thread is null");
         }
 
         connectThread = new ConnectThread( device );
