@@ -7,12 +7,12 @@
     tools:context=".matchScouting.MatchScoutingTeleopActivity">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/basket"
+        android:id="@+id/classified"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/specimen"
+        app:layout_constraintRight_toLeftOf="@id/overflow"
         android:layout_marginTop="30dp"
         android:textSize="48sp"
         android:text="Basket"
@@ -35,8 +35,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/sample_blue"
         android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/basket"
-        app:layout_constraintLeft_toLeftOf="@id/basket"
+        app:layout_constraintTop_toBottomOf="@id/classified"
+        app:layout_constraintLeft_toLeftOf="@id/classified"
         />
 
     <com.google.android.material.textview.MaterialTextView
@@ -114,11 +114,11 @@
 
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/specimen"
+        android:id="@+id/overflow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/basket"
-        app:layout_constraintLeft_toRightOf="@id/basket"
+        app:layout_constraintTop_toTopOf="@id/classified"
+        app:layout_constraintLeft_toRightOf="@id/classified"
         app:layout_constraintRight_toLeftOf="@id/ascent"
         android:textSize="48sp"
         android:text="Specimen"
@@ -141,8 +141,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/specimen_blue"
         android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/specimen"
-        app:layout_constraintLeft_toLeftOf="@id/specimen"
+        app:layout_constraintTop_toBottomOf="@id/overflow"
+        app:layout_constraintLeft_toLeftOf="@id/overflow"
 
         />
 
@@ -194,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/specimen"
+        app:layout_constraintLeft_toRightOf="@id/overflow"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"
         android:textSize="48sp"

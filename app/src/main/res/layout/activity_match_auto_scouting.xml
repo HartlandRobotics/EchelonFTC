@@ -7,27 +7,17 @@
     tools:context=".matchScouting.MatchScoutingAutoActivity">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/basket"
+        android:id="@+id/classified"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/specimen"
+        app:layout_constraintRight_toLeftOf="@id/overflow"
         android:textSize="48sp"
-        android:text="Basket"
+        android:text="Classified"
         android:layout_marginTop="30dp"
         />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/topBasketLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/topBasket"
-        app:layout_constraintRight_toLeftOf="@+id/topBasket"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:text="H"
-        />
 
     <ImageButton
         android:id="@+id/topBasket"
@@ -35,8 +25,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/sample_blue"
         android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/basket"
-        app:layout_constraintLeft_toLeftOf="@id/basket"
+        app:layout_constraintTop_toBottomOf="@id/classified"
+        app:layout_constraintLeft_toLeftOf="@id/classified"
         />
 
     <com.google.android.material.textview.MaterialTextView
@@ -48,17 +38,6 @@
         android:layout_marginLeft="30dp"
         android:textSize="48sp"
         tools:text="0"
-        />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/midBasketLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/midBasket"
-        app:layout_constraintRight_toLeftOf="@+id/midBasket"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:text="L"
         />
 
     <ImageButton
@@ -81,18 +60,7 @@
         tools:text="0"
         />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/lowBasketLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/lowBasket"
-        app:layout_constraintRight_toLeftOf="@id/lowBasket"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:text="NZ"
-        />
-
-    <ImageButton
+\    <ImageButton
         android:id="@+id/lowBasket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -114,26 +82,15 @@
 
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/specimen"
+        android:id="@+id/overflow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/basket"
-        app:layout_constraintRight_toLeftOf="@id/ascent"
+        app:layout_constraintLeft_toRightOf="@id/classified"
+        app:layout_constraintRight_toRightOf="parent"
         android:textSize="48sp"
         android:layout_marginTop="30dp"
-        android:text="Specimen"
-        />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/topSpecimenLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/topSpecimen"
-        app:layout_constraintRight_toLeftOf="@id/topSpecimen"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:text="H"
+        android:text="Overflow"
         />
 
     <ImageButton
@@ -142,8 +99,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/specimen_blue"
         android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/specimen"
-        app:layout_constraintLeft_toLeftOf="@id/specimen"
+        app:layout_constraintTop_toBottomOf="@id/overflow"
+        app:layout_constraintLeft_toLeftOf="@id/overflow"
 
         />
 
@@ -157,18 +114,6 @@
         android:textSize="48sp"
         tools:text="0"
         />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/lowSpecimenLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/lowSpecimen"
-        app:layout_constraintRight_toLeftOf="@+id/lowSpecimen"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:text="L"
-        />
-
 
     <ImageButton
         android:id="@+id/lowSpecimen"
@@ -192,28 +137,6 @@
         />
 
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/ascent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/specimen"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"
-        android:textSize="48sp"
-        android:text="Ascent"
-        />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/level1Ascent"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blueAlliance"
-        app:layout_constraintTop_toBottomOf="@+id/ascent"
-        app:layout_constraintStart_toStartOf="@+id/ascent"
-        android:layout_marginTop="20dp"
-        android:text="park"
-        />
 
     <ImageButton
         android:id="@+id/observationZone"
@@ -240,7 +163,7 @@
         android:id="@+id/teamKeyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="FRC 3536"
+        tools:text="FTC 5290"
         android:padding="20px"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
