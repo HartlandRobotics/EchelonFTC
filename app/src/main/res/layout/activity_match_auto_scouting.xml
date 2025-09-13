@@ -20,65 +20,27 @@
 
 
     <ImageButton
-        android:id="@+id/topBasket"
+        android:id="@+id/classified_ball"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/sample_blue"
+        android:src="@drawable/ball_green"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/classified"
         app:layout_constraintLeft_toLeftOf="@id/classified"
         />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/topBasketText"
+        android:id="@+id/classified_ball_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/topBasket"
-        app:layout_constraintLeft_toRightOf="@+id/topBasket"
+        app:layout_constraintTop_toTopOf="@id/classified_ball"
+        app:layout_constraintLeft_toRightOf="@+id/classified_ball"
         android:layout_marginLeft="30dp"
         android:textSize="48sp"
         tools:text="0"
         />
 
-    <ImageButton
-        android:id="@+id/midBasket"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/sample_blue"
-        android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/topBasket"
-        app:layout_constraintLeft_toLeftOf="@id/topBasket"
-        />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/midBasketText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/midBasket"
-        app:layout_constraintLeft_toLeftOf="@+id/topBasketText"
-        android:textSize="48sp"
-        tools:text="0"
-        />
-
-\    <ImageButton
-        android:id="@+id/lowBasket"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/sample_blue"
-        android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/midBasket"
-        app:layout_constraintLeft_toLeftOf="@id/midBasket"
-        />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/lowBasketText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/lowBasket"
-        app:layout_constraintLeft_toLeftOf="@+id/topBasketText"
-        android:textSize="48sp"
-        tools:text="0"
-        />
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -87,17 +49,18 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@id/classified"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/motif"
+
         android:textSize="48sp"
         android:layout_marginTop="30dp"
         android:text="Overflow"
         />
 
     <ImageButton
-        android:id="@+id/topSpecimen"
+        android:id="@+id/overflow_ball"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/specimen_blue"
+        android:src="@drawable/ball_white"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/overflow"
         app:layout_constraintLeft_toLeftOf="@id/overflow"
@@ -105,48 +68,62 @@
         />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/topSpecimenText"
+        android:id="@+id/overflow_ball_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/topSpecimen"
-        app:layout_constraintLeft_toRightOf="@id/topSpecimen"
+        app:layout_constraintTop_toTopOf="@id/overflow_ball"
+        app:layout_constraintLeft_toRightOf="@id/overflow_ball"
         android:layout_marginLeft="30dp"
         android:textSize="48sp"
         tools:text="0"
-        />
-
-    <ImageButton
-        android:id="@+id/lowSpecimen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/specimen_blue"
-        android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/topSpecimen"
-        app:layout_constraintLeft_toLeftOf="@id/topSpecimen"
         />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/lowSpecimenText"
+        android:id="@+id/motif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/lowSpecimen"
-        app:layout_constraintLeft_toRightOf="@id/lowSpecimen"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/overflow"
+        app:layout_constraintRight_toRightOf="parent"
         android:textSize="48sp"
+        android:layout_marginTop="30dp"
+        android:text="Motif"
+        />
+
+    <ImageButton
+        android:id="@+id/motif_ball"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ball_purple"
+        android:background="@null"
+        app:layout_constraintTop_toBottomOf="@id/motif"
+        app:layout_constraintLeft_toLeftOf="@id/motif"
+
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/motif_ball_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/motif_ball"
+        app:layout_constraintLeft_toRightOf="@id/motif_ball"
         android:layout_marginLeft="30dp"
+        android:textSize="48sp"
         tools:text="0"
         />
 
 
-
     <ImageButton
-        android:id="@+id/observationZone"
+        android:id="@+id/leave"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/observation_zone_blue"
-        android:scaleType="fitCenter"
         android:background="@null"
-        app:layout_constraintTop_toBottomOf="@+id/lowBasket"
-        app:layout_constraintLeft_toLeftOf="@id/lowBasket"
+        android:scaleType="fitCenter"
+        android:src="@drawable/leave_blue"
+
+        app:layout_constraintTop_toBottomOf="@id/classified_ball"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
 
         />
 
