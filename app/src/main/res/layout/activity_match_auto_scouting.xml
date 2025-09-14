@@ -112,16 +112,27 @@
         tools:text="0"
         />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/leave_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/overflow_ball"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="48sp"
+        android:text="Leave"
+        android:layout_marginTop="30dp"
+        />
 
     <ImageButton
         android:id="@+id/leave"
         android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/leave_blue"
 
-        app:layout_constraintTop_toBottomOf="@id/classified_ball"
+        app:layout_constraintTop_toBottomOf="@id/leave_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
 

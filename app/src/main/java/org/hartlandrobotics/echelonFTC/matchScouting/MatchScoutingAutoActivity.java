@@ -34,7 +34,6 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     private MaterialTextView motifText;
     private MaterialTextView teamKeyText;
 
-
     int leaveDrawable;
 
     MatchResultViewModel matchResultViewModel;
@@ -42,7 +41,6 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
 
     String matchKey;
     String teamKey;
-
 
     public static void launch(Context context, String matchKey, String teamKey){
         Intent intent = new Intent(context, MatchScoutingAutoActivity.class);
@@ -96,7 +94,6 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     }
 
     public void setupControls(){
-
         MaterialButton teleOpButton = findViewById(R.id.teleOp);
         teleOpButton.setOnClickListener(v -> {
             matchResultViewModel.upsert(matchResult);
@@ -141,5 +138,4 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
             leaveDrawable = R.drawable.leave_blue;
         }
     }
-
 }
