@@ -23,30 +23,19 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     private static final String MATCH_KEY = "auto_match_key_param";
     private static final String TEAM_KEY = "auto_team_key_param";
 
-    private ImageButton topBasketButton;
-    private ImageButton midBasketButton;
-    private ImageButton lowBasketButton;
+    private ImageButton classifiedButton;
+    private ImageButton overflowButton;
+    private ImageButton motifButton;
 
-    private ImageButton topSpecimenButton;
-    private ImageButton lowSpecimenButton;
+    private ImageButton leaveButton;
 
-    private ImageButton observationZoneButton;
-    private MaterialButton levelAscentButton;
-
-
-    private MaterialTextView topBasketText;
-    private MaterialTextView midBasketText;
-    private MaterialTextView lowBasketText;
-    private MaterialTextView topSpecimenText;
-    private MaterialTextView lowSpecimenText;
+    private MaterialTextView classifiedText;
+    private MaterialTextView overflowText;
+    private MaterialTextView motifText;
     private MaterialTextView teamKeyText;
 
 
-    int basketDrawable;
-    int specimemDrawable;
-    int ascentDrawable;
-    int observationZoneDrawable;
-    private int buttonColor;
+    int leaveDrawable;
 
     MatchResultViewModel matchResultViewModel;
     MatchResult matchResult;
@@ -95,27 +84,15 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     }
 
     public void populateControlsFromData(){
-        topBasketText.setText(String.valueOf(matchResult.getAutoInt6()));
-        midBasketText.setText(String.valueOf(matchResult.getAutoInt7()));
-        lowBasketText.setText(String.valueOf(matchResult.getAutoInt8()));
-
-        lowSpecimenText.setText(String.valueOf(matchResult.getAutoInt10()));
-        topSpecimenText.setText(String.valueOf(matchResult.getAutoInt9()));
+        classifiedText.setText(String.valueOf(matchResult.getAutoInt6()));
+        overflowText.setText(String.valueOf(matchResult.getAutoInt7()));
+        motifText.setText(String.valueOf(matchResult.getAutoInt8()));
 
         if( matchResult.getAutoFlag1() ){
-            observationZoneButton.setImageResource(R.drawable.observation_zone_green);
+            leaveButton.setImageResource(R.drawable.leave_green);
         } else {
-            observationZoneButton.setImageResource(observationZoneDrawable);
+            leaveButton.setImageResource(leaveDrawable);
         }
-
-        if (matchResult.getAutoFlag2()){
-            levelAscentButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.secondaryDarkColor)));
-        }
-        else {
-            levelAscentButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(buttonColor)));
-        }
-
-
     }
 
     public void setupControls(){
@@ -126,77 +103,42 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
             MatchScoutingTeleopActivity.launch(MatchScoutingAutoActivity.this, matchKey, teamKey );
         });
 
-        topBasketText = findViewById(R.id.topBasketText);
-        topBasketButton = findViewById(R.id.topBasket);
-        topBasketButton.setImageResource(basketDrawable);
-        topBasketButton.setOnClickListener(v -> {
+        classifiedText = findViewById(R.id.classified_ball_text);
+        classifiedButton = findViewById(R.id.classified_ball);
+        classifiedButton.setOnClickListener(v -> {
             matchResult.setAutoInt6( matchResult.getAutoInt6() + 1);
             populateControlsFromData();
         });
 
-        midBasketText = findViewById(R.id.midBasketText);
-        midBasketButton = findViewById(R.id.midBasket);
-        midBasketButton.setImageResource(basketDrawable);
-        midBasketButton.setOnClickListener(v -> {
+        overflowText = findViewById(R.id.overflow_ball_text);
+        overflowButton = findViewById(R.id.overflow_ball);
+        overflowButton.setOnClickListener(v -> {
             matchResult.setAutoInt7( matchResult.getAutoInt7() + 1);
             populateControlsFromData();
         });
 
-        lowBasketText = findViewById(R.id.lowBasketText);
-        lowBasketButton = findViewById(R.id.lowBasket);
-        lowBasketButton.setImageResource(basketDrawable);
-        lowBasketButton.setOnClickListener(v -> {
+        motifText = findViewById(R.id.motif_ball_text);
+        motifButton = findViewById(R.id.motif_ball);
+        motifButton.setOnClickListener(v -> {
             matchResult.setAutoInt8( matchResult.getAutoInt8() + 1);
             populateControlsFromData();
         });
 
-        topSpecimenText = findViewById(R.id.topSpecimenText);
-        topSpecimenButton = findViewById(R.id.topSpecimen);
-        topSpecimenButton.setImageResource(specimemDrawable);
-        topSpecimenButton.setOnClickListener(v -> {
-            matchResult.setAutoInt9( matchResult.getAutoInt9() + 1);
-            populateControlsFromData();
-        });
-
-        lowSpecimenText = findViewById(R.id.lowSpecimenText);
-        lowSpecimenButton = findViewById(R.id.lowSpecimen);
-        lowSpecimenButton.setImageResource(specimemDrawable);
-        lowSpecimenButton.setOnClickListener(v -> {
-            matchResult.setAutoInt10( matchResult.getAutoInt10() + 1);
-            populateControlsFromData();
-        });
-
-        observationZoneButton = findViewById(R.id.observationZone);
-        observationZoneButton.setImageResource(observationZoneDrawable);
-        observationZoneButton.setOnClickListener(v -> {
+        leaveButton = findViewById(R.id.leave);
+        leaveButton.setImageResource(leaveDrawable);
+        leaveButton.setOnClickListener(v -> {
             matchResult.setAutoFlag1( !matchResult.getAutoFlag1() );
             populateControlsFromData();
         });
-
-        levelAscentButton = findViewById(R.id.level1Ascent);
-        levelAscentButton.setOnClickListener(v -> {
-            matchResult.setAutoFlag2(!matchResult.getAutoFlag2());
-            populateControlsFromData();
-        });
-
-
     }
 
     public void setupColor() {
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
         if (settings.getDeviceRole().startsWith("red")){
-            basketDrawable = R.drawable.sample_red;
-            specimemDrawable = R.drawable.specimen_red;
-            ascentDrawable = R.drawable.bar_red;
-            observationZoneDrawable = R.drawable.observation_zone_red;
-            buttonColor = R.color.redAlliance;
+            leaveDrawable = R.drawable.leave_red;
         } else {
-            basketDrawable = R.drawable.sample_blue;
-            specimemDrawable = R.drawable.specimen_blue;
-            ascentDrawable = R.drawable.bar_blue;
-            observationZoneDrawable = R.drawable.observation_zone_blue;
-            buttonColor = R.color.blueAlliance;
+            leaveDrawable = R.drawable.leave_blue;
         }
     }
 
