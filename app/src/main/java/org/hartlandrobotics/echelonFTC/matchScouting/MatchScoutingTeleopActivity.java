@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
 
 import com.google.android.material.button.MaterialButton;
@@ -31,7 +29,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private ImageButton motifButton;
 
     private ImageButton baseButton;
-    private ImageButton twobotsButton;
+    private ImageButton twoBotsButton;
 
 
     private MaterialTextView classifiedText;
@@ -104,9 +102,9 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         }
 
         if( matchResult.getEndFlag1() ){
-            twobotsButton.setImageResource(R.drawable.base_green);
+            twoBotsButton.setImageResource(R.drawable.base_green);
         } else {
-            twobotsButton.setImageResource(twobotsDrawable);
+            twoBotsButton.setImageResource(twobotsDrawable);
         }
         //defensesText.setText(String.valueOf(matchResult.getDefenseCount()));
     }
@@ -146,8 +144,8 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
-        twobotsButton = findViewById(R.id.twobots_image);
-        twobotsButton.setOnClickListener(v -> {
+        twoBotsButton = findViewById(R.id.twobots_image);
+        twoBotsButton.setOnClickListener(v -> {
             matchResult.setEndFlag1(!matchResult.getEndFlag1());
             boolean isSelected = matchResult.getEndFlag1();
             populateControlsFromData();
