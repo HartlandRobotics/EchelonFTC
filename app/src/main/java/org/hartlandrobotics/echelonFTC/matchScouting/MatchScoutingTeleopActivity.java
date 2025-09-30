@@ -96,7 +96,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         if( matchResult.getEndInt6() == 2){
             baseButton.setImageResource(R.drawable.base_green);
         } else if( matchResult.getEndInt6() == 1){
-            baseButton.setImageResource(R.drawable.base_green);
+            baseButton.setImageResource(R.drawable.base_green_partial);
         } else {
             baseButton.setImageResource(baseDrawable);
         }
