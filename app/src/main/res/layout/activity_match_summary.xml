@@ -458,7 +458,7 @@
             android:id="@+id/endBaseCycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="&lt; - &gt;"
+            android:text="&lt;-&gt;"
             app:layout_constraintStart_toStartOf="@id/endBaseValue"
             app:layout_constraintTop_toBottomOf="@id/endBaseValue"
             />
