@@ -143,7 +143,7 @@
         android:id="@+id/twobots_image"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:src="@drawable/base_green"
+        android:src="@drawable/two_bots_blue"
         android:scaleType="fitCenter"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/twobots_text"

@@ -102,7 +102,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         }
 
         if( matchResult.getEndFlag1() ){
-            twoBotsButton.setImageResource(R.drawable.base_green);
+            twoBotsButton.setImageResource(R.drawable.two_bots_green);
         } else {
             twoBotsButton.setImageResource(twobotsDrawable);
         }
@@ -167,8 +167,10 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
         if (settings.getDeviceRole().startsWith("red")){
             baseDrawable = R.drawable.base_red;
+            twobotsDrawable = R.drawable.two_bots_red;
         } else {
             baseDrawable = R.drawable.base_blue;
+            twobotsDrawable = R.drawable.two_bots_red;
         }
     }
 }
