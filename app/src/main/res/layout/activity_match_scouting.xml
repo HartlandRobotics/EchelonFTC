@@ -150,6 +150,40 @@
         app:layout_constraintLeft_toLeftOf="@id/twobots_text"
         />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/depot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/motif_ball"
+        app:layout_constraintLeft_toRightOf="@id/overflow"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
+        android:textSize="48sp"
+        android:text="Depot"
+        />
+
+    <ImageButton
+        android:id="@+id/depot_ball"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ball_white"
+        android:background="@null"
+        app:layout_constraintTop_toBottomOf="@id/depot"
+        app:layout_constraintLeft_toLeftOf="@id/motif"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/depot_ball_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/depot_ball"
+        app:layout_constraintLeft_toRightOf="@id/depot_ball"
+        android:layout_marginLeft="30dp"
+        android:textSize="48sp"
+        tools:text="0"
+        />
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/summary"
         android:layout_width="wrap_content"

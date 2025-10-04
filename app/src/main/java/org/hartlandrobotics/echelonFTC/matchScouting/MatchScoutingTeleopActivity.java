@@ -27,6 +27,8 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private ImageButton classifiedButton;
     private ImageButton overflowButton;
     private ImageButton motifButton;
+    private ImageButton depotButton;
+
 
     private ImageButton baseButton;
     private ImageButton twoBotsButton;
@@ -35,6 +37,8 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private MaterialTextView classifiedText;
     private MaterialTextView overflowText;
     private MaterialTextView motifText;
+    private MaterialTextView depotText;
+
 
     private MaterialTextView teamKeyText;
 
@@ -92,6 +96,8 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         classifiedText.setText(String.valueOf(matchResult.getTeleOpInt1()));
         overflowText.setText(String.valueOf(matchResult.getTeleOpInt2()));
         motifText.setText(String.valueOf(matchResult.getTeleOpInt3()));
+        depotText.setText(String.valueOf(matchResult.getTeleOpInt4()));
+
 
         if( matchResult.getEndInt6() == 2){
             baseButton.setImageResource(R.drawable.base_green);
@@ -151,6 +157,12 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
+        depotText = findViewById(R.id.depot_ball_text);
+        depotButton = findViewById(R.id.depot_ball);
+        depotButton.setOnClickListener(v -> {
+            matchResult.setTeleOpInt4( matchResult.getTeleOpInt4() + 1);
+            populateControlsFromData();
+        });
 
         //defensesButton = findViewById(R.id.teleOpDefenses);
         //defensesButton.setImageResource(defenseDrawable);

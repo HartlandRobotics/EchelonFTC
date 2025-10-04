@@ -182,24 +182,10 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
-
-        teleOpDepotValue = findViewById(R.id.teleOpDepotValue);
-        teleOpDepotDecrement = findViewById(R.id.teleOpDepotDecrement);
-        teleOpDepotDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt3( Math.max(matchResult.getTeleOpInt3()-1,0) );
-            populateControlsFromData();
-        });
-        teleOpDepotIncrement = findViewById(R.id.teleOpDepotIncrement);
-        teleOpDepotIncrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt3( matchResult.getTeleOpInt3()+1 );
-            populateControlsFromData();
-        });
-
-
         teleOpMotifValue = findViewById(R.id.teleOpMotifValue);
         teleOpMotifDecrement = findViewById(R.id.teleOpMotifDecrement);
         teleOpMotifDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt4( Math.max(matchResult.getTeleOpInt4()-1,0) );
+            matchResult.setTeleOpInt3( Math.max(matchResult.getTeleOpInt3()-1,0) );
             populateControlsFromData();
         });
         teleOpMotifIncrement = findViewById(R.id.teleOpMotifIncrement);
@@ -208,7 +194,23 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
+        teleOpDepotValue = findViewById(R.id.teleOpDepotValue);
+        teleOpDepotDecrement = findViewById(R.id.teleOpDepotDecrement);
+        teleOpDepotDecrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt4( Math.max(matchResult.getTeleOpInt4()-1,0) );
+            populateControlsFromData();
+        });
+        teleOpDepotIncrement = findViewById(R.id.teleOpDepotIncrement);
+        teleOpDepotIncrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt4( matchResult.getTeleOpInt4()+1 );
+            populateControlsFromData();
+        });
+
+
+
+
         endBaseCycle = findViewById(R.id.endBaseCycle);
+        endBaseValue = findViewById(R.id.endBaseValue);
         endBaseCycle.setOnClickListener(v -> {
             matchResult.setEndInt6((matchResult.getEndInt6()+1)%3);
             populateControlsFromData();
@@ -271,11 +273,18 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
 
         teleOpClassifiedValue.setText( String.valueOf( matchResult.getTeleOpInt1() ));
         teleOpOverflowValue.setText( String.valueOf( matchResult.getTeleOpInt2() ));
-        teleOpDepotValue.setText(matchResult.getTeleOpInt3());
-        teleOpMotifValue.setText(matchResult.getTeleOpInt4());
+        teleOpMotifValue.setText( String.valueOf( matchResult.getTeleOpInt3() ));
+        teleOpDepotValue.setText( String.valueOf( matchResult.getTeleOpInt4() ));
 
 
-        endBaseValue.setText( String.valueOf( matchResult.getEndInt6() ));
+        int baseNum = matchResult.getEndInt6();
+        if( baseNum == 0 ){
+            endBaseValue.setText("None");
+        } else if ( baseNum == 1 ){
+            endBaseValue.setText("Part");
+        } else if ( baseNum == 2 ){
+            endBaseValue.setText("Full");
+        }
         endTwobotsCheckBox.setChecked( matchResult.getEndFlag1());
 
         //teleOpDefensesValue.setText( String.valueOf( matchResult.getDefenseCount() ));
