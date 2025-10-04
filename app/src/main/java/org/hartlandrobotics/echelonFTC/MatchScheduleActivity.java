@@ -1,5 +1,7 @@
 package org.hartlandrobotics.echelonFTC;
 
+import static java.util.Collections.sort;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +23,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hartlandrobotics.echelonFTC.database.currentGame.CurrentGamePoints;
+import org.hartlandrobotics.echelonFTC.database.currentGame.CurrentGame;
 import org.hartlandrobotics.echelonFTC.database.entities.Match;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
@@ -35,6 +38,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MatchScheduleActivity extends EchelonActivity {
+
+    static String TAG = "MatchScheduleActivity";
     EventRepo eventRepo;
     MatchResultRepo matchResultRepo;
     Map<String, List<MatchResult>> matchResultsByTeam =  new HashMap<>();
@@ -98,10 +103,16 @@ public class MatchScheduleActivity extends EchelonActivity {
             eventRepo.getMatchesForEvent(currentEvent).observe(this, event -> {
                 List<Match> matches = event.matches;
 
+                matches.sort(Comparator.comparingInt(Match::getMatchNumber));
+                Log.e(TAG, "" + matches.get(0).getMatchNumber());
+                Log.e(TAG, "" + matches.get(1).getMatchNumber());
+
+
                 for( Match match : matches ){
                     MatchScheduleViewModel matchScheduleViewModel = new MatchScheduleViewModel();
 
-                    matchScheduleViewModel.setMatchName( match.getMatchName() );
+                    //String mn = match.getMatchName();
+                    matchScheduleViewModel.setMatchName(  String.format("%3d",match.getMatchNumber() ));// match.getMatchName() );
 
                     int red1Average = getAverageByTeam(match.getRed1TeamKey());
                     matchScheduleViewModel.setRed1(match.getRed1TeamKey());
@@ -164,7 +175,7 @@ public class MatchScheduleActivity extends EchelonActivity {
 
         int totalPoints = 0;
         for (MatchResult matchResult : teamMatchResults) {
-            CurrentGamePoints currentGamePoints = new CurrentGamePoints(matchResult);
+            CurrentGame currentGamePoints = new CurrentGame(matchResult);
             totalPoints += currentGamePoints.getAutoPoints();
         }
         int averagePoints = totalPoints / teamMatchResults.size();
@@ -177,7 +188,7 @@ public class MatchScheduleActivity extends EchelonActivity {
 
         int totalPoints = 0;
         for(MatchResult matchResult : teamMatchResults ){
-            CurrentGamePoints currentGamePoints = new CurrentGamePoints(matchResult);
+            CurrentGame currentGamePoints = new CurrentGame(matchResult);
             totalPoints += currentGamePoints.getTeleOpPoints();
         }
         int averagePoints = totalPoints / teamMatchResults.size();
@@ -190,7 +201,7 @@ public class MatchScheduleActivity extends EchelonActivity {
 
         int totalPoints = 0;
         for(MatchResult matchResult : teamMatchResults ){
-            CurrentGamePoints currentGamePoints = new CurrentGamePoints(matchResult);
+            CurrentGame currentGamePoints = new CurrentGame(matchResult);
             totalPoints += currentGamePoints.getEndPoints();
         }
         int averagePoints = totalPoints / teamMatchResults.size();
@@ -204,7 +215,7 @@ public class MatchScheduleActivity extends EchelonActivity {
 
         int totalScore = 0;
         for( MatchResult matchResult : teamMatchResults ){
-            CurrentGamePoints points = new CurrentGamePoints(matchResult);
+            CurrentGame points = new CurrentGame(matchResult);
 
             int matchScore = 0;
             matchScore += points.getAutoPoints();
@@ -225,7 +236,7 @@ public class MatchScheduleActivity extends EchelonActivity {
 
         int totalScore = 0;
         for( MatchResult matchResult : teamMatchResults ){
-            CurrentGamePoints currentGamePoints = new CurrentGamePoints(matchResult);
+            CurrentGame currentGamePoints = new CurrentGame(matchResult);
 
             int matchScore = 0;
             matchScore += currentGamePoints.getAutoPoints();
@@ -239,7 +250,7 @@ public class MatchScheduleActivity extends EchelonActivity {
 
         int totalDeviation = 0;
         for( MatchResult matchResult : teamMatchResults ){
-            CurrentGamePoints currentGamePoints = new CurrentGamePoints(matchResult);
+            CurrentGame currentGamePoints = new CurrentGame(matchResult);
             int matchScore = 0;
             matchScore += currentGamePoints.getAutoPoints();
             matchScore += currentGamePoints.getTeleOpPoints();

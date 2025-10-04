@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
 //import org.hartlandrobotics.echelonFTC.database.currentGame.CurrentGameCounts;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.hartlandrobotics.echelonFTC.database.entities.Match;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResultWithTeamMatch;
@@ -130,7 +131,8 @@ public class ExportActivity extends EchelonActivity {
                     dataForFile.add(String.valueOf(mr.getEndFlag4()));
                     dataForFile.add(String.valueOf(mr.getEndInt6()));
 
-                    dataForFile.add("test");//(mr.getAdditionalNotes());
+                    dataForFile.add(StringEscapeUtils.escapeCsv(mr.getAdditionalNotes().trim()));
+                    //dataForFile.add("test");//(mr.getAdditionalNotes());
                     dataForFile.add(String.valueOf(mr.getDefenseCount()));
 
                     String outputString = dataForFile.stream().collect(Collectors.joining(",")) + "\n";
@@ -260,7 +262,7 @@ public class ExportActivity extends EchelonActivity {
 
             String teleDef = "0";
             //String matchResultKey = columns[26];
-            String AdditionalNotes = columns[25];
+            String AdditionalNotes = StringEscapeUtils.unescapeCsv( columns[25] );
 
             MatchResult matchResult = new MatchResult(
                     matchResultKey,

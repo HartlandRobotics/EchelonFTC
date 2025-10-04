@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
 
 import com.google.android.material.button.MaterialButton;
@@ -22,30 +20,24 @@ import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 
 public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private static final String TAG = "MatchScoutingTeleopActivity";
-
     private static final String MATCH_KEY = "auto_match_key_param";
     private static final String TEAM_KEY = "auto_team_key_param";
 
     MaterialButton scoutingDoneButton;
-    private ImageButton topBasketButton;
-    private ImageButton midBasketButton;
-    private ImageButton lowBasketButton;
-
-    private ImageButton topSpecimenButton;
-    private ImageButton lowSpecimenButton;
-
-    private ImageButton observationZoneButton;
-
-    private MaterialButton level1AscentButton;
-    private MaterialButton level2AscentButton;
-    private MaterialButton level3AscentButton;
+    private ImageButton classifiedButton;
+    private ImageButton overflowButton;
+    private ImageButton motifButton;
+    private ImageButton depotButton;
 
 
-    private MaterialTextView topBasketText;
-    private MaterialTextView midBasketText;
-    private MaterialTextView lowBasketText;
-    private MaterialTextView topSpecimenText;
-    private MaterialTextView lowSpecimenText;
+    private ImageButton baseButton;
+    private ImageButton twoBotsButton;
+
+
+    private MaterialTextView classifiedText;
+    private MaterialTextView overflowText;
+    private MaterialTextView motifText;
+    private MaterialTextView depotText;
 
 
     private MaterialTextView teamKeyText;
@@ -53,13 +45,8 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private ImageButton defensesButton;
     private MaterialTextView defensesText;
 
-    int basketDrawable;
-
-    int specimemDrawable;
-    int ascentDrawable;
-    int observationZoneDrawable;
-    private int buttonColor;
-    private int buttonSelectedTextColor;
+    int baseDrawable;
+    int twobotsDrawable;
     private int defenseDrawable;
 
     MatchResultViewModel matchResultViewModel;
@@ -106,141 +93,74 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
 
     public void populateControlsFromData(){
-        Log.e(TAG, "populate test");
+        classifiedText.setText(String.valueOf(matchResult.getTeleOpInt1()));
+        overflowText.setText(String.valueOf(matchResult.getTeleOpInt2()));
+        motifText.setText(String.valueOf(matchResult.getTeleOpInt3()));
+        depotText.setText(String.valueOf(matchResult.getTeleOpInt4()));
 
-        topBasketText.setText(String.valueOf(matchResult.getTeleOpInt1()));
-        midBasketText.setText(String.valueOf(matchResult.getTeleOpInt2()));
-        lowBasketText.setText(String.valueOf(matchResult.getTeleOpInt3()));
 
-        topSpecimenText.setText(String.valueOf(matchResult.getTeleOpInt4()));
-        lowSpecimenText.setText(String.valueOf(matchResult.getTeleOpInt5()));
+        if( matchResult.getEndInt6() == 2){
+            baseButton.setImageResource(R.drawable.base_green);
+        } else if( matchResult.getEndInt6() == 1){
+            baseButton.setImageResource(R.drawable.base_green_partial);
+        } else {
+            baseButton.setImageResource(baseDrawable);
+        }
 
         if( matchResult.getEndFlag1() ){
-            observationZoneButton.setImageResource(R.drawable.observation_zone_green);
+            twoBotsButton.setImageResource(R.drawable.two_bots_green);
         } else {
-            observationZoneButton.setImageResource(observationZoneDrawable);
+            twoBotsButton.setImageResource(twobotsDrawable);
         }
-
         //defensesText.setText(String.valueOf(matchResult.getDefenseCount()));
-
-        if (matchResult.getEndFlag2()){
-            level1AscentButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.secondaryDarkColor)));
-            level1AscentButton.setTextColor(getResources().getColor(buttonSelectedTextColor));
-        }
-        else {
-            level1AscentButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(buttonColor)));
-            level1AscentButton.setTextColor(getResources().getColor(R.color.secondaryDarkColor));
-        }
-
-        if (matchResult.getEndFlag3()){
-            level2AscentButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.secondaryDarkColor)));
-            level2AscentButton.setTextColor(getResources().getColor(buttonSelectedTextColor));
-        }
-        else {
-            level2AscentButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(buttonColor)));
-            level2AscentButton.setTextColor(getResources().getColor(R.color.secondaryDarkColor));
-        }
-
-        if (matchResult.getEndFlag4()){
-            level3AscentButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.secondaryDarkColor)));
-            level3AscentButton.setTextColor(getResources().getColor(buttonSelectedTextColor));
-        }
-        else {
-            level3AscentButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(buttonColor)));
-            level3AscentButton.setTextColor(getResources().getColor(R.color.secondaryDarkColor));
-        }
     }
 
     private void setupControls(){
         scoutingDoneButton = findViewById(R.id.summary);
         scoutingDoneButton.setOnClickListener(v -> {
-            Log.e(TAG, "set for summary");
             matchResultViewModel.upsert(matchResult);
             MatchScoutingSummaryActivity.launch(MatchScoutingTeleopActivity.this, matchKey, teamKey);
         });
 
-        topBasketText = findViewById(R.id.topBasketText);
-        topBasketButton = findViewById(R.id.topBasket);
-        topBasketButton.setImageResource(basketDrawable);
-        topBasketButton.setOnClickListener(v -> {
+        classifiedText = findViewById(R.id.classified_ball_text);
+        classifiedButton = findViewById(R.id.classified_ball);
+        classifiedButton.setOnClickListener(v -> {
             matchResult.setTeleOpInt1( matchResult.getTeleOpInt1() + 1 );
             populateControlsFromData();
         });
 
-        midBasketText = findViewById(R.id.midBasketText);
-        midBasketButton = findViewById(R.id.midBasket);
-        midBasketButton.setImageResource(basketDrawable);
-        midBasketButton.setOnClickListener(v -> {
+        overflowText = findViewById(R.id.overflow_ball_text);
+        overflowButton = findViewById(R.id.overflow_ball);
+        overflowButton.setOnClickListener(v -> {
             matchResult.setTeleOpInt2( matchResult.getTeleOpInt2() + 1 );
             populateControlsFromData();
         });
 
-        lowBasketText = findViewById(R.id.lowBasketText);
-        lowBasketButton = findViewById(R.id.lowBasket);
-        lowBasketButton.setImageResource(basketDrawable);
-        lowBasketButton.setOnClickListener(v -> {
+        motifText = findViewById(R.id.motif_ball_text);
+        motifButton = findViewById(R.id.motif_ball);
+        motifButton.setOnClickListener(v -> {
             matchResult.setTeleOpInt3( matchResult.getTeleOpInt3() + 1);
             populateControlsFromData();
         });
 
-        topSpecimenText = findViewById(R.id.topSpecimenText);
-        topSpecimenButton = findViewById(R.id.topSpecimen);
-        topSpecimenButton.setImageResource(specimemDrawable);
-        topSpecimenButton.setOnClickListener(v -> {
+        baseButton = findViewById(R.id.base_image);
+        baseButton.setImageResource(baseDrawable);
+        baseButton.setOnClickListener(v -> {
+            matchResult.setEndInt6( (matchResult.getEndInt6() + 1)%3 );
+            populateControlsFromData();
+        });
+
+        twoBotsButton = findViewById(R.id.twobots_image);
+        twoBotsButton.setOnClickListener(v -> {
+            matchResult.setEndFlag1(!matchResult.getEndFlag1());
+            boolean isSelected = matchResult.getEndFlag1();
+            populateControlsFromData();
+        });
+
+        depotText = findViewById(R.id.depot_ball_text);
+        depotButton = findViewById(R.id.depot_ball);
+        depotButton.setOnClickListener(v -> {
             matchResult.setTeleOpInt4( matchResult.getTeleOpInt4() + 1);
-            populateControlsFromData();
-        });
-
-        lowSpecimenText = findViewById(R.id.lowSpecimenText);
-        lowSpecimenButton = findViewById(R.id.lowSpecimen);
-        lowSpecimenButton.setImageResource(specimemDrawable);
-        lowSpecimenButton.setOnClickListener(v -> {
-            matchResult.setTeleOpInt5( matchResult.getTeleOpInt5() + 1);
-            populateControlsFromData();
-        });
-
-        observationZoneButton = findViewById(R.id.observationZone);
-        observationZoneButton.setImageResource(observationZoneDrawable);
-        observationZoneButton.setOnClickListener(v -> {
-            Log.e(TAG, "obs zone check");
-
-            matchResult.setEndFlag1( !matchResult.getEndFlag1() );
-            populateControlsFromData();
-        });
-
-        level1AscentButton = findViewById(R.id.level1Ascent);
-        level1AscentButton.setOnClickListener(v -> {
-            matchResult.setEndFlag2(!matchResult.getEndFlag2());
-            boolean isSelected = matchResult.getEndFlag2();
-            if ( isSelected ){
-                matchResult.setEndFlag3(false);
-                matchResult.setEndFlag4(false);
-            }
-
-            populateControlsFromData();
-        });
-
-        level2AscentButton = findViewById(R.id.level2Ascent);
-        level2AscentButton.setOnClickListener(v -> {
-            matchResult.setEndFlag3(!matchResult.getEndFlag3());
-            boolean isSelected = matchResult.getEndFlag3();
-            if ( isSelected ){
-                matchResult.setEndFlag2(false);
-                matchResult.setEndFlag4(false);
-            }
-
-            populateControlsFromData();
-        });
-
-        level3AscentButton = findViewById(R.id.level3Ascent);
-        level3AscentButton.setOnClickListener(v -> {
-            matchResult.setEndFlag4(!matchResult.getEndFlag4());
-            boolean isSelected = matchResult.getEndFlag3();
-            if ( isSelected ){
-                matchResult.setEndFlag2(false);
-                matchResult.setEndFlag3(false);
-            }
-
             populateControlsFromData();
         });
 
@@ -257,23 +177,12 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     public void setupColor() {
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
-        buttonSelectedTextColor = R.color.primaryDarkColor;
-
         if (settings.getDeviceRole().startsWith("red")){
-            basketDrawable = R.drawable.sample_red;
-            specimemDrawable = R.drawable.specimen_red;
-            ascentDrawable = R.drawable.bar_red;
-            observationZoneDrawable = R.drawable.observation_zone_red;
-            buttonColor = R.color.redAlliance;
+            baseDrawable = R.drawable.base_red;
+            twobotsDrawable = R.drawable.two_bots_red;
         } else {
-            basketDrawable = R.drawable.sample_blue;
-            specimemDrawable = R.drawable.specimen_blue;
-            ascentDrawable = R.drawable.bar_blue;
-            observationZoneDrawable = R.drawable.observation_zone_blue;
-            buttonColor = R.color.blueAlliance;
+            baseDrawable = R.drawable.base_blue;
+            twobotsDrawable = R.drawable.two_bots_red;
         }
-
-
-
     }
 }

@@ -8,7 +8,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hartlandrobotics.echelonFTC.database.currentGame.CurrentGamePoints;
+import org.hartlandrobotics.echelonFTC.database.currentGame.CurrentGame;
 
 import java.util.UUID;
 
@@ -259,7 +259,7 @@ public class MatchResult {
         this.defenseCount = defenseCount;
     }
 
-    public static CurrentGamePoints toCurrentGamePoints(MatchResult matchResult){
-        return new CurrentGamePoints(matchResult);
+    public static CurrentGame toCurrentGamePoints(MatchResult matchResult){
+        return new CurrentGame(matchResult);
     }
 }

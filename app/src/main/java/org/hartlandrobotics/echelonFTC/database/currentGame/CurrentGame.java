@@ -2,10 +2,10 @@ package org.hartlandrobotics.echelonFTC.database.currentGame;
 
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 
-public class CurrentGamePoints {
+public class CurrentGame {
     public MatchResult result = null;
 
-    public CurrentGamePoints(MatchResult result) {
+    public CurrentGame(MatchResult result) {
         this.result = result;
     }
 

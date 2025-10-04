@@ -10,4 +10,6 @@
     <color name="secondaryTextColor">#000000</color>
     <color name="blueAlliance">#8a85f5</color>
     <color name="redAlliance">#f18186</color>
+    <color name="summaryBackground">#CCCCCC</color>
+
 </resources>

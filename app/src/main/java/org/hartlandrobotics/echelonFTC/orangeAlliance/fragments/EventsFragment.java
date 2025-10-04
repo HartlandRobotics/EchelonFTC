@@ -133,7 +133,7 @@ public class EventsFragment extends Fragment {
 
                 Map<String, String> map = Stream.of(new String[][] {
                         { "region_key", districtKey },
-                        { "season_key", "2324" },
+                        { "season_key", "2425" },
                 }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
 
                 if( StringUtils.isBlank( eventKeyOverride )) {

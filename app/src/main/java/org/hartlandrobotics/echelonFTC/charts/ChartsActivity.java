@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.hartlandrobotics.echelonFTC.EchelonActivity;
 import org.hartlandrobotics.echelonFTC.R;
-import org.hartlandrobotics.echelonFTC.database.currentGame.CurrentGamePoints;
+import org.hartlandrobotics.echelonFTC.database.currentGame.CurrentGame;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.database.repositories.MatchResultRepo;
 import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
@@ -93,7 +93,7 @@ public class ChartsActivity extends EchelonActivity {
                 int teamNumber = Integer.valueOf( entry.getKey() );
                 List<MatchResult> matchResults = entry.getValue();
                 for( MatchResult matchResult : matchResults ){
-                    CurrentGamePoints currentGamePoints = MatchResult.toCurrentGamePoints(matchResult);
+                    CurrentGame currentGamePoints = MatchResult.toCurrentGamePoints(matchResult);
                     // 2324-FIM-HAQ-Q001-1
                     Integer matchNumber = Integer.valueOf(
                             //matchResult.getMatchKey().replace( matchResult.getEventKey() + "_qm", "")
