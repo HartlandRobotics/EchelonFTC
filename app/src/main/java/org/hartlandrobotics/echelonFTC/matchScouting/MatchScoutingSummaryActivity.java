@@ -185,7 +185,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         teleOpMotifValue = findViewById(R.id.teleOpMotifValue);
         teleOpMotifDecrement = findViewById(R.id.teleOpMotifDecrement);
         teleOpMotifDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt3( Math.max(matchResult.getTeleOpInt3()-1,0) );
+            matchResult.setTeleOpInt4( Math.max(matchResult.getTeleOpInt4()-1,0) );
             populateControlsFromData();
         });
         teleOpMotifIncrement = findViewById(R.id.teleOpMotifIncrement);
@@ -197,12 +197,12 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         teleOpDepotValue = findViewById(R.id.teleOpDepotValue);
         teleOpDepotDecrement = findViewById(R.id.teleOpDepotDecrement);
         teleOpDepotDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt4( Math.max(matchResult.getTeleOpInt4()-1,0) );
+            matchResult.setTeleOpInt3( Math.max(matchResult.getTeleOpInt3()-1,0) );
             populateControlsFromData();
         });
         teleOpDepotIncrement = findViewById(R.id.teleOpDepotIncrement);
         teleOpDepotIncrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt4( matchResult.getTeleOpInt4()+1 );
+            matchResult.setTeleOpInt3( matchResult.getTeleOpInt3()+1 );
             populateControlsFromData();
         });
 
@@ -273,8 +273,8 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
 
         teleOpClassifiedValue.setText( String.valueOf( matchResult.getTeleOpInt1() ));
         teleOpOverflowValue.setText( String.valueOf( matchResult.getTeleOpInt2() ));
-        teleOpMotifValue.setText( String.valueOf( matchResult.getTeleOpInt3() ));
-        teleOpDepotValue.setText( String.valueOf( matchResult.getTeleOpInt4() ));
+        teleOpMotifValue.setText( String.valueOf( matchResult.getTeleOpInt4() ));
+        teleOpDepotValue.setText( String.valueOf( matchResult.getTeleOpInt3() ));
 
 
         int baseNum = matchResult.getEndInt6();

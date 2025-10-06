@@ -95,8 +95,8 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     public void populateControlsFromData(){
         classifiedText.setText(String.valueOf(matchResult.getTeleOpInt1()));
         overflowText.setText(String.valueOf(matchResult.getTeleOpInt2()));
-        motifText.setText(String.valueOf(matchResult.getTeleOpInt3()));
-        depotText.setText(String.valueOf(matchResult.getTeleOpInt4()));
+        motifText.setText(String.valueOf(matchResult.getTeleOpInt4()));
+        depotText.setText(String.valueOf(matchResult.getTeleOpInt3()));
 
 
         if( matchResult.getEndInt6() == 2){
@@ -139,7 +139,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         motifText = findViewById(R.id.motif_ball_text);
         motifButton = findViewById(R.id.motif_ball);
         motifButton.setOnClickListener(v -> {
-            matchResult.setTeleOpInt3( matchResult.getTeleOpInt3() + 1);
+            matchResult.setTeleOpInt4( matchResult.getTeleOpInt4() + 1);
             populateControlsFromData();
         });
 
@@ -160,7 +160,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         depotText = findViewById(R.id.depot_ball_text);
         depotButton = findViewById(R.id.depot_ball);
         depotButton.setOnClickListener(v -> {
-            matchResult.setTeleOpInt4( matchResult.getTeleOpInt4() + 1);
+            matchResult.setTeleOpInt3( matchResult.getTeleOpInt3() + 1);
             populateControlsFromData();
         });
 
