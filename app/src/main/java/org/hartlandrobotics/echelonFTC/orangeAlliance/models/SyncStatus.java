@@ -4,58 +4,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SyncStatus {
 
+    @JsonProperty("name")
+    public String name;
 
-      @JsonProperty("version")
-      private String version;
+    @JsonProperty("version")
+    private String version;
 
-public void setVersion(String v){
+    @JsonProperty("status")
+    public String status;
+
+    public void setName(String n) { name=n; }
+    public String getName(){ return name; }
+
+    public void setVersion(String v){
     version=v;
 }
-public String getVersion(){
+    public String getVersion(){
     return version;
 }
 
-//    @JsonProperty("current_season")
-//    private int currentSeason;
-//
-//    @JsonProperty("max_season")
-//    private int maxSeason;
-//
-//    @JsonProperty("is_datafeed_down")
-//    private boolean isDatafeedDown;
-//
-//    @JsonProperty("down_events")
-//    private String[] downEvents;
-//
-//    public int getCurrentSeason() {
-//        return currentSeason;
-//    }
-//
-//    public void setCurrentSeason(int currentSeason) {
-//        this.currentSeason = currentSeason;
-//    }
-//
-//    public int getMaxSeason() {
-//        return maxSeason;
-//    }
-//
-//    public void setMaxSeason(int maxSeason) {
-//        this.maxSeason = maxSeason;
-//    }
-//
-//    public boolean isDatafeedDown() {
-//        return isDatafeedDown;
-//    }
-//
-//    public void setDatafeedDown(boolean datafeedDown) {
-//        isDatafeedDown = datafeedDown;
-//    }
-//
-//    public String[] getDownEvents() {
-//        return downEvents;
-//    }
-//
-//    public void setDownEvents(String[] downEvents) {
-//        this.downEvents = downEvents;
-//    }
+    public void setStatus(String s){ status=s; }
+    public String getStatus(){ return status; }
 }

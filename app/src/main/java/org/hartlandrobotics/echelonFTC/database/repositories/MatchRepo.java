@@ -11,20 +11,20 @@ import org.hartlandrobotics.echelonFTC.database.entities.Match;
 import java.util.List;
 
 public class MatchRepo {
-    private EvtWithMatchesDao eventMatchDao;
+    //private EvtWithMatchesDao eventMatchDao;
     private MatchDao matchDao;
 
     public MatchRepo(Application application){
         EchelonDatabase db = EchelonDatabase.getDatabase(application);
-        eventMatchDao = db.eventMatchesDao();
+        //eventMatchDao = db.eventMatchesDao();
         matchDao = db.matchDao();
     }
 
 
     public void upsert(EvtMatchCrossRef match){
-        EchelonDatabase.databaseWriteExecutor.execute(() -> {
-            eventMatchDao.upsert(match);
-        });
+        //EchelonDatabase.databaseWriteExecutor.execute(() -> {
+        //    eventMatchDao.upsert(match);
+        //});
     }
 
     public void upsert(Match match){

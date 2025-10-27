@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import org.hartlandrobotics.echelonFTC.orangeAlliance.fragments.DistrictsFragment;
+import org.hartlandrobotics.echelonFTC.orangeAlliance.fragments.RegionsFragment;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.fragments.EventsFragment;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.fragments.MatchesFragment;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.fragments.TeamsFragment;
@@ -17,16 +17,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class OrangeAlliancePagerAdapter extends FragmentStateAdapter {
+public class ApiPagerAdapter extends FragmentStateAdapter {
 
-   public OrangeAlliancePagerAdapter(@NonNull FragmentManager fragmentManager, Lifecycle lifecycle) {
+   public ApiPagerAdapter(@NonNull FragmentManager fragmentManager, Lifecycle lifecycle) {
       super(fragmentManager, lifecycle);
    }
 
    public static final String TAG = "TBAPagerAdapter";
    private Map<Integer, String> titleByPosition = new HashMap<>();
    public String getTabTitle(int position){
-      if( titleByPosition.size() == 0 ){
+      if(titleByPosition.isEmpty()){
          titleByPosition.put(0,"Regions");
          titleByPosition.put(1,"Events");
          titleByPosition.put(2, "Teams");
@@ -41,7 +41,7 @@ public class OrangeAlliancePagerAdapter extends FragmentStateAdapter {
       Fragment fragment = null;
       if (position == 0) {
          Log.e(TAG,"creating new District Fragment");
-         DistrictsFragment districtFragment = new DistrictsFragment();
+         RegionsFragment districtFragment = new RegionsFragment();
          fragment = districtFragment;
       }
       else if (position == 1) {

@@ -10,26 +10,24 @@ import org.hartlandrobotics.echelonFTC.database.entities.Rgn;
 
 import java.util.List;
 
-public class DistrictRepo {
-    private RgnDao districtDao;
+public class RegionRepo {
+    private RgnDao regionDao;
 
-    public DistrictRepo(Application application){
+    public RegionRepo(Application application){
         EchelonDatabase db = EchelonDatabase.getDatabase(application);
-        districtDao = db.regionDao();
-
+        regionDao = db.regionDao();
     }
 
-    public LiveData<List<Rgn>> getDistricts(){return districtDao.getRgns();}
-    // public LiveData<List<District>> getDistrictsByYear(int year){return districtDao.getDistrictsByYear(year);}
+    public LiveData<List<Rgn>> getRegions(){return regionDao.getRgns();}
 
-    public void upsert(Rgn district){
+    public void upsert(Rgn region){
         EchelonDatabase.databaseWriteExecutor.execute( () -> {
-            districtDao.upsert(district);
+            regionDao.upsert(region);
         });
     }
 
-    public void upsert(List<Rgn> districts){
-        for( Rgn d : districts){
+    public void upsert(List<Rgn> regions){
+        for( Rgn d : regions){
             upsert(d);
         }
     }

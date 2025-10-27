@@ -16,7 +16,7 @@ import org.hartlandrobotics.echelonFTC.configuration.AdminSettings;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.status.ApiStatus;
 
 public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private static final String TAG = "MatchScoutingTeleopActivity";
@@ -76,7 +76,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         matchKey = bundle.getString(MATCH_KEY);
         teamKey = bundle.getString(TEAM_KEY);
 
-        OrangeAllianceStatus orangeAllianceStatus = new OrangeAllianceStatus(getApplicationContext());
+        ApiStatus orangeAllianceStatus = new ApiStatus(getApplicationContext());
 
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
         matchResultViewModel.getMatchResultByMatchTeam(matchKey, teamKey)

@@ -1,7 +1,6 @@
 package org.hartlandrobotics.echelonFTC;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,14 +13,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 //import org.hartlandrobotics.echelonFTC.database.currentGame.CurrentGameCounts;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.hartlandrobotics.echelonFTC.database.entities.Match;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResultWithTeamMatch;
 import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
-import org.hartlandrobotics.echelonFTC.database.entities.Team;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
 import org.hartlandrobotics.echelonFTC.models.PitScoutViewModel;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.status.ApiStatus;
 import org.hartlandrobotics.echelonFTC.utilities.FileUtilities;
 
 import java.io.File;
@@ -70,7 +67,7 @@ public class ExportActivity extends EchelonActivity {
 
     public void exportMatchResults() throws RuntimeException {
         Context appContext = getApplicationContext();
-        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        ApiStatus status = new ApiStatus(appContext);
         File externalFilesDir = getFilePathForMatch();
         externalFilesDir.mkdirs();
         String path = externalFilesDir.getAbsolutePath();
@@ -164,7 +161,7 @@ public class ExportActivity extends EchelonActivity {
     public void exportPitScoutResults(){
         exportPitScoutResultsButton.setOnClickListener((view) -> {
             Context appContext = getApplicationContext();
-            OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+            ApiStatus status = new ApiStatus(appContext);
             File externalFilesDir = getFilePathForPitScout();
             externalFilesDir.mkdirs();
             String path = externalFilesDir.getAbsolutePath();

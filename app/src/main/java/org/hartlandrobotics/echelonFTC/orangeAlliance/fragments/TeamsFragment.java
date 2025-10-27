@@ -22,7 +22,7 @@ import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncTeam;
 import org.hartlandrobotics.echelonFTC.database.entities.EvtTeamCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Team;
 import org.hartlandrobotics.echelonFTC.database.repositories.TeamRepo;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.status.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +77,7 @@ public class TeamsFragment extends Fragment {
 
     public void setupCurrentTeams(){
         Context appContext = getActivity().getApplicationContext();
-        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        ApiStatus status = new ApiStatus(appContext);
         String eventKey = status.getEventKey();
 
         TeamRepo teamRepo = new TeamRepo(TeamsFragment.this.getActivity().getApplication());
@@ -92,7 +92,7 @@ public class TeamsFragment extends Fragment {
 
             try{
                 Context context = getActivity().getApplication();
-                OrangeAllianceStatus status = new OrangeAllianceStatus(context);
+                ApiStatus status = new ApiStatus(context);
                 String eventKey = status.getEventKey();
 
                 Call<List<SyncTeam>> newCall = newApi.getTeamsByEvent(eventKey);

@@ -23,8 +23,8 @@ import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelonFTC.database.entities.Season;
 import org.hartlandrobotics.echelonFTC.matchScouting.MatchSelectionActivity;
 import org.hartlandrobotics.echelonFTC.models.SeasonViewModel;
-import org.hartlandrobotics.echelonFTC.pitScouting.PitScoutActivity;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+//import org.hartlandrobotics.echelonFTC.pitScouting.PitScoutActivity;
+import org.hartlandrobotics.echelonFTC.status.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 
 public class MainActivity extends EchelonActivity {
 
-    private OrangeAllianceStatus status;
+    private ApiStatus status;
     String deviceName;
 
     private MaterialButton startScouting;
@@ -55,7 +55,7 @@ public class MainActivity extends EchelonActivity {
 
         setupToolbar("Home");
 
-        status= new OrangeAllianceStatus(getApplicationContext());
+        status= new ApiStatus(getApplicationContext());
         deviceName = Settings.Secure.getString(getContentResolver(), "bluetooth_name");
 
         setupStartScoutingButton();
@@ -103,7 +103,7 @@ public class MainActivity extends EchelonActivity {
 
     private void setupPitScoutingButton(){
         pitScouting = findViewById(R.id.pit_scout_button);
-        pitScouting.setOnClickListener( v -> PitScoutActivity.launch(MainActivity.this ));
+        //pitScouting.setOnClickListener( v -> PitScoutActivity.launch(MainActivity.this ));
     }
 
     private void setupMatchScheduleButton(){
@@ -127,7 +127,7 @@ public class MainActivity extends EchelonActivity {
         seasonLayout.getEditText().setText(status.getSeason());
 
         TextInputLayout districtLayout = findViewById(R.id.district_status_layout);
-        districtLayout.getEditText().setText(status.getDistrictKey());
+        districtLayout.getEditText().setText(status.getRegionCode());
 
         TextInputLayout eventLayout = findViewById(R.id.event_status_layout);
         eventLayout.getEditText().setText(status.getEventKey());

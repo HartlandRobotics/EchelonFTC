@@ -16,17 +16,17 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class Api {
     //private static String toaApiKey;
-    private static String apiKey;
-    private static String userAgentPrefix = "Echelon/1.0 ";
+    private static String apiHeader;
+    private static String userAgentPrefix = "Echelon/2.0 ";
     private static ApiInterface api;
 
     public static ApiInterface getApiClient(Context context) {
         if(api == null) {
             AdminSettingsViewModel vm = AdminSettingsProvider.getAdminSettings(context);
             assert vm != null;
+
             String userAgent = userAgentPrefix + " " + vm.getTeamNumber();
-            apiKey = vm.getOrangeAllianceApiKey();
-            //tbaApiKey = vm.getBlueAllianceApiKey();
+            apiHeader = vm.getApiHeader();
 
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(chain -> {
@@ -34,10 +34,7 @@ public class Api {
                 Request request = original.newBuilder()
                         .header("Accept", "application/json")
                         .header("User-Agent", userAgent)
-                        //.header("X-TBA-Auth-Key", tbaApiKey)
-                        //.header("X-TOA-Key", apiKey)
-                        //.header("X-Application-Origin", apiKey)
-                        .header("Authorization", "Basic "+ apiKey)
+                        .header("Authorization", "Basic "+ apiHeader)
                         .build();
                 return chain.proceed(request);
             });
@@ -47,8 +44,6 @@ public class Api {
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("http://ftc-api.firstinspires.org/v2.0/")
-                    //.baseUrl("https://theorangealliance.org/api/")
-                    //.baseUrl("https://thebluealliance.com/api/v3/")
                     .addConverterFactory(JacksonConverterFactory.create(mapper))
                     .client(client)
                     .build();

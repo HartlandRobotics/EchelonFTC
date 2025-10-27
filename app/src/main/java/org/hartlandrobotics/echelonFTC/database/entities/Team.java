@@ -74,8 +74,8 @@ public class Team {
         this.city = city;
     }
 
-    public EvtTeamCrossRef toEventTeam(String eventKey){
-        EvtTeamCrossRef crossRef = new EvtTeamCrossRef(eventKey, getTeamKey());
-        return crossRef;
-    }
+    //public EvtTeamCrossRef toEventTeam(String eventKey){
+    //    EvtTeamCrossRef crossRef = new EvtTeamCrossRef(eventKey, getTeamKey());
+    //    return crossRef;
+    //}
 }

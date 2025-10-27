@@ -9,32 +9,15 @@ import androidx.room.PrimaryKey;
 public class Rgn {
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "region_key")
-    private String regionKey;
+    @ColumnInfo(name = "regionCode")
+    private String regionCode;
 
-    @ColumnInfo(name = "description")
-    private String description;
-
-    public Rgn(@NonNull String regionKey, String description) {
-        this.regionKey = regionKey;
-        this.description = description;
+    public Rgn(@NonNull String regionCode) {
+        this.regionCode = regionCode;
     }
 
     @NonNull
-    public String getRegionKey() {
-        return regionKey;
+    public String getRegionCode() {
+        return regionCode;
     }
-    public String getDescription() {
-        return description;
-    }
-
-    public String getAbbreviation() {
-        return regionKey;
-    }
-
-    public String getDisplayName() {
-        return description;
-    }
-
-
 }

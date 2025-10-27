@@ -25,7 +25,7 @@ import org.hartlandrobotics.echelonFTC.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Match;
 import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
 import org.hartlandrobotics.echelonFTC.database.repositories.MatchRepo;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.status.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -84,7 +84,7 @@ public class MatchesFragment extends Fragment {
 
     public void setupCurrentMatches(){
         Context appContext = getActivity().getApplicationContext();
-        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        ApiStatus status = new ApiStatus(appContext);
         String eventKey = status.getEventKey();
         EventRepo eventRepo = new EventRepo(MatchesFragment.this.getActivity().getApplication());
         eventRepo.getEventWithMatchs(eventKey).observe(getViewLifecycleOwner(), events -> {
@@ -100,7 +100,7 @@ public class MatchesFragment extends Fragment {
 
             try{
                 Context appContext = getActivity().getApplicationContext();
-                OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+                ApiStatus status = new ApiStatus(appContext);
                 String eventKey = status.getEventKey();
 
                 Call<List<SyncMatch>> newCall = newApi.getMatchesByEvent(eventKey);

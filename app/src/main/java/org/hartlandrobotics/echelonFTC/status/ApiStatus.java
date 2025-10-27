@@ -7,26 +7,26 @@ import android.util.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class OrangeAllianceStatus {
-    private final static String TAG = "BlueAllianceStatus";
+public class ApiStatus {
+    private final static String TAG = "ApiStatus";
 
     private final static String SEASON_KEY = "SeasonKey";
     private final static String YEAR_KEY = "YearKey";
-    private final static String DISTRICT_KEY = "DistrictKey";
+    private final static String REGION_CODE = "RegionCode";
     private final static String EVENT_KEY = "EventKey";
 
     private Context appContext;
     private boolean online;
     private String season;
     private String year;
-    private String districtKey;
+    private String regionCode;
     private String eventKey;
 
-    public OrangeAllianceStatus(
+    public ApiStatus(
             Context appContext
     ){
         if( appContext == null){
-            Log.e(TAG, "appContext must be provided to BlueAllianceStatus");
+            Log.e(TAG, "appContext must be provided to AoiStatus");
             throw new IllegalArgumentException("appContext cannot be null");
         }
 
@@ -52,10 +52,10 @@ public class OrangeAllianceStatus {
         setPreferenceValue(YEAR_KEY, year);
     }
 
-    public String getDistrictKey() { return districtKey; }
-    public void setDistrictKey( String districtKey ){
-        this.districtKey = districtKey;
-        setPreferenceValue(DISTRICT_KEY, districtKey);
+    public String getRegionCode() { return regionCode; }
+    public void setRegionCode(String regionCode){
+        this.regionCode = regionCode;
+        setPreferenceValue(REGION_CODE, regionCode);
     }
 
     public String getEventKey(){ return eventKey;}
@@ -69,7 +69,7 @@ public class OrangeAllianceStatus {
 
         this.season = getSharedPreferences().getString(SEASON_KEY, StringUtils.EMPTY);
         this.year = getSharedPreferences().getString( YEAR_KEY, StringUtils.EMPTY);
-        this.districtKey = getSharedPreferences().getString(DISTRICT_KEY, StringUtils.EMPTY);
+        this.regionCode = getSharedPreferences().getString(REGION_CODE, StringUtils.EMPTY);
         this.eventKey = getSharedPreferences().getString(EVENT_KEY, StringUtils.EMPTY );
     }
 

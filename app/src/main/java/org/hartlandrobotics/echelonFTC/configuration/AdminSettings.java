@@ -1,6 +1,9 @@
 package org.hartlandrobotics.echelonFTC.configuration;
 
+import android.util.Base64;
+
 import org.apache.commons.lang3.StringUtils;
+
 
 public class AdminSettings {
     private String orangeAllianceApiKey;
@@ -32,7 +35,16 @@ public class AdminSettings {
     }
     */
 
-    public String getOrangeAllianceApiKey() { return defaultString(orangeAllianceApiKey); }
+    public String getApiHeader(){
+        String user = "hartladftc";
+        String apiKey = getOrangeAllianceApiKey();
+        String actualString  = user + ":" + apiKey;
+        return Base64.encodeToString(actualString.getBytes(),Base64.NO_WRAP);
+    }
+
+    public String getOrangeAllianceApiKey() {
+        return defaultString(orangeAllianceApiKey);
+    }
     public void setOrangeAllianceApiKey(String apiKey) {
         this.orangeAllianceApiKey = defaultString(apiKey);
     }

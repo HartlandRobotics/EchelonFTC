@@ -3,16 +3,16 @@ package org.hartlandrobotics.echelonFTC.database;
 import android.content.Context;
 
 import org.hartlandrobotics.echelonFTC.database.dao.RgnDao;
-import org.hartlandrobotics.echelonFTC.database.dao.RgnWithEventsDao;
+//import org.hartlandrobotics.echelonFTC.database.dao.RgnWithEventsDao;
 import org.hartlandrobotics.echelonFTC.database.dao.EvtWithMatchesDao;
-import org.hartlandrobotics.echelonFTC.database.dao.EvtWithTeamsDao;
+//import org.hartlandrobotics.echelonFTC.database.dao.EvtWithTeamsDao;
 import org.hartlandrobotics.echelonFTC.database.dao.MatchDao;
 import org.hartlandrobotics.echelonFTC.database.dao.MatchResultDao;
 import org.hartlandrobotics.echelonFTC.database.dao.PitScoutDao;
 import org.hartlandrobotics.echelonFTC.database.dao.SeasonDao;
 import org.hartlandrobotics.echelonFTC.database.dao.TeamDao;
 import org.hartlandrobotics.echelonFTC.database.entities.Rgn;
-import org.hartlandrobotics.echelonFTC.database.entities.RgnEvtCrossRef;
+//import org.hartlandrobotics.echelonFTC.database.entities.RgnEvtCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Evt;
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -39,7 +39,7 @@ import java.util.concurrent.Executors;
         Season.class,
         EvtTeamCrossRef.class,
         EvtMatchCrossRef.class,
-        RgnEvtCrossRef.class,
+        //RgnEvtCrossRef.class,
         Match.class,
         MatchResult.class
 
@@ -52,9 +52,9 @@ public abstract class EchelonDatabase extends RoomDatabase {
     public abstract RgnDao regionDao();
     public abstract PitScoutDao pitScoutDao();
     public abstract SeasonDao seasonDao();
-    public abstract EvtWithTeamsDao eventTeamsDao();
-    public abstract EvtWithMatchesDao eventMatchesDao();
-    public abstract RgnWithEventsDao districtEventsDao();
+//    public abstract EvtWithTeamsDao eventTeamsDao();
+//    public abstract EvtWithMatchesDao eventMatchesDao();
+    //public abstract RgnWithEventsDao districtEventsDao();
     public abstract MatchDao matchDao();
     public abstract MatchResultDao matchResultDao();
 

@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
@@ -17,7 +16,7 @@ import org.hartlandrobotics.echelonFTC.configuration.AdminSettings;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.status.ApiStatus;
 
 public class MatchScoutingAutoActivity extends AppCompatActivity {
     private static final String MATCH_KEY = "auto_match_key_param";
@@ -66,7 +65,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         teamKeyText = findViewById(R.id.teamKeyText);
         teamKeyText.setText(teamKey);
 
-        OrangeAllianceStatus orangeAllianceStatus = new OrangeAllianceStatus(getApplicationContext());
+        ApiStatus orangeAllianceStatus = new ApiStatus(getApplicationContext());
 
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
         matchResultViewModel.getMatchResultByMatchTeam(matchKey, teamKey)

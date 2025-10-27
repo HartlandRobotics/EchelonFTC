@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import org.hartlandrobotics.echelonFTC.orangeAlliance.OrangeAllianceActivity;
+import org.hartlandrobotics.echelonFTC.orangeAlliance.ApiActivity;
 import org.hartlandrobotics.echelonFTC.bluetooth.BluetoothSyncActivity;
 
 public abstract class EchelonActivity extends AppCompatActivity {
@@ -30,7 +30,7 @@ public abstract class EchelonActivity extends AppCompatActivity {
     }
 
     public void blueAlliancePressed(MenuItem item) {
-        OrangeAllianceActivity.launch(this);
+        ApiActivity.launch(this);
     }
 
     public void settingsPressed(MenuItem item) {

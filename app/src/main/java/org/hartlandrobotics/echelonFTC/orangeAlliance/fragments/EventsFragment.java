@@ -24,12 +24,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.Api;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.ApiInterface;
-import org.hartlandrobotics.echelonFTC.orangeAlliance.OrangeAllianceActivity;
+import org.hartlandrobotics.echelonFTC.orangeAlliance.ApiActivity;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncEvent;
-import org.hartlandrobotics.echelonFTC.database.entities.RgnEvtCrossRef;
+//import org.hartlandrobotics.echelonFTC.database.entities.RgnEvtCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Evt;
 import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.status.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,24 +92,24 @@ public class EventsFragment extends Fragment {
     //Bring back later when filter events by year
     public void setupCurrentEvents(){
         Context appContext = getActivity().getApplicationContext();
-        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        ApiStatus status = new ApiStatus(appContext);
 
         String eventKey = eventKeyOverrideLayout.getEditText().getText().toString();
         EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
         if( StringUtils.isBlank(eventKey)) {
-            String currentDistrict = status.getDistrictKey();
-            eventRepo.getDistrictWithEvents(currentDistrict).observe(getViewLifecycleOwner(), district -> {
-
-                String eventKeyInner = eventKeyOverrideLayout.getEditText().getText().toString();
-                if( !StringUtils.isBlank(eventKeyInner )) {
-                    Optional<Evt> matchingEvent = district.events.stream()
-                            .filter( districtEvent -> districtEvent.getEventCode().equals(eventKeyInner ))
-                            .findFirst();
-                    if(matchingEvent.isPresent()) {
-                        eventListAdapter.setEvents(district.events);
-                    }
-                }
-            });
+            String currentDistrict = status.getRegionCode();
+//            eventRepo.getDistrictWithEvents(currentDistrict).observe(getViewLifecycleOwner(), district -> {
+//
+//                String eventKeyInner = eventKeyOverrideLayout.getEditText().getText().toString();
+//                if( !StringUtils.isBlank(eventKeyInner )) {
+//                    Optional<Evt> matchingEvent = district.events.stream()
+//                            .filter( districtEvent -> districtEvent.getEventCode().equals(eventKeyInner ))
+//                            .findFirst();
+//                    if(matchingEvent.isPresent()) {
+//                        eventListAdapter.setEvents(district.events);
+//                    }
+//                }
+//            });
         }
         else{
             eventRepo.getEvent(eventKey).observe(getViewLifecycleOwner(), event ->{
@@ -127,17 +127,13 @@ public class EventsFragment extends Fragment {
 
             try{
                 Context appContext = getActivity().getApplicationContext();
-                OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
-                String districtKey = status.getDistrictKey();
+                ApiStatus status = new ApiStatus(appContext);
+                String regionCode = status.getRegionCode();
                 String eventKeyOverride = StringUtils.defaultIfEmpty( eventKeyOverrideLayout.getEditText().getText().toString(), StringUtils.EMPTY);
 
-                Map<String, String> map = Stream.of(new String[][] {
-                        { "region_key", districtKey },
-                        { "season_key", "2425" },
-                }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
 
                 if( StringUtils.isBlank( eventKeyOverride )) {
-                    Call<List<SyncEvent>> newCall = newApi.getEventsByRegion(map);
+                    Call<List<SyncEvent>> newCall = newApi.getEvents();
                     newCall.enqueue(new Callback<List<SyncEvent>>() {
                         @Override
                         public void onResponse(Call<List<SyncEvent>> call, Response<List<SyncEvent>> response) {
@@ -149,14 +145,14 @@ public class EventsFragment extends Fragment {
                                     List<SyncEvent> syncEvents = response.body();
                                     List<Evt> events = syncEvents.stream()
                                             .map(event -> event.toEvent())
+                                            .filter(evt -> evt.regionCode.equals(regionCode))
                                             .collect(Collectors.toList());
 
-                                    eventRepo.upsert(events);
+                                    //eventRepo.upsert(events);
 
                                     for (Evt event : events) {
-                                        RgnEvtCrossRef crossRef = event.toRgnEvent(districtKey);
-                                        eventRepo.upsert(crossRef);
-
+                                        //RgnEvtCrossRef crossRef = event.toRgnEvent(districtKey);
+                                        //eventRepo.upsert(crossRef);
                                     }
 
                                     eventListAdapter.setEvents(events);
@@ -189,7 +185,7 @@ public class EventsFragment extends Fragment {
 
                                     eventRepo.upsert(events);
 
-                                    OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+                                    ApiStatus status = new ApiStatus(appContext);
                                     status.setEventKey(eventKeyOverride);
 
                                     eventListAdapter.setEvents(events);
@@ -279,7 +275,7 @@ public class EventsFragment extends Fragment {
 
         void setEvents(List<Evt> events) {
             Context appContext = getActivity().getApplicationContext();
-            OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+            ApiStatus status = new ApiStatus(appContext);
             String currentEventKey = status.getEventKey();
 
             eventViewModels = new ArrayList<>();
@@ -295,7 +291,7 @@ public class EventsFragment extends Fragment {
         }
 
         void setCurrentEvent(EventsListViewModel currentViewModel){
-            OrangeAllianceActivity orangeAllianceActivity = (OrangeAllianceActivity)getActivity();
+            ApiActivity orangeAllianceActivity = (ApiActivity)getActivity();
             orangeAllianceActivity.setEventKey(currentViewModel.getEventKey());
 
             for(EventsListViewModel viewModel : eventViewModels){

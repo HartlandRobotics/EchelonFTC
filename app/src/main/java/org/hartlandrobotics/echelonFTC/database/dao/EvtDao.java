@@ -20,8 +20,8 @@ public abstract class EvtDao {
     @Update(onConflict = OnConflictStrategy.IGNORE)
     public abstract void update(Evt event);
 
-    @Query("SELECT * FROM event WHERE event_key = :eventKey")
-    public abstract LiveData<List<Evt>> getEvent(String eventKey);
+    @Query("SELECT * FROM event WHERE eventId = :eventId")
+    public abstract LiveData<List<Evt>> getEvent(String eventId);
 
     @Query("SELECT * FROM event")
     public abstract LiveData<List<Evt>> getEvents();
