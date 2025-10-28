@@ -56,8 +56,8 @@ public class ExportActivity extends EchelonActivity {
     String role;
     DeviceUtilities utilities;
 
-    public static void launch(Context context){
-        Intent intent = new Intent( context, ExportActivity.class );
+    public static void launch(Context context) {
+        Intent intent = new Intent(context, ExportActivity.class);
         context.startActivity(intent);
     }
 
@@ -68,7 +68,7 @@ public class ExportActivity extends EchelonActivity {
         setContentView(R.layout.activity_export);
         setupToolbar("Export Data");
 
-        adminSettings= AdminSettingsProvider.getAdminSettings(this);
+        adminSettings = AdminSettingsProvider.getAdminSettings(this);
         role = adminSettings.getDeviceRole();
 
 
@@ -77,26 +77,26 @@ public class ExportActivity extends EchelonActivity {
         exportCaptainMatchResultsButton = findViewById(R.id.exportCaptainMatchResults);
         Context appContext = getApplicationContext();
         String deviceName = DeviceUtilities.getDeviceName(appContext);
-        if(!deviceName.contains("aptain")){
+        if (!deviceName.contains("aptain")) {
             exportCaptainMatchResultsButton.setVisibility(View.GONE);
         }
 
         exportRed1MatchResultsButton = findViewById(R.id.exportRed1MatchResults);
-        if(!role.equalsIgnoreCase("Red1")){
-            exportRed2MatchResultsButton.setVisibility(View.GONE);
+        if (!role.equalsIgnoreCase("Red1")) {
+            exportRed1MatchResultsButton.setVisibility(View.GONE);
         }
-        exportRed1MatchResultsButton = findViewById(R.id.exportRed2MatchResults);
-        if(!role.equalsIgnoreCase("Red2")){
+        exportRed2MatchResultsButton = findViewById(R.id.exportRed2MatchResults);
+        if (!role.equalsIgnoreCase("Red2")) {
             exportRed2MatchResultsButton.setVisibility(View.GONE);
         }
 
         exportBlue1MatchResultsButton = findViewById(R.id.exportBlue1MatchResults);
-        if(!role.equalsIgnoreCase("Blue1")){
+        if (!role.equalsIgnoreCase("Blue1")) {
             exportBlue1MatchResultsButton.setVisibility(View.GONE);
         }
 
         exportBlue2MatchResultsButton = findViewById(R.id.exportBlue2MatchResults);
-        if(!role.equalsIgnoreCase("Blue2")){
+        if (!role.equalsIgnoreCase("Blue2")) {
             exportBlue2MatchResultsButton.setVisibility(View.GONE);
         }
 
@@ -104,7 +104,7 @@ public class ExportActivity extends EchelonActivity {
         //exportMatchResults();
         setupExportCSVButton();
         exportPitScoutResultsButton = findViewById(R.id.exportPitScouting);
-        exportPitScoutResults();
+        //exportPitScoutResults();
         importCSVMatchButton = findViewById(R.id.importMatchCSV);
         setupCSVImportButton();
 
@@ -115,14 +115,14 @@ public class ExportActivity extends EchelonActivity {
         OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
         File externalFilesDir = getFilePathForMatch();
         externalFilesDir.mkdirs();
-        String path = externalFilesDir.getAbsolutePath();
-        File[] files = getFilePathsForMatch();
+        //String path = externalFilesDir.getAbsolutePath();
+        //File[] files = getFilePathsForMatch();
         MatchResultViewModel matchResultViewModel = new MatchResultViewModel(getApplication());
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm");
 //        Date date = new Date();
 //        String dateForFile = dateFormat.format(date);
 //        String fileName = "Match_Data_" + dateForFile + ".csv";
-        File file = new File( externalFilesDir, fileName);
+        File file = new File(externalFilesDir, fileName);
 
         matchResultViewModel.getMatchResultsWithTeamMatchByEvent(status.getEventKey()).observe(this, matchResults -> {
 
@@ -190,7 +190,7 @@ public class ExportActivity extends EchelonActivity {
         });
     }
 
-    public void setupExportCSVButton(){
+    public void setupExportCSVButton() {
 
         exportCaptainMatchResultsButton.setOnClickListener((view) -> {
             try {
@@ -205,7 +205,7 @@ public class ExportActivity extends EchelonActivity {
         exportRed1MatchResultsButton.setOnClickListener((view) -> {
             try {
                 exportMatchResults("matchResultsRed1.csv");
-                Toast.makeText(this, "export Matches: ", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "export Matches: " + "matchResultsRed1", Toast.LENGTH_LONG).show();
 
             } catch (RuntimeException e) {
                 String message = e.getLocalizedMessage();
@@ -215,7 +215,7 @@ public class ExportActivity extends EchelonActivity {
         exportRed2MatchResultsButton.setOnClickListener((view) -> {
             try {
                 exportMatchResults("matchResultsRed2.csv");
-                Toast.makeText(this, "export Matches: ", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "export Matches: " + "matchResultsRed2", Toast.LENGTH_LONG).show();
 
             } catch (RuntimeException e) {
                 String message = e.getLocalizedMessage();
@@ -225,7 +225,7 @@ public class ExportActivity extends EchelonActivity {
         exportBlue1MatchResultsButton.setOnClickListener((view) -> {
             try {
                 exportMatchResults("matchResultsBlue1.csv");
-                Toast.makeText(this, "export Matches: ", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "export Matches: " + "matchResultsBlue1", Toast.LENGTH_LONG).show();
 
             } catch (RuntimeException e) {
                 String message = e.getLocalizedMessage();
@@ -235,7 +235,7 @@ public class ExportActivity extends EchelonActivity {
         exportBlue2MatchResultsButton.setOnClickListener((view) -> {
             try {
                 exportMatchResults("matchResultsBlue2.csv");
-                Toast.makeText(this, "export Matches: ", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "export Matches: " + "matchResultsBlue2", Toast.LENGTH_LONG).show();
 
             } catch (RuntimeException e) {
                 String message = e.getLocalizedMessage();
@@ -244,7 +244,7 @@ public class ExportActivity extends EchelonActivity {
         });
     }
 
-    public void exportPitScoutResults(){
+    public void exportPitScoutResults() {
         exportPitScoutResultsButton.setOnClickListener((view) -> {
             Context appContext = getApplicationContext();
             OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
@@ -260,7 +260,7 @@ public class ExportActivity extends EchelonActivity {
             File file = new File(externalFilesDir, fileName);
 
             pitScoutViewModel.getPitScoutByEvent(status.getEventKey()).observe(this, pitScoutResults -> {
-                try{
+                try {
                     FileOutputStream outputStream = new FileOutputStream(file);
                     String header = "Team_Key" +
                             ",Has_Autonomous,Help_With_Auto,Coding_Language,Shoots_Auto,Percent_Auto_Shots,Balls_Picked_Or_Shot_Auto" +
@@ -268,7 +268,7 @@ public class ExportActivity extends EchelonActivity {
                             ",Can_Robot_Hang,Highest_Hang_Bar,Hang_Time,Preferred_Hanging_Spot,Side_Swing" +
                             ",Driver_Experience,Operator_Experience,Human_Player_Accuracy,Extra_Notes\n";
                     outputStream.write(header.getBytes());
-                    for(PitScout ps: pitScoutResults){
+                    for (PitScout ps : pitScoutResults) {
                         List<String> psData = new ArrayList<>();
                         psData.add(ps.getTeamKey());
                         psData.add(String.valueOf(ps.getHasAutonomous()));
@@ -282,8 +282,7 @@ public class ExportActivity extends EchelonActivity {
                     outputStream.close();
 
                     Toast.makeText(this, "export Pit Scout: ", Toast.LENGTH_LONG).show();
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     Log.e("In Catch for Pit Scout", "Exception trying to export pitscout data", e);
                     String message = e.getLocalizedMessage();
                     Toast.makeText(this, "export Pit Scout error: " + message, Toast.LENGTH_LONG).show();
@@ -291,118 +290,123 @@ public class ExportActivity extends EchelonActivity {
             });
         });
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void importCSVMatches() throws IOException {
         File importPath = getImportPath();
-        File newFile = new File(importPath.getAbsolutePath().concat("/matchResults.csv"));
-        Stream<String> lines = Files.lines(newFile.toPath());
-        List<String> inputLines = lines.collect(Collectors.toList());
+        String[] filePaths = {"matchResultsRed1.csv", "matchResultsRed2.csv", "matchResultsBlue1.csv", "matchResultsBlue2.csv", "matchResultsCaptain.csv", "matchResultsCaptain2.csv"};
+        for (String fileName : filePaths) {
+            File newFile = new File(importPath.getAbsolutePath().concat("/" + fileName));
+            if(!newFile.exists()){
+                continue;
+            }
+            Stream<String> lines = Files.lines(newFile.toPath());
+            List<String> inputLines = lines.collect(Collectors.toList());
 
-        int timesRan = 0;
-        for(int lineIndex = 1; lineIndex < inputLines.size(); lineIndex++){
-            timesRan++;
-            String currentLine = inputLines.get(lineIndex);
-            String[] columns = currentLine.split(",");
-            //String header = "Event_Key,Match_Key,Team_Key"
+            for (int lineIndex = 1; lineIndex < inputLines.size(); lineIndex++) {
+                String currentLine = inputLines.get(lineIndex);
+                String[] columns = currentLine.split(",");
+                //String header = "Event_Key,Match_Key,Team_Key"
 
-            String header = "Match_Result_Key, Event_Key,Match_Key,Team_Key,has_been_synced"
-                    + ",AutoFlag1 ,AutoFlag2, AutoFlag3, AutoFlag4, AutoFlag5"
-                    + ",AutoInt6 ,AutoInt7 ,AutoInt8 ,AutoInt9 ,AutoInt10"
-                    + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
-                    + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6"
-                    //+ ",DefensesCount,Match_Result_Key"
-                    + ", AdditionalNotes\n";
+                String header = "Match_Result_Key, Event_Key,Match_Key,Team_Key,has_been_synced"
+                        + ",AutoFlag1 ,AutoFlag2, AutoFlag3, AutoFlag4, AutoFlag5"
+                        + ",AutoInt6 ,AutoInt7 ,AutoInt8 ,AutoInt9 ,AutoInt10"
+                        + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
+                        + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6"
+                        //+ ",DefensesCount,Match_Result_Key"
+                        + ", AdditionalNotes\n";
 
-            String matchResultKey = columns[0];
-            String eventKey = columns[1];
-            String matchKey = columns[2];
-            String teamKey = columns[3];
-            String has_been_synced = columns[4];
+                String matchResultKey = columns[0];
+                String eventKey = columns[1];
+                String matchKey = columns[2];
+                String teamKey = columns[3];
+                String has_been_synced = columns[4];
 
-            String AutoFlag1 = columns[5];
-            String AutoFlag2 = columns[6];
-            String AutoFlag3 = columns[7];
-            String AutoFlag4 = columns[8];
-            String AutoFlag5 = columns[9];
+                String AutoFlag1 = columns[5];
+                String AutoFlag2 = columns[6];
+                String AutoFlag3 = columns[7];
+                String AutoFlag4 = columns[8];
+                String AutoFlag5 = columns[9];
 
-            String AutoInt6 = columns[10];
-            String AutoInt7 = columns[11];
-            String AutoInt8 = columns[12];
-            String AutoInt9 = columns[13];
-            String AutoInt10 = columns[14];
+                String AutoInt6 = columns[10];
+                String AutoInt7 = columns[11];
+                String AutoInt8 = columns[12];
+                String AutoInt9 = columns[13];
+                String AutoInt10 = columns[14];
 
-            String TeleOpInt1 =columns[15];
-            String TeleOpInt2 =columns[16];
-            String TeleOpInt3 =columns[17];
-            String TeleOpInt4 =columns[18];
-            String TeleOpInt5 =columns[19];
+                String TeleOpInt1 = columns[15];
+                String TeleOpInt2 = columns[16];
+                String TeleOpInt3 = columns[17];
+                String TeleOpInt4 = columns[18];
+                String TeleOpInt5 = columns[19];
 
-            String EndFlag1 =columns[20];
-            String EndFlag2 =columns[21];
-            String EndFlag3 =columns[22];
-            String EndFlag4 =columns[23];
-            String EndInt6 =columns[24];
+                String EndFlag1 = columns[20];
+                String EndFlag2 = columns[21];
+                String EndFlag3 = columns[22];
+                String EndFlag4 = columns[23];
+                String EndInt6 = columns[24];
 
-            String teleDef = "0";
-            //String matchResultKey = columns[26];
-            String AdditionalNotes = StringEscapeUtils.unescapeCsv( columns[25] );
+                String teleDef = "0";
+                //String matchResultKey = columns[26];
+                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[25]);
 
-            MatchResult matchResult = new MatchResult(
-                    matchResultKey,
-                    eventKey,
-                    matchKey,
-                    teamKey,
-                    false,
+                MatchResult matchResult = new MatchResult(
+                        matchResultKey,
+                        eventKey,
+                        matchKey,
+                        teamKey,
+                        false,
 
-                    AutoFlag1.equalsIgnoreCase("true"),
-                    AutoFlag2.equalsIgnoreCase("true"),
-                    AutoFlag3.equalsIgnoreCase("true"),
-                    AutoFlag4.equalsIgnoreCase("true"),
-                    AutoFlag5.equalsIgnoreCase("true"),
+                        AutoFlag1.equalsIgnoreCase("true"),
+                        AutoFlag2.equalsIgnoreCase("true"),
+                        AutoFlag3.equalsIgnoreCase("true"),
+                        AutoFlag4.equalsIgnoreCase("true"),
+                        AutoFlag5.equalsIgnoreCase("true"),
 
-                    Integer.parseInt(AutoInt6),
-                    Integer.parseInt(AutoInt7),
-                    Integer.parseInt(AutoInt8),
-                    Integer.parseInt(AutoInt9),
-                    Integer.parseInt(AutoInt10),
+                        Integer.parseInt(AutoInt6),
+                        Integer.parseInt(AutoInt7),
+                        Integer.parseInt(AutoInt8),
+                        Integer.parseInt(AutoInt9),
+                        Integer.parseInt(AutoInt10),
 
-                    Integer.parseInt(TeleOpInt1),
-                    Integer.parseInt(TeleOpInt2),
-                    Integer.parseInt(TeleOpInt3),
-                    Integer.parseInt(TeleOpInt4),
-                    Integer.parseInt(TeleOpInt5),
+                        Integer.parseInt(TeleOpInt1),
+                        Integer.parseInt(TeleOpInt2),
+                        Integer.parseInt(TeleOpInt3),
+                        Integer.parseInt(TeleOpInt4),
+                        Integer.parseInt(TeleOpInt5),
 
-                    EndFlag1.equalsIgnoreCase("true"),
-                    EndFlag2.equalsIgnoreCase("true"),
-                    EndFlag3.equalsIgnoreCase("true"),
-                    EndFlag4.equalsIgnoreCase("true"),
-                    Integer.parseInt(EndInt6),
+                        EndFlag1.equalsIgnoreCase("true"),
+                        EndFlag2.equalsIgnoreCase("true"),
+                        EndFlag3.equalsIgnoreCase("true"),
+                        EndFlag4.equalsIgnoreCase("true"),
+                        Integer.parseInt(EndInt6),
 
-
-                    AdditionalNotes,
-                    //,
-                    Integer.parseInt(teleDef)
-            );
-            matchResultViewModel.upsert(matchResult);
+                        AdditionalNotes,
+                        //,
+                        Integer.parseInt(teleDef)
+                );
+                matchResultViewModel.upsert(matchResult);
+            }
         }
-        Log.e(this.getLocalClassName(), "Times ran: " + timesRan);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setupCSVImportButton(){
+    public void setupCSVImportButton() {
         importCSVMatchButton.setOnClickListener(v -> {
-            try{
+            try {
                 importCSVMatches();
                 Log.e("under setupCSVImportButton", "imported match results");
                 Toast.makeText(this, "imported matches", Toast.LENGTH_LONG).show();
-            }
-            catch(Exception E){
+            } catch (Exception E) {
                 E.printStackTrace();
             }
         });
     }
 
-    public File getImportPath(){
-        return FileUtilities.ensureDirectory(getApplicationContext(), "imports");
+    //String transferString = "transfer";
+
+    public File getImportPath() {
+        return FileUtilities.ensureDirectory(getApplicationContext(),  "transfer");
     }
 
     private File[] getFilePathsForMatch() {
@@ -410,14 +414,15 @@ public class ExportActivity extends EchelonActivity {
     }
 
     private File getFilePathForMatch() {
-        return FileUtilities.ensureDirectory(getApplicationContext(), "match_data");
+
+        return FileUtilities.ensureDirectory(getApplicationContext(), "transfer");
     }
 
-    private File[] getFilePathsForPitScout(){
+    private File[] getFilePathsForPitScout() {
         return getFilePathForPitScout().listFiles();
     }
 
-    private File getFilePathForPitScout(){
+    private File getFilePathForPitScout() {
         return FileUtilities.ensureDirectory(getApplicationContext(), "pitscout_data");
     }
 }
