@@ -10,7 +10,7 @@
         app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/miBlueAlliance"
-        android:icon="@drawable/toa"
+        android:icon="@drawable/toa2"
         android:onClick="blueAlliancePressed"
         android:title=""
         app:showAsAction="ifRoom|withText" />
