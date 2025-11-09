@@ -43,6 +43,7 @@ import java.util.stream.Stream;
 
 public class ExportActivity extends EchelonActivity {
 
+    private Button exportToTableaButton;
     private Button exportCaptainMatchResultsButton;
     private Button exportRed1MatchResultsButton;
     private Button exportRed2MatchResultsButton;
@@ -81,6 +82,11 @@ public class ExportActivity extends EchelonActivity {
             exportCaptainMatchResultsButton.setVisibility(View.GONE);
         }
 
+        exportToTableaButton = findViewById(R.id.exportToTableu);
+        //if (!deviceName.contains("aptain")) {
+        //    exportCaptainMatchResultsButton.setVisibility(View.GONE);
+        //}
+
         exportRed1MatchResultsButton = findViewById(R.id.exportRed1MatchResults);
         if (!role.equalsIgnoreCase("Red1")) {
             exportRed1MatchResultsButton.setVisibility(View.GONE);
@@ -115,13 +121,7 @@ public class ExportActivity extends EchelonActivity {
         OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
         File externalFilesDir = getFilePathForMatch();
         externalFilesDir.mkdirs();
-        //String path = externalFilesDir.getAbsolutePath();
-        //File[] files = getFilePathsForMatch();
         MatchResultViewModel matchResultViewModel = new MatchResultViewModel(getApplication());
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm");
-//        Date date = new Date();
-//        String dateForFile = dateFormat.format(date);
-//        String fileName = "Match_Data_" + dateForFile + ".csv";
         File file = new File(externalFilesDir, fileName);
 
         matchResultViewModel.getMatchResultsWithTeamMatchByEvent(status.getEventKey()).observe(this, matchResults -> {
@@ -190,11 +190,95 @@ public class ExportActivity extends EchelonActivity {
         });
     }
 
+    public void exportMatchResultsToTableu(String fileName) throws RuntimeException {
+        Context appContext = getApplicationContext();
+        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        File externalFilesDir = getFilePathForMatch();
+        externalFilesDir.mkdirs();
+        MatchResultViewModel matchResultViewModel = new MatchResultViewModel(getApplication());
+        File file = new File(externalFilesDir, fileName);
+
+        matchResultViewModel.getMatchResultsWithTeamMatchByEvent(status.getEventKey()).observe(this, matchResults -> {
+
+            try (FileOutputStream outputStream = new FileOutputStream(file)) {
+                String header = "Match_Result_Key,Event_Key,Match_Key,Team_Key,has_been_synced"
+                        + ",Auto_Leave ,Auto_NotUsed1, Auto_NotUsed2, Auto_NotUsed3, Auto_NotUsed4"
+                        + ",Auto_Artifact_Classified ,Auto_Artifact_Overflow ,Auto_Pattern ,Auto_NotUsed1 ,Auto_NotUsed2"
+                        + ",TeleOp_Artifact_Classified,TeleOp_Artifact_Overflow,TeleOp_Artifact_Depot, TeleOp_Pattern, TeleOp_NotUsed"
+                        + ",End_Base_TwoBots,End_NotUsed1,End_NotUsed2,End_NotUsed3, End_BaseReturn"
+                        + ",AdditionalNotes, DefensesCount\n";
+                outputStream.write(header.getBytes());
+                for (MatchResultWithTeamMatch matchResultWithTeamMatch : matchResults) {
+
+                    MatchResult mr = matchResultWithTeamMatch.matchResult;
+                    //Match m = matchResultWithTeamMatch.match;
+                    //Team t = matchResultWithTeamMatch.team;
+
+                    List<String> dataForFile = new ArrayList<>();
+                    dataForFile.add(mr.getMatchResultKey());
+                    dataForFile.add(mr.getEventKey());
+                    dataForFile.add(mr.getMatchKey());
+                    dataForFile.add(mr.getTeamKey());
+                    dataForFile.add(String.valueOf(mr.getHasBeenSynced()));
+                    //dataForFile.add(String.valueOf(m.getMatchName()));
+                    //dataForFile.add(String.valueOf(t.getTeamNumber()));
+
+                    dataForFile.add(String.valueOf(mr.getAutoFlag1()));
+                    dataForFile.add(String.valueOf(mr.getAutoFlag2()));
+                    dataForFile.add(String.valueOf(mr.getAutoFlag3()));
+                    dataForFile.add(String.valueOf(mr.getAutoFlag4()));
+                    dataForFile.add(String.valueOf(mr.getAutoFlag5()));
+
+                    dataForFile.add(String.valueOf(mr.getAutoInt6()));
+                    dataForFile.add(String.valueOf(mr.getAutoInt7()));
+                    dataForFile.add(String.valueOf(mr.getAutoInt8()));
+                    dataForFile.add(String.valueOf(mr.getAutoInt9()));
+                    dataForFile.add(String.valueOf(mr.getAutoInt10()));
+
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt1()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt2()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt3()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt4()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt5()));
+
+                    dataForFile.add(String.valueOf(mr.getEndFlag1()));
+                    dataForFile.add(String.valueOf(mr.getEndFlag2()));
+                    dataForFile.add(String.valueOf(mr.getEndFlag3()));
+                    dataForFile.add(String.valueOf(mr.getEndFlag4()));
+                    dataForFile.add(String.valueOf(mr.getEndInt6()));
+
+                    dataForFile.add(StringEscapeUtils.escapeCsv(mr.getAdditionalNotes().trim()));
+                    //dataForFile.add("test");//(mr.getAdditionalNotes());
+                    dataForFile.add(String.valueOf(mr.getDefenseCount()));
+
+                    String outputString = dataForFile.stream().collect(Collectors.joining(",")) + "\n";
+                    outputStream.write(outputString.getBytes());
+                }
+                outputStream.close();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+    }
+
     public void setupExportCSVButton() {
 
         exportCaptainMatchResultsButton.setOnClickListener((view) -> {
             try {
                 exportMatchResults("matchResultsCaptain.csv");
+                Toast.makeText(this, "export Matches: ", Toast.LENGTH_LONG).show();
+
+            } catch (RuntimeException e) {
+                String message = e.getLocalizedMessage();
+                Toast.makeText(this, "export Matches error: " + message, Toast.LENGTH_LONG).show();
+            }
+        });
+        exportToTableaButton.setOnClickListener((view) -> {
+            try {
+                exportMatchResultsToTableu("matchResultsTableu.csv");
                 Toast.makeText(this, "export Matches: ", Toast.LENGTH_LONG).show();
 
             } catch (RuntimeException e) {
