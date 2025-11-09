@@ -25,9 +25,9 @@ import org.hartlandrobotics.echelonFTC.database.entities.Evt;
 import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.Api;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.ApiInterface;
-import org.hartlandrobotics.echelonFTC.orangeAlliance.ApiActivity;
+//import org.hartlandrobotics.echelonFTC.orangeAlliance.ApiActivity;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncEvent;
-import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncRegions;
+//import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncRegions;
 import org.hartlandrobotics.echelonFTC.database.entities.Rgn;
 import org.hartlandrobotics.echelonFTC.database.repositories.RegionRepo;
 import org.hartlandrobotics.echelonFTC.status.ApiStatus;
@@ -108,25 +108,25 @@ public class RegionsFragment extends Fragment {
 
             try {
                 ApiStatus status = new ApiStatus(appContext);
-                Call<List<SyncEvent>> eventsCall = newApi.getEventsByYear();
-                eventsCall.enqueue(new Callback<List<SyncEvent>>() {
+                Call<SyncEvent> eventsCall = newApi.getEventsBySeason(status.getSeason());
+                eventsCall.enqueue(new Callback<SyncEvent>() {
                     @Override
-                    public void onResponse(Call<List<SyncEvent>> call, Response<List<SyncEvent>> response) {
+                    public void onResponse(Call<SyncEvent> call, Response<SyncEvent> response) {
                         try {
                             if (!response.isSuccessful()) {
                                 errorTextDisplay.setText("Couldn't pull events");
                             } else {
                                 EventRepo eventRepo = new EventRepo(app);
-                                List<SyncEvent> syncEvents = response.body();
-                                List<Evt> events = syncEvents.stream()
-                                        .map(SyncEvent::toEvent)
+                                SyncEvent syncEvents = response.body();
+                                List<Evt> events = syncEvents.events.stream()
+                                        .map(SyncEvent.EventProperty::toEvent)
                                         .collect(Collectors.toList());
                                 eventRepo.upsert(events);
 
                                 List<Rgn> regions = events.stream()
                                         .map(Evt::getRegionCode)
                                         .distinct()
-                                        .map(Rgn::new)
+                                        .map( rc -> new Rgn(rc,rc))
                                         .collect(Collectors.toList());
 
                                 RegionRepo regionRepo = new RegionRepo(app);
@@ -143,7 +143,7 @@ public class RegionsFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<List<SyncRegions>> call, Throwable t) {
+                    public void onFailure(Call<SyncEvent> call, Throwable t) {
                         errorTextDisplay.setText("Couldn't pull districts");
                     }
                 });

@@ -78,13 +78,11 @@ public class ApiActivity extends EchelonActivity {
             statusCall.enqueue(new Callback<SyncStatus>() {
                 @Override
                 public void onResponse(Call<SyncStatus> call, Response<SyncStatus> response) {
-
                     setOnlineStatus(response.isSuccessful());
                 }
 
                 @Override
                 public void onFailure(Call<SyncStatus> call, Throwable t) {
-
                     setOnlineStatus(false);
                 }
             });
@@ -104,9 +102,9 @@ public class ApiActivity extends EchelonActivity {
         assert seasonStatusLayout.getEditText() != null;
         seasonStatusLayout.getEditText().setText(season);
     }
-    private void setRegionStatus(String districtKey ){
+    private void setRegionStatus(String regionCode ){
         assert regionStatusLayout.getEditText() != null;
-        regionStatusLayout.getEditText().setText(districtKey);
+        regionStatusLayout.getEditText().setText(regionCode);
     }
 
     private void setEventStatus(String eventKey){

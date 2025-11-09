@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ApiStatus {
     private final static String TAG = "ApiStatus";
-
     private final static String SEASON_KEY = "SeasonKey";
     private final static String YEAR_KEY = "YearKey";
     private final static String REGION_CODE = "RegionCode";
@@ -22,9 +21,7 @@ public class ApiStatus {
     private String regionCode;
     private String eventKey;
 
-    public ApiStatus(
-            Context appContext
-    ){
+    public ApiStatus( Context appContext ){
         if( appContext == null){
             Log.e(TAG, "appContext must be provided to AoiStatus");
             throw new IllegalArgumentException("appContext cannot be null");

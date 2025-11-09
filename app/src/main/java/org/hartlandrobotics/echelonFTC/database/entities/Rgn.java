@@ -12,12 +12,18 @@ public class Rgn {
     @ColumnInfo(name = "regionCode")
     private String regionCode;
 
-    public Rgn(@NonNull String regionCode) {
+    @ColumnInfo(name = "name")
+    public String name;
+
+    public Rgn(@NonNull String regionCode, String name) {
         this.regionCode = regionCode;
+        this.name = name;
     }
 
     @NonNull
     public String getRegionCode() {
         return regionCode;
     }
+
+    public String getName(){ return name; }
 }

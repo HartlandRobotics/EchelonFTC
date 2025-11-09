@@ -27,8 +27,8 @@ public class RegionRepo {
     }
 
     public void upsert(List<Rgn> regions){
-        for( Rgn d : regions){
-            upsert(d);
+        for( Rgn r : regions){
+            upsert(r);
         }
     }
 }

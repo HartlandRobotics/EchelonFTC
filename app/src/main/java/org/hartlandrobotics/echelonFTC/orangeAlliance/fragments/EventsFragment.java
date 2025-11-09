@@ -1,5 +1,6 @@
 package org.hartlandrobotics.echelonFTC.orangeAlliance.fragments;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,7 @@ import org.hartlandrobotics.echelonFTC.status.ApiStatus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -123,54 +125,17 @@ public class EventsFragment extends Fragment {
 
     public void setupEventPulls(){
         eventPull.setOnClickListener((view) -> {
-            ApiInterface newApi = Api.getApiClient(getActivity().getApplication());
+            Application app= requireActivity().getApplication();
+            ApiInterface apiClient = Api.getApiClient(app);
 
             try{
-                Context appContext = getActivity().getApplicationContext();
+                Context appContext = requireActivity().getApplicationContext();
                 ApiStatus status = new ApiStatus(appContext);
                 String regionCode = status.getRegionCode();
                 String eventKeyOverride = StringUtils.defaultIfEmpty( eventKeyOverrideLayout.getEditText().getText().toString(), StringUtils.EMPTY);
 
-
                 if( StringUtils.isBlank( eventKeyOverride )) {
-                    Call<List<SyncEvent>> newCall = newApi.getEvents();
-                    newCall.enqueue(new Callback<List<SyncEvent>>() {
-                        @Override
-                        public void onResponse(Call<List<SyncEvent>> call, Response<List<SyncEvent>> response) {
-                            try {
-                                if (!response.isSuccessful()) {
-                                    errorTextDisplay.setText("Couldn't pull events");
-                                } else {
-                                    EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
-                                    List<SyncEvent> syncEvents = response.body();
-                                    List<Evt> events = syncEvents.stream()
-                                            .map(event -> event.toEvent())
-                                            .filter(evt -> evt.regionCode.equals(regionCode))
-                                            .collect(Collectors.toList());
-
-                                    //eventRepo.upsert(events);
-
-                                    for (Evt event : events) {
-                                        //RgnEvtCrossRef crossRef = event.toRgnEvent(districtKey);
-                                        //eventRepo.upsert(crossRef);
-                                    }
-
-                                    eventListAdapter.setEvents(events);
-                                    errorTextDisplay.setText("Got event: " + syncEvents.size());
-                                }
-                            } catch (Exception e) {
-                                Log.e("Inside onResponse", "\"Exception thrown inside onResponse\"");
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<SyncEvent>> call, Throwable t) {
-                            errorTextDisplay.setText("Error attempting to pull events from TBA");
-                        }
-
-                    });
-                }else {
-                    Call<SyncEvent> newCall = newApi.getEventByKey(eventKeyOverride);
+                    Call<SyncEvent> newCall = apiClient.getEventsBySeason(status.getSeason());
                     newCall.enqueue(new Callback<SyncEvent>() {
                         @Override
                         public void onResponse(Call<SyncEvent> call, Response<SyncEvent> response) {
@@ -179,17 +144,19 @@ public class EventsFragment extends Fragment {
                                     errorTextDisplay.setText("Couldn't pull events");
                                 } else {
                                     EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
-                                    SyncEvent syncEvent = response.body();
-                                    List<Evt> events = new ArrayList<>();
-                                    events.add(syncEvent.toEvent()) ;
+                                    SyncEvent syncEvents = response.body();
+                                    List<Evt> events = syncEvents.events.stream()
+                                            .map(event -> event.toEvent())
+                                            .filter(evt -> evt.regionCode.equals(regionCode))
+                                            .collect(Collectors.toList());
 
-                                    eventRepo.upsert(events);
-
-                                    ApiStatus status = new ApiStatus(appContext);
-                                    status.setEventKey(eventKeyOverride);
-
-                                    eventListAdapter.setEvents(events);
+                                    for (Evt event : events) {
+                                        //RgnEvtCrossRef crossRef = event.toRgnEvent(districtKey);
+                                        //eventRepo.upsert(crossRef);
+                                        eventListAdapter.setEvents(events);
+                                    }
                                     errorTextDisplay.setText("Got event: " + events.size());
+
                                 }
                             } catch (Exception e) {
                                 Log.e("Inside onResponse", "\"Exception thrown inside onResponse\"");
@@ -200,11 +167,46 @@ public class EventsFragment extends Fragment {
                         public void onFailure(Call<SyncEvent> call, Throwable t) {
                             errorTextDisplay.setText("Error attempting to pull events from TBA");
                         }
+
+                    });
+                }else {
+                    Call<SyncEvent> newCall = apiClient.getEventsByCode(status.getSeason(),eventKeyOverride);
+                    newCall.enqueue(new Callback<SyncEvent>() {
+                        @Override
+                        public void onResponse(Call<SyncEvent> call, Response<SyncEvent> response) {
+                            try {
+                                if (!response.isSuccessful()) {
+                                    errorTextDisplay.setText("Couldn't pull events");
+                                } else {
+                                    SyncEvent syncEvent = response.body();
+                                    for(SyncEvent.EventProperty event : response.body().events ) {
+                                        EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
+                                        List<Evt> events = new ArrayList<>();
+                                        events.add(event.toEvent());
+
+                                        eventRepo.upsert(events);
+
+                                        ApiStatus status = new ApiStatus(appContext);
+                                        status.setEventKey(eventKeyOverride);
+
+                                        eventListAdapter.setEvents(events);
+                                        errorTextDisplay.setText("Got event: " + events.size());
+                                    }
+                                }
+                            } catch (Exception e) {
+                                Log.e("Inside onResponse", "\"Exception thrown inside onResponse\"");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SyncEvent> call, Throwable t) {
+                            errorTextDisplay.setText("Error attempting to pull events from API");
+                        }
                     });
                 }
             }
             catch(Exception e){
-                Log.e("Outside Onresponse", "Exception attempting to pull from TBA");
+                Log.e("Outside OnResponse", "Exception attempting to pull from API");
             }
         });
     }
@@ -232,8 +234,8 @@ public class EventsFragment extends Fragment {
         public void setEvent(EventsListViewModel eventViewModel) {
             this.eventViewModel = eventViewModel;
 
-            eventName.setText(eventViewModel.getEventName());
-            eventKey.setText(eventViewModel.getEventKey());
+            eventName.setText(eventViewModel.getName());
+            eventKey.setText(eventViewModel.getEventId());
             eventSelectedRadioButton.setChecked(eventViewModel.getIsSelected());
         }
 
@@ -276,12 +278,12 @@ public class EventsFragment extends Fragment {
         void setEvents(List<Evt> events) {
             Context appContext = getActivity().getApplicationContext();
             ApiStatus status = new ApiStatus(appContext);
-            String currentEventKey = status.getEventKey();
+            String currentEventId = status.getEventKey();
 
             eventViewModels = new ArrayList<>();
             for( Evt event : events ){
                 EventsListViewModel viewModel = new EventsListViewModel(event);
-                if( event.getEventCode().equals(currentEventKey) ){
+                if( event.getEventId().equals(currentEventId) ){
                     viewModel.setIsSelected(true);
                 }
                 eventViewModels.add(viewModel);
@@ -292,10 +294,10 @@ public class EventsFragment extends Fragment {
 
         void setCurrentEvent(EventsListViewModel currentViewModel){
             ApiActivity orangeAllianceActivity = (ApiActivity)getActivity();
-            orangeAllianceActivity.setEventKey(currentViewModel.getEventKey());
+            orangeAllianceActivity.setEventKey(currentViewModel.getEventId());
 
             for(EventsListViewModel viewModel : eventViewModels){
-                viewModel.setIsSelected( currentViewModel.getEventKey().equals(viewModel.getEventKey()));
+                viewModel.setIsSelected( currentViewModel.getEventId().equals(viewModel.getEventId()));
             }
 
             notifyDataSetChanged();

@@ -3,7 +3,7 @@ package org.hartlandrobotics.echelonFTC.orangeAlliance;
 
 import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncEvent;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncMatch;
-import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncRegions;
+//import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncRegions;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncStatus;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncTeam;
 
@@ -13,14 +13,17 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.QueryMap;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
     @GET(" ")
     Call<SyncStatus> getStatus();
 
     @GET("/{season}/events")
-    Call<List<SyncEvent>> getEventsBySeason(@Path("season") String seasonKey);
+    Call<SyncEvent> getEventsBySeason(@Path("season") String seasonKey);
+
+    @GET("/{season}/events")
+    Call<SyncEvent> getEventsByCode(@Path("season") String seasonKey, @Query("eventCode") String eventCode);
 
     // same for orange alliance
     //@GET("event/{event_key}")
@@ -28,7 +31,8 @@ public interface ApiInterface {
 
     // same for orange alliance
     //@GET("event/{event_key}/teams")
-    //Call<List<SyncTeam>> getTeamsByEvent(@Path("event_key") String eventKey);
+    GET("/{season}/schedule/{eventCode}")
+    Call<List<SyncTeam>> getTeamsByEvent(@Path("season") String season, @Path("eventCode") String eventCode, @Query("tournamentLevel") String tournamentLevel);
 
 
     //tba

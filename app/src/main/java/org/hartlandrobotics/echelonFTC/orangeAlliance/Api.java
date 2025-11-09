@@ -34,7 +34,7 @@ public class Api {
                 Request request = original.newBuilder()
                         .header("Accept", "application/json")
                         .header("User-Agent", userAgent)
-                        .header("Authorization", "Basic "+ apiHeader)
+                        .header("Authorization", "Basic " + apiHeader)
                         .build();
                 return chain.proceed(request);
             });

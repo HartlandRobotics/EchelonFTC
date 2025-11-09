@@ -3,33 +3,28 @@ package org.hartlandrobotics.echelonFTC.orangeAlliance.fragments;
 import org.hartlandrobotics.echelonFTC.database.entities.Evt;
 
 public class EventsListViewModel {
-    private String eventName;
-    private String eventKey;
-    private String eventStartDate;
+    private String name;
+    private String eventId;
+    private String code;
     private boolean isSelected;
 
     public EventsListViewModel(Evt event) {
-        this.eventName = event.getEventName();
-        this.eventKey = event.getEventKey();
-        this.eventStartDate = event.getStartDate();
+        this.name = event.getName();
+        this.eventId = event.getEventId();
+        this.code = event.getCode();
         this.isSelected = false;
     }
 
-    public String getEventName() {
-        return eventName;
+    public String getName() {
+        return name;
     }
 
-    public String getEventKey() {
-        return eventKey;
+    public String getEventId() {
+        return eventId;
     }
 
-    public int getYear() {
-        try {
-            return Integer.parseInt(eventStartDate.substring(0, 4));
-        } catch (NumberFormatException e) {
-            return 0;
-        }
-    }
+    public String getCode(){ return code; }
+
 
     public boolean getIsSelected() {
         return isSelected;

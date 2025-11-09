@@ -29,8 +29,8 @@ public class ApiPagerAdapter extends FragmentStateAdapter {
       if(titleByPosition.isEmpty()){
          titleByPosition.put(0,"Regions");
          titleByPosition.put(1,"Events");
-         titleByPosition.put(2, "Teams");
-         titleByPosition.put(3, "Matches");
+         //titleByPosition.put(2, "Teams");
+         //titleByPosition.put(3, "Matches");
       }
       return titleByPosition.get(position);
    }
@@ -40,29 +40,29 @@ public class ApiPagerAdapter extends FragmentStateAdapter {
    public Fragment createFragment(int position) {
       Fragment fragment = null;
       if (position == 0) {
-         Log.e(TAG,"creating new District Fragment");
-         RegionsFragment districtFragment = new RegionsFragment();
-         fragment = districtFragment;
+         Log.e(TAG,"creating new Regions Fragment");
+         RegionsFragment regionsFragment = new RegionsFragment();
+         fragment = regionsFragment;
       }
       else if (position == 1) {
          Log.e(TAG,"creating new Events Fragment");
          EventsFragment eventsFragment = new EventsFragment();
          fragment = eventsFragment;
       }
-      else if (position == 2) {
-         Log.e(TAG,"creating new Teams Fragment");
-         TeamsFragment teamFragment = new TeamsFragment();
-         fragment = teamFragment;
-      }
-      else if(position == 3){
-         Log.e(TAG, "creating new Matches Fragment");
-         MatchesFragment matchFragment = new MatchesFragment();
-         fragment = matchFragment;
-      }
+//      else if (position == 2) {
+//         Log.e(TAG,"creating new Teams Fragment");
+//         TeamsFragment teamFragment = new TeamsFragment();
+//         fragment = teamFragment;
+//      }
+//      else if(position == 3){
+//         Log.e(TAG, "creating new Matches Fragment");
+//         MatchesFragment matchFragment = new MatchesFragment();
+//         fragment = matchFragment;
+//      }
 
       return fragment;
    }
 
    @Override
-   public int getItemCount(){ return 4; }
+   public int getItemCount(){ return 2; }
 }
