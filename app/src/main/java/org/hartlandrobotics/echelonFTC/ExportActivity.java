@@ -76,19 +76,21 @@ public class ExportActivity extends EchelonActivity {
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
 
         exportCaptainMatchResultsButton = findViewById(R.id.exportCaptainMatchResults);
+        exportToTableaButton = findViewById(R.id.exportToTableu);
+
         Context appContext = getApplicationContext();
         String deviceName = DeviceUtilities.getDeviceName(appContext);
         if (!deviceName.contains("aptain")) {
             exportCaptainMatchResultsButton.setVisibility(View.GONE);
+            exportToTableaButton.setVisibility(View.GONE);
         }
 
-        exportToTableaButton = findViewById(R.id.exportToTableu);
         //if (!deviceName.contains("aptain")) {
         //    exportCaptainMatchResultsButton.setVisibility(View.GONE);
         //}
 
         exportRed1MatchResultsButton = findViewById(R.id.exportRed1MatchResults);
-        if (!role.equalsIgnoreCase("Red1")) {
+        if (!role.equalsIgnoreCase("Red1") || deviceName.contains("aptain") ) {
             exportRed1MatchResultsButton.setVisibility(View.GONE);
         }
         exportRed2MatchResultsButton = findViewById(R.id.exportRed2MatchResults);
