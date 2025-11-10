@@ -207,7 +207,7 @@ public class ExportActivity extends EchelonActivity {
                         + ",Auto_Leave ,Auto_NotUsed1, Auto_NotUsed2, Auto_NotUsed3, Auto_NotUsed4"
                         + ",Auto_Artifact_Classified ,Auto_Artifact_Overflow ,Auto_Pattern ,Auto_NotUsed1 ,Auto_NotUsed2"
                         + ",TeleOp_Artifact_Classified,TeleOp_Artifact_Overflow,TeleOp_Artifact_Depot, TeleOp_Pattern, TeleOp_NotUsed"
-                        + ",End_Base_TwoBots,End_NotUsed1,End_NotUsed2,End_NotUsed3, End_BaseReturn"
+                        + ",End_BaseReturnString, End_Base_TwoBots,End_NotUsed1,End_NotUsed2,End_NotUsed3, End_BaseReturn"
                         + ",AdditionalNotes, DefensesCount\n";
                 outputStream.write(header.getBytes());
                 for (MatchResultWithTeamMatch matchResultWithTeamMatch : matchResults) {
@@ -243,6 +243,16 @@ public class ExportActivity extends EchelonActivity {
                     dataForFile.add(String.valueOf(mr.getTeleOpInt4()));
                     dataForFile.add(String.valueOf(mr.getTeleOpInt5()));
 
+                    int endBaseReturn = mr.getEndInt6();
+                    if(endBaseReturn == 0){
+                        dataForFile.add("none");
+                    }else if(endBaseReturn==1){
+                        dataForFile.add("partial");
+                    }else if(endBaseReturn==2) {
+                        dataForFile.add("full");
+                    }else{
+                        dataForFile.add("not 0:1:2");
+                    }
                     dataForFile.add(String.valueOf(mr.getEndFlag1()));
                     dataForFile.add(String.valueOf(mr.getEndFlag2()));
                     dataForFile.add(String.valueOf(mr.getEndFlag3()));
