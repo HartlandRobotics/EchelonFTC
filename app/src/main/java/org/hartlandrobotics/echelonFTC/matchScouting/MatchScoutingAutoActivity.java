@@ -22,6 +22,9 @@ import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 public class MatchScoutingAutoActivity extends AppCompatActivity {
     private static final String MATCH_KEY = "auto_match_key_param";
     private static final String TEAM_KEY = "auto_team_key_param";
+    private ImageButton patternLeftButton;
+    private ImageButton patternCenterButton;
+    private ImageButton patternRightButton;
 
     private ImageButton classifiedButton;
     private ImageButton overflowButton;
@@ -82,6 +85,21 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     }
 
     public void populateControlsFromData(){
+        int ballPattern = matchResult.getAutoInt9();
+        if( ballPattern == 0 ){
+            patternLeftButton.setImageResource(R.drawable.ball_green);
+            patternCenterButton.setImageResource(R.drawable.ball_purple);
+            patternRightButton.setImageResource(R.drawable.ball_purple);
+        } else if( ballPattern == 1 ) {
+            patternLeftButton.setImageResource(R.drawable.ball_purple);
+            patternCenterButton.setImageResource(R.drawable.ball_green);
+            patternRightButton.setImageResource(R.drawable.ball_purple);
+        } else if( ballPattern == 2 ) {
+            patternLeftButton.setImageResource(R.drawable.ball_purple);
+            patternCenterButton.setImageResource(R.drawable.ball_purple);
+            patternRightButton.setImageResource(R.drawable.ball_green);
+        }
+
         classifiedText.setText(String.valueOf(matchResult.getAutoInt6()));
         overflowText.setText(String.valueOf(matchResult.getAutoInt7()));
         motifText.setText(String.valueOf(matchResult.getAutoInt8()));
@@ -98,6 +116,24 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         teleOpButton.setOnClickListener(v -> {
             matchResultViewModel.upsert(matchResult);
             MatchScoutingTeleopActivity.launch(MatchScoutingAutoActivity.this, matchKey, teamKey );
+        });
+
+        patternLeftButton = findViewById(R.id.pattern_left);
+        patternLeftButton.setOnClickListener(v -> {
+            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1) % 3);
+            populateControlsFromData();
+        });
+
+        patternCenterButton = findViewById(R.id.pattern_center);
+        patternCenterButton.setOnClickListener(v -> {
+            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1) % 3);
+            populateControlsFromData();
+        });
+
+        patternRightButton = findViewById(R.id.pattern_right);
+        patternRightButton.setOnClickListener(v -> {
+            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1) % 3);
+            populateControlsFromData();
         });
 
         classifiedText = findViewById(R.id.classified_ball_text);

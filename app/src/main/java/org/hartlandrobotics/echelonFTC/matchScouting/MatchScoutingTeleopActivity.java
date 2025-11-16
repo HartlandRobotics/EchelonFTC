@@ -32,6 +32,9 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
     private ImageButton baseButton;
     private ImageButton twoBotsButton;
+    private ImageButton patternLeftButton;
+    private ImageButton patternCenterButton;
+    private ImageButton patternRightButton;
 
 
     private MaterialTextView classifiedText;
@@ -98,6 +101,20 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         motifText.setText(String.valueOf(matchResult.getTeleOpInt4()));
         depotText.setText(String.valueOf(matchResult.getTeleOpInt3()));
 
+        int ballPattern = matchResult.getAutoInt9();
+        if( ballPattern == 0 ){
+            patternLeftButton.setImageResource(R.drawable.ball_green);
+            patternCenterButton.setImageResource(R.drawable.ball_purple);
+            patternRightButton.setImageResource(R.drawable.ball_purple);
+        } else if( ballPattern == 1 ) {
+            patternLeftButton.setImageResource(R.drawable.ball_purple);
+            patternCenterButton.setImageResource(R.drawable.ball_green);
+            patternRightButton.setImageResource(R.drawable.ball_purple);
+        } else if( ballPattern == 2 ) {
+            patternLeftButton.setImageResource(R.drawable.ball_purple);
+            patternCenterButton.setImageResource(R.drawable.ball_purple);
+            patternRightButton.setImageResource(R.drawable.ball_green);
+        }
 
         if( matchResult.getEndInt6() == 2){
             baseButton.setImageResource(R.drawable.base_green);
@@ -120,6 +137,22 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         scoutingDoneButton.setOnClickListener(v -> {
             matchResultViewModel.upsert(matchResult);
             MatchScoutingSummaryActivity.launch(MatchScoutingTeleopActivity.this, matchKey, teamKey);
+        });
+
+        patternLeftButton = findViewById(R.id.pattern_left);
+        patternCenterButton = findViewById(R.id.pattern_center);
+        patternRightButton = findViewById(R.id.pattern_right);
+        patternLeftButton.setOnClickListener(v -> {
+            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1 ) % 3 );
+            populateControlsFromData();
+        });
+        patternCenterButton.setOnClickListener(v -> {
+            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1 ) % 3 );
+            populateControlsFromData();
+        });
+        patternRightButton.setOnClickListener(v -> {
+            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1 ) % 3 );
+            populateControlsFromData();
         });
 
         classifiedText = findViewById(R.id.classified_ball_text);

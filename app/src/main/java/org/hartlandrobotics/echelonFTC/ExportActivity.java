@@ -80,11 +80,10 @@ public class ExportActivity extends EchelonActivity {
 
         Context appContext = getApplicationContext();
         String deviceName = DeviceUtilities.getDeviceName(appContext);
-        if (!deviceName.contains("aptain")) {
+        if (!deviceName.contains("aptain") && !deviceName.contains("oach")) {
             exportCaptainMatchResultsButton.setVisibility(View.GONE);
             exportToTableaButton.setVisibility(View.GONE);
         }
-
         //if (!deviceName.contains("aptain")) {
         //    exportCaptainMatchResultsButton.setVisibility(View.GONE);
         //}
@@ -205,7 +204,7 @@ public class ExportActivity extends EchelonActivity {
             try (FileOutputStream outputStream = new FileOutputStream(file)) {
                 String header = "Match_Result_Key,Event_Key,Match_Key,Team_Key,has_been_synced"
                         + ",Auto_Leave ,Auto_NotUsed1, Auto_NotUsed2, Auto_NotUsed3, Auto_NotUsed4"
-                        + ",Auto_Artifact_Classified ,Auto_Artifact_Overflow ,Auto_Pattern ,Auto_NotUsed1 ,Auto_NotUsed2"
+                        + ",Auto_Artifact_Classified ,Auto_Artifact_Overflow ,Auto_Motif ,Auto_Pattern ,Auto_NotUsed2"
                         + ",TeleOp_Artifact_Classified,TeleOp_Artifact_Overflow,TeleOp_Artifact_Depot, TeleOp_Pattern, TeleOp_NotUsed"
                         + ",End_BaseReturnString, End_Base_TwoBots,End_NotUsed1,End_NotUsed2,End_NotUsed3, End_BaseReturn"
                         + ",AdditionalNotes, DefensesCount\n";
@@ -234,7 +233,17 @@ public class ExportActivity extends EchelonActivity {
                     dataForFile.add(String.valueOf(mr.getAutoInt6()));
                     dataForFile.add(String.valueOf(mr.getAutoInt7()));
                     dataForFile.add(String.valueOf(mr.getAutoInt8()));
-                    dataForFile.add(String.valueOf(mr.getAutoInt9()));
+                    //dataForFile.add(String.valueOf(mr.getAutoInt9()));
+                    int autoPattern = mr.getAutoInt9();
+                    if(autoPattern == 0){
+                        dataForFile.add("GPP");
+                    }else if(autoPattern==1){
+                        dataForFile.add("PGP");
+                    }else if(autoPattern==2) {
+                        dataForFile.add("PPG");
+                    }else{
+                        dataForFile.add("not 0:1:2");
+                    }
                     dataForFile.add(String.valueOf(mr.getAutoInt10()));
 
                     dataForFile.add(String.valueOf(mr.getTeleOpInt1()));

@@ -7,21 +7,64 @@
     tools:context=".matchScouting.MatchScoutingTeleopActivity">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/classified"
+        android:id="@+id/pattern"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/classified"
+        android:textSize="32sp"
+        android:text="Pattern"
+        />
+
+    <ImageButton
+        android:id="@+id/pattern_left"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_green"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/pattern"
+        android:layout_marginLeft="50dp"
+        />
+    <ImageButton
+        android:id="@+id/pattern_center"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_purple"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/pattern_left"
+        />
+    <ImageButton
+        android:id="@+id/pattern_right"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_purple"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/pattern_center"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/classified"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pattern"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/overflow"
         android:layout_marginTop="30dp"
-        android:textSize="48sp"
+        android:textSize="32sp"
         android:text="Classified"
         />
 
     <ImageButton
         android:id="@+id/classified_ball"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:scaleType="fitXY"
         android:src="@drawable/ball_white"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/classified"
@@ -35,7 +78,7 @@
         app:layout_constraintTop_toTopOf="@id/classified_ball"
         app:layout_constraintLeft_toRightOf="@+id/classified_ball"
         android:layout_marginLeft="30dp"
-        android:textSize="48sp"
+        android:textSize="32sp"
         tools:text="0"
         />
 
@@ -44,17 +87,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pattern"
         app:layout_constraintLeft_toRightOf="@id/classified"
         app:layout_constraintRight_toLeftOf="@id/motif"
-        android:textSize="48sp"
+        android:textSize="32sp"
         android:text="Overflow"
         />
 
     <ImageButton
         android:id="@+id/overflow_ball"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:scaleType="fitXY"
         android:src="@drawable/ball_white"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/overflow"
@@ -68,7 +112,7 @@
         app:layout_constraintTop_toTopOf="@id/overflow_ball"
         app:layout_constraintLeft_toRightOf="@id/overflow_ball"
         android:layout_marginLeft="30dp"
-        android:textSize="48sp"
+        android:textSize="32sp"
         tools:text="0"
         />
 
@@ -76,18 +120,19 @@
         android:id="@+id/motif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pattern"
         app:layout_constraintLeft_toRightOf="@id/overflow"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"
-        android:textSize="48sp"
+        android:textSize="32sp"
         android:text="Motif"
         />
 
     <ImageButton
         android:id="@+id/motif_ball"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:scaleType="fitXY"
         android:src="@drawable/ball_green"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/motif"
@@ -101,7 +146,7 @@
         app:layout_constraintTop_toTopOf="@id/motif_ball"
         app:layout_constraintLeft_toRightOf="@id/motif_ball"
         android:layout_marginLeft="30dp"
-        android:textSize="48sp"
+        android:textSize="32sp"
         tools:text="0"
         />
 
@@ -112,20 +157,19 @@
         app:layout_constraintTop_toBottomOf="@id/classified_ball"
         app:layout_constraintLeft_toLeftOf="@id/classified"
         android:layout_marginTop="30dp"
-        android:textSize="48sp"
+        android:textSize="32sp"
         android:text="Base"
         />
 
     <ImageButton
         android:id="@+id/base_image"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:src="@drawable/base_blue"
         android:scaleType="fitCenter"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/base_text"
         app:layout_constraintLeft_toLeftOf="@id/base_text"
-
         />
 
     <com.google.android.material.textview.MaterialTextView
@@ -135,16 +179,16 @@
         app:layout_constraintTop_toBottomOf="@id/overflow_ball"
         app:layout_constraintLeft_toLeftOf="@id/overflow_ball"
         android:layout_marginTop="30dp"
-        android:textSize="48sp"
+        android:textSize="32sp"
         android:text="Two Bots"
         />
 
     <ImageButton
         android:id="@+id/twobots_image"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:scaleType="fitXY"
         android:src="@drawable/two_bots_blue"
-        android:scaleType="fitCenter"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/twobots_text"
         app:layout_constraintLeft_toLeftOf="@id/twobots_text"
@@ -158,14 +202,15 @@
         app:layout_constraintLeft_toRightOf="@id/overflow"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"
-        android:textSize="48sp"
+        android:textSize="32sp"
         android:text="Depot"
         />
 
     <ImageButton
         android:id="@+id/depot_ball"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:scaleType="fitXY"
         android:src="@drawable/ball_white"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/depot"
@@ -179,7 +224,7 @@
         app:layout_constraintTop_toTopOf="@id/depot_ball"
         app:layout_constraintLeft_toRightOf="@id/depot_ball"
         android:layout_marginLeft="30dp"
-        android:textSize="48sp"
+        android:textSize="32sp"
         tools:text="0"
         />
 
