@@ -204,8 +204,8 @@ public class ExportActivity extends EchelonActivity {
             try (FileOutputStream outputStream = new FileOutputStream(file)) {
                 String header = "Match_Result_Key,Event_Key,Match_Key,Team_Key,has_been_synced"
                         + ",Auto_Leave ,Auto_NotUsed1, Auto_NotUsed2, Auto_NotUsed3, Auto_NotUsed4"
-                        + ",Auto_Artifact_Classified ,Auto_Artifact_Overflow ,Auto_Motif ,Auto_Pattern ,Auto_NotUsed2"
-                        + ",TeleOp_Artifact_Classified,TeleOp_Artifact_Overflow,TeleOp_Artifact_Depot, TeleOp_Pattern, TeleOp_NotUsed"
+                        + ",Auto_Artifact_Classified ,Auto_Artifact_Overflow ,Auto_Motif ,Auto_Pattern ,Auto_Missed"
+                        + ",TeleOp_Artifact_Classified,TeleOp_Artifact_Overflow,TeleOp_Artifact_Depot, TeleOp_Pattern, TeleOp_Missed"
                         + ",End_BaseReturnString, End_Base_TwoBots,End_NotUsed1,End_NotUsed2,End_NotUsed3, End_BaseReturn"
                         + ",AdditionalNotes, DefensesCount\n";
                 outputStream.write(header.getBytes());

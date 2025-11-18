@@ -26,6 +26,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     private ImageButton patternCenterButton;
     private ImageButton patternRightButton;
 
+    private ImageButton missedButton;
     private ImageButton classifiedButton;
     private ImageButton overflowButton;
     private ImageButton motifButton;
@@ -37,6 +38,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     private MaterialTextView motifText;
     private MaterialTextView teamKeyText;
 
+    private MaterialTextView missedText;
     int leaveDrawable;
 
     MatchResultViewModel matchResultViewModel;
@@ -104,6 +106,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         overflowText.setText(String.valueOf(matchResult.getAutoInt7()));
         motifText.setText(String.valueOf(matchResult.getAutoInt8()));
 
+        missedText.setText(String.valueOf(matchResult.getAutoInt10()));
         if( matchResult.getAutoFlag1() ){
             leaveButton.setImageResource(R.drawable.leave_green);
         } else {
@@ -161,6 +164,13 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         leaveButton.setImageResource(leaveDrawable);
         leaveButton.setOnClickListener(v -> {
             matchResult.setAutoFlag1( !matchResult.getAutoFlag1() );
+            populateControlsFromData();
+        });
+
+        missedText = findViewById(R.id.missed_ball_text);
+        missedButton = findViewById(R.id.missed_ball);
+        missedButton.setOnClickListener(view -> {
+            matchResult.setAutoInt10(matchResult.getAutoInt10());
             populateControlsFromData();
         });
     }

@@ -36,13 +36,13 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private ImageButton patternCenterButton;
     private ImageButton patternRightButton;
 
-
+    private ImageButton missedButton;
     private MaterialTextView classifiedText;
     private MaterialTextView overflowText;
     private MaterialTextView motifText;
     private MaterialTextView depotText;
 
-
+    private MaterialTextView missedText;
     private MaterialTextView teamKeyText;
 
     private ImageButton defensesButton;
@@ -100,7 +100,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         overflowText.setText(String.valueOf(matchResult.getTeleOpInt2()));
         motifText.setText(String.valueOf(matchResult.getTeleOpInt4()));
         depotText.setText(String.valueOf(matchResult.getTeleOpInt3()));
-
+        missedText.setText(String.valueOf(matchResult.getTeleOpInt5()));
         int ballPattern = matchResult.getAutoInt9();
         if( ballPattern == 0 ){
             patternLeftButton.setImageResource(R.drawable.ball_green);
@@ -194,6 +194,13 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         depotButton = findViewById(R.id.depot_ball);
         depotButton.setOnClickListener(v -> {
             matchResult.setTeleOpInt3( matchResult.getTeleOpInt3() + 1);
+            populateControlsFromData();
+        });
+
+        missedText = findViewById(R.id.missed_ball_text);
+        missedButton = findViewById(R.id.missed_ball);
+        missedButton.setOnClickListener( view -> {
+            matchResult.setTeleOpInt5(matchResult.getTeleOpInt5());
             populateControlsFromData();
         });
 

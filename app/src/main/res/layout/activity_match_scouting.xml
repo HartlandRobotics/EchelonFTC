@@ -228,6 +228,41 @@
         tools:text="0"
         />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/missed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/base_image"
+        app:layout_constraintLeft_toLeftOf="@id/base_text"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="120dp"
+        android:textSize="32sp"
+        android:text="Missed"
+        />
+
+    <ImageButton
+        android:id="@+id/missed_ball"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_white"
+        android:layout_marginLeft="15dp"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="@id/missed"
+        app:layout_constraintLeft_toRightOf="@id/missed"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/missed_ball_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/missed"
+        app:layout_constraintLeft_toRightOf="@id/missed_ball"
+        android:layout_marginLeft="10dp"
+        android:textSize="32sp"
+        tools:text="0"
+        />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/summary"
