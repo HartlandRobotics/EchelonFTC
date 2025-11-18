@@ -78,7 +78,9 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         matchKey = bundle.getString(MATCH_KEY);
         teamKey = bundle.getString(TEAM_KEY);
-
+        teamKeyText = findViewById(R.id.teamKeyText);
+        teamKeyText.setText(TEAM_KEY);
+        
         OrangeAllianceStatus orangeAllianceStatus = new OrangeAllianceStatus(getApplicationContext());
 
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
@@ -133,11 +135,15 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     }
 
     private void setupControls(){
+        teamKeyText = findViewById(R.id.teamKeyText);
+        teamKeyText.setText(teamKey);
+
         scoutingDoneButton = findViewById(R.id.summary);
         scoutingDoneButton.setOnClickListener(v -> {
             matchResultViewModel.upsert(matchResult);
             MatchScoutingSummaryActivity.launch(MatchScoutingTeleopActivity.this, matchKey, teamKey);
         });
+
 
         patternLeftButton = findViewById(R.id.pattern_left);
         patternCenterButton = findViewById(R.id.pattern_center);
@@ -222,7 +228,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
             twobotsDrawable = R.drawable.two_bots_red;
         } else {
             baseDrawable = R.drawable.base_blue;
-            twobotsDrawable = R.drawable.two_bots_red;
+            twobotsDrawable = R.drawable.two_bots_blue;
         }
     }
 }

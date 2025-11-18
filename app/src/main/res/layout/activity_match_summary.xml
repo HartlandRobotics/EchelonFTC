@@ -185,20 +185,64 @@
             android:layout_marginEnd="10dp"
 
             />
+       <!-- Auto Missed-->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/autoMissedLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="80dp"
+            android:text="Missed:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/autoMissedDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/autoMissedDecrement"
+            app:layout_constraintTop_toTopOf="@id/autoMissedDecrement"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/autoMissedDecrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            app:layout_constraintEnd_toStartOf="@id/autoMissedValue"
+            app:layout_constraintStart_toEndOf="@id/autoMissedLabel"
+            app:layout_constraintTop_toBottomOf="@id/autoMotifDecrement"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/autoMissedValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintStart_toEndOf="@id/autoMissedDecrement"
+            app:layout_constraintEnd_toStartOf="@id/autoMissedIncrement"
+            app:layout_constraintTop_toTopOf="@id/autoMissedDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/autoMissedDecrement"
+            tools:text="3"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/autoMissedIncrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            app:layout_constraintStart_toEndOf="@id/autoMissedValue"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/autoMotifDecrement"
+            android:layout_marginEnd="10dp"
+
+            />
 
 
         <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/autoLeaveCheckBox"
+            android:id="@+id/autoLeaveCheckbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="Leave:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/autoMotifDecrement"
+            app:layout_constraintTop_toBottomOf="@id/autoMissedDecrement"
             android:layout_marginTop="10dp"
             />
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -404,8 +448,54 @@
             android:layout_height="wrap_content"
             android:text="+"
             app:layout_constraintStart_toEndOf="@id/teleOpDepotValue"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/teleOpDepotDecrement"
+            android:layout_marginEnd="10dp"
+            />
+
+        <!-- TeleOp missed -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/teleOpMissedLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="80dp"
+            android:text="Missed:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/teleOpMissedDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpMissedDecrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpMissedDecrement"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/teleOpMissedDecrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            app:layout_constraintEnd_toStartOf="@id/teleOpMissedValue"
+            app:layout_constraintStart_toEndOf="@id/teleOpMissedLabel"
+            app:layout_constraintTop_toBottomOf="@id/teleOpDepotDecrement"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/teleOpMissedValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintStart_toEndOf="@id/teleOpMissedDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpMissedIncrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpMissedDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpMissedDecrement"
+            tools:text="2"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/teleOpMissedIncrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            app:layout_constraintStart_toEndOf="@id/teleOpMissedValue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/teleOpMotifDecrement"
+            app:layout_constraintTop_toBottomOf="@id/teleOpDepotDecrement"
             android:layout_marginEnd="10dp"
             />
 
