@@ -80,7 +80,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         teamKey = bundle.getString(TEAM_KEY);
         teamKeyText = findViewById(R.id.teamKeyText);
         teamKeyText.setText(TEAM_KEY);
-        
+
         OrangeAllianceStatus orangeAllianceStatus = new OrangeAllianceStatus(getApplicationContext());
 
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);

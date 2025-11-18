@@ -197,7 +197,7 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
+        android:src="@drawable/ball_none"
         android:layout_marginLeft="15dp"
         android:background="@null"
         app:layout_constraintTop_toTopOf="@id/missed"
