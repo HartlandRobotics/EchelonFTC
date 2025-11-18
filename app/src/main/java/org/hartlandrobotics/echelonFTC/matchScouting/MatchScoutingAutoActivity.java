@@ -170,7 +170,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         missedText = findViewById(R.id.missed_ball_text);
         missedButton = findViewById(R.id.missed_ball);
         missedButton.setOnClickListener(view -> {
-            matchResult.setAutoInt10(matchResult.getAutoInt10());
+            matchResult.setAutoInt10(matchResult.getAutoInt10() + 1);
             populateControlsFromData();
         });
     }

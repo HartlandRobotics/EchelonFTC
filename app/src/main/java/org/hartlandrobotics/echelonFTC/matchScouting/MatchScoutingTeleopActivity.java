@@ -200,7 +200,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         missedText = findViewById(R.id.missed_ball_text);
         missedButton = findViewById(R.id.missed_ball);
         missedButton.setOnClickListener( view -> {
-            matchResult.setTeleOpInt5(matchResult.getTeleOpInt5());
+            matchResult.setTeleOpInt5(matchResult.getTeleOpInt5 () + 1);
             populateControlsFromData();
         });
 
