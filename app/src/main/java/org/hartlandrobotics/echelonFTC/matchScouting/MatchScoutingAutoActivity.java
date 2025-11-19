@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
@@ -68,7 +69,11 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         matchKey = bundle.getString(MATCH_KEY);
         teamKey = bundle.getString(TEAM_KEY);
 
+
+        Context appContext = this.getApplicationContext();
+        AdminSettings settings = AdminSettingsProvider.getAdminSettings(appContext);
         teamKeyText = findViewById(R.id.teamKeyText);
+        teamKeyText.setTextColor(settings.getDeviceRole().contains("red") ? getResources().getColor(R.color.redAlliance) : getResources().getColor(R.color.blueAlliance));
         teamKeyText.setText(teamKey);
 
         OrangeAllianceStatus orangeAllianceStatus = new OrangeAllianceStatus(getApplicationContext());

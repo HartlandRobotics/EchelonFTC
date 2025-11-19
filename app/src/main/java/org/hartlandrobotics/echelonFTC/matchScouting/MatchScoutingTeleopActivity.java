@@ -58,7 +58,8 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     String matchKey;
     String teamKey;
 
-    public static void launch(Context context, String matchKey, String teamKey){
+
+    public static void launch(Context context, String matchKey, String teamKey ){
         Intent intent = new Intent(context, MatchScoutingTeleopActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(MATCH_KEY, matchKey);
@@ -78,8 +79,12 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         matchKey = bundle.getString(MATCH_KEY);
         teamKey = bundle.getString(TEAM_KEY);
+
+        Context appContext = this.getApplicationContext();
+        AdminSettings settings = AdminSettingsProvider.getAdminSettings(appContext);
         teamKeyText = findViewById(R.id.teamKeyText);
-        teamKeyText.setText(TEAM_KEY);
+        teamKeyText.setTextColor(settings.getDeviceRole().contains("red") ? getResources().getColor(R.color.redAlliance) : getResources().getColor(R.color.blueAlliance));
+        teamKeyText.setText(teamKey);
 
         OrangeAllianceStatus orangeAllianceStatus = new OrangeAllianceStatus(getApplicationContext());
 
