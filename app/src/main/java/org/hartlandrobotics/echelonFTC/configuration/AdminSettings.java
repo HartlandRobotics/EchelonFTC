@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class AdminSettings {
     private String orangeAllianceApiKey;
+    private String ftcApiKey;
     private String scoutingSeason;
     private String deviceRole;
     private String teamNumber;
@@ -18,8 +19,9 @@ public class AdminSettings {
     }
     */
 
-    public AdminSettings(String orangeAllianceApiKey, String scoutingSeason, String deviceRole, String teamNumber) {
+    public AdminSettings(String orangeAllianceApiKey, String ftcApiKey, String scoutingSeason, String deviceRole, String teamNumber) {
         this.orangeAllianceApiKey = defaultString(orangeAllianceApiKey);
+        this.ftcApiKey = defaultString(ftcApiKey);
         this.scoutingSeason = defaultString(scoutingSeason);
         this.deviceRole = StringUtils.defaultIfBlank(deviceRole, "red1");
         this.teamNumber = teamNumber;
@@ -36,6 +38,12 @@ public class AdminSettings {
     public void setOrangeAllianceApiKey(String apiKey) {
         this.orangeAllianceApiKey = defaultString(apiKey);
     }
+
+    public String getFtcApiKey() { return defaultString(ftcApiKey); }
+    public void setFtcApiKey(String ftcApiKey) {
+        this.ftcApiKey = defaultString(ftcApiKey);
+    }
+
     public String getScoutingSeason(){ return scoutingSeason; }
     public void setScoutingSeason(String scoutingSeason){
         this.scoutingSeason = defaultString(scoutingSeason);

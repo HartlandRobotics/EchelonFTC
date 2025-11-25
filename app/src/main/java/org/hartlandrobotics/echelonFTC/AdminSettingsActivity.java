@@ -27,6 +27,10 @@ public class AdminSettingsActivity extends EchelonActivity {
     private MaterialButton apiKeySaveButton;
     private MaterialButton apiKeyRestoreButton;
 
+    private TextInputLayout ftcApiKeyText;
+    private MaterialButton ftcApiKeySaveButton;
+    private MaterialButton ftcApiKeyRestoreButton;
+
     private TextInputLayout teamNumText;
     private MaterialButton teamNumSaveButton;
     private MaterialButton teamNumRestoreButton;
@@ -34,9 +38,8 @@ public class AdminSettingsActivity extends EchelonActivity {
     private TextInputLayout errorText;
 
 
-
-    public static void launch(Context context){
-        Intent intent = new Intent( context, AdminSettingsActivity.class );
+    public static void launch(Context context) {
+        Intent intent = new Intent(context, AdminSettingsActivity.class);
         context.startActivity(intent);
     }
 
@@ -51,7 +54,7 @@ public class AdminSettingsActivity extends EchelonActivity {
         errorText = this.findViewById(R.id.errorText);
 
         AdminSettingsViewModel viewModel = AdminSettingsProvider.getAdminSettings(getApplicationContext());
-        if( viewModel == null ){
+        if (viewModel == null) {
             Log.e(LOG_TAG, "Could not load admin settings");
             showError("Could not load admin settings");
             return;
@@ -60,13 +63,14 @@ public class AdminSettingsActivity extends EchelonActivity {
         initializeDeviceRole(viewModel);
 
         initializeBlueAllianceKey(viewModel);
+        initializeFtcApiKey(viewModel);
         initializeTeamNumText(viewModel);
 
     }
 
-    public void initializeBlueAllianceKey(AdminSettingsViewModel vm){
+    public void initializeBlueAllianceKey(AdminSettingsViewModel vm) {
         blueAllianceText = this.findViewById(R.id.blueAllianceApiText);
-        if( vm.getFileSettings() != null) {
+        if (vm.getFileSettings() != null) {
             setDisplayText(blueAllianceText, vm.getOrangeAllianceApiKey(), vm.getFileSettings().getOrangeAllianceApiKey());
         } else {
             setDisplayText(blueAllianceText, vm.getOrangeAllianceApiKey(), "Blue Alliance Key");
@@ -83,18 +87,40 @@ public class AdminSettingsActivity extends EchelonActivity {
         apiKeyRestoreButton.setOnClickListener(v -> {
             String fileApiKey = vm.getFileSettings().getOrangeAllianceApiKey();
             vm.setOrangeAllianceApiKey(getApplicationContext(), fileApiKey);
-            setDisplayText( blueAllianceText, fileApiKey, fileApiKey);
+            setDisplayText(blueAllianceText, fileApiKey, fileApiKey);
         });
     }
 
-    public void initializeTeamNumText(AdminSettingsViewModel vm){
-        teamNumText = this.findViewById(R.id.teamNumText);
-if(vm.getFileSettings() != null){
-        setDisplayText(teamNumText, vm.getTeamNumber(), vm.getFileSettings().getTeamNumber());
-} else {
-    setDisplayText(teamNumText, vm.getTeamNumber(), "Team Number");
+    public void initializeFtcApiKey(AdminSettingsViewModel vm) {
+        ftcApiKeyText = this.findViewById(R.id.ftcApiKeyText);
+        if (vm.getFileSettings() != null) {
+            setDisplayText(ftcApiKeyText, vm.getFtcApiKey(), vm.getFileSettings().getFtcApiKey());
+        } else {
+            setDisplayText(ftcApiKeyText, vm.getFtcApiKey(), "FTC API Key");
+        }
 
-}
+        ftcApiKeySaveButton = this.findViewById(R.id.ftcApiKeySaveButton);
+        ftcApiKeySaveButton.setOnClickListener(v -> {
+            String ftcApiKey = ftcApiKeyText.getEditText().getText().toString();
+            vm.setFtcApiKey(getApplicationContext(), ftcApiKey);
+        });
+
+        ftcApiKeyRestoreButton = this.findViewById(R.id.ftcApiKeyRestoreButton);
+        ftcApiKeyRestoreButton.setOnClickListener(v -> {
+            String fileFtcApiKey = vm.getFileSettings().getFtcApiKey();
+            vm.setFtcApiKey(getApplicationContext(), fileFtcApiKey);
+            setDisplayText(blueAllianceText, fileFtcApiKey, fileFtcApiKey);
+        });
+    }
+
+    public void initializeTeamNumText(AdminSettingsViewModel vm) {
+        teamNumText = this.findViewById(R.id.teamNumText);
+        if (vm.getFileSettings() != null) {
+            setDisplayText(teamNumText, vm.getTeamNumber(), vm.getFileSettings().getTeamNumber());
+        } else {
+            setDisplayText(teamNumText, vm.getTeamNumber(), "Team Number");
+
+        }
 
         teamNumSaveButton = this.findViewById(R.id.teamNumberSaveButton);
         teamNumSaveButton.setOnClickListener(v -> {
@@ -105,12 +131,12 @@ if(vm.getFileSettings() != null){
         teamNumRestoreButton = this.findViewById(R.id.teamNumberRestoreButton);
         teamNumRestoreButton.setOnClickListener(v -> {
             String fileTeamNumber = vm.getFileSettings().getTeamNumber();
-            vm.setTeamNumber(getApplicationContext(), fileTeamNumber );
+            vm.setTeamNumber(getApplicationContext(), fileTeamNumber);
             setDisplayText(teamNumText, fileTeamNumber, fileTeamNumber);
         });
     }
 
-    public void initializeDeviceRole(AdminSettingsViewModel vm){
+    public void initializeDeviceRole(AdminSettingsViewModel vm) {
         buttonRoleByText = new HashMap<>();
         buttonRoleByText.put("red1", R.id.red1);
         buttonRoleByText.put("red2", R.id.red2);
@@ -120,7 +146,7 @@ if(vm.getFileSettings() != null){
         buttonRoleByText.put("blue3", R.id.blue3);
 
         buttonRoleById = new HashMap<>();
-        buttonRoleById.put( R.id.red1, "red1");
+        buttonRoleById.put(R.id.red1, "red1");
         buttonRoleById.put(R.id.red2, "red2");
         buttonRoleById.put(R.id.red3, "red3");
         buttonRoleById.put(R.id.blue1, "blue1");
@@ -138,19 +164,19 @@ if(vm.getFileSettings() != null){
             }
         });
 
-        int currentButtonId = buttonRoleByText.get(StringUtils.defaultIfEmpty(vm.getDeviceRole(),"red1"));
+        int currentButtonId = buttonRoleByText.get(StringUtils.defaultIfEmpty(vm.getDeviceRole(), "red1"));
         MaterialButton currentButton = deviceRoleGroup.findViewById(currentButtonId);
         currentButton.toggle();
     }
 
-    private void setDisplayText(TextInputLayout layout, String displayText, String fileText){
+    private void setDisplayText(TextInputLayout layout, String displayText, String fileText) {
         layout.getEditText().setText(displayText);
-        if( fileText != null ) {
+        if (fileText != null) {
             layout.setHelperText(fileText);
         }
     }
 
-    private void showError( String errorMessage ){
+    private void showError(String errorMessage) {
         errorText.setErrorEnabled(true);
         errorText.setError(errorMessage);
         errorText.getEditText().setText("Admin Settings not available");

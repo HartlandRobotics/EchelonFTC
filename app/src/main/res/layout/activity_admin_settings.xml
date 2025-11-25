@@ -100,12 +100,55 @@
         />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ftcApiKeyText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:hint="FTC Alliance API key"
+        app:layout_constraintEnd_toStartOf="@id/apiKeySaveButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/blueAllianceApiText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="YOUR KEY HERE" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ftcApiKeySaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:layout_constraintTop_toTopOf="@id/ftcApiKeyText"
+        app:layout_constraintBottom_toBottomOf="@id/ftcApiKeyText"
+        app:layout_constraintStart_toEndOf="@id/ftcApiKeyText"
+        app:layout_constraintEnd_toStartOf="@id/ftcApiKeyRestoreButton"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ftcApiKeyRestoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:text="restore"
+        app:layout_constraintTop_toTopOf="@id/ftcApiKeyText"
+        app:layout_constraintBottom_toBottomOf="@id/ftcApiKeyText"
+        app:layout_constraintStart_toEndOf="@id/ftcApiKeySaveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/teamNumText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint = "Team Number"
-        app:layout_constraintTop_toBottomOf="@+id/blueAllianceApiText"
+        app:layout_constraintTop_toBottomOf="@+id/ftcApiKeyText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/teamNumberSaveButton"
         >
