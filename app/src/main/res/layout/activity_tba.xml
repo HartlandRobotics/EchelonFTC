@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tabIndicatorColor="@color/primaryTextColor"
-        app:tabTextColor="@color/primaryTextColor"></com.google.android.material.tabs.TabLayout>
+        app:tabTextColor="@color/primaryTextColor"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

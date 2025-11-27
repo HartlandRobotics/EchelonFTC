@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import org.hartlandrobotics.echelonFTC.ftapi.FtcApiActivity;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.OrangeAllianceActivity;
 import org.hartlandrobotics.echelonFTC.bluetooth.BluetoothSyncActivity;
 
@@ -35,7 +36,7 @@ public abstract class EchelonActivity extends AppCompatActivity {
     public void blueAlliancePressed(MenuItem item) { OrangeAllianceActivity.launch(this); }
 
     public void ftcApiPressed(MenuItem item){
-        Toast.makeText(getApplicationContext(),"ftcApi pressed",LENGTH_SHORT).show();
+        FtcApiActivity.launch(this);
     }
     public void settingsPressed(MenuItem item) {
         AdminSettingsActivity.launch(this);

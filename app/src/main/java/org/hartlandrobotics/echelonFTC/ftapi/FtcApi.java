@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsViewModel;
 
+import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
@@ -23,13 +24,12 @@ public class FtcApi {
             AdminSettingsViewModel vm = AdminSettingsProvider.getAdminSettings(context);
             String ftcApiKey = vm.getFtcApiKey();
 
-            String encodedValue = Base64.encodeToString(("hartlandftc:" + ftcApiKey).getBytes(), Base64.DEFAULT);
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(chain -> {
                 Request original = chain.request();
                 Request request = original.newBuilder()
                         .header("Accept", "application/json")
-                        .header("Authorization", "Basic " + encodedValue)
+                        .header("Authorization", Credentials.basic("hartlandftc", ftcApiKey))
                         .build();
                 return chain.proceed(request);
             });
@@ -38,7 +38,7 @@ public class FtcApi {
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://ftc-api.firstinspires.org/v2.0")
+                    .baseUrl("https://ftc-api.firstinspires.org/v2.0/")
                     .addConverterFactory(JacksonConverterFactory.create(mapper))
                     .client(client)
                     .build();
