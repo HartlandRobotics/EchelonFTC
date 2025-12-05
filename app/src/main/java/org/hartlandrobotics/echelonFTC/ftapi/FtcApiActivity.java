@@ -7,13 +7,15 @@ import android.os.Bundle;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.EchelonActivity;
 import org.hartlandrobotics.echelonFTC.R;
-import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiStatus;
+import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiIndex;
 import org.hartlandrobotics.echelonFTC.ftapi.status.ApiStatus;
+import org.hartlandrobotics.echelonFTC.orangeAlliance.OrangeAlliancePagerAdapter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,9 +26,11 @@ public class FtcApiActivity extends EchelonActivity {
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
+    FtcApiPagerAdapter ftcApiPagerAdapter;
 
     TextInputLayout onlineStatusLayout;
 
+    TextInputLayout regionStatusLayout;
 
 
 
@@ -47,17 +51,17 @@ public class FtcApiActivity extends EchelonActivity {
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
-//        orangeAlliancePagerAdapter = new OrangeAlliancePagerAdapter(getSupportFragmentManager(), getLifecycle());
-//        viewPager.setAdapter(orangeAlliancePagerAdapter);
-//
-//        new TabLayoutMediator(tabLayout, viewPager,
-//                (tab, position) -> tab.setText(orangeAlliancePagerAdapter.getTabTitle(position))).attach();
+        ftcApiPagerAdapter = new FtcApiPagerAdapter(getSupportFragmentManager(), getLifecycle());
+        viewPager.setAdapter(ftcApiPagerAdapter);
+
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> tab.setText(ftcApiPagerAdapter.getTabTitle(position))).attach();
 //
 //        seasonStatusLayout = findViewById(R.id.seasonStatusLayout);
 //        setSeasonStatus( tbaStatus.getSeason() );
 //
-//        districtStatusLayout = findViewById(R.id.districtStatusLayout);
-//        setDistrictStatus( tbaStatus.getDistrictKey() );
+        regionStatusLayout = findViewById(R.id.districtStatusLayout);
+        setRegionStatus( apiStatus.getRegionKey() );
 //
 //        eventStatusLayout = findViewById(R.id.eventStatusLayout);
 //        setEventStatus(tbaStatus.getEventKey());
@@ -70,15 +74,15 @@ public class FtcApiActivity extends EchelonActivity {
     private void checkOnlineStatus(){
         FtcApiInterface newApi = FtcApi.getApiClient(getApplication());
         try {
-            Call<FtcApiStatus> statusCall = newApi.getStatus();
-            statusCall.enqueue(new Callback<FtcApiStatus>() {
+            Call<FtcApiIndex> statusCall = newApi.getStatus();
+            statusCall.enqueue(new Callback<FtcApiIndex>() {
                 @Override
-                public void onResponse(Call<FtcApiStatus> call, Response<FtcApiStatus> response) {
+                public void onResponse(Call<FtcApiIndex> call, Response<FtcApiIndex> response) {
                     setOnlineStatus(response.isSuccessful());
                 }
 
                 @Override
-                public void onFailure(Call<FtcApiStatus> call, Throwable t) {
+                public void onFailure(Call<FtcApiIndex> call, Throwable t) {
                     setOnlineStatus(false);
                 }
             });
@@ -92,8 +96,13 @@ public class FtcApiActivity extends EchelonActivity {
         onlineStatusLayout.getEditText().setText( String.valueOf(isOnline) );
         apiStatus.setOnline(isOnline);
     }
-
-
+    private void setRegionStatus( String districtKey ){
+        regionStatusLayout.getEditText().setText(districtKey);
+    }
+    public void setRegionKey( String districtKey ){
+        setRegionStatus( districtKey );
+        apiStatus.setRegionKey(districtKey);
+    }
 }
 
 /*
@@ -105,7 +114,6 @@ public class OrangeAllianceActivity extends EchelonActivity {
     OrangeAlliancePagerAdapter orangeAlliancePagerAdapter;
 
     TextInputLayout seasonStatusLayout;
-    TextInputLayout districtStatusLayout;
     TextInputLayout eventStatusLayout;
     TextInputLayout matchStatusLayout;
 
@@ -116,9 +124,7 @@ public class OrangeAllianceActivity extends EchelonActivity {
     private void setSeasonStatus( String season ){
         seasonStatusLayout.getEditText().setText(season);
     }
-    private void setDistrictStatus( String districtKey ){
-        districtStatusLayout.getEditText().setText(districtKey);
-    }
+
 
     private void setEventStatus(String eventKey){
         eventStatusLayout.getEditText().setText(eventKey);
@@ -128,10 +134,7 @@ public class OrangeAllianceActivity extends EchelonActivity {
         matchStatusLayout.getEditText().setText(matchKey);
     }
 
-    public void setDistrictKey( String districtKey ){
-        setDistrictStatus( districtKey );
-        tbaStatus.setDistrictKey(districtKey);
-    }
+
 
     public void setEventKey(String eventKey){
         setEventStatus(eventKey);

@@ -2,7 +2,7 @@ package org.hartlandrobotics.echelonFTC.ftapi.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class FtcApiStatus {
+public class FtcApiIndex {
     @JsonProperty("name")
     private String name;
 
