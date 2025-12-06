@@ -29,7 +29,6 @@ public class FtcApiActivity extends EchelonActivity {
     FtcApiPagerAdapter ftcApiPagerAdapter;
 
     TextInputLayout onlineStatusLayout;
-
     TextInputLayout regionStatusLayout;
 
 
@@ -42,7 +41,7 @@ public class FtcApiActivity extends EchelonActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tba);
+        setContentView(R.layout.activity_ftcapi);
 
         setupToolbar("FTC Events API");
 
@@ -56,19 +55,21 @@ public class FtcApiActivity extends EchelonActivity {
 
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> tab.setText(ftcApiPagerAdapter.getTabTitle(position))).attach();
+        onlineStatusLayout = findViewById(R.id.onlineStatusLayout);
+        onlineStatusLayout.getEditText().setText(StringUtils.EMPTY);
+        checkOnlineStatus();
+
 //
 //        seasonStatusLayout = findViewById(R.id.seasonStatusLayout);
 //        setSeasonStatus( tbaStatus.getSeason() );
 //
-        regionStatusLayout = findViewById(R.id.districtStatusLayout);
+        regionStatusLayout = findViewById(R.id.regionStatusLayout);
         setRegionStatus( apiStatus.getRegionKey() );
 //
 //        eventStatusLayout = findViewById(R.id.eventStatusLayout);
 //        setEventStatus(tbaStatus.getEventKey());
 
-        onlineStatusLayout = findViewById(R.id.onlineStatusLayout);
-        onlineStatusLayout.getEditText().setText(StringUtils.EMPTY);
-        checkOnlineStatus();
+
     }
 
     private void checkOnlineStatus(){
