@@ -74,8 +74,8 @@ public class EventRepo {
         return eventDao.getEvent(eventKey);
     }
 
-    public LiveData<RgnWithEvents> getDistrictWithEvents(String currentDistrict) {
-        return rgnWithEventDao.getRgnEvents(currentDistrict);
+    public LiveData<RgnWithEvents> getRegionWithEvents(String currentRegion) {
+        return rgnWithEventDao.getRgnEvents(currentRegion);
     }
 
     public LiveData<EvtWithMatches> getMatchesForEvent(String eventKey){

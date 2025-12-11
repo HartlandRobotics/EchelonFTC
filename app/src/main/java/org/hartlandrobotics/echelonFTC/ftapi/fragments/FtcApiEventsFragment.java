@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelonFTC.orangeAlliance.fragments;
+package org.hartlandrobotics.echelonFTC.ftapi.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,62 +22,53 @@ import com.google.android.material.textview.MaterialTextView;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.R;
-import org.hartlandrobotics.echelonFTC.orangeAlliance.Api;
-import org.hartlandrobotics.echelonFTC.orangeAlliance.ApiInterface;
-import org.hartlandrobotics.echelonFTC.orangeAlliance.OrangeAllianceActivity;
-import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncEvent;
-import org.hartlandrobotics.echelonFTC.database.entities.RgnEvtCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Evt;
+import org.hartlandrobotics.echelonFTC.database.repositories.DistrictRepo;
 import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.ftapi.FtcApiActivity;
+import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiEvents;
+import org.hartlandrobotics.echelonFTC.ftapi.status.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+public class FtcApiEventsFragment extends Fragment {
 
-public class EventsFragment extends Fragment {
-    private Button eventPull;
     private TextView errorTextDisplay;
-    private TextInputLayout eventKeyOverrideLayout;
-
     private RecyclerView eventRecycler;
     private EventListAdapter eventListAdapter;
 
-    public EventsFragment(){
+
+    public FtcApiEventsFragment() {
         // required empty constructor
     }
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState){super.onCreate(savedInstanceState);}
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View fragmentView = inflater.inflate(R.layout.fragment_events, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View fragmentView = inflater.inflate(R.layout.fragment_ftcapi_events, container, false);
 
-        eventKeyOverrideLayout = fragmentView.findViewById(R.id.event_key_override_layout);
-        eventPull = fragmentView.findViewById(R.id.eventPullButton);
         errorTextDisplay = fragmentView.findViewById(R.id.errorTextDisplay);
         errorTextDisplay.setVisibility(View.GONE);
+
+        setupCurrentEvents();
 
         return fragmentView;
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         setupCurrentEvents();
-        setupEventPulls();
     }
 
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         eventListAdapter = new EventListAdapter(getActivity());
@@ -90,36 +81,135 @@ public class EventsFragment extends Fragment {
     }
 
     //Bring back later when filter events by year
-    public void setupCurrentEvents(){
+    public void setupCurrentEvents() {
         Context appContext = getActivity().getApplicationContext();
-        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        ApiStatus status = new ApiStatus(appContext);
 
-        String eventKey = eventKeyOverrideLayout.getEditText().getText().toString();
-        EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
-        if( StringUtils.isBlank(eventKey)) {
-            String currentDistrict = status.getDistrictKey();
-            eventRepo.getRegionWithEvents(currentDistrict).observe(getViewLifecycleOwner(), district -> {
+        EventRepo eventRepo = new EventRepo(FtcApiEventsFragment.this.getActivity().getApplication());
+        String currentRegion = status.getRegionKey();
+        Log.e("FtcApiEventsFragment", "current Region " + currentRegion);
+        eventRepo.getRegionWithEvents(currentRegion).observe(getViewLifecycleOwner(), regionWithEvents -> {
+            List<Evt> matchingEvents = regionWithEvents.events;
+            Log.e("FtcApiEventsFragment","size: " + matchingEvents.size());
+            eventListAdapter.setEvents(matchingEvents);
 
-                String eventKeyInner = eventKeyOverrideLayout.getEditText().getText().toString();
-                if( !StringUtils.isBlank(eventKeyInner )) {
-                    Optional<Evt> matchingEvent = district.events.stream()
-                            .filter( districtEvent -> districtEvent.getEventCode().equals(eventKeyInner ))
-                            .findFirst();
-                    if(matchingEvent.isPresent()) {
-                        eventListAdapter.setEvents(district.events);
-                    }
-                }
+        });
+
+
+    }
+
+    public class EventsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private MaterialTextView eventName;
+        private MaterialTextView eventKey;
+        private MaterialTextView eventCode;
+        private MaterialRadioButton eventSelectedRadioButton;
+
+        private FtcApiEventViewModel eventViewModel;
+
+        EventsViewHolder(View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+
+            eventName = itemView.findViewById(R.id.event_display_name);
+            eventKey = itemView.findViewById(R.id.event_key);
+            eventCode = itemView.findViewById(R.id.event_code);
+            eventSelectedRadioButton = itemView.findViewById(R.id.event_selected_radiobutton);
+
+            eventSelectedRadioButton.setOnClickListener(v -> {
+                eventListAdapter.setCurrentEvent(eventViewModel);
             });
         }
-        else{
-            eventRepo.getEvent(eventKey).observe(getViewLifecycleOwner(), event ->{
-                int i = 10;
-                i++;
-                //eventListAdapter.setEvents(List.of);
 
-            });
+        public void setEvent(FtcApiEventViewModel eventViewModel) {
+            this.eventViewModel = eventViewModel;
+
+            eventName.setText(eventViewModel.getEventName());
+            eventKey.setText(eventViewModel.getEventKey());
+            eventCode.setText(eventViewModel.getEventCode());
+            eventSelectedRadioButton.setChecked(eventViewModel.getIsSelected());
+        }
+
+        public void setDisplayText(String displayText) {
+            //eventName.setText(displayText);
+            eventCode.setText(displayText);
+        }
+
+        @Override
+        public void onClick(View view) {
+            eventListAdapter.setCurrentEvent(eventViewModel);
         }
     }
+
+    public class EventListAdapter extends RecyclerView.Adapter<EventsViewHolder> {
+
+
+        private final LayoutInflater inflater;
+        private List<FtcApiEventViewModel> eventViewModels;
+
+        EventListAdapter(Context context) {
+            inflater = LayoutInflater.from(context);
+        }
+
+        @NonNull
+        @Override
+        public EventsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View itemView = inflater.inflate(R.layout.list_item_event, parent, false);
+            return new EventsViewHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull EventsViewHolder holder, int position) {
+            if (eventViewModels != null) {
+                holder.setEvent(eventViewModels.get(position));
+            } else {
+                holder.setDisplayText("No Event Data Yet...");
+            }
+        }
+
+        void setEvents(List<Evt> events) {
+            Context appContext = getActivity().getApplicationContext();
+            ApiStatus status = new ApiStatus(appContext);
+            String currentEventKey = status.getEventKey();
+
+            eventViewModels = new ArrayList<>();
+            for (Evt event : events) {
+                FtcApiEventViewModel viewModel = new FtcApiEventViewModel(event);
+                if (event.getEventKey().equals(currentEventKey)) {
+                    viewModel.setIsSelected(true);
+                    setCurrentEvent(viewModel);
+                }
+                eventViewModels.add(viewModel);
+            }
+
+            notifyDataSetChanged();
+        }
+
+        void setCurrentEvent(FtcApiEventViewModel currentViewModel) {
+            FtcApiActivity ftcApiActivity = (FtcApiActivity) getActivity();
+            ftcApiActivity.setEventKey(currentViewModel.getEventKey());
+            ftcApiActivity.setEventCode(currentViewModel.getEventCode());
+
+            for (FtcApiEventViewModel viewModel : eventViewModels) {
+                viewModel.setIsSelected(currentViewModel.getEventKey().equals(viewModel.getEventKey()));
+            }
+
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getItemCount() {
+            return eventViewModels == null ? 0 : eventViewModels.size();
+        }
+    }
+
+}
+
+/*
+
+public class EventsFragment extends Fragment {
+
+
+
 
     public void setupEventPulls(){
         eventPull.setOnClickListener((view) -> {
@@ -213,102 +303,8 @@ public class EventsFragment extends Fragment {
         });
     }
 
-    public class EventsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private MaterialTextView eventName;
-        private MaterialTextView eventKey;
-        private MaterialRadioButton eventSelectedRadioButton;
-
-        private EventsListViewModel eventViewModel;
-
-        EventsViewHolder(View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(this);
-
-            eventName = itemView.findViewById(R.id.event_display_name);
-            eventKey = itemView.findViewById(R.id.event_key);
-            eventSelectedRadioButton = itemView.findViewById(R.id.event_selected_radiobutton);
-
-            eventSelectedRadioButton.setOnClickListener(v -> {
-                eventListAdapter.setCurrentEvent( eventViewModel );
-            });
-        }
-
-        public void setEvent(EventsListViewModel eventViewModel) {
-            this.eventViewModel = eventViewModel;
-
-            eventName.setText(eventViewModel.getEventName());
-            eventKey.setText(eventViewModel.getEventKey());
-            eventSelectedRadioButton.setChecked(eventViewModel.getIsSelected());
-        }
-
-        public void setDisplayText(String displayText) {
-            eventName.setText(displayText);
-        }
-
-        @Override
-        public void onClick(View view) {
-            eventListAdapter.setCurrentEvent(eventViewModel);
-        }
-    }
-
-    public class EventListAdapter extends RecyclerView.Adapter<EventsFragment.EventsViewHolder> {
-
-
-        private final LayoutInflater inflater;
-        private List<EventsListViewModel> eventViewModels;
-
-        EventListAdapter(Context context) {
-            inflater = LayoutInflater.from(context);
-        }
-
-        @NonNull
-        @Override
-        public EventsFragment.EventsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView = inflater.inflate(R.layout.list_item_event, parent, false);
-            return new EventsFragment.EventsViewHolder(itemView);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull EventsFragment.EventsViewHolder holder, int position) {
-            if (eventViewModels != null) {
-                holder.setEvent(eventViewModels.get(position));
-            } else {
-                holder.setDisplayText("No Event Data Yet...");
-            }
-        }
-
-        void setEvents(List<Evt> events) {
-            Context appContext = getActivity().getApplicationContext();
-            OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
-            String currentEventKey = status.getEventKey();
-
-            eventViewModels = new ArrayList<>();
-            for( Evt event : events ){
-                EventsListViewModel viewModel = new EventsListViewModel(event);
-                if( event.getEventCode().equals(currentEventKey) ){
-                    viewModel.setIsSelected(true);
-                }
-                eventViewModels.add(viewModel);
-            }
-
-            notifyDataSetChanged();
-        }
-
-        void setCurrentEvent(EventsListViewModel currentViewModel){
-            OrangeAllianceActivity orangeAllianceActivity = (OrangeAllianceActivity)getActivity();
-            orangeAllianceActivity.setEventKey(currentViewModel.getEventKey());
-
-            for(EventsListViewModel viewModel : eventViewModels){
-                viewModel.setIsSelected( currentViewModel.getEventKey().equals(viewModel.getEventKey()));
-            }
-
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public int getItemCount() {
-            return eventViewModels == null ? 0 : eventViewModels.size();
-        }
-    }
 
 }
+
+
+ */

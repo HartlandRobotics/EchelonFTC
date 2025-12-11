@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import org.hartlandrobotics.echelonFTC.ftapi.fragments.FtcApiEventsFragment;
 import org.hartlandrobotics.echelonFTC.ftapi.fragments.FtcApiRegionsFragment;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class FtcApiPagerAdapter extends FragmentStateAdapter{
     public String getTabTitle(int position){
         if(titleByPosition.isEmpty()){
             titleByPosition.put(0,"Regions");
-            //titleByPosition.put(1,"Events");
+            titleByPosition.put(1,"Events");
             //titleByPosition.put(2, "Teams");
             //titleByPosition.put(3, "Matches");
         }
@@ -40,11 +41,11 @@ public class FtcApiPagerAdapter extends FragmentStateAdapter{
             FtcApiRegionsFragment regionsFragment = new FtcApiRegionsFragment();
             fragment = regionsFragment;
         }
-//        else if (position == 1) {
-//            Log.e(TAG,"creating new Events Fragment");
-//            EventsFragment eventsFragment = new EventsFragment();
-//            fragment = eventsFragment;
-//        }
+        else if (position == 1) {
+            Log.e(TAG,"creating new Events Fragment");
+            FtcApiEventsFragment eventsFragment = new FtcApiEventsFragment();
+            fragment = eventsFragment;
+        }
 //        else if (position == 2) {
 //            Log.e(TAG,"creating new Teams Fragment");
 //            TeamsFragment teamFragment = new TeamsFragment();
@@ -60,7 +61,7 @@ public class FtcApiPagerAdapter extends FragmentStateAdapter{
     }
 
     @Override
-    public int getItemCount(){ return 1; }
+    public int getItemCount(){ return 2; }
 
 
 }

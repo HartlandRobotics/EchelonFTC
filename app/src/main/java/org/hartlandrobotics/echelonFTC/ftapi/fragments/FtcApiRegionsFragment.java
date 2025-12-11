@@ -239,6 +239,7 @@ public class FtcApiRegionsFragment extends Fragment {
                 FtcApiRegionViewModel viewModel = new FtcApiRegionViewModel(region);
                 if( region.getRegionKey().equals(currentRegionKey) ){
                     viewModel.setIsSelected(true);
+                    setCurrentRegion(viewModel);
                 }
                 regionViewModels.add(viewModel);
             }

@@ -3,6 +3,7 @@ package org.hartlandrobotics.echelonFTC.ftapi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -30,6 +31,8 @@ public class FtcApiActivity extends EchelonActivity {
 
     TextInputLayout onlineStatusLayout;
     TextInputLayout regionStatusLayout;
+    TextInputLayout eventStatusLayout;
+
 
 
 
@@ -65,9 +68,9 @@ public class FtcApiActivity extends EchelonActivity {
 //
         regionStatusLayout = findViewById(R.id.regionStatusLayout);
         setRegionStatus( apiStatus.getRegionKey() );
-//
-//        eventStatusLayout = findViewById(R.id.eventStatusLayout);
-//        setEventStatus(tbaStatus.getEventKey());
+
+        eventStatusLayout = findViewById(R.id.eventStatusLayout);
+        setEventStatus( apiStatus.getEventCode() );
 
 
     }
@@ -100,9 +103,26 @@ public class FtcApiActivity extends EchelonActivity {
     private void setRegionStatus( String districtKey ){
         regionStatusLayout.getEditText().setText(districtKey);
     }
-    public void setRegionKey( String districtKey ){
-        setRegionStatus( districtKey );
-        apiStatus.setRegionKey(districtKey);
+    public void setRegionKey( String regionKey ){
+        setRegionStatus( regionKey );
+        apiStatus.setRegionKey(regionKey);
+        Log.e("FtcApiActivity", "regionkey: " + regionKey);
+    }
+
+    public void setEventKey(String eventKey){
+        setEventStatus(eventKey);
+        apiStatus.setEventKey(eventKey);
+    }
+
+    private void setEventStatus(String eventKey){
+        eventStatusLayout.getEditText().setText(eventKey);
+        Log.e("FtcApiActivity", "eventKey: " + eventKey);
+
+    }
+
+    public void setEventCode(String eventCode){
+        setEventStatus(eventCode);
+        apiStatus.setEventCode(eventCode);
     }
 }
 
@@ -115,7 +135,6 @@ public class OrangeAllianceActivity extends EchelonActivity {
     OrangeAlliancePagerAdapter orangeAlliancePagerAdapter;
 
     TextInputLayout seasonStatusLayout;
-    TextInputLayout eventStatusLayout;
     TextInputLayout matchStatusLayout;
 
 
@@ -127,9 +146,6 @@ public class OrangeAllianceActivity extends EchelonActivity {
     }
 
 
-    private void setEventStatus(String eventKey){
-        eventStatusLayout.getEditText().setText(eventKey);
-    }
 
     private void setMatchStatus(String matchKey){
         matchStatusLayout.getEditText().setText(matchKey);
@@ -137,10 +153,7 @@ public class OrangeAllianceActivity extends EchelonActivity {
 
 
 
-    public void setEventKey(String eventKey){
-        setEventStatus(eventKey);
-        tbaStatus.setEventKey(eventKey);
-    }
+
 }
 
 

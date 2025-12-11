@@ -10,10 +10,16 @@ import org.apache.commons.lang3.StringUtils;
 public class ApiStatus {
     private final static String TAG = "ApiStatus";
     private final static String REGION_KEY = "RegionKey";
+    private final static String EVENT_KEY = "EventKey";
+    private final static String EVENT_CODE = "EventCode";
+
 
     private Context appContext;
     private boolean online;
     private String regionKey;
+    private String eventKey;
+    private String eventCode;
+
 
 
     public ApiStatus(Context appContext ){
@@ -38,6 +44,17 @@ public class ApiStatus {
         setPreferenceValue(REGION_KEY, regionKey);
     }
 
+    public String getEventKey(){ return eventKey;}
+    public void setEventKey( String eventKey){
+        this.eventKey = eventKey;
+        setPreferenceValue(EVENT_KEY, eventKey);
+    }
+
+    public String getEventCode(){ return eventCode;}
+    public void setEventCode( String eventCode ){
+        this.eventCode = eventCode;
+        setPreferenceValue(EVENT_CODE, eventCode);
+    }
 
 
     public void loadSettingsFromPrefs(){
@@ -46,7 +63,9 @@ public class ApiStatus {
         //this.season = getSharedPreferences().getString(SEASON_KEY, StringUtils.EMPTY);
         //this.year = getSharedPreferences().getString( YEAR_KEY, StringUtils.EMPTY);
         this.regionKey = getSharedPreferences().getString(REGION_KEY, StringUtils.EMPTY);
-        //this.eventKey = getSharedPreferences().getString(EVENT_KEY, StringUtils.EMPTY );
+        this.eventKey = getSharedPreferences().getString(EVENT_KEY, StringUtils.EMPTY );
+        this.eventCode = getSharedPreferences().getString(EVENT_CODE, StringUtils.EMPTY );
+
     }
 
     private SharedPreferences getSharedPreferences(){
@@ -73,11 +92,9 @@ public class OrangeAllianceStatus {
 
     private final static String SEASON_KEY = "SeasonKey";
     private final static String YEAR_KEY = "YearKey";
-    private final static String EVENT_KEY = "EventKey";
 
     private String season;
     private String year;
-    private String eventKey;
 
 
     public String getSeason(){return season;}
@@ -94,11 +111,6 @@ public class OrangeAllianceStatus {
 
 
 
-    public String getEventKey(){ return eventKey;}
-    public void setEventKey( String eventKey){
-        this.eventKey = eventKey;
-        setPreferenceValue(EVENT_KEY, eventKey);
-    }
 
 
 

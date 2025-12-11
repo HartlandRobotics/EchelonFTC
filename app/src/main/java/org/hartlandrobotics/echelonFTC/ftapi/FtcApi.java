@@ -2,6 +2,7 @@ package org.hartlandrobotics.echelonFTC.ftapi;
 
 import android.content.Context;
 import android.util.Base64;
+import android.util.Log;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +17,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class FtcApi {
+    static String TAG = "FtcApi";
     private static FtcApiInterface ftcApi;
 
     public static FtcApiInterface getApiClient(Context context) {
@@ -27,6 +29,8 @@ public class FtcApi {
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(chain -> {
                 Request original = chain.request();
+                String path = chain.request().url().uri().getPath();
+                Log.e(TAG,path);
                 Request request = original.newBuilder()
                         .header("Accept", "application/json")
                         .header("Authorization", Credentials.basic("hartlandftc", ftcApiKey))
