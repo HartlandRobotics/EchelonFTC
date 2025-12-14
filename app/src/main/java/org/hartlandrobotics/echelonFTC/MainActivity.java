@@ -21,6 +21,7 @@ import org.hartlandrobotics.echelonFTC.charts.ChartsActivity;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettings;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelonFTC.database.entities.Season;
+import org.hartlandrobotics.echelonFTC.ftapi.status.ApiStatus;
 import org.hartlandrobotics.echelonFTC.matchScouting.MatchSelectionActivity;
 import org.hartlandrobotics.echelonFTC.models.SeasonViewModel;
 import org.hartlandrobotics.echelonFTC.pitScouting.PitScoutActivity;
@@ -33,7 +34,9 @@ import java.util.stream.Collectors;
 
 public class MainActivity extends EchelonActivity {
 
-    private OrangeAllianceStatus status;
+    //private OrangeAllianceStatus oaStatus;
+    private ApiStatus faStatus;
+
     String deviceName;
 
     private MaterialButton startScouting;
@@ -55,7 +58,8 @@ public class MainActivity extends EchelonActivity {
 
         setupToolbar("Home");
 
-        status= new OrangeAllianceStatus(getApplicationContext());
+        //oaStatus = new OrangeAllianceStatus(getApplicationContext());
+        faStatus = new ApiStatus(getApplicationContext());
         deviceName = Settings.Secure.getString(getContentResolver(), "bluetooth_name");
 
         setupStartScoutingButton();
@@ -122,15 +126,22 @@ public class MainActivity extends EchelonActivity {
 
 
     private void setupStatus(){
-       status.loadSettingsFromPrefs();
+        //oaStatus.loadSettingsFromPrefs();
+        faStatus.loadSettingsFromPrefs();
+
         TextInputLayout seasonLayout = findViewById(R.id.season_status_layout);
-        seasonLayout.getEditText().setText(status.getSeason());
+        //seasonLayout.getEditText().setText(oaStatus.getSeason());
+        seasonLayout.getEditText().setText(faStatus.getSeason());
 
         TextInputLayout districtLayout = findViewById(R.id.district_status_layout);
-        districtLayout.getEditText().setText(status.getDistrictKey());
+        //districtLayout.getEditText().setText(oaStatus.getDistrictKey());
+        districtLayout.getEditText().setText(faStatus.getRegionKey());
+
 
         TextInputLayout eventLayout = findViewById(R.id.event_status_layout);
-        eventLayout.getEditText().setText(status.getEventKey());
+        //eventLayout.getEditText().setText(oaStatus.getEventKey());
+        eventLayout.getEditText().setText(faStatus.getEventKey());
+
 
         AdminSettings adminSettings = AdminSettingsProvider.getAdminSettings(this);
         TextInputLayout deviceLayout = findViewById(R.id.device_status_layout);
@@ -153,8 +164,11 @@ public class MainActivity extends EchelonActivity {
             ArrayAdapter seasonsAdapter = new ArrayAdapter(this, R.layout.dropdown_item, displaySeasons);
             seasonsAutoComplete.setAdapter(seasonsAdapter);
             // get the current season from status
-            String currentSeason = status.getSeason();
-            String currentYear = status.getYear();
+            //String currentSeason = oaStatus.getSeason();
+            //String currentYear = oaStatus.getYear();
+
+            String currentSeason = faStatus.getSeason();
+            String currentYear = faStatus.getYear();
             String currentDisplay = currentSeason + " - " + currentYear;
 
             Optional<Integer> foundIndex = Optional.empty();
@@ -173,9 +187,11 @@ public class MainActivity extends EchelonActivity {
 
             seasonsAutoComplete.setOnItemClickListener((parent, view, position, id) -> {
                 Season selectedSeason = seasons.get(position);
-                status.setYear( String.valueOf(selectedSeason.getYear()) );
-                status.setSeason( selectedSeason.getName() );
-                String selectedText = status.getSeason() + " - " + status.getYear();
+                //oaStatus.setYear( String.valueOf(selectedSeason.getYear()) );
+                //oaStatus.setSeason( selectedSeason.getName() );
+                faStatus.setYear( String.valueOf(selectedSeason.getYear()) );
+                faStatus.setSeason( selectedSeason.getName() );
+                String selectedText = faStatus.getSeason() + " - " + faStatus.getYear();
                 seasonsAutoComplete.setText(selectedText, false);
                 setupStatus();
                 setEnabled(true);
