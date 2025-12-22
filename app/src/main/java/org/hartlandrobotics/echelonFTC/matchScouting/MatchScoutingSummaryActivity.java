@@ -262,10 +262,12 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             Log.i(TAG, "current match key is " + matchKey);
             //2324-FIM-HAQ-Q001-1
             try{
-                String[] tokens = matchKey.split("-");
-                String matchNumberTokens = tokens[3];
-                String[] matchTokens = matchNumberTokens.split("Q");
-                Integer nextMatchNumber = Integer.valueOf(matchTokens[1]) + 1;
+                String[] tokens = matchKey.split("_");
+                //String matchNumberTokens = tokens[2];
+                String matchNumberTokens = tokens[tokens.length - 1 ];
+
+                //String[] matchTokens = matchNumberTokens.split("Q");
+                Integer nextMatchNumber = Integer.valueOf(matchNumberTokens) + 1;
                 MatchSelectionActivity.launch(MatchScoutingSummaryActivity.this, nextMatchNumber);
             }
             catch (Exception e){

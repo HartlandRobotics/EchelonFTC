@@ -33,9 +33,6 @@ public class FtcApiActivity extends EchelonActivity {
     TextInputLayout regionStatusLayout;
     TextInputLayout eventStatusLayout;
 
-
-
-
     public static void launch(Context context){
         Intent intent = new Intent(context, FtcApiActivity.class);
         context.startActivity(intent);

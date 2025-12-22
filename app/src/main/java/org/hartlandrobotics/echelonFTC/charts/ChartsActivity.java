@@ -97,7 +97,7 @@ public class ChartsActivity extends EchelonActivity {
                     // 2324-FIM-HAQ-Q001-1
                     Integer matchNumber = Integer.valueOf(
                             //matchResult.getMatchKey().replace( matchResult.getEventKey() + "_qm", "")
-                            matchResult.getMatchKey().split("-")[3].split("Q")[1]
+                            matchResult.getMatchKey().split("_")[2]
 
 
                     );

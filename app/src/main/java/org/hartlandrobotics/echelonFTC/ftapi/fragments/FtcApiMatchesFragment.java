@@ -1,0 +1,249 @@
+package org.hartlandrobotics.echelonFTC.ftapi.fragments;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import org.hartlandrobotics.echelonFTC.R;
+import org.hartlandrobotics.echelonFTC.database.entities.EvtMatchCrossRef;
+import org.hartlandrobotics.echelonFTC.database.entities.Match;
+import org.hartlandrobotics.echelonFTC.database.repositories.MatchRepo;
+import org.hartlandrobotics.echelonFTC.ftapi.FtcApi;
+import org.hartlandrobotics.echelonFTC.ftapi.FtcApiInterface;
+import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiMatch;
+import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiMatchTeam;
+import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiSchedule;
+import org.hartlandrobotics.echelonFTC.ftapi.status.ApiStatus;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class FtcApiMatchesFragment extends Fragment {
+    private static final String TAG = "FtcApiMatchesFragment";
+
+    private Button matchFetchButton;
+    private RecyclerView matchRecycler;
+    //private MatchListAdapter matchListAdapter;
+    //private TextView errorTextDisplay;
+
+    public FtcApiMatchesFragment(){
+        // required empty constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){ super.onCreate(savedInstanceState);}
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState){
+        View fragmentView = inflater.inflate(R.layout.fragment_matches, container, false);
+
+        matchFetchButton = fragmentView.findViewById(R.id.matchPullButton);
+        //errorTextDisplay = fragmentView.findViewById(R.id.errorTextDisplay);
+        //errorTextDisplay.setVisibility(View.GONE);
+
+        return fragmentView;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        //setupCurrentMatches();
+        setupPullMatches();
+    }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+
+        //matchListAdapter = new MatchListAdapter(getActivity());
+
+        matchRecycler = view.findViewById(R.id.match_recycler);
+        matchRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //matchRecycler.setAdapter(matchListAdapter);
+        matchRecycler.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
+
+    }
+
+    public  void setupPullMatches(){
+        matchFetchButton.setOnClickListener((view) -> {
+            FtcApiInterface newApi = FtcApi.getApiClient(getActivity().getApplication());
+
+            try{
+                Context appContext = getActivity().getApplicationContext();
+                ApiStatus status = new ApiStatus(appContext);
+                String eventKey = status.getEventKey();
+
+                Map<String, String> qsMap = new HashMap<>();
+                qsMap.put("tournamentLevel", "qual");
+                Call<FtcApiSchedule> newCall = newApi.getScheduleByEvent(status.getYear(), status.getEventCode(), qsMap);
+                newCall.enqueue(new Callback<FtcApiSchedule>(){
+                    @Override
+                    public void onResponse(Call<FtcApiSchedule> call, Response<FtcApiSchedule> response){
+                        try{
+                            if(!response.isSuccessful()){
+                                Log.e(TAG, "Couldn't pull matches" );
+                            }else{
+                                MatchRepo matchRepo = new MatchRepo(FtcApiMatchesFragment.this.getActivity().getApplication());
+                                FtcApiSchedule schedule = response.body();
+                                List<FtcApiMatch> ftcApiMatches = schedule.getMatches();
+                                List<Match> matches = ftcApiMatches.stream()
+                                        //.filter( match -> match.getTournamentLevel() == 1)
+                                        .map(match -> match.toMatch(status.getYear(), status.getEventCode()))
+                                        .collect(Collectors.toList());
+
+                                matchRepo.upsert(matches);
+
+                                for(Match m : matches){
+                                    EvtMatchCrossRef crossRef = new EvtMatchCrossRef(eventKey, m.getMatchKey());
+                                    matchRepo.upsert(crossRef);
+
+                                }
+
+                                //matchListAdapter.setMatches(matches);
+
+                                Log.i(TAG, "Got matches " + ftcApiMatches.size());
+                            }
+                        }catch(Exception e){
+                            Log.e(TAG, "Error " + e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FtcApiSchedule> call, Throwable t){
+                        Log.e(TAG, "Couldn't pull schedule");
+                    }
+                });
+            }catch(Exception e){
+                Log.e(TAG, "Error second catch " + e.getMessage());
+            }
+        });
+    }
+
+}
+
+
+/*
+
+public class MatchesFragment extends Fragment {
+
+    public void setupCurrentMatches(){
+        Context appContext = getActivity().getApplicationContext();
+        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        String eventKey = status.getEventKey();
+        EventRepo eventRepo = new EventRepo(MatchesFragment.this.getActivity().getApplication());
+        eventRepo.getEventWithMatchs(eventKey).observe(getViewLifecycleOwner(), events -> {
+            List<Match> matches = events != null ? events.matches : new ArrayList<>();
+            matchListAdapter.setMatches(matches);
+        });
+
+    }
+
+
+    private void showError(String errorMessage){
+
+    }
+
+    public class MatchViewHolder extends RecyclerView.ViewHolder{
+        private MaterialTextView matchNumber;
+        private MaterialTextView matchKey;
+        private MaterialTextView red1;
+        private MaterialTextView red2;
+        private MaterialTextView blue1;
+        private MaterialTextView blue2;
+
+        private MatchListViewModel matchViewModel;
+
+        MatchViewHolder(View itemView){
+            super(itemView);
+
+            matchNumber = itemView.findViewById(R.id.match_number);
+            red1 = itemView.findViewById(R.id.red1);
+            red2 = itemView.findViewById(R.id.red2);
+            blue1 = itemView.findViewById(R.id.blue1);
+            blue2 = itemView.findViewById(R.id.blue2);
+
+        }
+
+        public void setMatch(MatchListViewModel matchViewModel){
+            this.matchViewModel = matchViewModel;
+
+            matchNumber.setText(String.valueOf(matchViewModel.getMatchNumber()));
+            red1.setText("1: " + matchViewModel.getRed1());
+            red2.setText("2: " + matchViewModel.getRed2());
+            blue1.setText("1: " + matchViewModel.getBlue1());
+            blue2.setText("2: " + matchViewModel.getBlue2());
+
+
+        }
+
+        public void setDisplayText(String displayText){
+            matchNumber.setText(displayText);
+        }
+
+
+    }
+
+    public class MatchListAdapter extends RecyclerView.Adapter<MatchViewHolder>{
+        private final LayoutInflater inflater;
+        private List<MatchListViewModel> matchViewModels;
+
+        MatchListAdapter(Context context){
+            inflater = LayoutInflater.from(context);
+        }
+
+        @NonNull
+        @Override
+        public MatchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View itemView = inflater.inflate(R.layout.list_item_match, parent, false);
+            return new MatchViewHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MatchViewHolder holder, int position) {
+            if(matchViewModels != null){
+                holder.setMatch(matchViewModels.get(position));
+            }else{
+                holder.setDisplayText("No Match Data Yet...");
+            }
+        }
+
+        void setMatches(List<Match> matches){
+            matches = matches.stream()
+                    .sorted(Comparator.comparingInt(m -> Integer.parseInt(m.getMatchName().substring(6))))
+                    .collect(Collectors.toList());
+
+            matchViewModels = new ArrayList<>();
+            for(Match match : matches){
+                MatchListViewModel viewModel = new MatchListViewModel(match);
+                matchViewModels.add(viewModel);
+            }
+
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getItemCount() {
+            return matchViewModels == null ? 0 : matchViewModels.size();
+        }
+    }
+}
+
+
+ */

@@ -89,6 +89,8 @@ public class Match {
    }
 
    public Integer getMatchNumber(){
-      return Integer.parseInt( matchName.split(" ")[1]);
+      //return Integer.parseInt( matchName.split(" ")[1]);
+      return Integer.parseInt( matchName );
+
    }
 }

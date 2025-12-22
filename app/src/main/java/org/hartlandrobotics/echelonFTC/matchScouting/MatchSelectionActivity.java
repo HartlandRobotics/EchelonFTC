@@ -129,7 +129,7 @@ public class MatchSelectionActivity extends EchelonActivity {
                 matchNumbers = new ArrayList<>();
             }else {
                 matches = event.matches.stream()
-                        .sorted(Comparator.comparingInt(m -> Integer.parseInt(m.getMatchName().substring(6))))
+                        .sorted(Comparator.comparingInt(Match::getMatchNumber))    //getMatchName().substring(6))))
                         .collect(Collectors.toList());
 
                 matchNumbers = matches.stream()

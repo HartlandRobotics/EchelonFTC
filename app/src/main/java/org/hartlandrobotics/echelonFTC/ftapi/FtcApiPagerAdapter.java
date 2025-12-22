@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import org.hartlandrobotics.echelonFTC.ftapi.fragments.FtcApiEventsFragment;
+import org.hartlandrobotics.echelonFTC.ftapi.fragments.FtcApiMatchesFragment;
 import org.hartlandrobotics.echelonFTC.ftapi.fragments.FtcApiRegionsFragment;
 import org.hartlandrobotics.echelonFTC.ftapi.fragments.FtcApiTeamsFragment;
 
@@ -28,7 +29,7 @@ public class FtcApiPagerAdapter extends FragmentStateAdapter{
             titleByPosition.put(0,"Regions");
             titleByPosition.put(1,"Events");
             titleByPosition.put(2, "Teams");
-            //titleByPosition.put(3, "Matches");
+            titleByPosition.put(3, "Matches");
         }
         return titleByPosition.get(position);
     }
@@ -52,17 +53,17 @@ public class FtcApiPagerAdapter extends FragmentStateAdapter{
             FtcApiTeamsFragment teamFragment = new FtcApiTeamsFragment();
             fragment = teamFragment;
         }
-//        else if(position == 3){
-//            Log.e(TAG, "creating new Matches Fragment");
-//            MatchesFragment matchFragment = new MatchesFragment();
-//            fragment = matchFragment;
-//        }
+        else if(position == 3){
+            Log.e(TAG, "creating new Matches Fragment");
+            FtcApiMatchesFragment matchFragment = new FtcApiMatchesFragment();
+            fragment = matchFragment;
+        }
 
         return fragment;
     }
 
     @Override
-    public int getItemCount(){ return 3; }
+    public int getItemCount(){ return 4; }
 
 
 }

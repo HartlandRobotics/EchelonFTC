@@ -161,7 +161,7 @@ public class MainActivity extends EchelonActivity {
                     .map(s -> s.getName() + " - " + s.getYear() )
                     .collect(Collectors.toList());
 
-            ArrayAdapter seasonsAdapter = new ArrayAdapter(this, R.layout.dropdown_item, displaySeasons);
+            ArrayAdapter<String> seasonsAdapter = new ArrayAdapter<>(this, R.layout.dropdown_item, displaySeasons);
             seasonsAutoComplete.setAdapter(seasonsAdapter);
             // get the current season from status
             //String currentSeason = oaStatus.getSeason();
