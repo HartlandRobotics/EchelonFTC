@@ -15,17 +15,21 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textview.MaterialTextView;
+
 import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Match;
+import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
 import org.hartlandrobotics.echelonFTC.database.repositories.MatchRepo;
 import org.hartlandrobotics.echelonFTC.ftapi.FtcApi;
 import org.hartlandrobotics.echelonFTC.ftapi.FtcApiInterface;
 import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiMatch;
-import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiMatchTeam;
 import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiSchedule;
 import org.hartlandrobotics.echelonFTC.ftapi.status.ApiStatus;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +44,7 @@ public class FtcApiMatchesFragment extends Fragment {
 
     private Button matchFetchButton;
     private RecyclerView matchRecycler;
-    //private MatchListAdapter matchListAdapter;
+    private MatchListAdapter matchListAdapter;
     //private TextView errorTextDisplay;
 
     public FtcApiMatchesFragment(){
@@ -65,18 +69,18 @@ public class FtcApiMatchesFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        //setupCurrentMatches();
+        setupCurrentMatches();
         setupPullMatches();
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        //matchListAdapter = new MatchListAdapter(getActivity());
+        matchListAdapter = new MatchListAdapter(getActivity());
 
         matchRecycler = view.findViewById(R.id.match_recycler);
         matchRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //matchRecycler.setAdapter(matchListAdapter);
+        matchRecycler.setAdapter(matchListAdapter);
         matchRecycler.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
 
     }
@@ -113,10 +117,9 @@ public class FtcApiMatchesFragment extends Fragment {
                                 for(Match m : matches){
                                     EvtMatchCrossRef crossRef = new EvtMatchCrossRef(eventKey, m.getMatchKey());
                                     matchRepo.upsert(crossRef);
-
                                 }
 
-                                //matchListAdapter.setMatches(matches);
+                                matchListAdapter.setMatches(matches);
 
                                 Log.i(TAG, "Got matches " + ftcApiMatches.size());
                             }
@@ -136,18 +139,11 @@ public class FtcApiMatchesFragment extends Fragment {
         });
     }
 
-}
-
-
-/*
-
-public class MatchesFragment extends Fragment {
-
     public void setupCurrentMatches(){
         Context appContext = getActivity().getApplicationContext();
-        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        ApiStatus status = new ApiStatus(appContext);
         String eventKey = status.getEventKey();
-        EventRepo eventRepo = new EventRepo(MatchesFragment.this.getActivity().getApplication());
+        EventRepo eventRepo = new EventRepo(FtcApiMatchesFragment.this.getActivity().getApplication());
         eventRepo.getEventWithMatchs(eventKey).observe(getViewLifecycleOwner(), events -> {
             List<Match> matches = events != null ? events.matches : new ArrayList<>();
             matchListAdapter.setMatches(matches);
@@ -155,10 +151,6 @@ public class MatchesFragment extends Fragment {
 
     }
 
-
-    private void showError(String errorMessage){
-
-    }
 
     public class MatchViewHolder extends RecyclerView.ViewHolder{
         private MaterialTextView matchNumber;
@@ -168,7 +160,7 @@ public class MatchesFragment extends Fragment {
         private MaterialTextView blue1;
         private MaterialTextView blue2;
 
-        private MatchListViewModel matchViewModel;
+        private FtcApiMatchViewModel matchViewModel;
 
         MatchViewHolder(View itemView){
             super(itemView);
@@ -178,10 +170,9 @@ public class MatchesFragment extends Fragment {
             red2 = itemView.findViewById(R.id.red2);
             blue1 = itemView.findViewById(R.id.blue1);
             blue2 = itemView.findViewById(R.id.blue2);
-
         }
 
-        public void setMatch(MatchListViewModel matchViewModel){
+        public void setMatch(FtcApiMatchViewModel matchViewModel){
             this.matchViewModel = matchViewModel;
 
             matchNumber.setText(String.valueOf(matchViewModel.getMatchNumber()));
@@ -189,20 +180,16 @@ public class MatchesFragment extends Fragment {
             red2.setText("2: " + matchViewModel.getRed2());
             blue1.setText("1: " + matchViewModel.getBlue1());
             blue2.setText("2: " + matchViewModel.getBlue2());
-
-
         }
 
         public void setDisplayText(String displayText){
             matchNumber.setText(displayText);
         }
-
-
     }
 
     public class MatchListAdapter extends RecyclerView.Adapter<MatchViewHolder>{
         private final LayoutInflater inflater;
-        private List<MatchListViewModel> matchViewModels;
+        private List<FtcApiMatchViewModel> matchViewModels;
 
         MatchListAdapter(Context context){
             inflater = LayoutInflater.from(context);
@@ -226,12 +213,12 @@ public class MatchesFragment extends Fragment {
 
         void setMatches(List<Match> matches){
             matches = matches.stream()
-                    .sorted(Comparator.comparingInt(m -> Integer.parseInt(m.getMatchName().substring(6))))
+                    .sorted(Comparator.comparingInt(m -> m.getMatchNumber() ))
                     .collect(Collectors.toList());
 
             matchViewModels = new ArrayList<>();
             for(Match match : matches){
-                MatchListViewModel viewModel = new MatchListViewModel(match);
+                FtcApiMatchViewModel viewModel = new FtcApiMatchViewModel(match);
                 matchViewModels.add(viewModel);
             }
 
@@ -244,6 +231,3 @@ public class MatchesFragment extends Fragment {
         }
     }
 }
-
-
- */
