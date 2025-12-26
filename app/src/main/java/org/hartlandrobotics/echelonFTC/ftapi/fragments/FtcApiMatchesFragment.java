@@ -213,7 +213,7 @@ public class FtcApiMatchesFragment extends Fragment {
 
         void setMatches(List<Match> matches){
             matches = matches.stream()
-                    .sorted(Comparator.comparingInt(m -> m.getMatchNumber() ))
+                    .sorted(Comparator.comparingInt(Match::getMatchNumber))
                     .collect(Collectors.toList());
 
             matchViewModels = new ArrayList<>();
