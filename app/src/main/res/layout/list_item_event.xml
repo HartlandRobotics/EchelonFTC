@@ -22,12 +22,18 @@
             />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/event_key"
+            android:id="@+id/event_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="2022milan"
             />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/event_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            tools:text="f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
+            />
     </LinearLayout>
-
-
 </LinearLayout>

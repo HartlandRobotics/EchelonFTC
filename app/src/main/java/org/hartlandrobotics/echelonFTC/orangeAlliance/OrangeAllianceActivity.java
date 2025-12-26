@@ -84,7 +84,6 @@ public class OrangeAllianceActivity extends EchelonActivity {
 
                 @Override
                 public void onFailure(Call<SyncStatus> call, Throwable t) {
-
                     setOnlineStatus(false);
                 }
             });

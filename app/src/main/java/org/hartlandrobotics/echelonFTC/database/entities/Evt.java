@@ -244,7 +244,7 @@ public class Evt {
 
 
     public RgnEvtCrossRef toRgnEvent( String districtKey ){
-        RgnEvtCrossRef crossRef = new RgnEvtCrossRef(districtKey,getEventCode());
+        RgnEvtCrossRef crossRef = new RgnEvtCrossRef(districtKey,getEventKey());
         return crossRef;
     }
 }

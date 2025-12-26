@@ -24,6 +24,7 @@ public class AdminSettingsProvider {
     // Field names used in shared preference storage
     //public static final String BLUE_ALLIANCE_KEY = "BlueAllianceKey";
     public static final String ORANGE_ALLIANCE_KEY = "OrangeAllianceKey";
+    public static final String FTC_API_KEY = "FtcApiKey";
     public static final String SCOUTING_YEAR = "ScoutingYear";
     public static final String TEAM_NUMBER = "TeamNumber";
     public static final String DEVICE_ROLE = "DeviceRole";
@@ -71,15 +72,15 @@ public class AdminSettingsProvider {
 
         String orangeAllianceKey = preferences.getString(ORANGE_ALLIANCE_KEY, null);
 
+        String ftcApiKey = preferences.getString(FTC_API_KEY, null);
+
         String scoutingYear = preferences.getString(SCOUTING_YEAR, null);
 
         String deviceRole = preferences.getString(DEVICE_ROLE, null);
 
         String teamNumber = preferences.getString(TEAM_NUMBER, null);
 
-        return new AdminSettings(orangeAllianceKey, scoutingYear, deviceRole, teamNumber);
+        return new AdminSettings(orangeAllianceKey, ftcApiKey, scoutingYear, deviceRole, teamNumber);
     }
-
-
 
 }

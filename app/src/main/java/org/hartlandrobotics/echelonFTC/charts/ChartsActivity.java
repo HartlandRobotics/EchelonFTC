@@ -90,16 +90,13 @@ public class ChartsActivity extends EchelonActivity {
                 Map<Integer, Integer> teleOpScores = new HashMap<>();
                 Map<Integer, Integer> endGameScores = new HashMap<>();
                 String key = entry.getKey();
-                int teamNumber = Integer.valueOf( entry.getKey() );
+                int teamNumber = Integer.parseInt( entry.getKey() );
                 List<MatchResult> matchResults = entry.getValue();
                 for( MatchResult matchResult : matchResults ){
                     CurrentGame currentGamePoints = MatchResult.toCurrentGamePoints(matchResult);
                     // 2324-FIM-HAQ-Q001-1
                     Integer matchNumber = Integer.valueOf(
-                            //matchResult.getMatchKey().replace( matchResult.getEventKey() + "_qm", "")
-                            matchResult.getMatchKey().split("-")[3].split("Q")[1]
-
-
+                            matchResult.getMatchKey().split("_")[2]
                     );
 
                     int matchAuto = 0;

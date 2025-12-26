@@ -24,6 +24,13 @@ public class AdminSettingsViewModel extends AdminSettings {
         }
         this.setOrangeAllianceApiKey(StringUtils.defaultIfBlank(prefApiKey, fileApiKey));
 
+        String prefFtcApiKey = StringUtils.defaultIfBlank(prefSettings.getFtcApiKey(), StringUtils.EMPTY);
+        String fileFtcApiKey = StringUtils.EMPTY;
+        if (fileSettings != null ){
+            fileApiKey = StringUtils.defaultIfBlank(fileSettings.getFtcApiKey(), StringUtils.EMPTY);
+        }
+        this.setFtcApiKey(StringUtils.defaultIfBlank(prefFtcApiKey, fileApiKey));
+
         String prefScoutingSeason = prefSettings.getScoutingSeason();
         String fileScoutingSeason = StringUtils.EMPTY;
         if( fileSettings != null ) {
@@ -54,6 +61,14 @@ public class AdminSettingsViewModel extends AdminSettings {
         return fileSetting.equals( prefSetting );
     }
 
+    public boolean isFtcApikeySynced(){
+        if( fileSettings == null  && prefSettings == null ){ return true; }
+        String fileSetting = fileSettings == null ? StringUtils.EMPTY : fileSettings.getFtcApiKey();
+        String prefSetting = prefSettings == null ? StringUtils.EMPTY : prefSettings.getFtcApiKey();
+
+        return fileSetting.equals( prefSetting );
+    }
+
     public boolean isScoutingSeasonSynced(){
         if( fileSettings == null  && prefSettings == null ){ return true; }
         String fileSetting = fileSettings == null ? StringUtils.EMPTY : fileSettings.getScoutingSeason();
@@ -66,6 +81,12 @@ public class AdminSettingsViewModel extends AdminSettings {
         super.setOrangeAllianceApiKey(apiKey);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
         preferences.edit().putString(AdminSettingsProvider.ORANGE_ALLIANCE_KEY, apiKey).apply();
+    }
+
+    public void setFtcApiKey(Context appContext, String ftcApiKey){
+        super.setFtcApiKey(ftcApiKey);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
+        preferences.edit().putString(AdminSettingsProvider.FTC_API_KEY, ftcApiKey).apply();
     }
 
     public void setTeamNumber(Context appContext, String teamNumber) {

@@ -1,0 +1,236 @@
+package org.hartlandrobotics.echelonFTC.ftapi.fragments;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import org.hartlandrobotics.echelonFTC.R;
+import org.hartlandrobotics.echelonFTC.database.entities.EvtTeamCrossRef;
+import org.hartlandrobotics.echelonFTC.database.entities.Team;
+import org.hartlandrobotics.echelonFTC.database.repositories.TeamRepo;
+import org.hartlandrobotics.echelonFTC.ftapi.FtcApi;
+import org.hartlandrobotics.echelonFTC.ftapi.FtcApiInterface;
+import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiTeam;
+import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiTeams;
+import org.hartlandrobotics.echelonFTC.ftapi.status.ApiStatus;
+import org.hartlandrobotics.echelonFTC.orangeAlliance.fragments.TeamsFragment;
+import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncTeam;
+import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class FtcApiTeamsFragment extends Fragment {
+
+    private TextView errorTextDisplay;
+    private Button teamPull;
+    private RecyclerView teamRecycler;
+    private TeamListAdapter teamListAdapter;
+
+    public FtcApiTeamsFragment(){
+        // required empty constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){super.onCreate(savedInstanceState);}
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState){
+        // Inflate the layout for this fragment
+        View fragmentView =  inflater.inflate(R.layout.fragment_teams, container, false);
+        teamPull = fragmentView.findViewById(R.id.teamPullButton);
+        errorTextDisplay = fragmentView.findViewById(R.id.errorTextDisplay);
+
+        return fragmentView;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        setupCurrentTeams();
+        setupTeamPull();
+    }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+
+        teamListAdapter = new TeamListAdapter(getActivity());
+
+        teamRecycler = view.findViewById(R.id.teamRecyclerView);
+        teamRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        teamRecycler.setAdapter(teamListAdapter);
+        teamRecycler.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
+    }
+
+    public void setupCurrentTeams(){
+        Context appContext = getActivity().getApplicationContext();
+        ApiStatus status = new ApiStatus(appContext);
+        String eventKey = status.getEventKey();
+
+        TeamRepo teamRepo = new TeamRepo(getActivity().getApplication());
+        teamRepo.getEventsWithTeams(eventKey).observe(getViewLifecycleOwner(), evnt -> {
+
+            Log.e("API Fragment", String.valueOf( evnt.teams.size() ) );
+            teamListAdapter.setTeams(evnt.teams);
+        });
+    }
+
+    public void setupTeamPull(){
+        teamPull.setOnClickListener((view) -> {
+            FtcApiInterface newApi = FtcApi.getApiClient(getActivity().getApplication());
+
+            try{
+                Context context = getActivity().getApplication();
+                ApiStatus status = new ApiStatus(context);
+                String eventKey = status.getEventKey();
+                String eventCode = status.getEventCode();
+
+                OrangeAllianceStatus oaStatus = new OrangeAllianceStatus(context);
+
+
+                Call<FtcApiTeams> newCall = newApi.getTeamsByEvent(oaStatus.getYear(), eventCode);
+                newCall.enqueue(new Callback<FtcApiTeams>() {
+                    @Override
+                    public void onResponse(Call<FtcApiTeams> call, Response<FtcApiTeams> response) {
+                        try{
+                            if(!response.isSuccessful()){
+                                errorTextDisplay.setText("Couldn't pull Teams");
+                            }
+                            else{
+                                TeamRepo teamRepo = new TeamRepo(getActivity().getApplication());
+                                FtcApiTeams ftcApiTeams = response.body();
+                                List<Team> teams = ftcApiTeams.getTeams().stream()
+                                        .map(FtcApiTeam::toTeam)
+                                        .collect(Collectors.toList());
+
+                                teamRepo.upsert(teams);
+
+                                for(Team team: teams){
+                                    EvtTeamCrossRef crossRef = team.toEventTeam(eventKey);
+                                    teamRepo.upsert(crossRef);
+                                }
+
+                                teamListAdapter.setTeams(teams);
+
+                                errorTextDisplay.setText("Got Teams " + teams.size());
+                            }
+                        }
+                        catch(Exception e){
+                            errorTextDisplay.setText("Error " + e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FtcApiTeams> call, Throwable t) {
+                        errorTextDisplay.setText("Couldn't pull teams");
+                    }
+                });
+            }
+            catch(Exception e){
+                errorTextDisplay.setText("Error second catch " + e.getMessage());
+            }
+        });
+    }
+
+    public class TeamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final TextView teamNameText;
+        private final TextView teamDesc;
+
+        private Team team;
+
+        private TeamViewHolder(View itemView){
+            super(itemView);
+            itemView.setOnClickListener( this );
+
+            teamNameText = itemView.findViewById( R.id.teamName );
+            teamDesc = itemView.findViewById( R.id.teamDescription );
+        }
+
+        public void setTeam(Team team ){
+            this.team = team;
+
+            teamNameText.setText(team.getNickname());
+            teamDesc.setText(team.getTeamKey());
+        }
+
+        public void setDisplayText( String displayText ){
+            teamNameText.setText(displayText);
+        }
+
+        @Override
+        public void onClick(View view) {
+        }
+    }
+
+
+    public class TeamListAdapter extends RecyclerView.Adapter<TeamViewHolder> {
+        private final LayoutInflater inflater;
+        private List<Team> teams; // cached copy of districts
+
+        TeamListAdapter(Context context ){ inflater = LayoutInflater.from(context); }
+
+        @NonNull
+        @Override
+        public TeamViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View itemView = inflater.inflate( R.layout.list_item_team, parent, false );
+            return new TeamViewHolder( itemView );
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull TeamViewHolder holder, int position) {
+            if( teams != null ){
+                holder.setTeam( teams.get(position) );
+            } else {
+                holder.setDisplayText("No Team Data Yet...");
+            }
+        }
+
+        void setTeams(List<Team> teamsPara){
+            teams = new ArrayList<>();
+            teams.addAll(teamsPara);
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getItemCount() {
+            if( teams != null ) return teams.size();
+            return 0;
+        }
+    }
+
+
+}
+/*
+
+public class TeamsFragment extends Fragment {
+    // pulling teams by event
+
+
+
+
+
+
+
+
+}
+
+
+ */

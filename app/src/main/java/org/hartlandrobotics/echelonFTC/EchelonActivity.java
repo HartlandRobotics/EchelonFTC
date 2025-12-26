@@ -1,12 +1,16 @@
 package org.hartlandrobotics.echelonFTC;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import org.hartlandrobotics.echelonFTC.ftapi.FtcApiActivity;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.OrangeAllianceActivity;
 import org.hartlandrobotics.echelonFTC.bluetooth.BluetoothSyncActivity;
 
@@ -29,10 +33,11 @@ public abstract class EchelonActivity extends AppCompatActivity {
         return true;
     }
 
-    public void blueAlliancePressed(MenuItem item) {
-        OrangeAllianceActivity.launch(this);
-    }
+    public void blueAlliancePressed(MenuItem item) { OrangeAllianceActivity.launch(this); }
 
+    public void ftcApiPressed(MenuItem item){
+        FtcApiActivity.launch(this);
+    }
     public void settingsPressed(MenuItem item) {
         AdminSettingsActivity.launch(this);
     }
