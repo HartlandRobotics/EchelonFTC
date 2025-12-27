@@ -16,13 +16,13 @@ import org.hartlandrobotics.echelonFTC.EchelonActivity;
 import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiIndex;
 import org.hartlandrobotics.echelonFTC.ftapi.status.ApiStatus;
-import org.hartlandrobotics.echelonFTC.orangeAlliance.OrangeAlliancePagerAdapter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FtcApiActivity extends EchelonActivity {
+    final String TAG = "FtcApiActivity";
     ApiStatus apiStatus;
 
     TabLayout tabLayout;
@@ -45,7 +45,7 @@ public class FtcApiActivity extends EchelonActivity {
 
         setupToolbar("FTC Events API");
 
-        apiStatus = new ApiStatus(getApplicationContext());
+        apiStatus = new ApiStatus( getApplicationContext());
 
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
@@ -113,7 +113,7 @@ public class FtcApiActivity extends EchelonActivity {
 
     private void setEventStatus(String eventKey){
         eventStatusLayout.getEditText().setText(eventKey);
-        Log.e("FtcApiActivity", "eventKey: " + eventKey);
+        Log.e(TAG, "eventKey: " + eventKey);
 
     }
 
@@ -122,36 +122,3 @@ public class FtcApiActivity extends EchelonActivity {
         apiStatus.setEventCode(eventCode);
     }
 }
-
-/*
-
-
-
-public class OrangeAllianceActivity extends EchelonActivity {
-
-    OrangeAlliancePagerAdapter orangeAlliancePagerAdapter;
-
-    TextInputLayout seasonStatusLayout;
-    TextInputLayout matchStatusLayout;
-
-
-
-
-
-    private void setSeasonStatus( String season ){
-        seasonStatusLayout.getEditText().setText(season);
-    }
-
-
-
-    private void setMatchStatus(String matchKey){
-        matchStatusLayout.getEditText().setText(matchKey);
-    }
-
-
-
-
-}
-
-
- */

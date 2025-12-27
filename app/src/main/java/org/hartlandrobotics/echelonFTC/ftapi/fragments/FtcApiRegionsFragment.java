@@ -28,8 +28,8 @@ import org.hartlandrobotics.echelonFTC.ftapi.FtcApi;
 import org.hartlandrobotics.echelonFTC.ftapi.FtcApiActivity;
 import org.hartlandrobotics.echelonFTC.ftapi.FtcApiInterface;
 import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiEvents;
-import org.hartlandrobotics.echelonFTC.ftapi.status.ApiStatus;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.ftapi.status.*;
+//import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +88,7 @@ public class FtcApiRegionsFragment extends Fragment {
             Application app = getActivity().getApplication();
             Context appContext = app.getApplicationContext();
 
-            OrangeAllianceStatus status = new OrangeAllianceStatus(app);
+            ApiStatus status = new ApiStatus(app);
             status.loadSettingsFromPrefs();
             FtcApiInterface ftcApi = FtcApi.getApiClient(app);
 

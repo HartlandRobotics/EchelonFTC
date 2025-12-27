@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.orangeAlliance.fragments;
 
 import android.content.Context;
@@ -25,7 +26,7 @@ import org.hartlandrobotics.echelonFTC.orangeAlliance.OrangeAllianceActivity;
 import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncDistrict;
 import org.hartlandrobotics.echelonFTC.database.entities.Rgn;
 import org.hartlandrobotics.echelonFTC.database.repositories.DistrictRepo;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+//import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -246,3 +247,4 @@ public class DistrictsFragment extends Fragment {
     }
 
 }
+*/

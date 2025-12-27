@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.orangeAlliance.fragments;
 
 import android.content.Context;
@@ -25,7 +26,7 @@ import org.hartlandrobotics.echelonFTC.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Match;
 import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
 import org.hartlandrobotics.echelonFTC.database.repositories.MatchRepo;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+//import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -234,3 +235,4 @@ public class MatchesFragment extends Fragment {
         }
     }
 }
+*/

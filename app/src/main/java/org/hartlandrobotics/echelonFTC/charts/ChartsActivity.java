@@ -14,7 +14,7 @@ import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.database.currentGame.CurrentGame;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.database.repositories.MatchResultRepo;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.ftapi.status.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -63,7 +63,7 @@ public class ChartsActivity extends EchelonActivity {
     }
 
     public void setupData(){
-        OrangeAllianceStatus status = new OrangeAllianceStatus(getApplicationContext());
+        ApiStatus status = new ApiStatus(getApplicationContext());
         String currentEvent = status.getEventKey();
 
         matchResultRepo = new MatchResultRepo(getApplication());

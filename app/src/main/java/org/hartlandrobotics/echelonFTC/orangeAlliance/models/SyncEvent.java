@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.orangeAlliance.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -238,3 +239,4 @@ public class SyncEvent {
         return event;
     }
 }
+*/

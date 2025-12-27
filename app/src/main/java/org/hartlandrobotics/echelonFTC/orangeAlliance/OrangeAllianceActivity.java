@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.orangeAlliance;
 
 import android.content.Context;
@@ -15,14 +16,15 @@ import org.hartlandrobotics.echelonFTC.EchelonActivity;
 import org.hartlandrobotics.echelonFTC.R;
 
 import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncStatus;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+//import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.ftapi.status.*;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OrangeAllianceActivity extends EchelonActivity {
-    OrangeAllianceStatus tbaStatus;
+    ApiStatus tbaStatus;
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
@@ -123,3 +125,4 @@ public class OrangeAllianceActivity extends EchelonActivity {
         tbaStatus.setEventKey(eventKey);
     }
 }
+*/

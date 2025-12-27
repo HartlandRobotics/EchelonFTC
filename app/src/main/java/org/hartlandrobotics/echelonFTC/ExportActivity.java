@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 //import org.hartlandrobotics.echelonFTC.database.currentGame.CurrentGameCounts;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.hartlandrobotics.echelonFTC.bluetooth.BluetoothSyncService;
+//import org.hartlandrobotics.echelonFTC.bluetooth.BluetoothSyncService;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettings;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelonFTC.database.entities.Match;
@@ -25,7 +25,8 @@ import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
 import org.hartlandrobotics.echelonFTC.database.entities.Team;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
 import org.hartlandrobotics.echelonFTC.models.PitScoutViewModel;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+//import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.ftapi.status.*;
 import org.hartlandrobotics.echelonFTC.utilities.DeviceUtilities;
 import org.hartlandrobotics.echelonFTC.utilities.FileUtilities;
 
@@ -119,7 +120,7 @@ public class ExportActivity extends EchelonActivity {
 
     public void exportMatchResults(String fileName) throws RuntimeException {
         Context appContext = getApplicationContext();
-        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        ApiStatus status = new ApiStatus(appContext);
         File externalFilesDir = getFilePathForMatch();
         externalFilesDir.mkdirs();
         MatchResultViewModel matchResultViewModel = new MatchResultViewModel(getApplication());
@@ -193,7 +194,7 @@ public class ExportActivity extends EchelonActivity {
 
     public void exportMatchResultsToTableu(String fileName) throws RuntimeException {
         Context appContext = getApplicationContext();
-        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        ApiStatus status = new ApiStatus(appContext);
         File externalFilesDir = getFilePathForMatch();
         externalFilesDir.mkdirs();
         MatchResultViewModel matchResultViewModel = new MatchResultViewModel(getApplication());
@@ -352,7 +353,7 @@ public class ExportActivity extends EchelonActivity {
     public void exportPitScoutResults() {
         exportPitScoutResultsButton.setOnClickListener((view) -> {
             Context appContext = getApplicationContext();
-            OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+            ApiStatus status = new ApiStatus(appContext);
             File externalFilesDir = getFilePathForPitScout();
             externalFilesDir.mkdirs();
             String path = externalFilesDir.getAbsolutePath();

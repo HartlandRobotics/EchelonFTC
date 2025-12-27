@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
@@ -187,13 +188,15 @@ public class BluetoothSyncService {
 
     private void connectionLost() {
         // Send a failure message back to the Activity
-        /*
+        */
+/*
         Message msg = mHandler.obtainMessage(Constants.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
         bundle.putString(Constants.TOAST, "Device connection was lost");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
-         */
+         *//*
+
 
         currentState = STATE_NONE;
         // Update UI title
@@ -476,3 +479,4 @@ public class BluetoothSyncService {
 
     }
 }
+*/

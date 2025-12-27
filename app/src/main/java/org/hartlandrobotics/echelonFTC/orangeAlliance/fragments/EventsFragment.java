@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.orangeAlliance.fragments;
 
 import android.content.Context;
@@ -29,7 +30,8 @@ import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncEvent;
 import org.hartlandrobotics.echelonFTC.database.entities.RgnEvtCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Evt;
 import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+//import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.ftapi.status.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,12 +94,12 @@ public class EventsFragment extends Fragment {
     //Bring back later when filter events by year
     public void setupCurrentEvents(){
         Context appContext = getActivity().getApplicationContext();
-        OrangeAllianceStatus status = new OrangeAllianceStatus(appContext);
+        ApiStatus status = new ApiStatus(appContext);
 
         String eventKey = eventKeyOverrideLayout.getEditText().getText().toString();
         EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
         if( StringUtils.isBlank(eventKey)) {
-            String currentDistrict = status.getDistrictKey();
+            String currentDistrict = status.getRegionKey();
             eventRepo.getRegionWithEvents(currentDistrict).observe(getViewLifecycleOwner(), district -> {
 
                 String eventKeyInner = eventKeyOverrideLayout.getEditText().getText().toString();
@@ -312,3 +314,4 @@ public class EventsFragment extends Fragment {
     }
 
 }
+*/

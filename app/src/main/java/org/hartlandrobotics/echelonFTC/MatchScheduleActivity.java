@@ -28,7 +28,7 @@ import org.hartlandrobotics.echelonFTC.database.entities.Match;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
 import org.hartlandrobotics.echelonFTC.database.repositories.MatchResultRepo;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.ftapi.status.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -88,7 +88,7 @@ public class MatchScheduleActivity extends EchelonActivity {
       matchRecycler.setAdapter(matchListAdapter);
       matchRecycler.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
-        OrangeAllianceStatus status = new OrangeAllianceStatus(getApplicationContext());
+        ApiStatus status = new ApiStatus(getApplicationContext());
         String currentEvent = status.getEventKey();
 
         eventRepo = new EventRepo(getApplication());

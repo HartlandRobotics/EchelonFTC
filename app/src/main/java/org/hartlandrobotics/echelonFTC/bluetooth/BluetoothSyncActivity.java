@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.bluetooth;
 
 import androidx.annotation.NonNull;
@@ -28,7 +29,8 @@ import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
 import org.hartlandrobotics.echelonFTC.models.PitScoutViewModel;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+//import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.ftapi.status.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,12 +112,12 @@ public class BluetoothSyncActivity extends EchelonActivity {
 
     private void setupData(){
         // only need this if this is a non captain tablet
-        OrangeAllianceStatus orangeAllianceStatus = new OrangeAllianceStatus(getApplicationContext());
+        ApiStatus status = new ApiStatus(getApplicationContext());
         AdminSettings adminSettings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
         pitscoutViewModel = new ViewModelProvider( this ).get(PitScoutViewModel.class);
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
-        matchResultViewModel.getMatchResultsByEvent(orangeAllianceStatus.getEventKey()).observe(this, mrList -> {
+        matchResultViewModel.getMatchResultsByEvent(status.getEventKey()).observe(this, mrList -> {
             logLinesAdapter.addStatusItem("Match results loaded");
             if( mrList == null || mrList.size() == 0){
                 matchResults = new ArrayList<>();
@@ -129,7 +131,7 @@ public class BluetoothSyncActivity extends EchelonActivity {
             long unsyncedCount = matchResults.stream().filter( mr -> !mr.getHasBeenSynced() ).count();
             matchResultsUnsyncedText.setText( String.valueOf(unsyncedCount));
 
-            pitscoutViewModel.getPitScoutByEvent(orangeAllianceStatus.getEventKey()).observe(this, psList -> {
+            pitscoutViewModel.getPitScoutByEvent(status.getEventKey()).observe(this, psList -> {
                 if( psList == null || psList.size() == 0){
                     pitScoutResults = new ArrayList<>();
                     logLinesAdapter.addStatusItem("No pitscout results onthis device");
@@ -441,4 +443,4 @@ public class BluetoothSyncActivity extends EchelonActivity {
             }
         }
     };
-}
+}*/

@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.orangeAlliance.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -82,3 +83,4 @@ public class SyncMatch {
         return scheduledTime;
     }
 }
+*/

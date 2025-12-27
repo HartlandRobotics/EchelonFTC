@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.bluetooth;
 
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
@@ -45,3 +46,4 @@ public class ResultsContainer {
         this.sourceDeviceName = sourceDeviceName;
     }
 }
+*/

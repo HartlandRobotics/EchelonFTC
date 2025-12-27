@@ -20,14 +20,12 @@ import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.database.entities.EvtTeamCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Team;
 import org.hartlandrobotics.echelonFTC.database.repositories.TeamRepo;
-import org.hartlandrobotics.echelonFTC.ftapi.FtcApi;
-import org.hartlandrobotics.echelonFTC.ftapi.FtcApiInterface;
-import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiTeam;
-import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiTeams;
-import org.hartlandrobotics.echelonFTC.ftapi.status.ApiStatus;
-import org.hartlandrobotics.echelonFTC.orangeAlliance.fragments.TeamsFragment;
-import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncTeam;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.ftapi.*;
+import org.hartlandrobotics.echelonFTC.ftapi.models.*;
+import org.hartlandrobotics.echelonFTC.ftapi.status.*;
+//import org.hartlandrobotics.echelonFTC.orangeAlliance.fragments.TeamsFragment;
+//import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncTeam;
+//import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,10 +101,7 @@ public class FtcApiTeamsFragment extends Fragment {
                 String eventKey = status.getEventKey();
                 String eventCode = status.getEventCode();
 
-                OrangeAllianceStatus oaStatus = new OrangeAllianceStatus(context);
-
-
-                Call<FtcApiTeams> newCall = newApi.getTeamsByEvent(oaStatus.getYear(), eventCode);
+                Call<FtcApiTeams> newCall = newApi.getTeamsByEvent(status.getYear(), eventCode);
                 newCall.enqueue(new Callback<FtcApiTeams>() {
                     @Override
                     public void onResponse(Call<FtcApiTeams> call, Response<FtcApiTeams> response) {

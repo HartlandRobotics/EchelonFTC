@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.orangeAlliance.fragments;
 
 import android.content.Context;
@@ -22,7 +23,7 @@ import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncTeam;
 import org.hartlandrobotics.echelonFTC.database.entities.EvtTeamCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Team;
 import org.hartlandrobotics.echelonFTC.database.repositories.TeamRepo;
-import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+//import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -210,3 +211,4 @@ public class TeamsFragment extends Fragment {
         }
     }
 }
+*/

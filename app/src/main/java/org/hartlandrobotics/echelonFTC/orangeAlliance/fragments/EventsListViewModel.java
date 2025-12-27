@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.orangeAlliance.fragments;
 
 import org.hartlandrobotics.echelonFTC.database.entities.Evt;
@@ -39,3 +40,4 @@ public class EventsListViewModel {
         isSelected = selected;
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.orangeAlliance;
 //TODO: change to orange alliance
 
@@ -59,3 +60,4 @@ public interface ApiInterface {
     @GET("event/{event_key}/matches")
     Call<List<SyncMatch>> getMatchesByEvent(@Path("event_key") String eventKey);
 }
+*/

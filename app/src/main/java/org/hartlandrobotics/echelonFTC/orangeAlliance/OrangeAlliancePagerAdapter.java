@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.orangeAlliance;
 
 import android.util.Log;
@@ -66,3 +67,4 @@ public class OrangeAlliancePagerAdapter extends FragmentStateAdapter {
    @Override
    public int getItemCount(){ return 4; }
 }
+*/

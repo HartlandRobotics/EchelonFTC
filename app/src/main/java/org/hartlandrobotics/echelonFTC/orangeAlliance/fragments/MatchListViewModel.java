@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.orangeAlliance.fragments;
 
 import org.hartlandrobotics.echelonFTC.database.entities.Match;
@@ -52,3 +53,4 @@ public class MatchListViewModel {
 
     public void setIsSelected(boolean isSelected){this.isSelected = isSelected;}
 }
+*/

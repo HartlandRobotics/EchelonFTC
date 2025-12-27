@@ -1,3 +1,4 @@
+/*
 package org.hartlandrobotics.echelonFTC.bluetooth;
 
 public interface BluetoothMessageType {
@@ -6,3 +7,4 @@ public interface BluetoothMessageType {
     int MESSAGE_SENT = 3;
     int MESSAGE_REQUEST=4;
 }
+*/
