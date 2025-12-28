@@ -93,7 +93,7 @@ public class FtcApiTeamsFragment extends Fragment {
 
     public void setupTeamPull(){
         teamPull.setOnClickListener((view) -> {
-            FtcApiInterface newApi = FtcApi.getApiClient(getActivity().getApplication());
+            FtcApiInterface newApi = FtcApi.getApiClient(getActivity().getApplicationContext());
 
             try{
                 Context context = getActivity().getApplication();

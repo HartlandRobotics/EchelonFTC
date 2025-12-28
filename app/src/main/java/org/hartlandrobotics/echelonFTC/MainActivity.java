@@ -75,8 +75,6 @@ public class MainActivity extends EchelonActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.INTERNET,
                 Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.BLUETOOTH,
-                Manifest.permission.BLUETOOTH_ADMIN,
                 Manifest.permission.ACCESS_COARSE_LOCATION
         };
 

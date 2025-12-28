@@ -90,10 +90,10 @@ public class FtcApiRegionsFragment extends Fragment {
 
             ApiStatus status = new ApiStatus(app);
             status.loadSettingsFromPrefs();
-            FtcApiInterface ftcApi = FtcApi.getApiClient(app);
+            FtcApiInterface ftcApi = FtcApi.getApiClient(appContext);
 
             try {
-                Call<FtcApiEvents> newCall = ftcApi.getEvents(status.getYear());
+                Call<FtcApiEvents> newCall = ftcApi.getEventsByYear(status.getYear());
                 newCall.enqueue(new Callback<FtcApiEvents>() {
                     @Override
                     public void onResponse(Call<FtcApiEvents> call, Response<FtcApiEvents> response) {

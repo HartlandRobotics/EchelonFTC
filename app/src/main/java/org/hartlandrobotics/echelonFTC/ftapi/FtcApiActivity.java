@@ -14,8 +14,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.EchelonActivity;
 import org.hartlandrobotics.echelonFTC.R;
-import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiIndex;
-import org.hartlandrobotics.echelonFTC.ftapi.status.ApiStatus;
+import org.hartlandrobotics.echelonFTC.ftapi.models.*;
+import org.hartlandrobotics.echelonFTC.ftapi.status.*;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,7 +73,7 @@ public class FtcApiActivity extends EchelonActivity {
     }
 
     private void checkOnlineStatus(){
-        FtcApiInterface newApi = FtcApi.getApiClient(getApplication());
+        FtcApiInterface newApi = FtcApi.getApiClient(getApplicationContext());
         try {
             Call<FtcApiIndex> statusCall = newApi.getStatus();
             statusCall.enqueue(new Callback<FtcApiIndex>() {

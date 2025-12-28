@@ -12,16 +12,14 @@ public class ApiStatus {
 
     private final static String SEASON_KEY = "SeasonKey";
     private final static String YEAR_KEY = "YearKey";
-
     private final static String REGION_KEY = "RegionKey";
     private final static String EVENT_KEY = "EventKey";
     private final static String EVENT_CODE = "EventCode";
 
-    private Context appContext;
+    private final Context appContext;
     private boolean online;
     private String season;
     private String year;
-
     private String regionKey;
     private String eventKey;
     private String eventCode;
