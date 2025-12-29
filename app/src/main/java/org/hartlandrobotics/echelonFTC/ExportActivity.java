@@ -1,7 +1,6 @@
 package org.hartlandrobotics.echelonFTC;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,7 +20,7 @@ import org.hartlandrobotics.echelonFTC.database.entities.MatchResultWithTeamMatc
 import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
 import org.hartlandrobotics.echelonFTC.models.PitScoutViewModel;
-import org.hartlandrobotics.echelonFTC.ftapi.status.*;
+import org.hartlandrobotics.echelonFTC.ftcapi.status.*;
 import org.hartlandrobotics.echelonFTC.utilities.DeviceUtilities;
 import org.hartlandrobotics.echelonFTC.utilities.FileUtilities;
 
@@ -115,13 +114,13 @@ public class ExportActivity extends EchelonActivity {
 
     public void exportMatchResults(String fileName) throws RuntimeException {
         Context appContext = getApplicationContext();
-        ApiStatus status = new ApiStatus(appContext);
+        FtcApiStatus apiStatus = new FtcApiStatus(appContext);
         File externalFilesDir = getFilePathForMatch();
         externalFilesDir.mkdirs();
         MatchResultViewModel matchResultViewModel = new MatchResultViewModel(getApplication());
         File file = new File(externalFilesDir, fileName);
 
-        matchResultViewModel.getMatchResultsWithTeamMatchByEvent(status.getEventKey()).observe(this, matchResults -> {
+        matchResultViewModel.getMatchResultsWithTeamMatchByEvent(apiStatus.getEventKey()).observe(this, matchResults -> {
 
             try (FileOutputStream outputStream = new FileOutputStream(file)) {
                 String header = "Match_Result_Key,Event_Key,Match_Key,Team_Key,has_been_synced"
@@ -189,13 +188,13 @@ public class ExportActivity extends EchelonActivity {
 
     public void exportMatchResultsToTableu(String fileName) throws RuntimeException {
         Context appContext = getApplicationContext();
-        ApiStatus status = new ApiStatus(appContext);
+        FtcApiStatus apiStatus = new FtcApiStatus(appContext);
         File externalFilesDir = getFilePathForMatch();
         externalFilesDir.mkdirs();
         MatchResultViewModel matchResultViewModel = new MatchResultViewModel(getApplication());
         File file = new File(externalFilesDir, fileName);
 
-        matchResultViewModel.getMatchResultsWithTeamMatchByEvent(status.getEventKey()).observe(this, matchResults -> {
+        matchResultViewModel.getMatchResultsWithTeamMatchByEvent(apiStatus.getEventKey()).observe(this, matchResults -> {
 
             try (FileOutputStream outputStream = new FileOutputStream(file)) {
                 String header = "Match_Result_Key,Event_Key,Match_Key,Team_Key,has_been_synced"
@@ -348,7 +347,7 @@ public class ExportActivity extends EchelonActivity {
     public void exportPitScoutResults() {
         exportPitScoutResultsButton.setOnClickListener((view) -> {
             Context appContext = getApplicationContext();
-            ApiStatus status = new ApiStatus(appContext);
+            FtcApiStatus apiStatus = new FtcApiStatus(appContext);
             File externalFilesDir = getFilePathForPitScout();
             externalFilesDir.mkdirs();
             String path = externalFilesDir.getAbsolutePath();
@@ -360,7 +359,7 @@ public class ExportActivity extends EchelonActivity {
             String fileName = "PitScout_Data_" + dateForFile + ".csv";
             File file = new File(externalFilesDir, fileName);
 
-            pitScoutViewModel.getPitScoutByEvent(status.getEventKey()).observe(this, pitScoutResults -> {
+            pitScoutViewModel.getPitScoutByEvent(apiStatus.getEventKey()).observe(this, pitScoutResults -> {
                 try {
                     FileOutputStream outputStream = new FileOutputStream(file);
                     String header = "Team_Key" +

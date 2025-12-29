@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelonFTC.ftapi;
+package org.hartlandrobotics.echelonFTC.ftcapi;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,27 +14,27 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.EchelonActivity;
 import org.hartlandrobotics.echelonFTC.R;
-import org.hartlandrobotics.echelonFTC.ftapi.models.*;
-import org.hartlandrobotics.echelonFTC.ftapi.status.*;
+import org.hartlandrobotics.echelonFTC.ftcapi.status.FtcApiStatus;
+import org.hartlandrobotics.echelonFTC.ftcapi.models.ApiIndex;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FtcApiActivity extends EchelonActivity {
-    final String TAG = "FtcApiActivity";
-    ApiStatus apiStatus;
+public class ApiActivity extends EchelonActivity {
+    final String TAG = "ApiActivity";
+    FtcApiStatus apiStatus;
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
-    FtcApiPagerAdapter ftcApiPagerAdapter;
+    ApiPagerAdapter ftcApiPagerAdapter;
 
     TextInputLayout onlineStatusLayout;
     TextInputLayout regionStatusLayout;
     TextInputLayout eventStatusLayout;
 
     public static void launch(Context context){
-        Intent intent = new Intent(context, FtcApiActivity.class);
+        Intent intent = new Intent(context, ApiActivity.class);
         context.startActivity(intent);
     }
 
@@ -45,12 +45,12 @@ public class FtcApiActivity extends EchelonActivity {
 
         setupToolbar("FTC Events API");
 
-        apiStatus = new ApiStatus( getApplicationContext());
+        apiStatus = new FtcApiStatus( getApplicationContext());
 
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
-        ftcApiPagerAdapter = new FtcApiPagerAdapter(getSupportFragmentManager(), getLifecycle());
+        ftcApiPagerAdapter = new ApiPagerAdapter(getSupportFragmentManager(), getLifecycle());
         viewPager.setAdapter(ftcApiPagerAdapter);
 
         new TabLayoutMediator(tabLayout, viewPager,
@@ -73,17 +73,17 @@ public class FtcApiActivity extends EchelonActivity {
     }
 
     private void checkOnlineStatus(){
-        FtcApiInterface newApi = FtcApi.getApiClient(getApplicationContext());
+        ApiInterface newApi = Api.getApiClient(getApplicationContext());
         try {
-            Call<FtcApiIndex> statusCall = newApi.getStatus();
-            statusCall.enqueue(new Callback<FtcApiIndex>() {
+            Call<ApiIndex> statusCall = newApi.getStatus();
+            statusCall.enqueue(new Callback<ApiIndex>() {
                 @Override
-                public void onResponse(Call<FtcApiIndex> call, Response<FtcApiIndex> response) {
+                public void onResponse(Call<ApiIndex> call, Response<ApiIndex> response) {
                     setOnlineStatus(response.isSuccessful());
                 }
 
                 @Override
-                public void onFailure(Call<FtcApiIndex> call, Throwable t) {
+                public void onFailure(Call<ApiIndex> call, Throwable t) {
                     setOnlineStatus(false);
                 }
             });

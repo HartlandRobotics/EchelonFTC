@@ -15,12 +15,11 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
 //import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
-import org.hartlandrobotics.echelonFTC.ftapi.status.*;
+import org.hartlandrobotics.echelonFTC.ftcapi.status.*;
 
 public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private static final String TAG = "MatchScoutingSummaryActivity";
@@ -105,7 +104,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         matchKey = bundle.getString(MATCH_KEY);
         teamKey = bundle.getString(TEAM_KEY);
-        ApiStatus orangeAllianceStatus = new ApiStatus(getApplicationContext());
+        FtcApiStatus orangeAllianceStatus = new FtcApiStatus(getApplicationContext());
 
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
         matchResultViewModel.getMatchResultByMatchTeam(matchKey, teamKey)

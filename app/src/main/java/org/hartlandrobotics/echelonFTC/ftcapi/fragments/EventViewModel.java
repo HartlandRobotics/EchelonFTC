@@ -1,15 +1,15 @@
-package org.hartlandrobotics.echelonFTC.ftapi.fragments;
+package org.hartlandrobotics.echelonFTC.ftcapi.fragments;
 
 import org.hartlandrobotics.echelonFTC.database.entities.Evt;
 
-public class FtcApiEventViewModel {
+public class EventViewModel {
     private boolean isSelected;
     private String eventKey;
     private String eventCode;
     private String eventName;
     private String regionKey;
 
-    public FtcApiEventViewModel(Evt event){
+    public EventViewModel(Evt event){
         this.eventKey = event.getEventKey();
         this.eventCode = event.getEventCode();
         this.eventName = event.getEventName();

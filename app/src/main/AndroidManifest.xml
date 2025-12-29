@@ -49,14 +49,12 @@
             android:name=".pitScouting.PitScoutActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".orangeAlliance.OrangeAllianceActivity"
+
+       <activity
+            android:name=".ftcapi.ApiActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".ftapi.FtcApiActivity"
-            android:exported="true"
-            android:screenOrientation="landscape" />
+
         <activity
             android:name=".AdminSettingsActivity"
             android:exported="true"

@@ -21,10 +21,10 @@ import org.hartlandrobotics.echelonFTC.charts.ChartsActivity;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettings;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelonFTC.database.entities.Season;
-import org.hartlandrobotics.echelonFTC.ftapi.status.*;
 import org.hartlandrobotics.echelonFTC.matchScouting.MatchSelectionActivity;
 import org.hartlandrobotics.echelonFTC.models.SeasonViewModel;
 import org.hartlandrobotics.echelonFTC.pitScouting.PitScoutActivity;
+import org.hartlandrobotics.echelonFTC.ftcapi.status.FtcApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MainActivity extends EchelonActivity {
-    private ApiStatus status;
+    private FtcApiStatus status;
 
     String deviceName;
 
@@ -55,7 +55,7 @@ public class MainActivity extends EchelonActivity {
 
         setupToolbar("Home");
 
-        status = new ApiStatus(getApplicationContext());
+        status = new FtcApiStatus(getApplicationContext());
         deviceName = Settings.Secure.getString(getContentResolver(), "bluetooth_name");
 
         setupStartScoutingButton();

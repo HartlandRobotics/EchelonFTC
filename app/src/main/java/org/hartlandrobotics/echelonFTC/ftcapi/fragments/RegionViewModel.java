@@ -1,13 +1,13 @@
-package org.hartlandrobotics.echelonFTC.ftapi.fragments;
+package org.hartlandrobotics.echelonFTC.ftcapi.fragments;
 
 import org.hartlandrobotics.echelonFTC.database.entities.Rgn;
 
-public class FtcApiRegionViewModel {
+public class RegionViewModel {
     private String regionKey;
     private String description;
     private boolean isSelected;
 
-    public FtcApiRegionViewModel(Rgn district) {
+    public RegionViewModel(Rgn district) {
         this.regionKey = district.getRegionKey();
         this.description = district.getDescription();
         this.isSelected = false;

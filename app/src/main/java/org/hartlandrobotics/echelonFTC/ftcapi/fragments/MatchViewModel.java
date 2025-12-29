@@ -1,8 +1,8 @@
-package org.hartlandrobotics.echelonFTC.ftapi.fragments;
+package org.hartlandrobotics.echelonFTC.ftcapi.fragments;
 
 import org.hartlandrobotics.echelonFTC.database.entities.Match;
 
-public class FtcApiMatchViewModel {
+public class MatchViewModel {
     private String matchName;
     private String matchKey;
     private String red1;
@@ -11,7 +11,7 @@ public class FtcApiMatchViewModel {
     private String blue2;
     private boolean isSelected;
 
-    public FtcApiMatchViewModel(Match match){
+    public MatchViewModel(Match match){
         this.matchName = match.getMatchName();
         this.matchKey = match.getMatchKey();
         this.red1 = match.getRed1TeamKey();

@@ -1,12 +1,12 @@
-package org.hartlandrobotics.echelonFTC.ftapi.models;
+package org.hartlandrobotics.echelonFTC.ftcapi.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class FtcApiTeams {
+public class ApiTeams {
     @JsonProperty("teams")
-    private List<FtcApiTeam> teams;
+    private List<ApiTeam> teams;
     @JsonProperty("teamCountTotal")
     private int teamCountTotal;
     @JsonProperty("teamCountPage")
@@ -16,7 +16,7 @@ public class FtcApiTeams {
     @JsonProperty("pageTotal")
     private int pageTotal;
 
-    public List<FtcApiTeam> getTeams() {
+    public List<ApiTeam> getTeams() {
         return teams;
     }
     public int getTeamCountTotal() {

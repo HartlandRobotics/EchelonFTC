@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="status here"/>
+        tools:text="apiStatus here"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

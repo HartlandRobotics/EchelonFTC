@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import org.hartlandrobotics.echelonFTC.ftapi.*;
+import org.hartlandrobotics.echelonFTC.ftcapi.*;
 
 public abstract class EchelonActivity extends AppCompatActivity {
     private TextView pageName;
@@ -29,7 +29,7 @@ public abstract class EchelonActivity extends AppCompatActivity {
     }
 
     public void ftcApiPressed(MenuItem item){
-        FtcApiActivity.launch(this);
+        ApiActivity.launch(this);
     }
     public void settingsPressed(MenuItem item) {
         AdminSettingsActivity.launch(this);

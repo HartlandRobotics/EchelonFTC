@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelonFTC.ftapi.fragments;
+package org.hartlandrobotics.echelonFTC.ftcapi.fragments;
 
 import android.app.Application;
 import android.content.Context;
@@ -24,12 +24,11 @@ import org.hartlandrobotics.echelonFTC.database.entities.Evt;
 import org.hartlandrobotics.echelonFTC.database.entities.Rgn;
 import org.hartlandrobotics.echelonFTC.database.repositories.DistrictRepo;
 import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
-import org.hartlandrobotics.echelonFTC.ftapi.FtcApi;
-import org.hartlandrobotics.echelonFTC.ftapi.FtcApiActivity;
-import org.hartlandrobotics.echelonFTC.ftapi.FtcApiInterface;
-import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiEvents;
-import org.hartlandrobotics.echelonFTC.ftapi.status.*;
-//import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.ftcapi.Api;
+import org.hartlandrobotics.echelonFTC.ftcapi.ApiActivity;
+import org.hartlandrobotics.echelonFTC.ftcapi.ApiInterface;
+import org.hartlandrobotics.echelonFTC.ftcapi.models.ApiEvents;
+import org.hartlandrobotics.echelonFTC.ftcapi.status.FtcApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +38,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FtcApiRegionsFragment extends Fragment {
+public class RegionsFragment extends Fragment {
     private RecyclerView regionRecycler;
     private RegionListAdapter regionListAdapter;
     private Button regionFetchButton;
     private TextView errorTextDisplay;
 
-    public FtcApiRegionsFragment() {
+    public RegionsFragment() {
         //required empty constructor
     }
 
@@ -88,20 +87,20 @@ public class FtcApiRegionsFragment extends Fragment {
             Application app = getActivity().getApplication();
             Context appContext = app.getApplicationContext();
 
-            ApiStatus status = new ApiStatus(app);
+            FtcApiStatus status = new FtcApiStatus(app);
             status.loadSettingsFromPrefs();
-            FtcApiInterface ftcApi = FtcApi.getApiClient(appContext);
+            ApiInterface ftcApi = Api.getApiClient(appContext);
 
             try {
-                Call<FtcApiEvents> newCall = ftcApi.getEventsByYear(status.getYear());
-                newCall.enqueue(new Callback<FtcApiEvents>() {
+                Call<ApiEvents> newCall = ftcApi.getEventsByYear(status.getYear());
+                newCall.enqueue(new Callback<ApiEvents>() {
                     @Override
-                    public void onResponse(Call<FtcApiEvents> call, Response<FtcApiEvents> response) {
+                    public void onResponse(Call<ApiEvents> call, Response<ApiEvents> response) {
                         try {
                             if (!response.isSuccessful()) {
                                 errorTextDisplay.setText("Couldn't pull regions");
                             } else {
-                                FtcApiEvents ftcapievents = response.body();
+                                ApiEvents ftcapievents = response.body();
                                 List<Evt> events = ftcapievents.getEvents()
                                         .stream()
                                         .map(ftcapievt -> ftcapievt.toEvent(appContext,status.getYear()))
@@ -113,10 +112,10 @@ public class FtcApiRegionsFragment extends Fragment {
                                         .map(strRegion -> new Rgn(strRegion, strRegion))
                                         .collect(Collectors.toList());
 
-                                EventRepo eventRepo = new EventRepo(FtcApiRegionsFragment.this.getActivity().getApplication());
+                                EventRepo eventRepo = new EventRepo(RegionsFragment.this.getActivity().getApplication());
                                 eventRepo.upsert(events);
 
-                                DistrictRepo regionRepo = new DistrictRepo(FtcApiRegionsFragment.this.getActivity().getApplication());
+                                DistrictRepo regionRepo = new DistrictRepo(RegionsFragment.this.getActivity().getApplication());
                                 regionRepo.upsert(regions);
 
                                 for(Evt event : events ){
@@ -137,7 +136,7 @@ public class FtcApiRegionsFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<FtcApiEvents> call, Throwable t) {
+                    public void onFailure(Call<ApiEvents> call, Throwable t) {
                         errorTextDisplay.setText("Couldn't pull events");
                     }
                 });
@@ -151,7 +150,7 @@ public class FtcApiRegionsFragment extends Fragment {
         //Context appContext = getActivity().getApplicationContext();
         //BlueAllianceStatus status = new BlueAllianceStatus(appContext);
         // int currentYear = Integer.parseInt(status.getYear());
-        DistrictRepo districtRepo = new DistrictRepo(FtcApiRegionsFragment.this.getActivity().getApplication());
+        DistrictRepo districtRepo = new DistrictRepo(RegionsFragment.this.getActivity().getApplication());
         districtRepo.getDistricts().observe(getViewLifecycleOwner(), regions -> {
             regionListAdapter.setRegions(regions);
         });
@@ -165,7 +164,7 @@ public class FtcApiRegionsFragment extends Fragment {
         private final MaterialTextView regionKey;
         private final MaterialRadioButton regionSelectedRadioButton;
 
-        private FtcApiRegionViewModel regionViewModel;
+        private RegionViewModel regionViewModel;
 
         RegionViewHolder(View itemView) {
             super(itemView);
@@ -180,7 +179,7 @@ public class FtcApiRegionsFragment extends Fragment {
             });
         }
 
-        public void setRegion(FtcApiRegionViewModel regionViewModel) {
+        public void setRegion(RegionViewModel regionViewModel) {
             this.regionViewModel = regionViewModel;
 
             regionName.setText(regionViewModel.getDescription());
@@ -207,7 +206,7 @@ public class FtcApiRegionsFragment extends Fragment {
 
     public class RegionListAdapter extends RecyclerView.Adapter<RegionViewHolder> {
         private final LayoutInflater inflater;
-        private List<FtcApiRegionViewModel> regionViewModels;
+        private List<RegionViewModel> regionViewModels;
 
         RegionListAdapter(Context context) {
             inflater = LayoutInflater.from(context);
@@ -231,12 +230,12 @@ public class FtcApiRegionsFragment extends Fragment {
 
         void setRegions(List<Rgn> regions) {
             Context appContext = getActivity().getApplicationContext();
-            ApiStatus status = new ApiStatus(appContext);
+            FtcApiStatus status = new FtcApiStatus(appContext);
             String currentRegionKey = status.getRegionKey();
 
             regionViewModels = new ArrayList<>();
             for( Rgn region : regions ){
-                FtcApiRegionViewModel viewModel = new FtcApiRegionViewModel(region);
+                RegionViewModel viewModel = new RegionViewModel(region);
                 if( region.getRegionKey().equals(currentRegionKey) ){
                     viewModel.setIsSelected(true);
                     setCurrentRegion(viewModel);
@@ -247,11 +246,11 @@ public class FtcApiRegionsFragment extends Fragment {
             notifyDataSetChanged();
         }
 
-        void setCurrentRegion(FtcApiRegionViewModel currentViewModel){
-            FtcApiActivity ftcApiActivity = (FtcApiActivity)getActivity();
+        void setCurrentRegion(RegionViewModel currentViewModel){
+            ApiActivity ftcApiActivity = (ApiActivity)getActivity();
             ftcApiActivity.setRegionKey(currentViewModel.getRegionKey());
 
-            for(FtcApiRegionViewModel viewModel : regionViewModels ){
+            for(RegionViewModel viewModel : regionViewModels ){
                 viewModel.setIsSelected( currentViewModel.getRegionKey().equals(viewModel.getRegionKey()));
             }
 

@@ -1,11 +1,11 @@
-package org.hartlandrobotics.echelonFTC.ftapi.models;
+package org.hartlandrobotics.echelonFTC.ftcapi.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.database.entities.Team;
 
-public class FtcApiTeam {
+public class ApiTeam {
     @JsonProperty("teamNumber")
     private int teamNumber;
     @JsonProperty("displayTeamNumber")

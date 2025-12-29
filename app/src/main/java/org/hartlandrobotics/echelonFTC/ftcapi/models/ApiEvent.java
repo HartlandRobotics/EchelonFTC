@@ -1,15 +1,13 @@
-package org.hartlandrobotics.echelonFTC.ftapi.models;
+package org.hartlandrobotics.echelonFTC.ftcapi.models;
 
 import android.content.Context;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
-import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsViewModel;
 import org.hartlandrobotics.echelonFTC.database.entities.Evt;
 
-public class FtcApiEvent {
+public class ApiEvent {
     @JsonProperty("eventId")
     private String eventId;
 

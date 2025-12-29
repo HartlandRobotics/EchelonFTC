@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelonFTC.ftapi.fragments;
+package org.hartlandrobotics.echelonFTC.ftcapi.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,11 +22,11 @@ import org.hartlandrobotics.echelonFTC.database.entities.EvtMatchCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Match;
 import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
 import org.hartlandrobotics.echelonFTC.database.repositories.MatchRepo;
-import org.hartlandrobotics.echelonFTC.ftapi.FtcApi;
-import org.hartlandrobotics.echelonFTC.ftapi.FtcApiInterface;
-import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiMatch;
-import org.hartlandrobotics.echelonFTC.ftapi.models.FtcApiSchedule;
-import org.hartlandrobotics.echelonFTC.ftapi.status.ApiStatus;
+import org.hartlandrobotics.echelonFTC.ftcapi.Api;
+import org.hartlandrobotics.echelonFTC.ftcapi.ApiInterface;
+import org.hartlandrobotics.echelonFTC.ftcapi.models.ApiMatch;
+import org.hartlandrobotics.echelonFTC.ftcapi.models.ApiSchedule;
+import org.hartlandrobotics.echelonFTC.ftcapi.status.FtcApiStatus;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -39,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FtcApiMatchesFragment extends Fragment {
+public class MatchesFragment extends Fragment {
     private static final String TAG = "FtcApiMatchesFragment";
 
     private Button matchFetchButton;
@@ -47,7 +47,7 @@ public class FtcApiMatchesFragment extends Fragment {
     private MatchListAdapter matchListAdapter;
     //private TextView errorTextDisplay;
 
-    public FtcApiMatchesFragment(){
+    public MatchesFragment(){
         // required empty constructor
     }
 
@@ -87,26 +87,26 @@ public class FtcApiMatchesFragment extends Fragment {
 
     public  void setupPullMatches(){
         matchFetchButton.setOnClickListener((view) -> {
-            FtcApiInterface newApi = FtcApi.getApiClient(getActivity().getApplication());
+            ApiInterface newApi = Api.getApiClient(getActivity().getApplication().getApplicationContext());
 
             try{
                 Context appContext = getActivity().getApplicationContext();
-                ApiStatus status = new ApiStatus(appContext);
+                FtcApiStatus status = new FtcApiStatus(appContext);
                 String eventKey = status.getEventKey();
 
                 Map<String, String> qsMap = new HashMap<>();
                 qsMap.put("tournamentLevel", "qual");
-                Call<FtcApiSchedule> newCall = newApi.getScheduleByEvent(status.getYear(), status.getEventCode(), qsMap);
-                newCall.enqueue(new Callback<FtcApiSchedule>(){
+                Call<ApiSchedule> newCall = newApi.getScheduleByEvent(status.getYear(), status.getEventCode(), qsMap);
+                newCall.enqueue(new Callback<ApiSchedule>(){
                     @Override
-                    public void onResponse(Call<FtcApiSchedule> call, Response<FtcApiSchedule> response){
+                    public void onResponse(Call<ApiSchedule> call, Response<ApiSchedule> response){
                         try{
                             if(!response.isSuccessful()){
                                 Log.e(TAG, "Couldn't pull matches" );
                             }else{
-                                MatchRepo matchRepo = new MatchRepo(FtcApiMatchesFragment.this.getActivity().getApplication());
-                                FtcApiSchedule schedule = response.body();
-                                List<FtcApiMatch> ftcApiMatches = schedule.getMatches();
+                                MatchRepo matchRepo = new MatchRepo(MatchesFragment.this.getActivity().getApplication());
+                                ApiSchedule schedule = response.body();
+                                List<ApiMatch> ftcApiMatches = schedule.getMatches();
                                 List<Match> matches = ftcApiMatches.stream()
                                         //.filter( match -> match.getTournamentLevel() == 1)
                                         .map(match -> match.toMatch(status.getYear(), status.getEventCode()))
@@ -129,7 +129,7 @@ public class FtcApiMatchesFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<FtcApiSchedule> call, Throwable t){
+                    public void onFailure(Call<ApiSchedule> call, Throwable t){
                         Log.e(TAG, "Couldn't pull schedule");
                     }
                 });
@@ -141,9 +141,9 @@ public class FtcApiMatchesFragment extends Fragment {
 
     public void setupCurrentMatches(){
         Context appContext = getActivity().getApplicationContext();
-        ApiStatus status = new ApiStatus(appContext);
+        FtcApiStatus status = new FtcApiStatus(appContext);
         String eventKey = status.getEventKey();
-        EventRepo eventRepo = new EventRepo(FtcApiMatchesFragment.this.getActivity().getApplication());
+        EventRepo eventRepo = new EventRepo(MatchesFragment.this.getActivity().getApplication());
         eventRepo.getEventWithMatchs(eventKey).observe(getViewLifecycleOwner(), events -> {
             List<Match> matches = events != null ? events.matches : new ArrayList<>();
             matchListAdapter.setMatches(matches);
@@ -160,7 +160,7 @@ public class FtcApiMatchesFragment extends Fragment {
         private MaterialTextView blue1;
         private MaterialTextView blue2;
 
-        private FtcApiMatchViewModel matchViewModel;
+        private MatchViewModel matchViewModel;
 
         MatchViewHolder(View itemView){
             super(itemView);
@@ -172,7 +172,7 @@ public class FtcApiMatchesFragment extends Fragment {
             blue2 = itemView.findViewById(R.id.blue2);
         }
 
-        public void setMatch(FtcApiMatchViewModel matchViewModel){
+        public void setMatch(MatchViewModel matchViewModel){
             this.matchViewModel = matchViewModel;
 
             matchNumber.setText(String.valueOf(matchViewModel.getMatchNumber()));
@@ -189,7 +189,7 @@ public class FtcApiMatchesFragment extends Fragment {
 
     public class MatchListAdapter extends RecyclerView.Adapter<MatchViewHolder>{
         private final LayoutInflater inflater;
-        private List<FtcApiMatchViewModel> matchViewModels;
+        private List<MatchViewModel> matchViewModels;
 
         MatchListAdapter(Context context){
             inflater = LayoutInflater.from(context);
@@ -218,7 +218,7 @@ public class FtcApiMatchesFragment extends Fragment {
 
             matchViewModels = new ArrayList<>();
             for(Match match : matches){
-                FtcApiMatchViewModel viewModel = new FtcApiMatchViewModel(match);
+                MatchViewModel viewModel = new MatchViewModel(match);
                 matchViewModels.add(viewModel);
             }
 

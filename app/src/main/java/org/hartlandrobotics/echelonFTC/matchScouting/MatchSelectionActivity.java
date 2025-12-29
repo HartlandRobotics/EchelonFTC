@@ -3,7 +3,6 @@ package org.hartlandrobotics.echelonFTC.matchScouting;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +22,7 @@ import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelonFTC.database.entities.Match;
 import org.hartlandrobotics.echelonFTC.database.repositories.EventRepo;
 //import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
-import org.hartlandrobotics.echelonFTC.ftapi.status.*;
+import org.hartlandrobotics.echelonFTC.ftcapi.status.*;
 import org.hartlandrobotics.echelonFTC.utilities.FileUtilities;
 
 import java.io.File;
@@ -122,8 +121,8 @@ public class MatchSelectionActivity extends EchelonActivity {
     public void setupMatchDropdown(){
         Context appContext = this.getApplicationContext();
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(appContext);
-        ApiStatus status = new ApiStatus(appContext);
-        String eventKey = status.getEventKey();
+        FtcApiStatus apiStatus = new FtcApiStatus(appContext);
+        String eventKey = apiStatus.getEventKey();
         EventRepo eventRepo = new EventRepo(this.getApplication());
         eventRepo.getEventWithMatchs(eventKey).observe(this, event ->{
             if( event == null ){

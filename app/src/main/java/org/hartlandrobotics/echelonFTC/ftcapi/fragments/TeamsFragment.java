@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelonFTC.ftapi.fragments;
+package org.hartlandrobotics.echelonFTC.ftcapi.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,12 +20,12 @@ import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.database.entities.EvtTeamCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Team;
 import org.hartlandrobotics.echelonFTC.database.repositories.TeamRepo;
-import org.hartlandrobotics.echelonFTC.ftapi.*;
-import org.hartlandrobotics.echelonFTC.ftapi.models.*;
-import org.hartlandrobotics.echelonFTC.ftapi.status.*;
-//import org.hartlandrobotics.echelonFTC.orangeAlliance.fragments.TeamsFragment;
-//import org.hartlandrobotics.echelonFTC.orangeAlliance.models.SyncTeam;
-//import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
+import org.hartlandrobotics.echelonFTC.ftcapi.models.ApiTeams;
+import org.hartlandrobotics.echelonFTC.ftcapi.models.ApiTeam;
+import org.hartlandrobotics.echelonFTC.ftcapi.Api;
+import org.hartlandrobotics.echelonFTC.ftcapi.ApiInterface;
+import org.hartlandrobotics.echelonFTC.ftcapi.status.FtcApiStatus;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,14 +35,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FtcApiTeamsFragment extends Fragment {
+public class TeamsFragment extends Fragment {
 
     private TextView errorTextDisplay;
     private Button teamPull;
     private RecyclerView teamRecycler;
     private TeamListAdapter teamListAdapter;
 
-    public FtcApiTeamsFragment(){
+    public TeamsFragment(){
         // required empty constructor
     }
 
@@ -80,7 +80,7 @@ public class FtcApiTeamsFragment extends Fragment {
 
     public void setupCurrentTeams(){
         Context appContext = getActivity().getApplicationContext();
-        ApiStatus status = new ApiStatus(appContext);
+        FtcApiStatus status = new FtcApiStatus(appContext);
         String eventKey = status.getEventKey();
 
         TeamRepo teamRepo = new TeamRepo(getActivity().getApplication());
@@ -93,27 +93,27 @@ public class FtcApiTeamsFragment extends Fragment {
 
     public void setupTeamPull(){
         teamPull.setOnClickListener((view) -> {
-            FtcApiInterface newApi = FtcApi.getApiClient(getActivity().getApplicationContext());
+            ApiInterface newApi = Api.getApiClient(getActivity().getApplicationContext());
 
             try{
                 Context context = getActivity().getApplication();
-                ApiStatus status = new ApiStatus(context);
+                FtcApiStatus status = new FtcApiStatus(context);
                 String eventKey = status.getEventKey();
                 String eventCode = status.getEventCode();
 
-                Call<FtcApiTeams> newCall = newApi.getTeamsByEvent(status.getYear(), eventCode);
-                newCall.enqueue(new Callback<FtcApiTeams>() {
+                Call<ApiTeams> newCall = newApi.getTeamsByEvent(status.getYear(), eventCode);
+                newCall.enqueue(new Callback<ApiTeams>() {
                     @Override
-                    public void onResponse(Call<FtcApiTeams> call, Response<FtcApiTeams> response) {
+                    public void onResponse(Call<ApiTeams> call, Response<ApiTeams> response) {
                         try{
                             if(!response.isSuccessful()){
                                 errorTextDisplay.setText("Couldn't pull Teams");
                             }
                             else{
                                 TeamRepo teamRepo = new TeamRepo(getActivity().getApplication());
-                                FtcApiTeams ftcApiTeams = response.body();
+                                ApiTeams ftcApiTeams = response.body();
                                 List<Team> teams = ftcApiTeams.getTeams().stream()
-                                        .map(FtcApiTeam::toTeam)
+                                        .map(ApiTeam::toTeam)
                                         .collect(Collectors.toList());
 
                                 teamRepo.upsert(teams);
@@ -134,7 +134,7 @@ public class FtcApiTeamsFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<FtcApiTeams> call, Throwable t) {
+                    public void onFailure(Call<ApiTeams> call, Throwable t) {
                         errorTextDisplay.setText("Couldn't pull teams");
                     }
                 });
@@ -213,19 +213,3 @@ public class FtcApiTeamsFragment extends Fragment {
 
 
 }
-/*
-
-public class TeamsFragment extends Fragment {
-    // pulling teams by event
-
-
-
-
-
-
-
-
-}
-
-
- */

@@ -22,7 +22,7 @@ import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
 import org.hartlandrobotics.echelonFTC.database.entities.Team;
 import org.hartlandrobotics.echelonFTC.models.PitScoutViewModel;
 import org.hartlandrobotics.echelonFTC.models.TeamViewModel;
-import org.hartlandrobotics.echelonFTC.ftapi.status.*;
+import org.hartlandrobotics.echelonFTC.ftcapi.status.FtcApiStatus;
 
 import java.util.Comparator;
 import java.util.List;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 public class PitScoutActivity extends EchelonActivity {
     private static final String TAG = "PitScoutActivity";
-    private ApiStatus status;
+    private FtcApiStatus status;
     TabLayout tabLayout;
     MaterialTextView selectTextPrompt;
     ViewPager2 viewPager;
@@ -58,7 +58,7 @@ public class PitScoutActivity extends EchelonActivity {
 
         setupToolbar("Pit Scout");
 
-        status = new ApiStatus(getApplicationContext());
+        status = new FtcApiStatus(getApplicationContext());
 
         saveButton = findViewById(R.id.ps_save_button);
         teamNumberAutoComplete = findViewById(R.id.teamSelectionAutoComplete);

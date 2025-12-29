@@ -1,4 +1,4 @@
-package org.hartlandrobotics.echelonFTC.ftapi.status;
+package org.hartlandrobotics.echelonFTC.ftcapi.status;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,8 +7,8 @@ import android.util.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class ApiStatus {
-    private final static String TAG = "ApiStatus";
+public class FtcApiStatus {
+    private final static String TAG = "FtcApiStatus";
 
     private final static String SEASON_KEY = "SeasonKey";
     private final static String YEAR_KEY = "YearKey";
@@ -26,7 +26,7 @@ public class ApiStatus {
 
 
 
-    public ApiStatus(Context appContext ){
+    public FtcApiStatus(Context appContext ){
         if( appContext == null){
             Log.e(TAG, "appContext must be provided to ApiStatus");
             throw new IllegalArgumentException("appContext cannot be null");

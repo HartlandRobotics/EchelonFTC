@@ -1,7 +1,6 @@
-package org.hartlandrobotics.echelonFTC.ftapi;
+package org.hartlandrobotics.echelonFTC.ftcapi;
 
 import android.content.Context;
-import android.util.Base64;
 import android.util.Log;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -16,11 +15,11 @@ import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-public class FtcApi {
+public class Api {
     static String TAG = "FtcApi";
-    private static FtcApiInterface ftcApi;
+    private static ApiInterface ftcApi;
 
-    public static FtcApiInterface getApiClient(Context context) {
+    public static ApiInterface getApiClient(Context context) {
 
         if (ftcApi == null) {
             AdminSettingsViewModel vm = AdminSettingsProvider.getAdminSettings(context);
@@ -47,7 +46,7 @@ public class FtcApi {
                     .client(client)
                     .build();
 
-            ftcApi = retrofit.create(FtcApiInterface.class);
+            ftcApi = retrofit.create(ApiInterface.class);
         }
         return ftcApi;
     }
