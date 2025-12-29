@@ -71,11 +71,11 @@ public class MainActivity extends EchelonActivity {
     private void handlePermissions() {
         int REQUEST_REQUIRED_PERMISSIONS = 1;
         String[] REQUIRED_PERMISSIONS = {
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                //Manifest.permission.READ_EXTERNAL_STORAGE,
+                //Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.INTERNET,
-                Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                //Manifest.permission.ACCESS_NETWORK_STATE,
+                //Manifest.permission.ACCESS_COARSE_LOCATION
         };
 
         boolean requestNeeded = false;
