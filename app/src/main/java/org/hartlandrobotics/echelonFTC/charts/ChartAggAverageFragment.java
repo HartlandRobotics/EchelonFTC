@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ChartAggAverageFragment extends Fragment {
-
+    private static final String TAG = "ChartAggAverageFragment";
     private BarChart aggScoringChart;
     private ListView teamNumberListView;
     private ListViewItemCheckboxBaseAdapter teamListAdapter;
@@ -60,9 +60,7 @@ public class ChartAggAverageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fragment_chart_agg_average, container, false);
-
-        return fragmentView;
+        return inflater.inflate(R.layout.fragment_chart_agg_average, container, false);
     }
 
     @Override
@@ -71,22 +69,17 @@ public class ChartAggAverageFragment extends Fragment {
 
         teamListAdapter = new ListViewItemCheckboxBaseAdapter(getContext());
 
-        teamNumberListView = view.findViewById(R.id.team_list);
-        //teamNumberRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ListView teamNumberListView = view.findViewById(R.id.team_list);
         teamNumberListView.setAdapter(teamListAdapter);
         teamNumberListView.setOnItemClickListener( new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("test", "test");
-
+                Log.i(TAG, "onItemClick");
             }
         });
 
-
-
         aggScoringChart = view.findViewById(R.id.agg_average_chart);
         setupChart();
-
     }
 
     public void setData(List<TeamListViewModel> allTeamNumbers, List<ChartsActivity.TeamDataViewModel> allTeamData) {
@@ -97,21 +90,17 @@ public class ChartAggAverageFragment extends Fragment {
         teamListAdapter.notifyDataSetChanged();
 
         setVisibleTeams();
-
         setupChartData();
     }
 
     public void setVisibleTeams(){
         List<String> visibleTeamNumbers = allTeamNumbers.stream()
                 .filter(TeamListViewModel::getIsSelected)
-                .map( teamListViewModel -> teamListViewModel.getTeamNumber() )
+                .map(TeamListViewModel::getTeamNumber)
                 .collect(Collectors.toList());
 
         visibleTeamData = allTeamData.stream()
-                .filter( teamData -> {
-                    boolean isVisible = visibleTeamNumbers.contains( String.valueOf(teamData.getTeamNumber()) );
-                    return isVisible;
-                })
+                .filter( teamData -> visibleTeamNumbers.contains( String.valueOf(teamData.getTeamNumber()) ))
                 .sorted(Comparator.comparingDouble(ChartsActivity.TeamDataViewModel::getTotalAverage).reversed())
                 .limit(35)
                 .collect(Collectors.toList());
@@ -130,7 +119,6 @@ public class ChartAggAverageFragment extends Fragment {
         // change the position of the y-labels
         YAxis leftAxis = aggScoringChart.getAxisLeft();
         leftAxis.setValueFormatter((value, axis) -> {
-            float val = value;
             return String.valueOf(value);
         });
         leftAxis.setAxisMinimum(0f);
@@ -207,9 +195,7 @@ public class ChartAggAverageFragment extends Fragment {
         aggScoringChart.setFitBars(true);
         aggScoringChart.invalidate();
     }
-
-
-
+    
     public class ListViewItemCheckboxBaseAdapter extends BaseAdapter {
         Context context;
         List<TeamListViewModel> teamViewModels;
