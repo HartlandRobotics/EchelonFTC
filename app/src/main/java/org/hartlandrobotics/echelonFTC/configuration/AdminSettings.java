@@ -10,14 +10,6 @@ public class AdminSettings {
     private String teamNumber;
 
     public AdminSettings(){};
-    /*
-    public AdminSettings(String blueAllianceApiKey, String scoutingSeason, String deviceRole, String teamNumber) {
-        this.blueAllianceApiKey = defaultString(blueAllianceApiKey);
-        this.scoutingSeason = defaultString(scoutingSeason);
-        this.deviceRole = StringUtils.defaultIfBlank(deviceRole, "red1");
-        this.teamNumber = teamNumber;
-    }
-    */
 
     public AdminSettings(String orangeAllianceApiKey, String ftcApiKey, String scoutingSeason, String deviceRole, String teamNumber) {
         this.orangeAllianceApiKey = defaultString(orangeAllianceApiKey);
@@ -26,13 +18,6 @@ public class AdminSettings {
         this.deviceRole = StringUtils.defaultIfBlank(deviceRole, "red1");
         this.teamNumber = teamNumber;
     }
-
-    /*
-    public String getBlueAllianceApiKey() { return defaultString(blueAllianceApiKey); }
-    public void setBlueAllianceApiKey(String blueAllianceApiKey) {
-        this.blueAllianceApiKey = defaultString(blueAllianceApiKey);
-    }
-    */
 
     public String getOrangeAllianceApiKey() { return defaultString(orangeAllianceApiKey); }
     public void setOrangeAllianceApiKey(String apiKey) {

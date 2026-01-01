@@ -106,8 +106,6 @@ public class ChartTeleOpTrendFragment extends Fragment {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setAxisMinimum(0);
 
-
-
         YAxis yAxis = teleOpTrendChart.getAxisLeft();
         yAxis.setAxisMinimum(0);
         yAxis.setDrawLabels(false);
@@ -115,8 +113,6 @@ public class ChartTeleOpTrendFragment extends Fragment {
         yAxis.setDrawGridLines(false);
 
         teleOpTrendChart.getAxisRight().setDrawAxisLine(false);
-
-
     }
 
     public void setupChartData(){

@@ -23,5 +23,4 @@ public class TeamListViewModel {
     public void setIsSelected(boolean isSelected){
         this.isSelected = isSelected;
     }
-
 }

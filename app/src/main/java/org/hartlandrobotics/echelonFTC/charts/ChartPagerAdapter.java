@@ -16,10 +16,7 @@ import java.util.Map;
 public class ChartPagerAdapter extends FragmentStateAdapter {
     public static final String TAG = "ChartPagerAdapter";
 
-    // data to come from activity List of TeamDataModels
-    //private PitScout data;
-
-    private static final int AGREGATE_AVERAGE_POSITION = 0;
+    private static final int AGGREGATE_AVERAGE_POSITION = 0;
     private static final int TREND_AUTO_POSITION = 1;
     private static final int TREND_TELEOP_POSITION = 2;
     private static final int TREND_ENDGAME_POSITION = 3;
@@ -36,7 +33,7 @@ public class ChartPagerAdapter extends FragmentStateAdapter {
 
     private Map<Integer, String> titleByPosition = new HashMap<>();
     public String getTabTitle(int position){
-        if( titleByPosition.size() == 0 ){
+        if(titleByPosition.isEmpty()){
             titleByPosition.put(0,"Average Points");
             titleByPosition.put(1,"Trend Auto");
             titleByPosition.put(2, "Trend TeleOp");
@@ -49,7 +46,7 @@ public class ChartPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case AGREGATE_AVERAGE_POSITION:
+            case AGGREGATE_AVERAGE_POSITION:
                 Log.i(TAG,"creating new Aggregate Average Fragment");
                 aggAverageFragment = new ChartAggAverageFragment();
                 return aggAverageFragment;
@@ -100,8 +97,5 @@ public class ChartPagerAdapter extends FragmentStateAdapter {
         if( chartEndGameTrendFragment != null){
             chartEndGameTrendFragment.setData(allTeamNumbers);
         }
-
-
-
     }
 }

@@ -134,18 +134,13 @@ public class ChartsActivity extends EchelonActivity {
                 );
                 allTeamsData.add(teamData);
             }
-
-
             updateFragmentData(allTeamNumbers, allTeamsData);
-
-            //setupChart();
         });
 
    }
     public void updateFragmentData(List<TeamListViewModel> allTeamNumbers, List<TeamDataViewModel> allTeamsData){
         chartPagerAdapter.updateFragmentData(allTeamNumbers, allTeamsData);
         chartPagerAdapter.notifyDataSetChanged();
-
     }
 
     public List<TeamListViewModel> getAllTeamNumbers(){
@@ -156,11 +151,8 @@ public class ChartsActivity extends EchelonActivity {
                 .filter( td -> td.getTeamNumber() == Integer.valueOf(teamNumber))
                 .findFirst();
 
-        return teamData.isPresent() ? teamData.get() : null;
+        return teamData.orElse(null);
     }
-
-
-
 
     public static class TeamDataViewModel{
         private int teamNumber;

@@ -22,7 +22,6 @@ public class AdminSettingsProvider {
     private static final String CONFIG_FILE_NAME = "adminSettings.json";
 
     // Field names used in shared preference storage
-    //public static final String BLUE_ALLIANCE_KEY = "BlueAllianceKey";
     public static final String ORANGE_ALLIANCE_KEY = "OrangeAllianceKey";
     public static final String FTC_API_KEY = "FtcApiKey";
     public static final String SCOUTING_YEAR = "ScoutingYear";
