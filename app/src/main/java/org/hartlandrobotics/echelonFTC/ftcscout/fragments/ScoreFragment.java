@@ -54,7 +54,7 @@ public class ScoreFragment extends Fragment {
 
         Button scoreFetchButton = fragmentView.findViewById(R.id.scorePullButton);
 
-        //setupCurrentScore();
+        setupCurrentScore();
         setupPullScore(scoreFetchButton);
 
         return fragmentView;
@@ -78,7 +78,7 @@ public class ScoreFragment extends Fragment {
 
         MatchScoreRepo matchScoreRepo = new MatchScoreRepo(ScoreFragment.this.requireActivity().getApplication());
         matchScoreRepo.getMatchScoresByYearEvent(status.getYear(), status.getEventCode()).observe(getViewLifecycleOwner(), scores -> {
-            //matchScoreListAdapter.setScores(scores);
+            matchScoreListAdapter.setScores(scores);
         });
     }
 
