@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import org.hartlandrobotics.echelonFTC.ftcapi.*;
+import org.hartlandrobotics.echelonFTC.ftcscout.FTCScoutActivity;
 
 public abstract class EchelonActivity extends AppCompatActivity {
     private TextView pageName;
@@ -31,6 +32,7 @@ public abstract class EchelonActivity extends AppCompatActivity {
     public void ftcApiPressed(MenuItem item){
         ApiActivity.launch(this);
     }
+    public void ftcScoutPressed(MenuItem item){ FTCScoutActivity.launch(this); };
     public void settingsPressed(MenuItem item) {
         AdminSettingsActivity.launch(this);
     }

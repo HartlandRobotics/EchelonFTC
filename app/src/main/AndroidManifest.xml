@@ -23,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EchelonFTC"
         >
+        <activity android:name=".ftcscout.FTCScoutActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".charts.ChartsActivity"
             android:exported="false"

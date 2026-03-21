@@ -2,6 +2,7 @@ package org.hartlandrobotics.echelonFTC.database;
 
 import android.content.Context;
 
+import org.hartlandrobotics.echelonFTC.database.dao.MatchScoreDao;
 import org.hartlandrobotics.echelonFTC.database.dao.RgnDao;
 import org.hartlandrobotics.echelonFTC.database.dao.RgnWithEventsDao;
 import org.hartlandrobotics.echelonFTC.database.dao.EvtWithMatchesDao;
@@ -11,6 +12,7 @@ import org.hartlandrobotics.echelonFTC.database.dao.MatchResultDao;
 import org.hartlandrobotics.echelonFTC.database.dao.PitScoutDao;
 import org.hartlandrobotics.echelonFTC.database.dao.SeasonDao;
 import org.hartlandrobotics.echelonFTC.database.dao.TeamDao;
+import org.hartlandrobotics.echelonFTC.database.entities.MatchScore;
 import org.hartlandrobotics.echelonFTC.database.entities.Rgn;
 import org.hartlandrobotics.echelonFTC.database.entities.RgnEvtCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Evt;
@@ -27,6 +29,7 @@ import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
 import org.hartlandrobotics.echelonFTC.database.entities.Season;
 import org.hartlandrobotics.echelonFTC.database.entities.Team;
+import org.hartlandrobotics.echelonFTC.database.entities.MatchScore;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -41,7 +44,8 @@ import java.util.concurrent.Executors;
         EvtMatchCrossRef.class,
         RgnEvtCrossRef.class,
         Match.class,
-        MatchResult.class
+        MatchResult.class,
+        MatchScore.class
 
 }, version = 8,
         exportSchema = false
@@ -57,6 +61,7 @@ public abstract class EchelonDatabase extends RoomDatabase {
     public abstract RgnWithEventsDao districtEventsDao();
     public abstract MatchDao matchDao();
     public abstract MatchResultDao matchResultDao();
+    public abstract MatchScoreDao matchScoreDao();
 
 
     private static volatile EchelonDatabase _instance;
@@ -71,6 +76,7 @@ public abstract class EchelonDatabase extends RoomDatabase {
                     _instance = Room.databaseBuilder(context.getApplicationContext(),
                             EchelonDatabase.class, "echelon_ftc_database.db")
                             .fallbackToDestructiveMigration()
+                            .setJournalMode(JournalMode.TRUNCATE)
                             .addCallback(roomDatabaseCallback)
                             .build();
                 }
@@ -120,6 +126,8 @@ public abstract class EchelonDatabase extends RoomDatabase {
                 PitScoutDao pitScoutDao = _instance.pitScoutDao();
                 SeasonDao seasonDao = _instance.seasonDao();
                 MatchResultDao matchResultDao = _instance.matchResultDao();
+                MatchScoreDao matchScoreDao = _instance.matchScoreDao();
+
             } );
         }
     };

@@ -10,6 +10,13 @@
         app:showAsAction="ifRoom|withText" />
 
     <item
+        android:id="@+id/ftcScout"
+        android:icon="@drawable/bullseye"
+        android:onClick="ftcScoutPressed"
+        android:title=""
+        app:showAsAction="ifRoom|withText" />
+
+    <item
         android:id="@+id/miExport"
         android:icon="@drawable/baseline_drive_file_move_white_24dp"
         android:onClick="exportPressed"
