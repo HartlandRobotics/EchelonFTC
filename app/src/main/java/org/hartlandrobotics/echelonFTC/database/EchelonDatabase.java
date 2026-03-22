@@ -3,6 +3,7 @@ package org.hartlandrobotics.echelonFTC.database;
 import android.content.Context;
 
 import org.hartlandrobotics.echelonFTC.database.dao.MatchScoreDao;
+import org.hartlandrobotics.echelonFTC.database.dao.OprDao;
 import org.hartlandrobotics.echelonFTC.database.dao.RgnDao;
 import org.hartlandrobotics.echelonFTC.database.dao.RgnWithEventsDao;
 import org.hartlandrobotics.echelonFTC.database.dao.EvtWithMatchesDao;
@@ -13,6 +14,7 @@ import org.hartlandrobotics.echelonFTC.database.dao.PitScoutDao;
 import org.hartlandrobotics.echelonFTC.database.dao.SeasonDao;
 import org.hartlandrobotics.echelonFTC.database.dao.TeamDao;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchScore;
+import org.hartlandrobotics.echelonFTC.database.entities.Opr;
 import org.hartlandrobotics.echelonFTC.database.entities.Rgn;
 import org.hartlandrobotics.echelonFTC.database.entities.RgnEvtCrossRef;
 import org.hartlandrobotics.echelonFTC.database.entities.Evt;
@@ -45,7 +47,8 @@ import java.util.concurrent.Executors;
         RgnEvtCrossRef.class,
         Match.class,
         MatchResult.class,
-        MatchScore.class
+        MatchScore.class,
+        Opr.class
 
 }, version = 8,
         exportSchema = false
@@ -62,6 +65,7 @@ public abstract class EchelonDatabase extends RoomDatabase {
     public abstract MatchDao matchDao();
     public abstract MatchResultDao matchResultDao();
     public abstract MatchScoreDao matchScoreDao();
+    public abstract OprDao oprDao();
 
 
     private static volatile EchelonDatabase _instance;
@@ -127,7 +131,7 @@ public abstract class EchelonDatabase extends RoomDatabase {
                 SeasonDao seasonDao = _instance.seasonDao();
                 MatchResultDao matchResultDao = _instance.matchResultDao();
                 MatchScoreDao matchScoreDao = _instance.matchScoreDao();
-
+                OprDao oprDao = _instance.oprDao();
             } );
         }
     };

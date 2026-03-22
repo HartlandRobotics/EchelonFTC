@@ -113,7 +113,7 @@ public class ScoreFragment extends Fragment {
                                         .collect(Collectors.toList());
 
                                 matchScoreRepo.upsert(scores);
-                                //matchScoreListAdapter.setScores(scores);
+                                matchScoreListAdapter.setScores(scores);
                             }
                         }
                         catch(Exception e){
