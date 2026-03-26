@@ -18,6 +18,7 @@ import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
 //import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 import org.hartlandrobotics.echelonFTC.ftcapi.status.*;
+import org.hartlandrobotics.echelonFTC.utilities.RoleUtilities;
 
 public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private static final String TAG = "MatchScoutingTeleopActivity";
@@ -87,13 +88,20 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         teamKeyText.setTextColor(settings.getDeviceRole().contains("red") ? getResources().getColor(R.color.redAlliance) : getResources().getColor(R.color.blueAlliance));
         teamKeyText.setText(teamKey);
 
-        FtcApiStatus orangeAllianceStatus = new FtcApiStatus(getApplicationContext());
+        FtcApiStatus ftcApiStatus = new FtcApiStatus(getApplicationContext());
+        AdminSettings adminSettings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
+
 
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
         matchResultViewModel.getMatchResultByMatchTeam(matchKey, teamKey)
                 .observe(MatchScoutingTeleopActivity.this, mr->{
                     if( mr == null ){
-                        matchResult = matchResultViewModel.getDefault(orangeAllianceStatus.getEventKey(), matchKey, teamKey);
+                        matchResult = matchResultViewModel.getDefault(
+                                ftcApiStatus.getEventKey(),
+                                matchKey,
+                                teamKey,
+                                RoleUtilities.deviceColor(adminSettings.getDeviceRole())
+                        );
                     } else {
                         matchResult = mr;
                     }

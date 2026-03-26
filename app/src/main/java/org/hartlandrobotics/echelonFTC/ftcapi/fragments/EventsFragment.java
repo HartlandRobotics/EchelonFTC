@@ -82,6 +82,7 @@ public class EventsFragment extends Fragment {
         String currentRegion = status.getRegionKey();
         Log.e("FtcApiEventsFragment", "current Region " + currentRegion);
         eventRepo.getRegionWithEvents(currentRegion).observe(getViewLifecycleOwner(), regionWithEvents -> {
+            if( regionWithEvents == null ) return;
             List<Evt> matchingEvents = regionWithEvents.events;
             Log.e("FtcApiEventsFragment","size: " + matchingEvents.size());
             eventListAdapter.setEvents(matchingEvents);

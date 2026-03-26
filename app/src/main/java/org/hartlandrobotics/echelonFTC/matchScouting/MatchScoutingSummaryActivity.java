@@ -16,10 +16,13 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.hartlandrobotics.echelonFTC.R;
+import org.hartlandrobotics.echelonFTC.configuration.AdminSettings;
+import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
 //import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 import org.hartlandrobotics.echelonFTC.ftcapi.status.*;
+import org.hartlandrobotics.echelonFTC.utilities.RoleUtilities;
 
 public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private static final String TAG = "MatchScoutingSummaryActivity";
@@ -104,13 +107,16 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         matchKey = bundle.getString(MATCH_KEY);
         teamKey = bundle.getString(TEAM_KEY);
-        FtcApiStatus orangeAllianceStatus = new FtcApiStatus(getApplicationContext());
+        AdminSettings adminStatus = AdminSettingsProvider.getAdminSettings(getApplicationContext());
+        String role = adminStatus.getDeviceRole();
+        String alliance = RoleUtilities.deviceColor(role);
+        FtcApiStatus ftcApiStatus = new FtcApiStatus(getApplicationContext());
 
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
         matchResultViewModel.getMatchResultByMatchTeam(matchKey, teamKey)
                 .observe(MatchScoutingSummaryActivity.this, mr->{
                     if( mr == null ){
-                        matchResult = matchResultViewModel.getDefault(orangeAllianceStatus.getEventKey(), matchKey, teamKey);
+                        matchResult = matchResultViewModel.getDefault(ftcApiStatus.getEventKey(), matchKey, teamKey, alliance);
                     } else {
                         matchResult = mr;
                     }

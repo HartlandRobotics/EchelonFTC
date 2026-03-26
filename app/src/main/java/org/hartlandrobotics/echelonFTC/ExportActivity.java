@@ -21,8 +21,8 @@ import org.hartlandrobotics.echelonFTC.database.entities.PitScout;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
 import org.hartlandrobotics.echelonFTC.models.PitScoutViewModel;
 import org.hartlandrobotics.echelonFTC.ftcapi.status.*;
-import org.hartlandrobotics.echelonFTC.utilities.DeviceUtilities;
 import org.hartlandrobotics.echelonFTC.utilities.FileUtilities;
+import org.hartlandrobotics.echelonFTC.utilities.RoleUtilities;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -48,9 +48,14 @@ public class ExportActivity extends EchelonActivity {
     private Button importCSVMatchButton;
 
     private MatchResultViewModel matchResultViewModel;
+
+    private boolean isRed1;
+    private boolean isRed2;
+
+    private boolean isBlue1;
+    private boolean isBlue2;
     AdminSettings adminSettings;
     String role;
-    DeviceUtilities utilities;
 
     public static void launch(Context context) {
         Intent intent = new Intent(context, ExportActivity.class);
@@ -66,41 +71,34 @@ public class ExportActivity extends EchelonActivity {
 
         adminSettings = AdminSettingsProvider.getAdminSettings(this);
         role = adminSettings.getDeviceRole();
+        isRed1 = role.equalsIgnoreCase("Red1");
+        isRed2 = role.equalsIgnoreCase("Red2");
+        isBlue1 = role.equalsIgnoreCase("Blue1");
+        isBlue2 = role.equalsIgnoreCase("Blue2");
 
 
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
 
         exportCaptainMatchResultsButton = findViewById(R.id.exportCaptainMatchResults);
+        exportCaptainMatchResultsButton.setVisibility(RoleUtilities.isAdminTablet(role) ? View.VISIBLE: View.GONE);
+
+
         exportToTableaButton = findViewById(R.id.exportToTableu);
 
-        Context appContext = getApplicationContext();
-        String deviceName = DeviceUtilities.getDeviceName(appContext);
-        if (!deviceName.contains("aptain") && !deviceName.contains("oach")) {
-            exportCaptainMatchResultsButton.setVisibility(View.GONE);
-            exportToTableaButton.setVisibility(View.GONE);
-        }
-        //if (!deviceName.contains("aptain")) {
-        //    exportCaptainMatchResultsButton.setVisibility(View.GONE);
-        //}
 
         exportRed1MatchResultsButton = findViewById(R.id.exportRed1MatchResults);
-        if (!role.equalsIgnoreCase("Red1") || deviceName.contains("aptain") ) {
-            exportRed1MatchResultsButton.setVisibility(View.GONE);
-        }
+        exportRed1MatchResultsButton.setVisibility(isRed1 ? View.VISIBLE : View.GONE);
+
         exportRed2MatchResultsButton = findViewById(R.id.exportRed2MatchResults);
-        if (!role.equalsIgnoreCase("Red2")) {
-            exportRed2MatchResultsButton.setVisibility(View.GONE);
-        }
+        exportRed2MatchResultsButton.setVisibility(isRed2 ? View.VISIBLE : View.GONE);
 
         exportBlue1MatchResultsButton = findViewById(R.id.exportBlue1MatchResults);
-        if (!role.equalsIgnoreCase("Blue1")) {
-            exportBlue1MatchResultsButton.setVisibility(View.GONE);
-        }
+        exportBlue1MatchResultsButton.setVisibility(isBlue1 ? View.VISIBLE : View.GONE);
 
         exportBlue2MatchResultsButton = findViewById(R.id.exportBlue2MatchResults);
-        if (!role.equalsIgnoreCase("Blue2")) {
-            exportBlue2MatchResultsButton.setVisibility(View.GONE);
-        }
+        exportBlue2MatchResultsButton.setVisibility(isBlue2 ? View.VISIBLE : View.GONE);
+
+
 
 
         //exportMatchResults();
@@ -197,11 +195,12 @@ public class ExportActivity extends EchelonActivity {
         matchResultViewModel.getMatchResultsWithTeamMatchByEvent(apiStatus.getEventKey()).observe(this, matchResults -> {
 
             try (FileOutputStream outputStream = new FileOutputStream(file)) {
-                String header = "Match_Result_Key,Event_Key,Match_Key,Team_Key,has_been_synced"
+                String header = "Match_Result_Key,Event_Key,Match_Key,Team_Key,has_been_synced,alliance"
                         + ",Auto_Leave ,Auto_NotUsed1, Auto_NotUsed2, Auto_NotUsed3, Auto_NotUsed4"
                         + ",Auto_Artifact_Classified ,Auto_Artifact_Overflow ,Auto_Motif ,Auto_Pattern ,Auto_Missed"
                         + ",TeleOp_Artifact_Classified,TeleOp_Artifact_Overflow,TeleOp_Artifact_Depot, TeleOp_Pattern, TeleOp_Missed"
                         + ",End_BaseReturnString, End_Base_TwoBots,End_NotUsed1,End_NotUsed2,End_NotUsed3, End_BaseReturn"
+                        + ",Contribution"
                         + ",AdditionalNotes, DefensesCount\n";
                 outputStream.write(header.getBytes());
                 for (MatchResultWithTeamMatch matchResultWithTeamMatch : matchResults) {
@@ -218,6 +217,7 @@ public class ExportActivity extends EchelonActivity {
                     dataForFile.add(String.valueOf(mr.getHasBeenSynced()));
                     //dataForFile.add(String.valueOf(m.getMatchName()));
                     //dataForFile.add(String.valueOf(t.getTeamNumber()));
+                    dataForFile.add(mr.getAlliance());
 
                     dataForFile.add(String.valueOf(mr.getAutoFlag1()));
                     dataForFile.add(String.valueOf(mr.getAutoFlag2()));
@@ -262,6 +262,8 @@ public class ExportActivity extends EchelonActivity {
                     dataForFile.add(String.valueOf(mr.getEndFlag3()));
                     dataForFile.add(String.valueOf(mr.getEndFlag4()));
                     dataForFile.add(String.valueOf(mr.getEndInt6()));
+
+                    dataForFile.add(String.valueOf(mr.getContribution()));
 
                     dataForFile.add(StringEscapeUtils.escapeCsv(mr.getAdditionalNotes().trim()));
                     //dataForFile.add("test");//(mr.getAdditionalNotes());
@@ -408,12 +410,13 @@ public class ExportActivity extends EchelonActivity {
                 String[] columns = currentLine.split(",");
                 //String header = "Event_Key,Match_Key,Team_Key"
 
-                String header = "Match_Result_Key, Event_Key,Match_Key,Team_Key,has_been_synced"
+                String header = "Match_Result_Key, Event_Key,Match_Key,Team_Key,has_been_synced,alliance"
                         + ",AutoFlag1 ,AutoFlag2, AutoFlag3, AutoFlag4, AutoFlag5"
                         + ",AutoInt6 ,AutoInt7 ,AutoInt8 ,AutoInt9 ,AutoInt10"
                         + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
                         + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6"
                         //+ ",DefensesCount,Match_Result_Key"
+                        + ",Contribution"
                         + ", AdditionalNotes\n";
 
                 String matchResultKey = columns[0];
@@ -421,34 +424,36 @@ public class ExportActivity extends EchelonActivity {
                 String matchKey = columns[2];
                 String teamKey = columns[3];
                 String has_been_synced = columns[4];
+                String alliance = columns[5];
 
-                String AutoFlag1 = columns[5];
-                String AutoFlag2 = columns[6];
-                String AutoFlag3 = columns[7];
-                String AutoFlag4 = columns[8];
-                String AutoFlag5 = columns[9];
+                String AutoFlag1 = columns[6];
+                String AutoFlag2 = columns[7];
+                String AutoFlag3 = columns[8];
+                String AutoFlag4 = columns[9];
+                String AutoFlag5 = columns[10];
 
-                String AutoInt6 = columns[10];
-                String AutoInt7 = columns[11];
-                String AutoInt8 = columns[12];
-                String AutoInt9 = columns[13];
-                String AutoInt10 = columns[14];
+                String AutoInt6 = columns[11];
+                String AutoInt7 = columns[12];
+                String AutoInt8 = columns[13];
+                String AutoInt9 = columns[14];
+                String AutoInt10 = columns[15];
 
-                String TeleOpInt1 = columns[15];
-                String TeleOpInt2 = columns[16];
-                String TeleOpInt3 = columns[17];
-                String TeleOpInt4 = columns[18];
-                String TeleOpInt5 = columns[19];
+                String TeleOpInt1 = columns[16];
+                String TeleOpInt2 = columns[17];
+                String TeleOpInt3 = columns[18];
+                String TeleOpInt4 = columns[19];
+                String TeleOpInt5 = columns[20];
 
-                String EndFlag1 = columns[20];
-                String EndFlag2 = columns[21];
-                String EndFlag3 = columns[22];
-                String EndFlag4 = columns[23];
-                String EndInt6 = columns[24];
+                String EndFlag1 = columns[21];
+                String EndFlag2 = columns[22];
+                String EndFlag3 = columns[23];
+                String EndFlag4 = columns[24];
+                String EndInt6 = columns[25];
 
                 String teleDef = "0";
                 //String matchResultKey = columns[26];
-                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[25]);
+                String Contribution = columns[26];
+                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[27]);
 
                 MatchResult matchResult = new MatchResult(
                         matchResultKey,
@@ -456,6 +461,7 @@ public class ExportActivity extends EchelonActivity {
                         matchKey,
                         teamKey,
                         false,
+                        alliance,
 
                         AutoFlag1.equalsIgnoreCase("true"),
                         AutoFlag2.equalsIgnoreCase("true"),
@@ -483,7 +489,8 @@ public class ExportActivity extends EchelonActivity {
 
                         AdditionalNotes,
                         //,
-                        Integer.parseInt(teleDef)
+                        Integer.parseInt(teleDef),
+                        Integer.parseInt(Contribution)
                 );
                 matchResultViewModel.upsert(matchResult);
             }
@@ -502,8 +509,6 @@ public class ExportActivity extends EchelonActivity {
             }
         });
     }
-
-    //String transferString = "transfer";
 
     public File getImportPath() {
         return FileUtilities.ensureDirectory(getApplicationContext(),  "transfer");

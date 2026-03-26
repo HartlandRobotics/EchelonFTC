@@ -18,6 +18,7 @@ import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.models.MatchResultViewModel;
 //import org.hartlandrobotics.echelonFTC.status.OrangeAllianceStatus;
 import org.hartlandrobotics.echelonFTC.ftcapi.status.*;
+import org.hartlandrobotics.echelonFTC.utilities.RoleUtilities;
 
 public class MatchScoutingAutoActivity extends AppCompatActivity {
     private static final String MATCH_KEY = "auto_match_key_param";
@@ -71,6 +72,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
 
         Context appContext = this.getApplicationContext();
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(appContext);
+        String alliance = RoleUtilities.deviceColor(settings.getDeviceRole());
         teamKeyText = findViewById(R.id.teamKeyText);
         teamKeyText.setTextColor(settings.getDeviceRole().contains("red") ? getResources().getColor(R.color.redAlliance) : getResources().getColor(R.color.blueAlliance));
         teamKeyText.setText(teamKey);
@@ -81,7 +83,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         matchResultViewModel.getMatchResultByMatchTeam(matchKey, teamKey)
                 .observe(MatchScoutingAutoActivity.this, mr->{
                     if( mr == null ){
-                        matchResult = matchResultViewModel.getDefault(orangeAllianceStatus.getEventKey(), matchKey, teamKey);
+                        matchResult = matchResultViewModel.getDefault(orangeAllianceStatus.getEventKey(), matchKey, teamKey, alliance);
                     } else {
                         matchResult = mr;
                     }
@@ -187,5 +189,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         } else {
             leaveDrawable = R.drawable.leave_blue;
         }
+
+
     }
 }

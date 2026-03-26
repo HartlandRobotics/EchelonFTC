@@ -11,5 +11,5 @@
     <color name="blueAlliance">#8a85f5</color>
     <color name="redAlliance">#f18186</color>
     <color name="summaryBackground">#CCCCCC</color>
-
+    <color name="hrYellowTextColor">#fecc09</color>
 </resources>

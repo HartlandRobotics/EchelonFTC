@@ -9,6 +9,10 @@ public class CurrentGame {
         this.result = result;
     }
 
+    public int getTotalPoints(){
+        return getAutoPoints() + getTeleOpPoints() + getEndPoints();
+    }
+
     public int getAutoPoints() {
         int autoPoints = 0;
         autoPoints += this.getAuto1Points();

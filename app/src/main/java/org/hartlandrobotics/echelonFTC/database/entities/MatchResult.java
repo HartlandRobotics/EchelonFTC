@@ -34,6 +34,9 @@ public class MatchResult {
     @ColumnInfo(name = "has_been_synced")
     private boolean hasBeenSynced;
 
+    @ColumnInfo(name = "alliance")
+    private String alliance;
+
     @ColumnInfo(name="auto_flag_1")
     private boolean autoFlag1;
 
@@ -98,6 +101,9 @@ public class MatchResult {
     @ColumnInfo(name = "defense_count")
     private int defenseCount;
 
+    @ColumnInfo(name = "contribution", defaultValue = "0")
+    private int contribution;
+
     @Ignore
     public MatchResult(){}
 
@@ -107,6 +113,7 @@ public class MatchResult {
             @NonNull String matchKey,
             @NonNull String teamKey,
             boolean hasBeenSynced,
+            String alliance,
 
             boolean autoFlag1,
             boolean autoFlag2,
@@ -132,7 +139,8 @@ public class MatchResult {
             int endInt6,
 
             String additionalNotes,
-            int defenseCount
+            int defenseCount,
+            int contribution
     ) {
 
         this.matchResultKey = StringUtils.defaultIfBlank(matchResultKey, UUID.randomUUID().toString());
@@ -140,6 +148,7 @@ public class MatchResult {
         this.matchKey = matchKey;
         this.teamKey = teamKey;
         this.hasBeenSynced = hasBeenSynced;
+        this.alliance = alliance;
 
         this.autoFlag1 = autoFlag1;
         this.autoFlag2 = autoFlag2;
@@ -168,6 +177,7 @@ public class MatchResult {
 
         this.additionalNotes = additionalNotes;
         this.defenseCount = defenseCount;
+        this.contribution = contribution;
     }
 
     public String getMatchResultKey() { return matchResultKey; }
@@ -192,6 +202,9 @@ public class MatchResult {
     public void setHasBeenSynced(boolean hasBeenSynced){
         this.hasBeenSynced = hasBeenSynced;
     }
+
+    public String getAlliance() { return alliance; }
+    public void setAlliance(String alliance) { this.alliance = alliance; }
 
     public boolean getAutoFlag1(){ return autoFlag1; }
     public void setAutoFlag1(boolean autoFlag1){ this.autoFlag1 = autoFlag1; }
@@ -254,6 +267,9 @@ public class MatchResult {
     public void setDefenseCount( int defenseCount ){
         this.defenseCount = defenseCount;
     }
+
+    public int getContribution() { return contribution; }
+    public void setContribution(int contribution) { this.contribution = contribution; }
 
     public static CurrentGame toCurrentGamePoints(MatchResult matchResult){
         return new CurrentGame(matchResult);

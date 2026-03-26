@@ -40,6 +40,8 @@ public class MainActivity extends EchelonActivity {
     private MaterialButton pitScouting;
     private MaterialButton matchSchedule;
     private MaterialButton chartsButton;
+    private MaterialButton accuracyButton;
+
 
     private AutoCompleteTextView seasonsAutoComplete;
 
@@ -62,6 +64,7 @@ public class MainActivity extends EchelonActivity {
         setupPitScoutingButton();
         setupMatchScheduleButton();
         setupChartsButton();
+        setupAccuracyButton();
 
         setupSeasonSelection();
 
@@ -118,6 +121,15 @@ public class MainActivity extends EchelonActivity {
         }
     }
 
+    private void setupAccuracyButton(){
+        accuracyButton = findViewById(R.id.main_admin_accuracy_config);
+        accuracyButton.setOnClickListener( v -> AccuracyActivity.launch(MainActivity.this));
+
+        //if( RoleUtilities.isAdminTablet(deviceRole)){
+        //    accuracyButton.setVisibility(View.VISIBLE);
+        //}
+    }
+
     private void setupStatus(){
         status.loadSettingsFromPrefs();
 
@@ -128,7 +140,7 @@ public class MainActivity extends EchelonActivity {
         districtLayout.getEditText().setText(status.getRegionKey());
 
         TextInputLayout eventLayout = findViewById(R.id.event_status_layout);
-        eventLayout.getEditText().setText(status.getEventKey());
+        eventLayout.getEditText().setText(status.getEventCode());
 
         AdminSettings adminSettings = AdminSettingsProvider.getAdminSettings(this);
         TextInputLayout deviceLayout = findViewById(R.id.device_status_layout);

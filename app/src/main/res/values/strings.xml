@@ -12,7 +12,7 @@
         <item>C++</item>
     </string-array>
     <string-array name="drive_train">
-        <item></item>
+        <item/>
         <item>2wd</item>
         <item>4wd</item>
         <item>6wd</item>
@@ -22,12 +22,12 @@
         <item>swerve</item>
     </string-array>
     <string-array name="ingest_types">
-        <item></item>
+        <item/>
         <item>claw</item>
         <item>active</item>
     </string-array>
     <string-array name="outgest_types">
-        <item></item>
+        <item/>
         <item>arm</item>
         <item>lift</item>
     </string-array>
@@ -44,11 +44,16 @@
         <item>Scorer</item>
     </string-array>
     <string-array name="hang_park_types">
-        <item></item>
+        <item/>
         <item>Level 1</item>
         <item>Level 2</item>
         <item>Level 3</item>
         <item>Observation Zone</item>
+    </string-array>
+
+    <string-array name="calculation_type">
+        <item>StudentScore</item>
+        <item>OPR</item>
     </string-array>
 
 </resources>
