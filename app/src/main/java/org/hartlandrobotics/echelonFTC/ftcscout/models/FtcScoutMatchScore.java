@@ -61,7 +61,7 @@ public class FtcScoutMatchScore {
                 getRedTotal(),
                 getRedPenalty(),
                 getBlueTotal(),
-                getBlueTotal()
+                getBluePenalty()
         );
 
         return matchScore;

@@ -76,6 +76,9 @@ public class TeamsFragment extends Fragment {
         teamRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         teamRecycler.setAdapter(teamListAdapter);
         teamRecycler.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
+
+        //setupCurrentTeams();
+
     }
 
     public void setupCurrentTeams(){

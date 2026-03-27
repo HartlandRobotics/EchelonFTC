@@ -143,7 +143,7 @@ public class AccuracyActivity extends EchelonActivity{
                                         }
 
 
-                                        vm.setTablet1Name(currentTeamKey.substring(3));
+                                        vm.setTablet1Name(currentTeamKey);
                                     }
                                     {
                                         String currentTeamKey = match.getRed2TeamKey();
@@ -157,7 +157,7 @@ public class AccuracyActivity extends EchelonActivity{
                                             studentSum += cg.getTotalPoints();
                                         }
 
-                                        vm.setTablet2Name(currentTeamKey.substring(3));
+                                        vm.setTablet2Name(currentTeamKey);
                                     }
 
                                     vm.setBlueAlliancePoints(matchScore.getRedTotal() - matchScore.getRedPenalty());
@@ -181,7 +181,7 @@ public class AccuracyActivity extends EchelonActivity{
                                             studentSum += cg.getTotalPoints();
                                         }
 
-                                        vm.setTablet1Name(currentTeamKey.substring(3));
+                                        vm.setTablet1Name(currentTeamKey);
                                     }
                                     {
                                         String currentTeamKey = match.getBlue2TeamKey();
@@ -195,7 +195,7 @@ public class AccuracyActivity extends EchelonActivity{
                                             studentSum += cg.getTotalPoints();
                                         }
 
-                                        vm.setTablet2Name(currentTeamKey.substring(3));
+                                        vm.setTablet2Name(currentTeamKey);
                                     }
                                     vm.setBlueAlliancePoints(matchScore.getBlueTotal() - matchScore.getBluePenalty());
                                     vm.setStudentPoints(studentSum);
@@ -296,7 +296,7 @@ public class AccuracyActivity extends EchelonActivity{
 
         //String matchValueStr = StringUtils.defaultIfBlank(matchKey, "2025_qm0" );
         //Log.i(TAG, String.valueOf(matchKey.length()));
-        String matchNumberStr = matchKey.split("_")[1].substring(2);
+        String matchNumberStr = matchKey.split("_")[2];
         return Integer.parseInt(matchNumberStr);
     }
 

@@ -25,6 +25,7 @@ import org.hartlandrobotics.echelonFTC.matchScouting.MatchSelectionActivity;
 import org.hartlandrobotics.echelonFTC.models.SeasonViewModel;
 import org.hartlandrobotics.echelonFTC.pitScouting.PitScoutActivity;
 import org.hartlandrobotics.echelonFTC.ftcapi.status.FtcApiStatus;
+import org.hartlandrobotics.echelonFTC.utilities.RoleUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,10 @@ import java.util.stream.Collectors;
 
 public class MainActivity extends EchelonActivity {
     private FtcApiStatus status;
+    private AdminSettings adminSettings;
 
-    String deviceName;
+    private String deviceRole;
+    private boolean hasSelectedSeason;
 
     private MaterialButton startScouting;
     private MaterialButton pitScouting;
@@ -57,8 +60,9 @@ public class MainActivity extends EchelonActivity {
 
         setupToolbar("Home");
 
+        adminSettings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
         status = new FtcApiStatus(getApplicationContext());
-        deviceName = Settings.Secure.getString(getContentResolver(), "bluetooth_name");
+        deviceRole = adminSettings.getDeviceRole();
 
         setupStartScoutingButton();
         setupPitScoutingButton();
@@ -74,11 +78,7 @@ public class MainActivity extends EchelonActivity {
     private void handlePermissions() {
         int REQUEST_REQUIRED_PERMISSIONS = 1;
         String[] REQUIRED_PERMISSIONS = {
-                //Manifest.permission.READ_EXTERNAL_STORAGE,
-                //Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.INTERNET,
-                //Manifest.permission.ACCESS_NETWORK_STATE,
-                //Manifest.permission.ACCESS_COARSE_LOCATION
         };
 
         boolean requestNeeded = false;
@@ -116,7 +116,7 @@ public class MainActivity extends EchelonActivity {
         chartsButton = findViewById(R.id.charts_button);
         chartsButton.setOnClickListener( v -> ChartsActivity.launch(MainActivity.this));
 
-        if( deviceName.contains("aptain" ) || deviceName.contains("oach")){
+        if(RoleUtilities.isAdminTablet(deviceRole)){
             chartsButton.setVisibility(View.VISIBLE);
         }
     }
@@ -125,9 +125,9 @@ public class MainActivity extends EchelonActivity {
         accuracyButton = findViewById(R.id.main_admin_accuracy_config);
         accuracyButton.setOnClickListener( v -> AccuracyActivity.launch(MainActivity.this));
 
-        //if( RoleUtilities.isAdminTablet(deviceRole)){
-        //    accuracyButton.setVisibility(View.VISIBLE);
-        //}
+        if( RoleUtilities.isAdminTablet(deviceRole)){
+            accuracyButton.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setupStatus(){
@@ -179,7 +179,8 @@ public class MainActivity extends EchelonActivity {
 
                 seasonsAutoComplete.setText(selectedText, false);
             }
-            setEnabled(foundIndex.isPresent());
+            hasSelectedSeason = foundIndex.isPresent();
+            setEnabled();
 
             seasonsAutoComplete.setOnItemClickListener((parent, view, position, id) -> {
                 Season selectedSeason = seasons.get(position);
@@ -188,14 +189,21 @@ public class MainActivity extends EchelonActivity {
                 String selectedText = status.getSeason() + " - " + status.getYear();
                 seasonsAutoComplete.setText(selectedText, false);
                 setupStatus();
-                setEnabled(true);
+                hasSelectedSeason = true;
+                setEnabled();
             });
         });
     }
 
 
-    private void setEnabled(boolean seasonSelected){
-           startScouting.setEnabled(seasonSelected);
-           pitScouting.setEnabled(seasonSelected);
+    private void setEnabled(){
+        startScouting.setEnabled(hasSelectedSeason && RoleUtilities.isStudentTablet(deviceRole));
+        pitScouting.setEnabled(hasSelectedSeason && RoleUtilities.isAdminTablet(deviceRole));
+        if(hasSelectedSeason && RoleUtilities.isAdminTablet(deviceRole)){
+            pitScouting.setVisibility(View.VISIBLE);
+        }
+        matchSchedule.setEnabled(hasSelectedSeason);
+        chartsButton.setEnabled(hasSelectedSeason && RoleUtilities.isAdminTablet(deviceRole));
+        accuracyButton.setEnabled(RoleUtilities.isAdminTablet(deviceRole));
     }
 }

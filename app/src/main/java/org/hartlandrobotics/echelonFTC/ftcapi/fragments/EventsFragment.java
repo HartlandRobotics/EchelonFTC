@@ -50,14 +50,13 @@ public class EventsFragment extends Fragment {
         errorTextDisplay = fragmentView.findViewById(R.id.errorTextDisplay);
         errorTextDisplay.setVisibility(View.GONE);
 
-        setupCurrentEvents();
-
         return fragmentView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
         setupCurrentEvents();
     }
 
@@ -71,6 +70,7 @@ public class EventsFragment extends Fragment {
         eventRecycler.setAdapter(eventListAdapter);
         eventRecycler.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
 
+        //setupCurrentEvents();
     }
 
     //Bring back later when filter events by year

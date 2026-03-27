@@ -14,7 +14,7 @@ import org.hartlandrobotics.echelonFTC.ftcapi.models.ApiEvents;
 import org.hartlandrobotics.echelonFTC.ftcapi.models.ApiSchedule;
 
 public interface ApiInterface {
-    @GET("")
+    @GET(" ")
     Call<ApiIndex> getStatus();
 
     @GET("{year}/events")

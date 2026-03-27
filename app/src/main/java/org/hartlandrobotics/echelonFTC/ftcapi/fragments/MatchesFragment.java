@@ -83,6 +83,7 @@ public class MatchesFragment extends Fragment {
         matchRecycler.setAdapter(matchListAdapter);
         matchRecycler.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
 
+        setupCurrentMatches();
     }
 
     public  void setupPullMatches(){

@@ -53,11 +53,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Pit Scouting"
-        app:layout_constraintTop_toBottomOf="@id/main_admin_start_scouting"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+       android:visibility="gone"
+       app:layout_constraintTop_toBottomOf="@id/main_admin_start_scouting"
+       app:layout_constraintBottom_toTopOf="@id/match_schedule_button"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_percent="0.33"
-        app:layout_constraintBottom_toTopOf="@id/match_schedule_button"
         />
 
     <com.google.android.material.button.MaterialButton
@@ -66,10 +67,10 @@
         android:layout_height="wrap_content"
         android:text="Match Schedule"
         app:layout_constraintTop_toBottomOf="@id/pit_scout_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.33"
         app:layout_constraintBottom_toTopOf="@id/charts_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.33"
         />
 
     <com.google.android.material.button.MaterialButton
@@ -77,12 +78,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="charts"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/match_schedule_button"
         app:layout_constraintBottom_toTopOf="@id/main_admin_accuracy_config"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_percent="0.33"
-        android:visibility="gone"
         />
 
     <com.google.android.material.button.MaterialButton
@@ -90,6 +91,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Accuracy Config"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/charts_button"
         app:layout_constraintBottom_toTopOf="@id/status_layout"
         app:layout_constraintEnd_toEndOf="parent"

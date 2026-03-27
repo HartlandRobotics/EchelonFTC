@@ -144,6 +144,9 @@ public class AdminSettingsActivity extends EchelonActivity {
         buttonRoleByText.put("blue1", R.id.blue1);
         buttonRoleByText.put("blue2", R.id.blue2);
         buttonRoleByText.put("blue3", R.id.blue3);
+        buttonRoleByText.put("captain", R.id.captain);
+        buttonRoleByText.put("coach", R.id.coach);
+
 
         buttonRoleById = new HashMap<>();
         buttonRoleById.put(R.id.red1, "red1");
@@ -152,6 +155,9 @@ public class AdminSettingsActivity extends EchelonActivity {
         buttonRoleById.put(R.id.blue1, "blue1");
         buttonRoleById.put(R.id.blue2, "blue2");
         buttonRoleById.put(R.id.blue3, "blue3");
+        buttonRoleById.put(R.id.captain, "captain");
+        buttonRoleById.put(R.id.coach, "coach");
+
 
         deviceRoleGroup = findViewById(R.id.deviceRoleSelection);
         deviceRoleGroup.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
