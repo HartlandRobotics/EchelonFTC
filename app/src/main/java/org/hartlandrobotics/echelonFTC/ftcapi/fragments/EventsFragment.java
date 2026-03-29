@@ -70,7 +70,7 @@ public class EventsFragment extends Fragment {
         eventRecycler.setAdapter(eventListAdapter);
         eventRecycler.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
 
-        //setupCurrentEvents();
+        setupCurrentEvents();
     }
 
     //Bring back later when filter events by year
