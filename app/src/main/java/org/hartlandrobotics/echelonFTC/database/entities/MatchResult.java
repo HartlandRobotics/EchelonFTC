@@ -82,6 +82,10 @@ public class MatchResult {
     @ColumnInfo( name = "teleOp_int_5" )
     private int teleOpInt5;
 
+    @ColumnInfo( name="teleOp_string_6", defaultValue = "")
+    @NonNull
+    private String teleOpString6;
+
     @ColumnInfo( name = "end_flag_1" )
     private boolean endFlag1;
 
@@ -131,6 +135,7 @@ public class MatchResult {
             int teleOpInt3,
             int teleOpInt4,
             int teleOpInt5,
+            String teleOpString6,
 
             boolean endFlag1,
             boolean endFlag2,
@@ -167,6 +172,7 @@ public class MatchResult {
         this.teleOpInt3 = teleOpInt3;
         this.teleOpInt4 = teleOpInt4;
         this.teleOpInt5 = teleOpInt5;
+        this.teleOpString6 = teleOpString6;
 
         this.endFlag1 = endFlag1;
         this.endFlag2 = endFlag2;
@@ -244,6 +250,8 @@ public class MatchResult {
     }
     public int getTeleOpInt5(){ return teleOpInt5; }
     public void setTeleOpInt5( int teleOpInt5 ){ this.teleOpInt5 = teleOpInt5; }
+    public String getTeleOpString6() { return teleOpString6; }
+    public void setTeleOpString6(String teleOpString6) { this.teleOpString6 = teleOpString6; }
 
     public boolean getEndFlag1(){ return endFlag1; }
     public void setEndFlag1(boolean endFlag1 ){  this.endFlag1 = endFlag1; }

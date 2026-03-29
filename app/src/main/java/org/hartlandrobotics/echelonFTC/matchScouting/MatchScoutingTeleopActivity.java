@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettings;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
@@ -28,8 +30,18 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     MaterialButton scoutingDoneButton;
     private ImageButton classifiedButton;
     private ImageButton overflowButton;
-    private ImageButton motifButton;
+    //private ImageButton motifButton;
     private ImageButton depotButton;
+
+    private ImageButton ball0;
+    private ImageButton ball1;
+    private ImageButton ball2;
+    private ImageButton ball3;
+    private ImageButton ball4;
+    private ImageButton ball5;
+    private ImageButton ball6;
+    private ImageButton ball7;
+    private ImageButton ball8;
 
 
     private ImageButton baseButton;
@@ -41,7 +53,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private ImageButton missedButton;
     private MaterialTextView classifiedText;
     private MaterialTextView overflowText;
-    private MaterialTextView motifText;
+    //private MaterialTextView motifText;
     private MaterialTextView depotText;
 
     private MaterialTextView missedText;
@@ -114,9 +126,11 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     public void populateControlsFromData(){
         classifiedText.setText(String.valueOf(matchResult.getTeleOpInt1()));
         overflowText.setText(String.valueOf(matchResult.getTeleOpInt2()));
-        motifText.setText(String.valueOf(matchResult.getTeleOpInt4()));
+        //motifText.setText(String.valueOf(matchResult.getTeleOpInt4()));
         depotText.setText(String.valueOf(matchResult.getTeleOpInt3()));
         missedText.setText(String.valueOf(matchResult.getTeleOpInt5()));
+
+
         int ballPattern = matchResult.getAutoInt9();
         if( ballPattern == 0 ){
             patternLeftButton.setImageResource(R.drawable.ball_green);
@@ -146,6 +160,52 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
             twoBotsButton.setImageResource(twobotsDrawable);
         }
         //defensesText.setText(String.valueOf(matchResult.getDefenseCount()));
+
+        String[] strArr = matchResult.getTeleOpString6().split(",");
+        for(int index=0; index<9; index++){
+            String currentValue = strArr[index];
+            int currentImage = R.drawable.ball_white;
+            switch (currentValue) {
+                case "1":
+                    currentImage = R.drawable.ball_purple;
+                    break;
+                case "2":
+                    currentImage = R.drawable.ball_green;
+                    break;
+                default:
+                    break;
+            }
+
+            switch (index){
+                case 0:
+                    ball0.setImageResource(currentImage);
+                    break;
+                case 1:
+                    ball1.setImageResource(currentImage);
+                    break;
+                case 2:
+                    ball2.setImageResource(currentImage);
+                    break;
+                case 3:
+                    ball3.setImageResource(currentImage);
+                    break;
+                case 4:
+                    ball4.setImageResource(currentImage);
+                    break;
+                case 5:
+                    ball5.setImageResource(currentImage);
+                    break;
+                case 6:
+                    ball6.setImageResource(currentImage);
+                    break;
+                case 7:
+                    ball7.setImageResource(currentImage);
+                    break;
+                case 8:
+                    ball8.setImageResource(currentImage);
+                    break;
+            }
+        }
     }
 
     private void setupControls(){
@@ -189,13 +249,6 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
-        motifText = findViewById(R.id.motif_ball_text);
-        motifButton = findViewById(R.id.motif_ball);
-        motifButton.setOnClickListener(v -> {
-            matchResult.setTeleOpInt4( matchResult.getTeleOpInt4() + 1);
-            populateControlsFromData();
-        });
-
         baseButton = findViewById(R.id.base_image);
         baseButton.setImageResource(baseDrawable);
         baseButton.setOnClickListener(v -> {
@@ -232,15 +285,100 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         //});
 
         //defensesText = findViewById(R.id.teleOpDefensesValue);
-    }
 
+        ball0 = findViewById(R.id.ball0);
+        ball0.setOnClickListener( v -> {
+            ButtonClick(v, 0);
+        });
+        ball1 = findViewById(R.id.ball1);
+        ball1.setOnClickListener( v -> {
+            ButtonClick(v, 1);
+        });
+        ball2 = findViewById(R.id.ball2);
+        ball2.setOnClickListener( v -> {
+            ButtonClick(v, 2);
+        });
+        ball3 = findViewById(R.id.ball3);
+        ball3.setOnClickListener( v -> {
+            ButtonClick(v, 3);
+        });
+        ball4 = findViewById(R.id.ball4);
+        ball4.setOnClickListener( v -> {
+            ButtonClick(v, 4);
+        });
+        ball5 = findViewById(R.id.ball5);
+        ball5.setOnClickListener( v -> {
+            ButtonClick(v, 5);
+        });
+        ball6 = findViewById(R.id.ball6);
+        ball6.setOnClickListener( v -> {
+            ButtonClick(v, 6);
+        });
+        ball7 = findViewById(R.id.ball7);
+        ball7.setOnClickListener( v -> {
+            ButtonClick(v, 7);
+        });
+        ball8 = findViewById(R.id.ball8);
+        ball8.setOnClickListener( v -> {
+            ButtonClick(v, 8);
+        });
+
+    }
+    private void ButtonClick(View v, int currentIndex ) {
+        ImageButton currentButton = (ImageButton) v;
+        String ballString = matchResult.getTeleOpString6();
+        String[] ballStringArr = ballString.split(",");
+        String currentBallStr = ballStringArr[currentIndex];
+        if (StringUtils.isBlank(currentBallStr)) {
+            return;
+        }
+        int newBall = (Integer.parseInt(currentBallStr) + 1) % 3;
+        if (newBall == 0) {
+            currentButton.setImageResource(R.drawable.ball_white);
+        } else if (newBall == 1) {
+            currentButton.setImageResource(R.drawable.ball_purple);
+        } else if (newBall == 2) {
+            currentButton.setImageResource(R.drawable.ball_green);
+        }
+        ballStringArr[currentIndex] = String.valueOf(newBall);
+        matchResult.setTeleOpString6( String.join(",", ballStringArr) );
+
+        int ballPattern = matchResult.getAutoInt9();
+        String[] patternArr = new String[3];
+        if( ballPattern == 0 ){
+            patternArr[0] = "2";
+            patternArr[1] = "1";
+            patternArr[2] = "1" ;
+        } else if( ballPattern == 1 ) {
+            patternArr[0] = "1";
+            patternArr[1] = "2";
+            patternArr[2] = "1";
+        } else if( ballPattern == 2 ) {
+            patternArr[0] = "1";
+            patternArr[1] = "1";
+            patternArr[2] = "2";
+
+        }
+
+        int motifCount = 0;
+        for( int index=0; index < 9; index++) {
+            String currentBall = ballStringArr[index];
+            String currentPattern = patternArr[index%3];
+            if( currentBall.equals(currentPattern) ){
+                motifCount++;
+            }
+        }
+        matchResult.setTeleOpInt4(motifCount);
+
+        populateControlsFromData();
+    }
     public void setupColor() {
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
         if (settings.getDeviceRole().startsWith("red")){
             baseDrawable = R.drawable.base_red;
             twobotsDrawable = R.drawable.two_bots_red;
-        } else {
+        } else if(settings.getDeviceRole().startsWith("blue")){
             baseDrawable = R.drawable.base_blue;
             twobotsDrawable = R.drawable.two_bots_blue;
         }

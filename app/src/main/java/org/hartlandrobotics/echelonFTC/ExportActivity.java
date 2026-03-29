@@ -414,6 +414,7 @@ public class ExportActivity extends EchelonActivity {
                         + ",AutoFlag1 ,AutoFlag2, AutoFlag3, AutoFlag4, AutoFlag5"
                         + ",AutoInt6 ,AutoInt7 ,AutoInt8 ,AutoInt9 ,AutoInt10"
                         + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
+                        + ",TeleOpString6"
                         + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6"
                         //+ ",DefensesCount,Match_Result_Key"
                         + ",Contribution"
@@ -443,17 +444,18 @@ public class ExportActivity extends EchelonActivity {
                 String TeleOpInt3 = columns[18];
                 String TeleOpInt4 = columns[19];
                 String TeleOpInt5 = columns[20];
+                String TeleOpString6 = columns[21];
 
-                String EndFlag1 = columns[21];
-                String EndFlag2 = columns[22];
-                String EndFlag3 = columns[23];
-                String EndFlag4 = columns[24];
-                String EndInt6 = columns[25];
+                String EndFlag1 = columns[22];
+                String EndFlag2 = columns[23];
+                String EndFlag3 = columns[24];
+                String EndFlag4 = columns[25];
+                String EndInt6 = columns[26];
 
                 String teleDef = "0";
                 //String matchResultKey = columns[26];
-                String Contribution = columns[26];
-                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[27]);
+                String Contribution = columns[27];
+                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[28]);
 
                 MatchResult matchResult = new MatchResult(
                         matchResultKey,
@@ -480,6 +482,7 @@ public class ExportActivity extends EchelonActivity {
                         Integer.parseInt(TeleOpInt3),
                         Integer.parseInt(TeleOpInt4),
                         Integer.parseInt(TeleOpInt5),
+                        TeleOpString6,
 
                         EndFlag1.equalsIgnoreCase("true"),
                         EndFlag2.equalsIgnoreCase("true"),

@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@id/pattern"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/overflow"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:textSize="32sp"
         android:text="Classified"
         />
@@ -86,10 +86,10 @@
         android:id="@+id/overflow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@id/pattern"
         app:layout_constraintLeft_toRightOf="@id/classified"
-        app:layout_constraintRight_toLeftOf="@id/motif"
+        app:layout_constraintRight_toLeftOf="@id/missed"
         android:textSize="32sp"
         android:text="Overflow"
         />
@@ -117,34 +117,34 @@
         />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/motif"
+        android:id="@+id/missed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/pattern"
         app:layout_constraintLeft_toRightOf="@id/overflow"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:textSize="32sp"
-        android:text="Motif"
+        android:text="Missed"
         />
 
     <ImageButton
-        android:id="@+id/motif_ball"
+        android:id="@+id/missed_ball"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ball_green"
+        android:src="@drawable/ball_none"
         android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/motif"
-        app:layout_constraintLeft_toLeftOf="@id/motif"
+        app:layout_constraintTop_toBottomOf="@id/missed"
+        app:layout_constraintLeft_toLeftOf="@id/missed"
         />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/motif_ball_text"
+        android:id="@+id/missed_ball_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/motif_ball"
-        app:layout_constraintLeft_toRightOf="@id/motif_ball"
+        app:layout_constraintTop_toTopOf="@id/missed_ball"
+        app:layout_constraintLeft_toRightOf="@id/missed_ball"
         android:layout_marginLeft="30dp"
         android:textSize="32sp"
         tools:text="0"
@@ -156,7 +156,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/classified_ball"
         app:layout_constraintLeft_toLeftOf="@id/classified"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:textSize="32sp"
         android:text="Base"
         />
@@ -178,7 +178,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/overflow_ball"
         app:layout_constraintLeft_toLeftOf="@id/overflow_ball"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:textSize="32sp"
         android:text="Two Bots"
         />
@@ -198,10 +198,10 @@
         android:id="@+id/depot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/motif_ball"
+        app:layout_constraintTop_toBottomOf="@id/missed_ball"
         app:layout_constraintLeft_toRightOf="@id/overflow"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:textSize="32sp"
         android:text="Depot"
         />
@@ -214,7 +214,7 @@
         android:src="@drawable/ball_white"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/depot"
-        app:layout_constraintLeft_toLeftOf="@id/motif"
+        app:layout_constraintLeft_toLeftOf="@id/depot"
         />
 
     <com.google.android.material.textview.MaterialTextView
@@ -229,39 +229,134 @@
         />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/missed"
+        android:id="@+id/motif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/base_image"
-        app:layout_constraintLeft_toLeftOf="@id/base_text"
-        android:layout_marginTop="4dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="120dp"
         android:textSize="32sp"
-        android:text="Missed"
+        android:text="Motif"
         />
 
     <ImageButton
-        android:id="@+id/missed_ball"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:id="@+id/ball0"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ball_none"
-        android:layout_marginLeft="15dp"
+        android:src="@drawable/ball_white"
+        android:layout_marginLeft="5dp"
         android:background="@null"
-        app:layout_constraintTop_toTopOf="@id/missed"
-        app:layout_constraintLeft_toRightOf="@id/missed"
+        app:layout_constraintTop_toTopOf="@id/motif"
+        app:layout_constraintLeft_toRightOf="@id/motif"
         />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/missed_ball_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/missed"
-        app:layout_constraintLeft_toRightOf="@id/missed_ball"
-        android:layout_marginLeft="10dp"
-        android:textSize="32sp"
-        tools:text="0"
+    <ImageButton
+        android:id="@+id/ball1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_white"
+        android:layout_marginLeft="5dp"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="@id/motif"
+        app:layout_constraintLeft_toRightOf="@id/ball0"
         />
+
+    <ImageButton
+        android:id="@+id/ball2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_white"
+        android:layout_marginLeft="1dp"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="@id/motif"
+        app:layout_constraintLeft_toRightOf="@id/ball1"
+        />
+
+    <ImageButton
+        android:id="@+id/ball3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_white"
+        android:layout_marginLeft="5dp"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="@id/motif"
+        app:layout_constraintLeft_toRightOf="@id/ball2"
+        />
+
+    <ImageButton
+        android:id="@+id/ball4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_white"
+        android:layout_marginLeft="5dp"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="@id/motif"
+        app:layout_constraintLeft_toRightOf="@id/ball3"
+        />
+
+    <ImageButton
+        android:id="@+id/ball5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_white"
+        android:layout_marginLeft="5dp"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="@id/motif"
+        app:layout_constraintLeft_toRightOf="@id/ball4"
+        />
+
+
+
+
+    <ImageButton
+        android:id="@+id/ball6"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_white"
+        android:layout_marginLeft="5dp"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="@id/motif"
+        app:layout_constraintLeft_toRightOf="@id/ball5"
+        />
+
+    <ImageButton
+        android:id="@+id/ball7"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_white"
+        android:layout_marginLeft="5dp"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="@id/motif"
+        app:layout_constraintLeft_toRightOf="@id/ball6"
+        />
+
+    <ImageButton
+        android:id="@+id/ball8"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ball_white"
+        android:layout_marginLeft="5dp"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="@id/motif"
+        app:layout_constraintLeft_toRightOf="@id/ball7"
+
+        />
+
+
+
+
+
+
 
 
     <com.google.android.material.button.MaterialButton
