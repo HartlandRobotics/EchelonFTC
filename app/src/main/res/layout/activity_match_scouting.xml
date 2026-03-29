@@ -228,6 +228,7 @@
         tools:text="0"
         />
 
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/motif"
         android:layout_width="wrap_content"

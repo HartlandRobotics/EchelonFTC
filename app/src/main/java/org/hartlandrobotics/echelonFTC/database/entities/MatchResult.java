@@ -67,6 +67,9 @@ public class MatchResult {
     @ColumnInfo( name= "auto_int_10")
     private int autoInt10;
 
+    @ColumnInfo(name="auto_string_11")
+    private String autoString11;
+
     @ColumnInfo( name = "teleOp_int_1" )
     private int teleOpInt1;
 
@@ -129,6 +132,7 @@ public class MatchResult {
             int autoInt8,
             int autoInt9,
             int autoInt10,
+            String autoString11,
 
             int teleOpInt1,
             int teleOpInt2,
@@ -165,6 +169,7 @@ public class MatchResult {
         this.autoInt8 = autoInt8;
         this.autoInt9 = autoInt9;
         this.autoInt10 = autoInt10;
+        this.autoString11 = autoString11;
 
 
         this.teleOpInt1 = teleOpInt1;
@@ -234,7 +239,8 @@ public class MatchResult {
     public void setAutoInt9( int autoInt9 ){ this.autoInt9 = autoInt9; }
     public int getAutoInt10(){ return autoInt10; }
     public void setAutoInt10( int autoInt10 ){ this.autoInt10 = autoInt10; }
-
+    public String getAutoString11() { return autoString11; }
+    public void setAutoString11(String autoString11) { this.autoString11 = autoString11; }
 
     public int getTeleOpInt1(){ return teleOpInt1; }
     public void setTeleOpInt1(int teleOpInt1){ this.teleOpInt1 = teleOpInt1; }

@@ -30,7 +30,6 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     MaterialButton scoutingDoneButton;
     private ImageButton classifiedButton;
     private ImageButton overflowButton;
-    //private ImageButton motifButton;
     private ImageButton depotButton;
 
     private ImageButton ball0;
@@ -126,7 +125,6 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     public void populateControlsFromData(){
         classifiedText.setText(String.valueOf(matchResult.getTeleOpInt1()));
         overflowText.setText(String.valueOf(matchResult.getTeleOpInt2()));
-        //motifText.setText(String.valueOf(matchResult.getTeleOpInt4()));
         depotText.setText(String.valueOf(matchResult.getTeleOpInt3()));
         missedText.setText(String.valueOf(matchResult.getTeleOpInt5()));
 

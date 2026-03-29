@@ -413,6 +413,7 @@ public class ExportActivity extends EchelonActivity {
                 String header = "Match_Result_Key, Event_Key,Match_Key,Team_Key,has_been_synced,alliance"
                         + ",AutoFlag1 ,AutoFlag2, AutoFlag3, AutoFlag4, AutoFlag5"
                         + ",AutoInt6 ,AutoInt7 ,AutoInt8 ,AutoInt9 ,AutoInt10"
+                        + ",AutoString11,"
                         + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
                         + ",TeleOpString6"
                         + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6"
@@ -439,23 +440,25 @@ public class ExportActivity extends EchelonActivity {
                 String AutoInt9 = columns[14];
                 String AutoInt10 = columns[15];
 
-                String TeleOpInt1 = columns[16];
-                String TeleOpInt2 = columns[17];
-                String TeleOpInt3 = columns[18];
-                String TeleOpInt4 = columns[19];
-                String TeleOpInt5 = columns[20];
-                String TeleOpString6 = columns[21];
+                String AutoString11 = columns[16];
 
-                String EndFlag1 = columns[22];
-                String EndFlag2 = columns[23];
-                String EndFlag3 = columns[24];
-                String EndFlag4 = columns[25];
-                String EndInt6 = columns[26];
+                String TeleOpInt1 = columns[17];
+                String TeleOpInt2 = columns[18];
+                String TeleOpInt3 = columns[19];
+                String TeleOpInt4 = columns[20];
+                String TeleOpInt5 = columns[21];
+                String TeleOpString6 = columns[22];
+
+                String EndFlag1 = columns[23];
+                String EndFlag2 = columns[24];
+                String EndFlag3 = columns[25];
+                String EndFlag4 = columns[26];
+                String EndInt6 = columns[27];
 
                 String teleDef = "0";
                 //String matchResultKey = columns[26];
-                String Contribution = columns[27];
-                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[28]);
+                String Contribution = columns[28];
+                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[29]);
 
                 MatchResult matchResult = new MatchResult(
                         matchResultKey,
@@ -476,6 +479,8 @@ public class ExportActivity extends EchelonActivity {
                         Integer.parseInt(AutoInt8),
                         Integer.parseInt(AutoInt9),
                         Integer.parseInt(AutoInt10),
+
+                        AutoString11,
 
                         Integer.parseInt(TeleOpInt1),
                         Integer.parseInt(TeleOpInt2),
