@@ -55,12 +55,12 @@ public class CurrentGame {
     }
 
     public int getAuto2Counts(){
-//        if( result == null ) return 0;
-        return 0;
+        if( result == null ) return 0;
+        return result.getAutoFlag2() ? 1:0;
     }
     public int getAuto2Points(){
-//        if( result == null ) return 0;
-        return 0;
+        if( result == null ) return 0;
+        return result.getAutoFlag2() ? 5:0;
     }
 
     public int getAuto3Counts(){
@@ -94,7 +94,7 @@ public class CurrentGame {
     }
     public int getAuto6Points(){
         if( result == null ) return 0;
-        return result.getAutoInt6() * 3;
+        return result.getAutoInt6() * 20;
     }
 
     public int getAuto7Counts(){
@@ -224,11 +224,11 @@ public class CurrentGame {
     }
     public int getEnd1Points(){
         if( result == null ) return 0;
-        return result.getEndFlag1() ? 10:0;
+        return result.getEndFlag1() ? 5:0;
     }
 
     public int getEnd2Counts(){
-        if( result == null ) return 0;
+        //if( result == null ) return 0;
         return 0;
     }
     public int getEnd2Points(){
@@ -258,7 +258,7 @@ public class CurrentGame {
     }
     public int getEnd6Points(){
         if( result == null ) return 0;
-        return result.getEndInt6() * 5;
+        return result.getEndInt6() * 2;
     }
 
 }

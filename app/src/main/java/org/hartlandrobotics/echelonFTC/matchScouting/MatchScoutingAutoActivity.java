@@ -25,6 +25,13 @@ import org.hartlandrobotics.echelonFTC.utilities.RoleUtilities;
 public class MatchScoutingAutoActivity extends AppCompatActivity {
     private static final String MATCH_KEY = "auto_match_key_param";
     private static final String TEAM_KEY = "auto_team_key_param";
+
+    private int hiveDrawable = 0;
+    private int scoringDrawable = 0;
+    private int missedDrawable = 0;
+    private int leaveDrawable = 0;
+    private int parkDrawable = 0;
+
     private ImageButton patternLeftButton;
     private ImageButton patternCenterButton;
     private ImageButton patternRightButton;

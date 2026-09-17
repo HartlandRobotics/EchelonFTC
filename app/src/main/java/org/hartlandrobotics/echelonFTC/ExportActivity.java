@@ -125,7 +125,7 @@ public class ExportActivity extends EchelonActivity {
                         + ",AutoFlag1 ,AutoFlag2, AutoFlag3, AutoFlag4, AutoFlag5"
                         + ",AutoInt6 ,AutoInt7 ,AutoInt8 ,AutoInt9 ,AutoInt10"
                         + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
-                        + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6"
+                        + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6, EndInt7"
                         + ",AdditionalNotes, DefensesCount\n";
                 outputStream.write(header.getBytes());
                 for (MatchResultWithTeamMatch matchResultWithTeamMatch : matchResults) {
@@ -166,6 +166,7 @@ public class ExportActivity extends EchelonActivity {
                     dataForFile.add(String.valueOf(mr.getEndFlag3()));
                     dataForFile.add(String.valueOf(mr.getEndFlag4()));
                     dataForFile.add(String.valueOf(mr.getEndInt6()));
+                    dataForFile.add(String.valueOf(mr.getEndInt7()));
 
                     dataForFile.add(StringEscapeUtils.escapeCsv(mr.getAdditionalNotes().trim()));
                     //dataForFile.add("test");//(mr.getAdditionalNotes());
@@ -416,7 +417,7 @@ public class ExportActivity extends EchelonActivity {
                         + ",AutoString11,"
                         + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
                         + ",TeleOpString6"
-                        + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6"
+                        + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6, EndInt7"
                         //+ ",DefensesCount,Match_Result_Key"
                         + ",Contribution"
                         + ", AdditionalNotes\n";
@@ -454,11 +455,13 @@ public class ExportActivity extends EchelonActivity {
                 String EndFlag3 = columns[25];
                 String EndFlag4 = columns[26];
                 String EndInt6 = columns[27];
+                String EndInt7 = columns[28];
+
 
                 String teleDef = "0";
                 //String matchResultKey = columns[26];
-                String Contribution = columns[28];
-                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[29]);
+                String Contribution = columns[29];
+                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[30]);
 
                 MatchResult matchResult = new MatchResult(
                         matchResultKey,
@@ -494,6 +497,7 @@ public class ExportActivity extends EchelonActivity {
                         EndFlag3.equalsIgnoreCase("true"),
                         EndFlag4.equalsIgnoreCase("true"),
                         Integer.parseInt(EndInt6),
+                        Integer.parseInt(EndInt7),
 
                         AdditionalNotes,
                         //,

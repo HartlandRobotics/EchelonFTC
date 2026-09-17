@@ -102,6 +102,9 @@ public class MatchResult {
     @ColumnInfo( name = "end_int_6" )
     private int endInt6;
 
+    @ColumnInfo( name = "end_int_7" )
+    private int endInt7;
+
     @ColumnInfo(name = "additional_notes")
     private String additionalNotes;
 
@@ -139,13 +142,14 @@ public class MatchResult {
             int teleOpInt3,
             int teleOpInt4,
             int teleOpInt5,
-            String teleOpString6,
+            @NonNull String teleOpString6,
 
             boolean endFlag1,
             boolean endFlag2,
             boolean endFlag3,
             boolean endFlag4,
             int endInt6,
+            int endInt7,
 
             String additionalNotes,
             int defenseCount,
@@ -185,6 +189,7 @@ public class MatchResult {
         this.endFlag4 = endFlag4;
 
         this.endInt6 = endInt6;
+        this.endInt7 = endInt7;
 
         this.additionalNotes = additionalNotes;
         this.defenseCount = defenseCount;
@@ -271,6 +276,8 @@ public class MatchResult {
 
     public int getEndInt6(){ return endInt6; }
     public void setEndInt6( int endInt6 ){ this.endInt6 = endInt6; }
+    public int getEndInt7(){ return endInt7; }
+    public void setEndInt7( int endInt7 ){ this.endInt7 = endInt7; }
 
     public String getAdditionalNotes(){ return additionalNotes; }
     public void setAdditionalNotes( String additionalNotes ){

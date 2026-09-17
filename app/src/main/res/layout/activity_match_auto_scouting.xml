@@ -6,68 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".matchScouting.MatchScoutingAutoActivity">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/pattern"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/classified"
-        android:textSize="32sp"
-        android:text="Pattern"
-        />
 
-
-    <ImageButton
-        android:id="@+id/pattern_left"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_green"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/pattern"
-        android:layout_marginLeft="50dp"
-        />
-    <ImageButton
-        android:id="@+id/pattern_center"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_purple"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/pattern_left"
-        />
-    <ImageButton
-        android:id="@+id/pattern_right"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_purple"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/pattern_center"
-        />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/classified"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/pattern"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/overflow"
         android:textSize="30dp"
-        android:text="Classified"
-        android:layout_marginTop="30dp"
+        android:text="Hive Tip"
         />
 
 
     <ImageButton
         android:id="@+id/classified_ball"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
+        android:src="@drawable/hive_red"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/classified"
         app:layout_constraintLeft_toLeftOf="@id/classified"
@@ -97,7 +55,7 @@
 
         android:textSize="30dp"
         android:layout_marginTop="30dp"
-        android:text="Overflow"
+        android:text="Scoring"
         />
 
     <ImageButton
@@ -105,7 +63,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
+        android:src="@drawable/scoring_elements_red"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/overflow"
         app:layout_constraintLeft_toLeftOf="@id/overflow"
@@ -122,6 +80,33 @@
         android:textSize="32sp"
         tools:text="0"
         />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/park_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/leave_text"
+        app:layout_constraintLeft_toLeftOf="@id/overflow"
+        android:textSize="30dp"
+        android:text="Park"
+        />
+
+    <ImageButton
+        android:id="@+id/park"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/park_red"
+        app:layout_constraintTop_toBottomOf="@id/park_text"
+        app:layout_constraintLeft_toLeftOf="@id/park_text"
+        />
+
+
+
+
+
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/missed"
         android:layout_width="wrap_content"
@@ -139,7 +124,7 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ball_none"
+        android:src="@drawable/missing_scoring_elements_red"
         android:layout_marginLeft="15dp"
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@id/missed"
@@ -209,136 +194,11 @@
         android:layout_height="100dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        android:src="@drawable/leave_blue"
+        android:src="@drawable/leave_red"
 
         app:layout_constraintTop_toBottomOf="@id/leave_text"
         app:layout_constraintLeft_toLeftOf="@id/leave_text"
         />
-
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/motif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/leave"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="120dp"
-        android:textSize="32sp"
-        android:text="Motif"
-        />
-
-    <ImageButton
-        android:id="@+id/ball0"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
-        android:layout_marginLeft="5dp"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="@id/motif"
-        app:layout_constraintLeft_toRightOf="@id/motif"
-        />
-
-    <ImageButton
-        android:id="@+id/ball1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
-        android:layout_marginLeft="5dp"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="@id/motif"
-        app:layout_constraintLeft_toRightOf="@id/ball0"
-        />
-
-    <ImageButton
-        android:id="@+id/ball2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
-        android:layout_marginLeft="1dp"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="@id/motif"
-        app:layout_constraintLeft_toRightOf="@id/ball1"
-        />
-
-    <ImageButton
-        android:id="@+id/ball3"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
-        android:layout_marginLeft="5dp"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="@id/motif"
-        app:layout_constraintLeft_toRightOf="@id/ball2"
-        />
-
-    <ImageButton
-        android:id="@+id/ball4"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
-        android:layout_marginLeft="5dp"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="@id/motif"
-        app:layout_constraintLeft_toRightOf="@id/ball3"
-        />
-
-    <ImageButton
-        android:id="@+id/ball5"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
-        android:layout_marginLeft="5dp"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="@id/motif"
-        app:layout_constraintLeft_toRightOf="@id/ball4"
-        />
-
-
-
-
-    <ImageButton
-        android:id="@+id/ball6"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
-        android:layout_marginLeft="5dp"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="@id/motif"
-        app:layout_constraintLeft_toRightOf="@id/ball5"
-        />
-
-    <ImageButton
-        android:id="@+id/ball7"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
-        android:layout_marginLeft="5dp"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="@id/motif"
-        app:layout_constraintLeft_toRightOf="@id/ball6"
-        />
-
-    <ImageButton
-        android:id="@+id/ball8"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ball_white"
-        android:layout_marginLeft="5dp"
-        android:background="@null"
-        app:layout_constraintTop_toTopOf="@id/motif"
-        app:layout_constraintLeft_toRightOf="@id/ball7"
-
-        />
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/teleOp"
