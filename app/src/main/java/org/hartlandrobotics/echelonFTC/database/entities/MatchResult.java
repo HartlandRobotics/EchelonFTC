@@ -70,21 +70,26 @@ public class MatchResult {
     @ColumnInfo(name="auto_string_11")
     private String autoString11;
 
-    @ColumnInfo( name = "teleOp_int_1" )
-    private int teleOpInt1;
+    @ColumnInfo( name = "teleOp_int_6" )
+    private int teleOpInt6;
 
-    @ColumnInfo( name = "teleOp_int_2" )
-    private int teleOpInt2;
+    @ColumnInfo( name = "teleOp_int_7" )
+    private int teleOpInt7;
 
-    @ColumnInfo( name = "teleOp_int_3" )
-    private int teleOpInt3;
+    @ColumnInfo( name = "teleOp_int_8" )
+    private int teleOpInt8;
 
-    @ColumnInfo( name = "teleOp_int_4" )
-    private int teleOpInt4;
+    @ColumnInfo( name = "teleOp_int_9" )
+    private int teleOpInt9;
 
-    @ColumnInfo( name = "teleOp_int_5" )
-    private int teleOpInt5;
+    @ColumnInfo( name = "teleOp_int_10" )
+    private int teleOpInt10;
 
+    @ColumnInfo( name = "teleOp_int_11" )
+    private int teleOpInt11;
+
+    @ColumnInfo( name = "teleOp_int_12" )
+    private int teleOpInt12;
     @ColumnInfo( name="teleOp_string_6", defaultValue = "")
     @NonNull
     private String teleOpString6;
@@ -137,11 +142,13 @@ public class MatchResult {
             int autoInt10,
             String autoString11,
 
-            int teleOpInt1,
-            int teleOpInt2,
-            int teleOpInt3,
-            int teleOpInt4,
-            int teleOpInt5,
+            int teleOpInt6,
+            int teleOpInt7,
+            int teleOpInt8,
+            int teleOpInt9,
+            int teleOpInt10,
+            int teleOpInt11,
+            int teleOpInt12,
             @NonNull String teleOpString6,
 
             boolean endFlag1,
@@ -176,11 +183,13 @@ public class MatchResult {
         this.autoString11 = autoString11;
 
 
-        this.teleOpInt1 = teleOpInt1;
-        this.teleOpInt2 = teleOpInt2;
-        this.teleOpInt3 = teleOpInt3;
-        this.teleOpInt4 = teleOpInt4;
-        this.teleOpInt5 = teleOpInt5;
+        this.teleOpInt6 = teleOpInt6;
+        this.teleOpInt7 = teleOpInt7;
+        this.teleOpInt8 = teleOpInt8;
+        this.teleOpInt9 = teleOpInt9;
+        this.teleOpInt10 = teleOpInt10;
+        this.teleOpInt11 = teleOpInt11;
+        this.teleOpInt12 = teleOpInt11;
         this.teleOpString6 = teleOpString6;
 
         this.endFlag1 = endFlag1;
@@ -247,20 +256,20 @@ public class MatchResult {
     public String getAutoString11() { return autoString11; }
     public void setAutoString11(String autoString11) { this.autoString11 = autoString11; }
 
-    public int getTeleOpInt1(){ return teleOpInt1; }
-    public void setTeleOpInt1(int teleOpInt1){ this.teleOpInt1 = teleOpInt1; }
-    public int getTeleOpInt2(){ return teleOpInt2;}
-    public void setTeleOpInt2( int teleOpInt2 )   { this.teleOpInt2 = teleOpInt2; }
-    public int getTeleOpInt3(){ return teleOpInt3; }
-    public void setTeleOpInt3( int teleOpInt3 ){
-        this.teleOpInt3 = teleOpInt3;
-    }
-    public int getTeleOpInt4(){ return teleOpInt4; }
-    public void setTeleOpInt4( int teleOpInt4 ){
-        this.teleOpInt4 = teleOpInt4;
-    }
-    public int getTeleOpInt5(){ return teleOpInt5; }
-    public void setTeleOpInt5( int teleOpInt5 ){ this.teleOpInt5 = teleOpInt5; }
+    public int getTeleOpInt6(){ return teleOpInt6; }
+    public void setTeleOpInt6(int teleOpInt6){ this.teleOpInt6 = teleOpInt6; }
+    public int getTeleOpInt7(){ return teleOpInt7;}
+    public void setTeleOpInt7( int teleOpInt7 )   { this.teleOpInt7 = teleOpInt7; }
+    public int getTeleOpInt8(){ return teleOpInt8; }
+    public void setTeleOpInt8( int teleOpInt8 ){ this.teleOpInt8 = teleOpInt8; }
+    public int getTeleOpInt9(){ return teleOpInt9; }
+    public void setTeleOpInt9( int teleOpInt9 ){ this.teleOpInt9 = teleOpInt9; }
+    public int getTeleOpInt10(){ return teleOpInt10; }
+    public void setTeleOpInt10( int teleOpInt10 ){ this.teleOpInt10 = teleOpInt10; }
+    public int getTeleOpInt11(){ return teleOpInt11; }
+    public void setTeleOpInt11( int teleOpInt11 ){ this.teleOpInt11 = teleOpInt11; }
+    public int getTeleOpInt12(){ return teleOpInt12; }
+    public void setTeleOpInt12( int teleOpInt12 ){ this.teleOpInt12 = teleOpInt12; }
     public String getTeleOpString6() { return teleOpString6; }
     public void setTeleOpString6(String teleOpString6) { this.teleOpString6 = teleOpString6; }
 

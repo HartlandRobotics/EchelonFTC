@@ -27,43 +27,53 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private static final String MATCH_KEY = "auto_match_key_param";
     private static final String TEAM_KEY = "auto_team_key_param";
 
-    MaterialButton scoutingDoneButton;
-    private ImageButton classifiedButton;
-    private ImageButton overflowButton;
-    private ImageButton depotButton;
+    private int nectarDrawable = 0;
+    private ImageButton nectarButton;
+    private MaterialTextView nectarText;
 
-    private ImageButton ball0;
-    private ImageButton ball1;
-    private ImageButton ball2;
-    private ImageButton ball3;
-    private ImageButton ball4;
-    private ImageButton ball5;
-    private ImageButton ball6;
-    private ImageButton ball7;
-    private ImageButton ball8;
+    private int polledDrawable = 0;
+    private ImageButton pollenButton;
+    private MaterialTextView pollenText;
 
-
-    private ImageButton baseButton;
-    private ImageButton twoBotsButton;
-    private ImageButton patternLeftButton;
-    private ImageButton patternCenterButton;
-    private ImageButton patternRightButton;
-
+    private int missedDrawable = 0;
     private ImageButton missedButton;
-    private MaterialTextView classifiedText;
-    private MaterialTextView overflowText;
-    //private MaterialTextView motifText;
-    private MaterialTextView depotText;
-
     private MaterialTextView missedText;
+
+
+    private int ownedDrawable = 0;
+    private ImageButton ownedButton;
+    private MaterialTextView ownedText;
+
+    private int bottomDrawable = 0;
+    private ImageButton bottomButton;
+    private MaterialTextView bottomText;
+
+
+    private int hiveDrawable = 0;
+    private ImageButton hiveButton;
+    private MaterialTextView hiveText;
+
+    private int gardenDrawable = 0;
+    private ImageButton gardenButton;
+    private MaterialTextView gardenText;
+
+
+    private int hiveRemainingDrawable = 0;
+    private ImageButton hiveRemainingButton;
+    private MaterialTextView hiveRemainingText;
+
+    private int parkDrawable = 0;
+    private ImageButton parkButton;
+
+
+    MaterialButton summaryButton;
+
+
     private MaterialTextView teamKeyText;
 
     private ImageButton defensesButton;
     private MaterialTextView defensesText;
 
-    int baseDrawable;
-    int twobotsDrawable;
-    private int defenseDrawable;
 
     MatchResultViewModel matchResultViewModel;
     MatchResult matchResult;
@@ -72,7 +82,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     String teamKey;
 
 
-    public static void launch(Context context, String matchKey, String teamKey ){
+    public static void launch(Context context, String matchKey, String teamKey) {
         Intent intent = new Intent(context, MatchScoutingTeleopActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString(MATCH_KEY, matchKey);
@@ -105,8 +115,8 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
         matchResultViewModel = new ViewModelProvider(this).get(MatchResultViewModel.class);
         matchResultViewModel.getMatchResultByMatchTeam(matchKey, teamKey)
-                .observe(MatchScoutingTeleopActivity.this, mr->{
-                    if( mr == null ){
+                .observe(MatchScoutingTeleopActivity.this, mr -> {
+                    if (mr == null) {
                         matchResult = matchResultViewModel.getDefault(
                                 ftcApiStatus.getEventKey(),
                                 matchKey,
@@ -122,263 +132,128 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     }
 
 
-    public void populateControlsFromData(){
-        classifiedText.setText(String.valueOf(matchResult.getTeleOpInt1()));
-        overflowText.setText(String.valueOf(matchResult.getTeleOpInt2()));
-        depotText.setText(String.valueOf(matchResult.getTeleOpInt3()));
-        missedText.setText(String.valueOf(matchResult.getTeleOpInt5()));
+    public void populateControlsFromData() {
+        nectarText.setText(String.valueOf(matchResult.getTeleOpInt6()));
+        pollenText.setText(String.valueOf(matchResult.getTeleOpInt7()));
+        missedText.setText(String.valueOf(matchResult.getTeleOpInt8()));
 
+        ownedText.setText(String.valueOf(matchResult.getTeleOpInt9()));
 
-        int ballPattern = matchResult.getAutoInt9();
-        if( ballPattern == 0 ){
-            patternLeftButton.setImageResource(R.drawable.ball_green);
-            patternCenterButton.setImageResource(R.drawable.ball_purple);
-            patternRightButton.setImageResource(R.drawable.ball_purple);
-        } else if( ballPattern == 1 ) {
-            patternLeftButton.setImageResource(R.drawable.ball_purple);
-            patternCenterButton.setImageResource(R.drawable.ball_green);
-            patternRightButton.setImageResource(R.drawable.ball_purple);
-        } else if( ballPattern == 2 ) {
-            patternLeftButton.setImageResource(R.drawable.ball_purple);
-            patternCenterButton.setImageResource(R.drawable.ball_purple);
-            patternRightButton.setImageResource(R.drawable.ball_green);
-        }
+        hiveText.setText(String.valueOf(matchResult.getTeleOpInt10()));
+        gardenText.setText(String.valueOf(matchResult.getTeleOpInt11()));
+        ;
 
-        if( matchResult.getEndInt6() == 2){
-            baseButton.setImageResource(R.drawable.base_green);
-        } else if( matchResult.getEndInt6() == 1){
-            baseButton.setImageResource(R.drawable.base_green_partial);
+        hiveRemainingText.setText(String.valueOf(matchResult.getTeleOpInt12()));
+
+        if (matchResult.getEndFlag1()) {
+            parkButton.setImageResource(R.drawable.park_green);
         } else {
-            baseButton.setImageResource(baseDrawable);
+            parkButton.setImageResource(parkDrawable);
         }
 
-        if( matchResult.getEndFlag1() ){
-            twoBotsButton.setImageResource(R.drawable.two_bots_green);
-        } else {
-            twoBotsButton.setImageResource(twobotsDrawable);
-        }
+
         //defensesText.setText(String.valueOf(matchResult.getDefenseCount()));
 
-        String[] strArr = matchResult.getTeleOpString6().split(",");
-        for(int index=0; index<9; index++){
-            String currentValue = strArr[index];
-            int currentImage = R.drawable.ball_white;
-            switch (currentValue) {
-                case "1":
-                    currentImage = R.drawable.ball_purple;
-                    break;
-                case "2":
-                    currentImage = R.drawable.ball_green;
-                    break;
-                default:
-                    break;
-            }
-
-            switch (index){
-                case 0:
-                    ball0.setImageResource(currentImage);
-                    break;
-                case 1:
-                    ball1.setImageResource(currentImage);
-                    break;
-                case 2:
-                    ball2.setImageResource(currentImage);
-                    break;
-                case 3:
-                    ball3.setImageResource(currentImage);
-                    break;
-                case 4:
-                    ball4.setImageResource(currentImage);
-                    break;
-                case 5:
-                    ball5.setImageResource(currentImage);
-                    break;
-                case 6:
-                    ball6.setImageResource(currentImage);
-                    break;
-                case 7:
-                    ball7.setImageResource(currentImage);
-                    break;
-                case 8:
-                    ball8.setImageResource(currentImage);
-                    break;
-            }
-        }
     }
 
-    private void setupControls(){
+    private void setupControls() {
         teamKeyText = findViewById(R.id.teamKeyText);
         teamKeyText.setText(teamKey);
 
-        scoutingDoneButton = findViewById(R.id.summary);
-        scoutingDoneButton.setOnClickListener(v -> {
+        summaryButton = findViewById(R.id.summary);
+        summaryButton.setOnClickListener(v -> {
             matchResultViewModel.upsert(matchResult);
             MatchScoutingSummaryActivity.launch(MatchScoutingTeleopActivity.this, matchKey, teamKey);
         });
 
-
-        patternLeftButton = findViewById(R.id.pattern_left);
-        patternCenterButton = findViewById(R.id.pattern_center);
-        patternRightButton = findViewById(R.id.pattern_right);
-        patternLeftButton.setOnClickListener(v -> {
-            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1 ) % 3 );
-            populateControlsFromData();
-        });
-        patternCenterButton.setOnClickListener(v -> {
-            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1 ) % 3 );
-            populateControlsFromData();
-        });
-        patternRightButton.setOnClickListener(v -> {
-            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1 ) % 3 );
+        nectarText = findViewById(R.id.nectar_text);
+        nectarButton = findViewById(R.id.nectar_image);
+        nectarButton.setOnClickListener(v -> {
+            matchResult.setTeleOpInt6(matchResult.getTeleOpInt6() + 1);
             populateControlsFromData();
         });
 
-        classifiedText = findViewById(R.id.classified_ball_text);
-        classifiedButton = findViewById(R.id.classified_ball);
-        classifiedButton.setOnClickListener(v -> {
-            matchResult.setTeleOpInt1( matchResult.getTeleOpInt1() + 1 );
+        pollenText = findViewById(R.id.pollen_text);
+        pollenButton = findViewById(R.id.pollen_image);
+        pollenButton.setOnClickListener(v -> {
+            matchResult.setTeleOpInt7(matchResult.getTeleOpInt7() + 1);
             populateControlsFromData();
-        });
 
-        overflowText = findViewById(R.id.overflow_ball_text);
-        overflowButton = findViewById(R.id.overflow_ball);
-        overflowButton.setOnClickListener(v -> {
-            matchResult.setTeleOpInt2( matchResult.getTeleOpInt2() + 1 );
-            populateControlsFromData();
         });
-
-        baseButton = findViewById(R.id.base_image);
-        baseButton.setImageResource(baseDrawable);
-        baseButton.setOnClickListener(v -> {
-            matchResult.setEndInt6( (matchResult.getEndInt6() + 1)%3 );
-            populateControlsFromData();
-        });
-
-        twoBotsButton = findViewById(R.id.twobots_image);
-        twoBotsButton.setOnClickListener(v -> {
-            matchResult.setEndFlag1(!matchResult.getEndFlag1());
-            boolean isSelected = matchResult.getEndFlag1();
-            populateControlsFromData();
-        });
-
-        depotText = findViewById(R.id.depot_ball_text);
-        depotButton = findViewById(R.id.depot_ball);
-        depotButton.setOnClickListener(v -> {
-            matchResult.setTeleOpInt3( matchResult.getTeleOpInt3() + 1);
-            populateControlsFromData();
-        });
-
         missedText = findViewById(R.id.missed_ball_text);
         missedButton = findViewById(R.id.missed_ball);
-        missedButton.setOnClickListener( view -> {
-            matchResult.setTeleOpInt5(matchResult.getTeleOpInt5 () + 1);
+        missedButton.setOnClickListener(v -> {
+            matchResult.setTeleOpInt8(matchResult.getTeleOpInt8() + 1);
             populateControlsFromData();
         });
+
+        hiveText = findViewById(R.id.hive_text);
+        hiveButton = findViewById(R.id.hive_image);
+        hiveButton.setOnClickListener(v -> {
+            matchResult.setTeleOpInt9(matchResult.getTeleOpInt9() + 1);
+            populateControlsFromData();
+        });
+
+        gardenText = findViewById(R.id.garden_text);
+        gardenButton = findViewById(R.id.garden_image);
+        gardenButton.setOnClickListener(v -> {
+            matchResult.setTeleOpInt10(matchResult.getTeleOpInt10() + 1);
+            populateControlsFromData();
+        });
+
+        hiveRemainingText = findViewById(R.id.hive_remaining_text);
+        hiveRemainingButton = findViewById(R.id.hive_remaining_image);
+        hiveRemainingButton.setOnClickListener(v -> {
+            matchResult.setTeleOpInt11(matchResult.getTeleOpInt11() + 1);
+            populateControlsFromData();
+        });
+
+        parkButton = findViewById(R.id.park_image);
+        parkButton.setOnClickListener(v -> {
+            matchResult.setEndFlag1(!matchResult.getEndFlag1());
+            populateControlsFromData();
+        });
+
 
         //defensesButton = findViewById(R.id.teleOpDefenses);
         //defensesButton.setImageResource(defenseDrawable);
         //defensesButton.setOnClickListener( v -> {
-            //matchResult.setDefenseCount( matchResult.getDefenseCount() + 1);
-            //populateControlsFromData();
+        //matchResult.setDefenseCount( matchResult.getDefenseCount() + 1);
+        //populateControlsFromData();
         //});
 
         //defensesText = findViewById(R.id.teleOpDefensesValue);
 
-        ball0 = findViewById(R.id.ball0);
-        ball0.setOnClickListener( v -> {
-            ButtonClick(v, 0);
-        });
-        ball1 = findViewById(R.id.ball1);
-        ball1.setOnClickListener( v -> {
-            ButtonClick(v, 1);
-        });
-        ball2 = findViewById(R.id.ball2);
-        ball2.setOnClickListener( v -> {
-            ButtonClick(v, 2);
-        });
-        ball3 = findViewById(R.id.ball3);
-        ball3.setOnClickListener( v -> {
-            ButtonClick(v, 3);
-        });
-        ball4 = findViewById(R.id.ball4);
-        ball4.setOnClickListener( v -> {
-            ButtonClick(v, 4);
-        });
-        ball5 = findViewById(R.id.ball5);
-        ball5.setOnClickListener( v -> {
-            ButtonClick(v, 5);
-        });
-        ball6 = findViewById(R.id.ball6);
-        ball6.setOnClickListener( v -> {
-            ButtonClick(v, 6);
-        });
-        ball7 = findViewById(R.id.ball7);
-        ball7.setOnClickListener( v -> {
-            ButtonClick(v, 7);
-        });
-        ball8 = findViewById(R.id.ball8);
-        ball8.setOnClickListener( v -> {
-            ButtonClick(v, 8);
-        });
 
     }
-    private void ButtonClick(View v, int currentIndex ) {
-        ImageButton currentButton = (ImageButton) v;
-        String ballString = matchResult.getTeleOpString6();
-        String[] ballStringArr = ballString.split(",");
-        String currentBallStr = ballStringArr[currentIndex];
-        if (StringUtils.isBlank(currentBallStr)) {
-            return;
-        }
-        int newBall = (Integer.parseInt(currentBallStr) + 1) % 3;
-        if (newBall == 0) {
-            currentButton.setImageResource(R.drawable.ball_white);
-        } else if (newBall == 1) {
-            currentButton.setImageResource(R.drawable.ball_purple);
-        } else if (newBall == 2) {
-            currentButton.setImageResource(R.drawable.ball_green);
-        }
-        ballStringArr[currentIndex] = String.valueOf(newBall);
-        matchResult.setTeleOpString6( String.join(",", ballStringArr) );
 
-        int ballPattern = matchResult.getAutoInt9();
-        String[] patternArr = new String[3];
-        if( ballPattern == 0 ){
-            patternArr[0] = "2";
-            patternArr[1] = "1";
-            patternArr[2] = "1" ;
-        } else if( ballPattern == 1 ) {
-            patternArr[0] = "1";
-            patternArr[1] = "2";
-            patternArr[2] = "1";
-        } else if( ballPattern == 2 ) {
-            patternArr[0] = "1";
-            patternArr[1] = "1";
-            patternArr[2] = "2";
-
-        }
-
-        int motifCount = 0;
-        for( int index=0; index < 9; index++) {
-            String currentBall = ballStringArr[index];
-            String currentPattern = patternArr[index%3];
-            if( currentBall.equals(currentPattern) ){
-                motifCount++;
-            }
-        }
-        matchResult.setTeleOpInt4(motifCount);
-
-        populateControlsFromData();
-    }
     public void setupColor() {
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
-        if (settings.getDeviceRole().startsWith("red")){
-            baseDrawable = R.drawable.base_red;
-            twobotsDrawable = R.drawable.two_bots_red;
-        } else if(settings.getDeviceRole().startsWith("blue")){
-            baseDrawable = R.drawable.base_blue;
-            twobotsDrawable = R.drawable.two_bots_blue;
+        if (settings.getDeviceRole().startsWith("red")) {
+            nectarDrawable = R.drawable.nectar_red;
+            missedDrawable = R.drawable.missing_scoring_elements_red;
+
+            ownedDrawable = R.drawable.owned_red_flower;
+            bottomDrawable = R.drawable.flower_bottom_red;
+
+            hiveDrawable = R.drawable.hive_red;
+            gardenDrawable = R.drawable.garden_red;
+
+            hiveRemainingDrawable = R.drawable.hive_red_score;
+            parkDrawable = R.drawable.park_red;
+        } else if (settings.getDeviceRole().startsWith("blue")) {
+            nectarDrawable = R.drawable.nectar_blue;
+            missedDrawable = R.drawable.missing_scoring_elements_blue;
+
+            ownedDrawable = R.drawable.owned_blue_flower;
+            bottomDrawable = R.drawable.flower_bottom_blue;
+
+            hiveDrawable = R.drawable.hive_blue;
+            gardenDrawable = R.drawable.garden_blue;
+
+            hiveRemainingDrawable = R.drawable.hive_blue_score;
+            parkDrawable = R.drawable.park_blue;
         }
     }
 }

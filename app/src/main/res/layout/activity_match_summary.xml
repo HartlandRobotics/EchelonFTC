@@ -46,146 +46,101 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
-        <!-- Auto Classified -->
+
+        <!-- Auto Nectar -->
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoClassifiedLabel"
+            android:id="@+id/autoNectarLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
-            android:text="Classified:"
+            android:text="Nectar:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/autoClassifiedDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoClassifiedDecrement"
-            app:layout_constraintTop_toTopOf="@id/autoClassifiedDecrement"
+            app:layout_constraintEnd_toStartOf="@id/autoNectarDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/autoNectarDecrement"
+            app:layout_constraintTop_toTopOf="@id/autoNectarDecrement"
             />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoClassifiedDecrement"
+            android:id="@+id/autoNectarDecrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/autoClassifiedValue"
-            app:layout_constraintStart_toEndOf="@id/autoClassifiedLabel"
+            app:layout_constraintEnd_toStartOf="@id/autoNectarValue"
+            app:layout_constraintStart_toEndOf="@id/autoNectarLabel"
             app:layout_constraintTop_toBottomOf="@id/autoLabel" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoClassifiedValue"
+            android:id="@+id/autoNectarValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/autoClassifiedDecrement"
-            app:layout_constraintEnd_toStartOf="@id/autoClassifiedIncrement"
-            app:layout_constraintStart_toEndOf="@id/autoClassifiedDecrement"
-            app:layout_constraintTop_toTopOf="@id/autoClassifiedDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/autoNectarDecrement"
+            app:layout_constraintEnd_toStartOf="@id/autoNectarIncrement"
+            app:layout_constraintStart_toEndOf="@id/autoNectarDecrement"
+            app:layout_constraintTop_toTopOf="@id/autoNectarDecrement"
             tools:text="1" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoClassifiedIncrement"
+            android:id="@+id/autoNectarIncrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/autoClassifiedValue"
+            app:layout_constraintStart_toEndOf="@id/autoNectarValue"
             app:layout_constraintTop_toBottomOf="@id/autoLabel"
             android:layout_marginEnd="10dp"
             />
 
 
-        <!-- Auto Overflow -->
+        <!-- Auto Pollen -->
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoOverflowLabel"
+            android:id="@+id/autoPollenLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
-            android:text="Overflow:"
+            android:text="Pollen:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/autoOverflowDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoOverflowDecrement"
-            app:layout_constraintTop_toTopOf="@id/autoOverflowDecrement"
+            app:layout_constraintEnd_toStartOf="@id/autoPollenDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/autoPollenDecrement"
+            app:layout_constraintTop_toTopOf="@id/autoPollenDecrement"
             />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoOverflowDecrement"
+            android:id="@+id/autoPollenDecrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/autoOverflowValue"
-            app:layout_constraintStart_toEndOf="@id/autoOverflowLabel"
-            app:layout_constraintTop_toBottomOf="@id/autoClassifiedDecrement"
+            app:layout_constraintEnd_toStartOf="@id/autoPollenValue"
+            app:layout_constraintStart_toEndOf="@id/autoPollenLabel"
+            app:layout_constraintTop_toBottomOf="@id/autoNectarDecrement"
             />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoOverflowValue"
+            android:id="@+id/autoPollenValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/autoOverflowDecrement"
-            app:layout_constraintEnd_toStartOf="@id/autoOverflowIncrement"
-            app:layout_constraintTop_toTopOf="@id/autoOverflowDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoOverflowDecrement"
+            app:layout_constraintStart_toEndOf="@id/autoPollenDecrement"
+            app:layout_constraintEnd_toStartOf="@id/autoPollenIncrement"
+            app:layout_constraintTop_toTopOf="@id/autoPollenDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/autoPollenDecrement"
             tools:text="2"
             />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoOverflowIncrement"
+            android:id="@+id/autoPollenIncrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
-            app:layout_constraintStart_toEndOf="@id/autoOverflowValue"
+            app:layout_constraintStart_toEndOf="@id/autoPollenValue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/autoClassifiedDecrement"
+            app:layout_constraintTop_toBottomOf="@id/autoNectarDecrement"
             android:layout_marginEnd="10dp"
             />
 
 
-        <!-- Auto Motif -->
+        <!-- Auto Missed -->
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoMotifLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Motif:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/autoMotifDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoMotifDecrement"
-            app:layout_constraintTop_toTopOf="@id/autoMotifDecrement"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoMotifDecrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/autoMotifValue"
-            app:layout_constraintStart_toEndOf="@id/autoMotifLabel"
-            app:layout_constraintTop_toBottomOf="@id/autoOverflowDecrement"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoMotifValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/autoMotifDecrement"
-            app:layout_constraintEnd_toStartOf="@id/autoMotifIncrement"
-            app:layout_constraintTop_toTopOf="@id/autoMotifDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoMotifDecrement"
-            tools:text="3"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoMotifIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintStart_toEndOf="@id/autoMotifValue"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/autoOverflowDecrement"
-            android:layout_marginEnd="10dp"
-
-            />
-       <!-- Auto Missed-->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/autoMissedLabel"
             android:layout_width="wrap_content"
@@ -205,7 +160,7 @@
             android:text="-"
             app:layout_constraintEnd_toStartOf="@id/autoMissedValue"
             app:layout_constraintStart_toEndOf="@id/autoMissedLabel"
-            app:layout_constraintTop_toBottomOf="@id/autoMotifDecrement"
+            app:layout_constraintTop_toBottomOf="@id/autoPollenDecrement"
             />
 
         <com.google.android.material.textview.MaterialTextView
@@ -227,12 +182,60 @@
             android:text="+"
             app:layout_constraintStart_toEndOf="@id/autoMissedValue"
             app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/autoMotifDecrement"
+            app:layout_constraintTop_toBottomOf="@id/autoPollenDecrement"
+            android:layout_marginEnd="10dp"
+
+            />
+
+       <!-- Auto Hive Tip-->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/autoHiveTipLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="80dp"
+            android:text="Hive Tip:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/autoHiveTipDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/autoHiveTipDecrement"
+            app:layout_constraintTop_toTopOf="@id/autoHiveTipDecrement"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/autoHiveTipDecrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            app:layout_constraintEnd_toStartOf="@id/autoHiveTipValue"
+            app:layout_constraintStart_toEndOf="@id/autoHiveTipLabel"
+            app:layout_constraintTop_toBottomOf="@id/autoMissedDecrement"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/autoHiveTipValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintStart_toEndOf="@id/autoHiveTipDecrement"
+            app:layout_constraintEnd_toStartOf="@id/autoHiveTipIncrement"
+            app:layout_constraintTop_toTopOf="@id/autoHiveTipDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/autoHiveTipDecrement"
+            tools:text="3"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/autoHiveTipIncrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            app:layout_constraintStart_toEndOf="@id/autoHiveTipValue"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/autoMissedDecrement"
             android:layout_marginEnd="10dp"
 
             />
 
 
+        <!-- Auto Leave -->
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/autoLeaveCheckbox"
             android:layout_width="wrap_content"
@@ -240,7 +243,19 @@
             android:checked="true"
             android:text="Leave:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/autoMissedDecrement"
+            app:layout_constraintTop_toBottomOf="@id/autoHiveTipDecrement"
+            android:layout_marginTop="10dp"
+            />
+
+        <!-- Auto Park -->
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/autoParkCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Park:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/autoLeaveCheckbox"
             android:layout_marginTop="10dp"
             />
 
@@ -266,190 +281,96 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <!-- TeleOp Classified -->
+        <!-- TeleOp Nectar -->
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpClassifiedLabel"
+            android:id="@+id/teleOpNectarLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
-            android:text="Classified:"
+            android:text="Nectar:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/teleOpClassifiedDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpClassifiedDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpClassifiedDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpNectarDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpNectarDecrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpNectarDecrement"
             />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpClassifiedDecrement"
+            android:id="@+id/teleOpNectarDecrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/teleOpClassifiedValue"
-            app:layout_constraintStart_toEndOf="@id/teleOpClassifiedLabel"
+            app:layout_constraintEnd_toStartOf="@id/teleOpNectarValue"
+            app:layout_constraintStart_toEndOf="@id/teleOpNectarLabel"
             app:layout_constraintTop_toBottomOf="@id/teleOpLabel"
             />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpClassifiedValue"
+            android:id="@+id/teleOpNectarValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpClassifiedDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpClassifiedIncrement"
-            app:layout_constraintStart_toEndOf="@id/teleOpClassifiedDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpClassifiedDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpNectarDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpNectarIncrement"
+            app:layout_constraintStart_toEndOf="@id/teleOpNectarDecrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpNectarDecrement"
             tools:text="1"
             />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpClassifiedIncrement"
+            android:id="@+id/teleOpNectarIncrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/teleOpClassifiedValue"
+            app:layout_constraintStart_toEndOf="@id/teleOpNectarValue"
             app:layout_constraintTop_toBottomOf="@id/teleOpLabel"
             android:layout_marginEnd="10dp"
             />
 
 
-        <!-- TeleOp Overflow -->
+        <!-- TeleOp Pollen -->
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpOverflowLabel"
+            android:id="@+id/teleOpPollenLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="80dp"
-            android:text="Overflow:"
+            android:text="Pollen:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/teleOpOverflowDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpOverflowDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpOverflowDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpPollenDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpPollenDecrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpPollenDecrement"
             />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpOverflowDecrement"
+            android:id="@+id/teleOpPollenDecrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/teleOpOverflowValue"
-            app:layout_constraintStart_toEndOf="@id/teleOpOverflowLabel"
-            app:layout_constraintTop_toBottomOf="@id/teleOpClassifiedDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpPollenValue"
+            app:layout_constraintStart_toEndOf="@id/teleOpPollenLabel"
+            app:layout_constraintTop_toBottomOf="@id/teleOpNectarDecrement"
             />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpOverflowValue"
+            android:id="@+id/teleOpPollenValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/teleOpOverflowDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpOverflowIncrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpOverflowDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpOverflowDecrement"
+            app:layout_constraintStart_toEndOf="@id/teleOpPollenDecrement"
+            app:layout_constraintEnd_toStartOf="@id/teleOpPollenIncrement"
+            app:layout_constraintTop_toTopOf="@id/teleOpPollenDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/teleOpPollenDecrement"
             tools:text="2"
             />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpOverflowIncrement"
+            android:id="@+id/teleOpPollenIncrement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
-            app:layout_constraintStart_toEndOf="@id/teleOpOverflowValue"
+            app:layout_constraintStart_toEndOf="@id/teleOpPollenValue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/teleOpClassifiedDecrement"
-            android:layout_marginEnd="10dp"
-            />
-
-
-        <!-- TeleOp Motif -->
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpMotifLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Motif:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/teleOpMotifDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpMotifDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpMotifDecrement"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpMotifDecrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/teleOpMotifValue"
-            app:layout_constraintStart_toEndOf="@id/teleOpMotifLabel"
-            app:layout_constraintTop_toBottomOf="@id/teleOpOverflowDecrement"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpMotifValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/teleOpMotifDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpMotifIncrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpMotifDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpMotifDecrement"
-            tools:text="3"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpMotifIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintStart_toEndOf="@id/teleOpMotifValue"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/teleOpMotifDecrement"
-            android:layout_marginEnd="10dp"
-            />
-
-        <!-- Depot-->
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpDepotLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Depot:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/teleOpDepotDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpDepotDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpDepotDecrement"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpDepotDecrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/teleOpDepotValue"
-            app:layout_constraintStart_toEndOf="@id/teleOpDepotLabel"
-            app:layout_constraintTop_toBottomOf="@id/teleOpMotifDecrement"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpDepotValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/teleOpDepotDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpDepotIncrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpDepotDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpDepotDecrement"
-            tools:text="2"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpDepotIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintStart_toEndOf="@id/teleOpDepotValue"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/teleOpDepotDecrement"
+            app:layout_constraintTop_toBottomOf="@id/teleOpNectarDecrement"
             android:layout_marginEnd="10dp"
             />
 
@@ -473,7 +394,7 @@
             android:text="-"
             app:layout_constraintEnd_toStartOf="@id/teleOpMissedValue"
             app:layout_constraintStart_toEndOf="@id/teleOpMissedLabel"
-            app:layout_constraintTop_toBottomOf="@id/teleOpDepotDecrement"
+            app:layout_constraintTop_toBottomOf="@id/teleOpPollenDecrement"
             />
 
         <com.google.android.material.textview.MaterialTextView
@@ -495,9 +416,12 @@
             android:text="+"
             app:layout_constraintStart_toEndOf="@id/teleOpMissedValue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/teleOpDepotDecrement"
+            app:layout_constraintTop_toBottomOf="@id/teleOpPollenDecrement"
             android:layout_marginEnd="10dp"
             />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -523,47 +447,110 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/endBaseLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Base:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/endBaseValue"
-            app:layout_constraintTop_toBottomOf="@id/endLabel"
-
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/endBaseValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/endBaseValue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/endLabel"
-            tools:text="Full"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/endBaseCycle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="&lt;-&gt;"
-            app:layout_constraintStart_toStartOf="@id/endBaseValue"
-            app:layout_constraintTop_toBottomOf="@id/endBaseValue"
-            />
-
-
-        <!-- End two bots -->
+        <!-- End Park -->
 
         <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/endTwoBotsCheckbox"
+            android:id="@+id/endPark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Two Bots"
+            android:text="Park"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/endBaseCycle"
+            app:layout_constraintTop_toBottomOf="@+id/endLabel"
+            />
+
+        <!--End Owned -->
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/endOwnedLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="80dp"
+            android:text="Owned:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/endOwnedDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/endOwnedDecrement"
+            app:layout_constraintTop_toTopOf="@id/endOwnedDecrement"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/endOwnedDecrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            app:layout_constraintEnd_toStartOf="@id/endOwnedValue"
+            app:layout_constraintStart_toEndOf="@id/endOwnedLabel"
+            app:layout_constraintTop_toBottomOf="@id/endPark"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/endOwnedValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintStart_toEndOf="@id/endOwnedDecrement"
+            app:layout_constraintEnd_toStartOf="@id/endOwnedIncrement"
+            app:layout_constraintTop_toTopOf="@id/endOwnedDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/endOwnedDecrement"
+            tools:text="3"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/endOwnedIncrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            app:layout_constraintStart_toEndOf="@id/endOwnedValue"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/endOwnedDecrement"
+            android:layout_marginEnd="10dp"
+            />
+
+        <!--End Bottom -->
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/endBottomLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="80dp"
+            android:text="Bottom:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/endBottomDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/endBottomDecrement"
+            app:layout_constraintTop_toTopOf="@id/endBottomDecrement"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/endBottomDecrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            app:layout_constraintEnd_toStartOf="@id/endBottomValue"
+            app:layout_constraintStart_toEndOf="@id/endBottomLabel"
+            app:layout_constraintTop_toBottomOf="@id/endOwnedDecrement"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/endBottomValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintStart_toEndOf="@id/endBottomDecrement"
+            app:layout_constraintEnd_toStartOf="@id/endBottomIncrement"
+            app:layout_constraintTop_toTopOf="@id/endBottomDecrement"
+            app:layout_constraintBottom_toBottomOf="@id/endBottomDecrement"
+            tools:text="3"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/endBottomIncrement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            app:layout_constraintStart_toEndOf="@id/endBottomValue"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/endBottomDecrement"
+            android:layout_marginEnd="10dp"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

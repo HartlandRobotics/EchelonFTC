@@ -135,67 +135,78 @@ public class CurrentGame {
 
     public int getTeleOpPoints() {
         int teleOpPoints = 0;
-        teleOpPoints += this.getTeleOp1Points();
-        teleOpPoints += this.getTeleOp2Points();
-        teleOpPoints += this.getTeleOp3Points();
-        teleOpPoints += this.getTeleOp4Points();
-        teleOpPoints += this.getTeleOp5Points();
+        teleOpPoints += this.getTeleOp6Points();
+        teleOpPoints += this.getTeleOp7Points();
+        teleOpPoints += this.getTeleOp8Points();
+        teleOpPoints += this.getTeleOp9Points();
+        teleOpPoints += this.getTeleOp10Points();
+        teleOpPoints += this.getTeleOp11Points();
         return teleOpPoints;
     }
     public int getTeleOpCounts() {
         int teleOpCounts = 0;
-        teleOpCounts += this.getTeleOp1Counts();
-        teleOpCounts += this.getTeleOp2Counts();
-        teleOpCounts += this.getTeleOp3Counts();
-        teleOpCounts += this.getTeleOp4Counts();
-        teleOpCounts += this.getTeleOp5Counts();
+        teleOpCounts += this.getTeleOp6Counts();
+        teleOpCounts += this.getTeleOp7Counts();
+        teleOpCounts += this.getTeleOp8Counts();
+        teleOpCounts += this.getTeleOp9Counts();
+        teleOpCounts += this.getTeleOp10Counts();
+        teleOpCounts += this.getTeleOp11Counts();
         return teleOpCounts;
     }
 
-    public int getTeleOp1Counts(){
+    public int getTeleOp6Counts(){
         if( result == null ) return 0;
-        return result.getTeleOpInt1();
+        return result.getTeleOpInt6();
     }
-    public int getTeleOp1Points(){
+    public int getTeleOp6Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt1() * 3;
-    }
-
-    public int getTeleOp2Counts(){
-        if( result == null ) return 0;
-        return result.getTeleOpInt2();
-    }
-    public int getTeleOp2Points(){
-        if( result == null ) return 0;
-        return result.getTeleOpInt2() * 1;
+        return result.getTeleOpInt6() * 3;
     }
 
-    public int getTeleOp3Counts(){
+    public int getTeleOp7Counts(){
         if( result == null ) return 0;
-        return result.getTeleOpInt3();
+        return result.getTeleOpInt7();
     }
-    public int getTeleOp3Points(){
+    public int getTeleOp7Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt3() * 1;
+        return result.getTeleOpInt7() * 1;
+    }
+
+    public int getTeleOp8Counts(){
+        if( result == null ) return 0;
+        return result.getTeleOpInt8();
+    }
+    public int getTeleOp8Points(){
+        if( result == null ) return 0;
+        return result.getTeleOpInt8() * 1;
     }
 
 
-    public int getTeleOp4Counts(){
+    public int getTeleOp9Counts(){
         if( result == null ) return 0;
-        return result.getTeleOpInt4();
+        return result.getTeleOpInt9();
     }
-    public int getTeleOp4Points(){
+    public int getTeleOp9Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt4() * 2;
+        return result.getTeleOpInt9() * 2;
     }
 
-    public int getTeleOp5Counts(){
+    public int getTeleOp10Counts(){
         if( result == null ) return 0;
-        return result.getTeleOpInt5();
+        return result.getTeleOpInt10();
     }
-    public int getTeleOp5Points(){
+    public int getTeleOp10Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt5() * 0;
+        return result.getTeleOpInt10() * 0;
+    }
+
+    public int getTeleOp11Counts(){
+        if( result == null ) return 0;
+        return result.getTeleOpInt11();
+    }
+    public int getTeleOp11Points(){
+        if( result == null ) return 0;
+        return result.getTeleOpInt11() * 0;
     }
 
     public int getEndPoints() {

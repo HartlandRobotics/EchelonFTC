@@ -6,199 +6,205 @@
     android:layout_height="match_parent"
     tools:context=".matchScouting.MatchScoutingAutoActivity">
 
-
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/classified"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/column_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/overflow"
-        android:textSize="30dp"
-        android:text="Hive Tip"
-        />
+        app:layout_constraintRight_toLeftOf="@id/column_two"
+        app:layout_constraintTop_toTopOf="parent">
 
 
-    <ImageButton
-        android:id="@+id/classified_ball"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/hive_red"
-        android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/classified"
-        app:layout_constraintLeft_toLeftOf="@id/classified"
-        />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/classified_ball_text"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/nectar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nectar"
+            android:textSize="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hive_image"
+            />
+
+        <ImageButton
+            android:id="@+id/nectar_image"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/nectar_red"
+            app:layout_constraintLeft_toLeftOf="@id/nectar"
+            app:layout_constraintTop_toBottomOf="@id/nectar" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/nectar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="32sp"
+            app:layout_constraintLeft_toRightOf="@id/nectar_image"
+            app:layout_constraintTop_toTopOf="@id/nectar_image"
+            tools:text="0" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/pollen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pollen"
+            android:textSize="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nectar_image"
+            />
+
+        <ImageButton
+            android:id="@+id/pollen_image"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/pollen"
+            app:layout_constraintLeft_toLeftOf="@id/pollen"
+            app:layout_constraintTop_toBottomOf="@id/pollen" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/pollen_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="32sp"
+            app:layout_constraintLeft_toRightOf="@id/pollen_image"
+            app:layout_constraintTop_toTopOf="@id/pollen_image"
+            tools:text="0" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/missed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Missed"
+            android:textSize="32sp"
+            app:layout_constraintTop_toBottomOf="@id/pollen_image"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <ImageButton
+            android:id="@+id/missed_ball"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/missing_scoring_elements_red"
+            app:layout_constraintLeft_toLeftOf="@id/missed"
+            app:layout_constraintTop_toBottomOf="@id/missed" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/missed_ball_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="32sp"
+            app:layout_constraintLeft_toRightOf="@id/missed_ball"
+            app:layout_constraintTop_toTopOf="@id/missed_ball"
+            tools:text="0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/column_two"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/classified_ball"
-        app:layout_constraintLeft_toRightOf="@+id/classified_ball"
-        android:layout_marginLeft="30dp"
-        android:textSize="32sp"
-        tools:text="0"
-        />
+        app:layout_constraintLeft_toRightOf="@id/column_one"
+        app:layout_constraintRight_toLeftOf="@id/column_three"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/hive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tip"
+            android:textSize="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+
+        <ImageButton
+            android:id="@+id/hive_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/hive_red"
+            app:layout_constraintLeft_toLeftOf="@id/hive"
+            app:layout_constraintTop_toBottomOf="@id/hive" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/hive_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="32sp"
+            app:layout_constraintLeft_toRightOf="@+id/hive_image"
+            app:layout_constraintTop_toTopOf="@id/hive_image"
+            tools:text="0" />
 
 
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/overflow"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/column_three"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/pattern"
-        app:layout_constraintLeft_toRightOf="@id/classified"
-        app:layout_constraintRight_toLeftOf="@id/missed"
-
-        android:textSize="30dp"
-        android:layout_marginTop="30dp"
-        android:text="Scoring"
-        />
-
-    <ImageButton
-        android:id="@+id/overflow_ball"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/scoring_elements_red"
-        android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/overflow"
-        app:layout_constraintLeft_toLeftOf="@id/overflow"
-
-        />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/overflow_ball_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/overflow_ball"
-        app:layout_constraintLeft_toRightOf="@id/overflow_ball"
-        android:layout_marginLeft="30dp"
-        android:textSize="32sp"
-        tools:text="0"
-        />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/park_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/leave_text"
-        app:layout_constraintLeft_toLeftOf="@id/overflow"
-        android:textSize="30dp"
-        android:text="Park"
-        />
-
-    <ImageButton
-        android:id="@+id/park"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/park_red"
-        app:layout_constraintTop_toBottomOf="@id/park_text"
-        app:layout_constraintLeft_toLeftOf="@id/park_text"
-        />
-
-
-
-
-
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/missed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/pattern"
-        app:layout_constraintLeft_toRightOf="@id/overflow"
+        app:layout_constraintLeft_toRightOf="@id/column_two"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"
-        android:textSize="32sp"
-        android:text="Missed"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
-    <ImageButton
-        android:id="@+id/missed_ball"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/missing_scoring_elements_red"
-        android:layout_marginLeft="15dp"
-        android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/missed"
-        app:layout_constraintLeft_toLeftOf="@id/missed"
-        />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/missed_ball_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32sp"
-        app:layout_constraintLeft_toRightOf="@id/missed_ball"
-        app:layout_constraintTop_toTopOf="@id/missed_ball"
-        tools:text="0"
-        android:layout_marginLeft="30dp"
-        />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/park"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Park"
+            android:textSize="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
-<!--    <com.google.android.material.textview.MaterialTextView-->
-<!--        android:id="@+id/motif"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/pattern"-->
-<!--        app:layout_constraintLeft_toRightOf="@id/overflow"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        android:textSize="30dp"-->
-<!--        android:layout_marginTop="30dp"-->
-<!--        android:text="Motif"-->
-<!--        />-->
+        <ImageButton
+            android:id="@+id/park_image"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/park_red"
+            app:layout_constraintLeft_toLeftOf="@id/park"
+            app:layout_constraintTop_toBottomOf="@id/park" />
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/motif_ball"-->
-<!--        android:layout_width="75dp"-->
-<!--        android:layout_height="75dp"-->
-<!--        android:scaleType="fitXY"-->
-<!--        android:src="@drawable/ball_purple"-->
-<!--        android:background="@null"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/motif"-->
-<!--        app:layout_constraintLeft_toLeftOf="@id/motif"-->
 
-<!--        />-->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/leave_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Leave"
+            android:textSize="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/park_image" />
 
-<!--    <com.google.android.material.textview.MaterialTextView-->
-<!--        android:id="@+id/motif_ball_text"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintTop_toTopOf="@id/motif_ball"-->
-<!--        app:layout_constraintLeft_toRightOf="@id/motif_ball"-->
-<!--        android:layout_marginLeft="30dp"-->
-<!--        android:textSize="32sp"-->
-<!--        tools:text="0"-->
-<!--        />-->
+        <ImageButton
+            android:id="@+id/leave"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/leave_red"
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/leave_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/classified_ball"
-        app:layout_constraintLeft_toLeftOf="@id/classified"
-        android:textSize="30dp"
-        android:text="Leave"
-        android:layout_marginTop="30dp"
-        />
+            app:layout_constraintLeft_toLeftOf="@id/leave_text"
+            app:layout_constraintTop_toBottomOf="@id/leave_text" />
 
-    <ImageButton
-        android:id="@+id/leave"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/leave_red"
-
-        app:layout_constraintTop_toBottomOf="@id/leave_text"
-        app:layout_constraintLeft_toLeftOf="@id/leave_text"
-        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/teleOp"
@@ -206,18 +212,16 @@
         android:layout_height="wrap_content"
         android:text="TeleOp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/teamKeyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="FTC 5290"
-        android:textSize="20dp"
         android:padding="20px"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="FTC 5290" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

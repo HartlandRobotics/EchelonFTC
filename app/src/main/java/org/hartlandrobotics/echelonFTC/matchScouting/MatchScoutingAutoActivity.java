@@ -26,36 +26,29 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     private static final String MATCH_KEY = "auto_match_key_param";
     private static final String TEAM_KEY = "auto_team_key_param";
 
-    private int hiveDrawable = 0;
-    private int scoringDrawable = 0;
-    private int missedDrawable = 0;
-    private int leaveDrawable = 0;
-    private int parkDrawable = 0;
 
-    private ImageButton patternLeftButton;
-    private ImageButton patternCenterButton;
-    private ImageButton patternRightButton;
+    private ImageButton nectarButton;
+    private MaterialTextView nectarText;
+
+    private ImageButton pollenButton;
+    private MaterialTextView pollenText;
 
     private ImageButton missedButton;
-    private ImageButton classifiedButton;
-    private ImageButton overflowButton;
+    private MaterialTextView missedText;
+
+
+    private ImageButton hiveButton;
+    private MaterialTextView hiveText;
+
+
+
+    private int leaveDrawable;
     private ImageButton leaveButton;
 
-    private MaterialTextView classifiedText;
-    private MaterialTextView overflowText;
-    private MaterialTextView teamKeyText;
+    private int parkDrawable;
+    private ImageButton parkButton;
 
-    private MaterialTextView missedText;
-    int leaveDrawable;
-    private ImageButton ball0;
-    private ImageButton ball1;
-    private ImageButton ball2;
-    private ImageButton ball3;
-    private ImageButton ball4;
-    private ImageButton ball5;
-    private ImageButton ball6;
-    private ImageButton ball7;
-    private ImageButton ball8;
+
     MatchResultViewModel matchResultViewModel;
     MatchResult matchResult;
 
@@ -87,7 +80,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         Context appContext = this.getApplicationContext();
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(appContext);
         String alliance = RoleUtilities.deviceColor(settings.getDeviceRole());
-        teamKeyText = findViewById(R.id.teamKeyText);
+        MaterialTextView teamKeyText = findViewById(R.id.teamKeyText);
         teamKeyText.setTextColor(settings.getDeviceRole().contains("red") ? getResources().getColor(R.color.redAlliance) : getResources().getColor(R.color.blueAlliance));
         teamKeyText.setText(teamKey);
 
@@ -107,75 +100,23 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     }
 
     public void populateControlsFromData(){
-        int ballPattern = matchResult.getAutoInt9();
-        if( ballPattern == 0 ){
-            patternLeftButton.setImageResource(R.drawable.ball_green);
-            patternCenterButton.setImageResource(R.drawable.ball_purple);
-            patternRightButton.setImageResource(R.drawable.ball_purple);
-        } else if( ballPattern == 1 ) {
-            patternLeftButton.setImageResource(R.drawable.ball_purple);
-            patternCenterButton.setImageResource(R.drawable.ball_green);
-            patternRightButton.setImageResource(R.drawable.ball_purple);
-        } else if( ballPattern == 2 ) {
-            patternLeftButton.setImageResource(R.drawable.ball_purple);
-            patternCenterButton.setImageResource(R.drawable.ball_purple);
-            patternRightButton.setImageResource(R.drawable.ball_green);
-        }
 
-        classifiedText.setText(String.valueOf(matchResult.getAutoInt6()));
-        overflowText.setText(String.valueOf(matchResult.getAutoInt7()));
+        nectarText.setText(String.valueOf(matchResult.getAutoInt6()));
+        pollenText.setText(String.valueOf(matchResult.getAutoInt7()));
+        missedText.setText(String.valueOf(matchResult.getAutoInt8()));
 
-        missedText.setText(String.valueOf(matchResult.getAutoInt10()));
+        hiveText.setText(String.valueOf(matchResult.getAutoInt9()));
+
         if( matchResult.getAutoFlag1() ){
             leaveButton.setImageResource(R.drawable.leave_green);
         } else {
             leaveButton.setImageResource(leaveDrawable);
         }
 
-        String[] strArr = matchResult.getAutoString11().split(",");
-        for(int index=0; index<9; index++){
-            String currentValue = strArr[index];
-            int currentImage = R.drawable.ball_white;
-            switch (currentValue) {
-                case "1":
-                    currentImage = R.drawable.ball_purple;
-                    break;
-                case "2":
-                    currentImage = R.drawable.ball_green;
-                    break;
-                default:
-                    break;
-            }
-
-            switch (index){
-                case 0:
-                    ball0.setImageResource(currentImage);
-                    break;
-                case 1:
-                    ball1.setImageResource(currentImage);
-                    break;
-                case 2:
-                    ball2.setImageResource(currentImage);
-                    break;
-                case 3:
-                    ball3.setImageResource(currentImage);
-                    break;
-                case 4:
-                    ball4.setImageResource(currentImage);
-                    break;
-                case 5:
-                    ball5.setImageResource(currentImage);
-                    break;
-                case 6:
-                    ball6.setImageResource(currentImage);
-                    break;
-                case 7:
-                    ball7.setImageResource(currentImage);
-                    break;
-                case 8:
-                    ball8.setImageResource(currentImage);
-                    break;
-            }
+        if( matchResult.getAutoFlag2() ){
+            parkButton.setImageResource(R.drawable.park_green);
+        } else {
+            parkButton.setImageResource(parkDrawable);
         }
 
     }
@@ -187,37 +128,35 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
             MatchScoutingTeleopActivity.launch(MatchScoutingAutoActivity.this, matchKey, teamKey );
         });
 
-        patternLeftButton = findViewById(R.id.pattern_left);
-        patternLeftButton.setOnClickListener(v -> {
-            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1) % 3);
-            populateControlsFromData();
-        });
-
-        patternCenterButton = findViewById(R.id.pattern_center);
-        patternCenterButton.setOnClickListener(v -> {
-            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1) % 3);
-            populateControlsFromData();
-        });
-
-        patternRightButton = findViewById(R.id.pattern_right);
-        patternRightButton.setOnClickListener(v -> {
-            matchResult.setAutoInt9( (matchResult.getAutoInt9() + 1) % 3);
-            populateControlsFromData();
-        });
-
-        classifiedText = findViewById(R.id.classified_ball_text);
-        classifiedButton = findViewById(R.id.classified_ball);
-        classifiedButton.setOnClickListener(v -> {
-            matchResult.setAutoInt6( matchResult.getAutoInt6() + 1);
-            populateControlsFromData();
-        });
-
-        overflowText = findViewById(R.id.overflow_ball_text);
-        overflowButton = findViewById(R.id.overflow_ball);
-        overflowButton.setOnClickListener(v -> {
+        nectarText = findViewById(R.id.nectar_text);
+        nectarButton = findViewById(R.id.nectar_image);
+        nectarButton.setOnClickListener(v -> {
             matchResult.setAutoInt7( matchResult.getAutoInt7() + 1);
             populateControlsFromData();
         });
+
+        pollenText = findViewById(R.id.pollen_text);
+        pollenButton = findViewById(R.id.pollen_image);
+        pollenButton.setOnClickListener(v -> {
+            matchResult.setAutoInt8( matchResult.getAutoInt8() + 1);
+            populateControlsFromData();
+        });
+
+        missedText = findViewById(R.id.missed_ball_text);
+        missedButton = findViewById(R.id.missed_ball);
+        missedButton.setOnClickListener(v -> {
+            matchResult.setAutoInt9( matchResult.getAutoInt9() + 1);
+            populateControlsFromData();
+        });
+
+        hiveText = findViewById(R.id.hive_text);
+        hiveButton = findViewById(R.id.hive_image);
+        hiveButton.setOnClickListener(v -> {
+            matchResult.setAutoInt10( matchResult.getAutoInt10() + 1 );
+            populateControlsFromData();
+        });
+
+
 
         leaveButton = findViewById(R.id.leave);
         leaveButton.setImageResource(leaveDrawable);
@@ -226,108 +165,34 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
-        missedText = findViewById(R.id.missed_ball_text);
-        missedButton = findViewById(R.id.missed_ball);
-        missedButton.setOnClickListener(view -> {
-            matchResult.setAutoInt10(matchResult.getAutoInt10() + 1);
+
+        parkButton = findViewById(R.id.park_image);
+        parkButton.setImageResource(parkDrawable);
+        parkButton.setOnClickListener(v -> {
+            matchResult.setAutoFlag2( !matchResult.getAutoFlag2() );
             populateControlsFromData();
         });
-
-        ball0 = findViewById(R.id.ball0);
-        ball0.setOnClickListener( v -> {
-            ButtonClick(v, 0);
-        });
-        ball1 = findViewById(R.id.ball1);
-        ball1.setOnClickListener( v -> {
-            ButtonClick(v, 1);
-        });
-        ball2 = findViewById(R.id.ball2);
-        ball2.setOnClickListener( v -> {
-            ButtonClick(v, 2);
-        });
-        ball3 = findViewById(R.id.ball3);
-        ball3.setOnClickListener( v -> {
-            ButtonClick(v, 3);
-        });
-        ball4 = findViewById(R.id.ball4);
-        ball4.setOnClickListener( v -> {
-            ButtonClick(v, 4);
-        });
-        ball5 = findViewById(R.id.ball5);
-        ball5.setOnClickListener( v -> {
-            ButtonClick(v, 5);
-        });
-        ball6 = findViewById(R.id.ball6);
-        ball6.setOnClickListener( v -> {
-            ButtonClick(v, 6);
-        });
-        ball7 = findViewById(R.id.ball7);
-        ball7.setOnClickListener( v -> {
-            ButtonClick(v, 7);
-        });
-        ball8 = findViewById(R.id.ball8);
-        ball8.setOnClickListener( v -> {
-            ButtonClick(v, 8);
-        });
-
-    }
-
-    private void ButtonClick(View v, int currentIndex ) {
-        ImageButton currentButton = (ImageButton) v;
-        String ballString = matchResult.getAutoString11();
-        String[] ballStringArr = ballString.split(",");
-        String currentBallStr = ballStringArr[currentIndex];
-        if (StringUtils.isBlank(currentBallStr)) {
-            return;
-        }
-        int newBall = (Integer.parseInt(currentBallStr) + 1) % 3;
-        if (newBall == 0) {
-            currentButton.setImageResource(R.drawable.ball_white);
-        } else if (newBall == 1) {
-            currentButton.setImageResource(R.drawable.ball_purple);
-        } else if (newBall == 2) {
-            currentButton.setImageResource(R.drawable.ball_green);
-        }
-        ballStringArr[currentIndex] = String.valueOf(newBall);
-        matchResult.setAutoString11( String.join(",", ballStringArr) );
-
-        int ballPattern = matchResult.getAutoInt9();
-        String[] patternArr = new String[3];
-        if( ballPattern == 0 ){
-            patternArr[0] = "2";
-            patternArr[1] = "1";
-            patternArr[2] = "1" ;
-        } else if( ballPattern == 1 ) {
-            patternArr[0] = "1";
-            patternArr[1] = "2";
-            patternArr[2] = "1";
-        } else if( ballPattern == 2 ) {
-            patternArr[0] = "1";
-            patternArr[1] = "1";
-            patternArr[2] = "2";
-
-        }
-
-        int motifCount = 0;
-        for( int index=0; index < 9; index++) {
-            String currentBall = ballStringArr[index];
-            String currentPattern = patternArr[index%3];
-            if( currentBall.equals(currentPattern) ){
-                motifCount++;
-            }
-        }
-        matchResult.setAutoInt8(motifCount);
-
-        populateControlsFromData();
     }
 
     public void setupColor() {
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
+        int nectarDrawable = 0;
+        int missedDrawable = 0;
+        int hiveDrawable = 0;
+
         if (settings.getDeviceRole().startsWith("red")){
+            nectarDrawable = R.drawable.nectar_red;
+            missedDrawable = R.drawable.missing_scoring_elements_red;
+            hiveDrawable = R.drawable.hive_red;
             leaveDrawable = R.drawable.leave_red;
+            parkDrawable = R.drawable.leave_red;
         } else {
+            nectarDrawable = R.drawable.nectar_blue;
+            missedDrawable = R.drawable.missing_scoring_elements_blue;
+            hiveDrawable = R.drawable.hive_blue;
             leaveDrawable = R.drawable.leave_blue;
+            parkDrawable = R.drawable.leave_blue;
         }
 
 

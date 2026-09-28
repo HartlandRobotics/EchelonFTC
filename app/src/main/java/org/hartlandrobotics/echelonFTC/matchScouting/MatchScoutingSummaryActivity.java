@@ -37,52 +37,54 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     MatchResult matchResult;
 
     // auto
-    private MaterialButton autoClassifiedDecrement;
-    private MaterialTextView autoClassifiedValue;
-    private MaterialButton autoClassifiedIncrement;
+    private MaterialButton autoNectarDecrement;
+    private MaterialTextView autoNectarValue;
+    private MaterialButton autoNectarIncrement;
 
-    private MaterialButton autoOverflowDecrement;
-    private MaterialTextView autoOverflowValue;
-    private MaterialButton autoOverflowIncrement;
-
-    private MaterialButton autoMotifDecrement;
-    private MaterialTextView autoMotifValue;
-    private MaterialButton autoMotifIncrement;
+    private MaterialButton autoPollenDecrement;
+    private MaterialTextView autoPollenValue;
+    private MaterialButton autoPollenIncrement;
 
     private MaterialButton autoMissedDecrement;
     private MaterialTextView autoMissedValue;
     private MaterialButton autoMissedIncrement;
 
+    private MaterialButton autoHiveTipDecrement;
+    private MaterialTextView autoHiveTipValue;
+    private MaterialButton autoHiveTipIncrement;
+
     private MaterialCheckBox autoLeave;
+    private MaterialCheckBox autoPark;
 
-    private MaterialButton teleOpClassifiedDecrement;
-    private MaterialTextView teleOpClassifiedValue;
-    private MaterialButton teleOpClassifiedIncrement;
 
-    private MaterialButton teleOpOverflowDecrement;
-    private MaterialTextView teleOpOverflowValue;
-    private MaterialButton teleOpOverflowIncrement;
 
-    private MaterialButton teleOpDepotDecrement;
-    private MaterialTextView teleOpDepotValue;
-    private MaterialButton teleOpDepotIncrement;
 
-    private MaterialButton teleOpMotifDecrement;
-    private MaterialTextView teleOpMotifValue;
-    private MaterialButton teleOpMotifIncrement;
+    private MaterialButton teleOpNectarDecrement;
+    private MaterialTextView teleOpNectarValue;
+    private MaterialButton teleOpNectarIncrement;
+
+    private MaterialButton teleOpPollenDecrement;
+    private MaterialTextView teleOpPollenValue;
+    private MaterialButton teleOpPollenIncrement;
 
     private MaterialButton teleOpMissedDecrement;
     private MaterialTextView teleOpMissedValue;
     private MaterialButton teleOpMissedIncrement;
 
-    //private MaterialButton teleOpDefensesDecrement;
-    //private MaterialTextView teleOpDefensesValue;
-    //private MaterialButton teleOpDefensesIncrement;
+    private MaterialButton teleOpHiveTipDecrement;
+    private MaterialTextView teleOpHiveTipValue;
+    private MaterialButton teleOpHiveTipIncrement;
 
-    private MaterialButton endBaseCycle;
-    private MaterialTextView endBaseValue;
 
-    private MaterialCheckBox endTwobotsCheckBox;
+    private MaterialCheckBox endParkCheckBox;
+
+    private MaterialButton endOwnedDecrement;
+    private MaterialTextView endOwnedValue;
+    private MaterialButton endOwnedIncrement;
+
+    private MaterialButton endBottomDecrement;
+    private MaterialTextView endBottomValue;
+    private MaterialButton endBottomIncrement;
 
     private TextInputLayout additionalNotesLayout;
 
@@ -128,39 +130,27 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
     private void setupControls(){
 
         //Auto
-        autoClassifiedValue = findViewById(R.id.autoClassifiedValue);
-        autoClassifiedDecrement = findViewById(R.id.autoClassifiedDecrement);
-        autoClassifiedDecrement.setOnClickListener(v -> {
+        autoNectarValue = findViewById(R.id.autoNectarValue);
+        autoNectarDecrement = findViewById(R.id.autoNectarDecrement);
+        autoNectarDecrement.setOnClickListener(v -> {
                 matchResult.setAutoInt6(Math.max(matchResult.getAutoInt6()-1,0));
                 populateControlsFromData();
                 });
-        autoClassifiedIncrement = findViewById(R.id.autoClassifiedIncrement);
-        autoClassifiedIncrement.setOnClickListener(v -> {
+        autoNectarIncrement = findViewById(R.id.autoNectarIncrement);
+        autoNectarIncrement.setOnClickListener(v -> {
             matchResult.setAutoInt6( matchResult.getAutoInt6()+1);
             populateControlsFromData();
         });
 
-        autoOverflowValue = findViewById(R.id.autoOverflowValue);
-        autoOverflowDecrement = findViewById(R.id.autoOverflowDecrement);
-        autoOverflowDecrement.setOnClickListener(v -> {
+        autoPollenValue = findViewById(R.id.autoPollenValue);
+        autoPollenDecrement = findViewById(R.id.autoPollenDecrement);
+        autoPollenDecrement.setOnClickListener(v -> {
             matchResult.setAutoInt7( Math.max(matchResult.getAutoInt7()-1,0) );
             populateControlsFromData();
         });
-        autoOverflowIncrement = findViewById(R.id.autoOverflowIncrement);
-        autoOverflowIncrement.setOnClickListener(v -> {
+        autoPollenIncrement = findViewById(R.id.autoPollenIncrement);
+        autoPollenIncrement.setOnClickListener(v -> {
             matchResult.setAutoInt7( matchResult.getAutoInt7()+1 );
-            populateControlsFromData();
-        });
-
-        autoMotifValue = findViewById(R.id.autoMotifValue);
-        autoMotifDecrement = findViewById(R.id.autoMotifDecrement);
-        autoMotifDecrement.setOnClickListener(v -> {
-            matchResult.setAutoInt8( Math.max(matchResult.getAutoInt8()-1, 0) );
-            populateControlsFromData();
-        });
-        autoMotifIncrement = findViewById(R.id.autoMotifIncrement);
-        autoMotifIncrement.setOnClickListener(v -> {
-            matchResult.setAutoInt8( matchResult.getAutoInt8()+1 );
             populateControlsFromData();
         });
 
@@ -176,88 +166,67 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
+        autoHiveTipValue = findViewById(R.id.autoHiveTipValue);
+        autoHiveTipDecrement = findViewById(R.id.autoHiveTipDecrement);
+        autoHiveTipDecrement.setOnClickListener(v -> {
+            matchResult.setAutoInt8( Math.max(matchResult.getAutoInt8()-1, 0) );
+            populateControlsFromData();
+        });
+        autoHiveTipIncrement = findViewById(R.id.autoHiveTipIncrement);
+        autoHiveTipIncrement.setOnClickListener(v -> {
+            matchResult.setAutoInt8( matchResult.getAutoInt8()+1 );
+            populateControlsFromData();
+        });
 
         autoLeave = findViewById(R.id.autoLeaveCheckbox);
         autoLeave.setOnCheckedChangeListener((buttonView, isChecked) -> {
             matchResult.setAutoFlag1(isChecked);
             populateControlsFromData();
         });
-        
+
+
         //TeleOp
-        teleOpClassifiedValue = findViewById(R.id.teleOpClassifiedValue);
-        teleOpClassifiedDecrement = findViewById(R.id.teleOpClassifiedDecrement);
-        teleOpClassifiedDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt1(Math.max(matchResult.getTeleOpInt1()-1,0));
+        teleOpNectarValue = findViewById(R.id.teleOpNectarValue);
+        teleOpNectarDecrement = findViewById(R.id.teleOpNectarDecrement);
+        teleOpNectarDecrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt6(Math.max(matchResult.getTeleOpInt6()-1,0));
             populateControlsFromData();
         });
-        teleOpClassifiedIncrement = findViewById(R.id.teleOpClassifiedIncrement);
-        teleOpClassifiedIncrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt1( matchResult.getTeleOpInt1()+1);
-            populateControlsFromData();
-        });
-
-        teleOpOverflowValue = findViewById(R.id.teleOpOverflowValue);
-        teleOpOverflowDecrement = findViewById(R.id.teleOpOverflowDecrement);
-        teleOpOverflowDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt2( Math.max(matchResult.getTeleOpInt2()-1,0) );
-            populateControlsFromData();
-        });
-        teleOpOverflowIncrement = findViewById(R.id.teleOpOverflowIncrement);
-        teleOpOverflowIncrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt2( matchResult.getTeleOpInt2()+1 );
+        teleOpNectarIncrement = findViewById(R.id.teleOpNectarIncrement);
+        teleOpNectarIncrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt6( matchResult.getTeleOpInt6()+1);
             populateControlsFromData();
         });
 
-        teleOpMotifValue = findViewById(R.id.teleOpMotifValue);
-        teleOpMotifDecrement = findViewById(R.id.teleOpMotifDecrement);
-        teleOpMotifDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt4( Math.max(matchResult.getTeleOpInt4()-1,0) );
+        teleOpPollenValue = findViewById(R.id.teleOpPollenValue);
+        teleOpPollenDecrement = findViewById(R.id.teleOpPollenDecrement);
+        teleOpPollenDecrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt7( Math.max(matchResult.getTeleOpInt7()-1,0) );
             populateControlsFromData();
         });
-        teleOpMotifIncrement = findViewById(R.id.teleOpMotifIncrement);
-        teleOpMotifIncrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt4( matchResult.getTeleOpInt4()+1 );
+        teleOpPollenIncrement = findViewById(R.id.teleOpPollenIncrement);
+        teleOpPollenIncrement.setOnClickListener(v -> {
+            matchResult.setTeleOpInt7( matchResult.getTeleOpInt7()+1 );
             populateControlsFromData();
         });
-
-        teleOpDepotValue = findViewById(R.id.teleOpDepotValue);
-        teleOpDepotDecrement = findViewById(R.id.teleOpDepotDecrement);
-        teleOpDepotDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt3( Math.max(matchResult.getTeleOpInt3()-1,0) );
-            populateControlsFromData();
-        });
-        teleOpDepotIncrement = findViewById(R.id.teleOpDepotIncrement);
-        teleOpDepotIncrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt3( matchResult.getTeleOpInt3()+1 );
-            populateControlsFromData();
-        });
-
 
         teleOpMissedValue = findViewById(R.id.teleOpMissedValue);
         teleOpMissedDecrement = findViewById(R.id.teleOpMissedDecrement);
         teleOpMissedDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt5( Math.max(matchResult.getTeleOpInt5()-1,0) );
+            matchResult.setTeleOpInt8( Math.max(matchResult.getTeleOpInt8()-1,0) );
             populateControlsFromData();
         });
         teleOpMissedIncrement = findViewById(R.id.teleOpMissedIncrement);
         teleOpMissedIncrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt5( matchResult.getTeleOpInt5()+1 );
+            matchResult.setTeleOpInt8( matchResult.getTeleOpInt8()+1 );
             populateControlsFromData();
         });
 
 
 
 
-
-        endBaseCycle = findViewById(R.id.endBaseCycle);
-        endBaseValue = findViewById(R.id.endBaseValue);
-        endBaseCycle.setOnClickListener(v -> {
-            matchResult.setEndInt6((matchResult.getEndInt6()+1)%3);
-            populateControlsFromData();
-        });
-
-        endTwobotsCheckBox = findViewById(R.id.endTwoBotsCheckbox);
-        endTwobotsCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        endParkCheckBox = findViewById(R.id.endPark);
+        endParkCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             matchResult.setEndFlag1(isChecked);
             populateControlsFromData();
         });
@@ -308,28 +277,22 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
 
         populating = true;
 
+        autoNectarValue.setText( matchResult.getAutoInt6());
+        autoPollenValue.setText( matchResult.getAutoInt7());
+        autoMissedValue.setText( matchResult.getAutoInt8());
+        autoHiveTipValue.setText( matchResult.getAutoInt9());
         autoLeave.setChecked(matchResult.getAutoFlag1());
-        autoClassifiedValue.setText( String.valueOf( matchResult.getAutoInt6() ));
-        autoOverflowValue.setText( String.valueOf( matchResult.getAutoInt7() ));
-        autoMotifValue.setText( String.valueOf( matchResult.getAutoInt8() ));
-        autoMissedValue.setText(String.valueOf(matchResult.getAutoInt10()));
-
-        teleOpClassifiedValue.setText( String.valueOf( matchResult.getTeleOpInt1() ));
-        teleOpOverflowValue.setText( String.valueOf( matchResult.getTeleOpInt2() ));
-        teleOpMotifValue.setText( String.valueOf( matchResult.getTeleOpInt4() ));
-        teleOpDepotValue.setText( String.valueOf( matchResult.getTeleOpInt3() ));
-       teleOpMissedValue.setText(String.valueOf(matchResult.getTeleOpInt5() ));
+        autoPark.setChecked(matchResult.getAutoFlag2());
 
 
-        int baseNum = matchResult.getEndInt6();
-        if( baseNum == 0 ){
-            endBaseValue.setText("None");
-        } else if ( baseNum == 1 ){
-            endBaseValue.setText("Part");
-        } else if ( baseNum == 2 ){
-            endBaseValue.setText("Full");
-        }
-        endTwobotsCheckBox.setChecked( matchResult.getEndFlag1());
+        teleOpNectarValue.setText( matchResult.getTeleOpInt6());
+        teleOpPollenValue.setText( matchResult.getTeleOpInt7());
+        teleOpMissedValue.setText( matchResult.getTeleOpInt8());
+
+
+        endParkCheckBox.setChecked(matchResult.getEndFlag1());
+        endOwnedValue.setText( String.valueOf( matchResult.getEndInt6() ));
+        endBottomValue.setText( String.valueOf( matchResult.getEndInt7() ));
 
         //teleOpDefensesValue.setText( String.valueOf( matchResult.getDefenseCount() ));
 

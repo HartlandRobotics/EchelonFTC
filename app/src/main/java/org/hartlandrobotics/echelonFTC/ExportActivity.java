@@ -124,7 +124,7 @@ public class ExportActivity extends EchelonActivity {
                 String header = "Match_Result_Key,Event_Key,Match_Key,Team_Key,has_been_synced"
                         + ",AutoFlag1 ,AutoFlag2, AutoFlag3, AutoFlag4, AutoFlag5"
                         + ",AutoInt6 ,AutoInt7 ,AutoInt8 ,AutoInt9 ,AutoInt10"
-                        + ",TeleOpInt1,TeleOpInt2,TeleOpInt3, TeleOpInt4, TeleOpInt5"
+                        + ",TeleOpInt6,TeleOpInt7,TeleOpInt8, TeleOpInt9, TeleOpInt10, TeleOpInt11"
                         + ",EndFlag1,EndFlag2,EndFlag3,EndFlag4, EndInt6, EndInt7"
                         + ",AdditionalNotes, DefensesCount\n";
                 outputStream.write(header.getBytes());
@@ -155,11 +155,12 @@ public class ExportActivity extends EchelonActivity {
                     dataForFile.add(String.valueOf(mr.getAutoInt9()));
                     dataForFile.add(String.valueOf(mr.getAutoInt10()));
 
-                    dataForFile.add(String.valueOf(mr.getTeleOpInt1()));
-                    dataForFile.add(String.valueOf(mr.getTeleOpInt2()));
-                    dataForFile.add(String.valueOf(mr.getTeleOpInt3()));
-                    dataForFile.add(String.valueOf(mr.getTeleOpInt4()));
-                    dataForFile.add(String.valueOf(mr.getTeleOpInt5()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt6()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt7()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt8()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt9()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt10()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt11()));
 
                     dataForFile.add(String.valueOf(mr.getEndFlag1()));
                     dataForFile.add(String.valueOf(mr.getEndFlag2()));
@@ -242,11 +243,12 @@ public class ExportActivity extends EchelonActivity {
                     }
                     dataForFile.add(String.valueOf(mr.getAutoInt10()));
 
-                    dataForFile.add(String.valueOf(mr.getTeleOpInt1()));
-                    dataForFile.add(String.valueOf(mr.getTeleOpInt2()));
-                    dataForFile.add(String.valueOf(mr.getTeleOpInt3()));
-                    dataForFile.add(String.valueOf(mr.getTeleOpInt4()));
-                    dataForFile.add(String.valueOf(mr.getTeleOpInt5()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt6()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt7()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt8()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt9()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt10()));
+                    dataForFile.add(String.valueOf(mr.getTeleOpInt11()));
 
                     int endBaseReturn = mr.getEndInt6();
                     if(endBaseReturn == 0){
@@ -443,25 +445,27 @@ public class ExportActivity extends EchelonActivity {
 
                 String AutoString11 = columns[16];
 
-                String TeleOpInt1 = columns[17];
-                String TeleOpInt2 = columns[18];
-                String TeleOpInt3 = columns[19];
-                String TeleOpInt4 = columns[20];
-                String TeleOpInt5 = columns[21];
-                String TeleOpString6 = columns[22];
+                String TeleOpInt6 = columns[17];
+                String TeleOpInt7 = columns[18];
+                String TeleOpInt8 = columns[19];
+                String TeleOpInt9 = columns[20];
+                String TeleOpInt10 = columns[21];
+                String TeleOpInt11 = columns[22];
+                String TeleOpInt12 = columns[23];
+                String TeleOpString6 = columns[24];
 
-                String EndFlag1 = columns[23];
-                String EndFlag2 = columns[24];
-                String EndFlag3 = columns[25];
-                String EndFlag4 = columns[26];
-                String EndInt6 = columns[27];
-                String EndInt7 = columns[28];
+                String EndFlag1 = columns[25];
+                String EndFlag2 = columns[26];
+                String EndFlag3 = columns[27];
+                String EndFlag4 = columns[28];
+                String EndInt6 = columns[29];
+                String EndInt7 = columns[30];
 
 
                 String teleDef = "0";
                 //String matchResultKey = columns[26];
-                String Contribution = columns[29];
-                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[30]);
+                String Contribution = columns[31];
+                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[32]);
 
                 MatchResult matchResult = new MatchResult(
                         matchResultKey,
@@ -485,11 +489,13 @@ public class ExportActivity extends EchelonActivity {
 
                         AutoString11,
 
-                        Integer.parseInt(TeleOpInt1),
-                        Integer.parseInt(TeleOpInt2),
-                        Integer.parseInt(TeleOpInt3),
-                        Integer.parseInt(TeleOpInt4),
-                        Integer.parseInt(TeleOpInt5),
+                        Integer.parseInt(TeleOpInt6),
+                        Integer.parseInt(TeleOpInt7),
+                        Integer.parseInt(TeleOpInt8),
+                        Integer.parseInt(TeleOpInt9),
+                        Integer.parseInt(TeleOpInt10),
+                        Integer.parseInt(TeleOpInt11),
+                        Integer.parseInt(TeleOpInt12),
                         TeleOpString6,
 
                         EndFlag1.equalsIgnoreCase("true"),

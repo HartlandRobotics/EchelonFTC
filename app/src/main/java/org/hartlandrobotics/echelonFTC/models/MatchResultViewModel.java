@@ -47,6 +47,8 @@ public class MatchResultViewModel extends AndroidViewModel {
         0,
         0,
         0,
+                0,
+                0,
         "0,0,0,0,0,0,0,0,0",
 
         false,

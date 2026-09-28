@@ -88,9 +88,10 @@ public class TeamsFragment extends Fragment {
 
         TeamRepo teamRepo = new TeamRepo(getActivity().getApplication());
         teamRepo.getEventsWithTeams(eventKey).observe(getViewLifecycleOwner(), evnt -> {
-
-            Log.e("API Fragment", String.valueOf( evnt.teams.size() ) );
-            teamListAdapter.setTeams(evnt.teams);
+            if(evnt != null) {
+                Log.e("API Fragment", String.valueOf(evnt.teams.size()));
+                teamListAdapter.setTeams(evnt.teams);
+            }
         });
     }
 
