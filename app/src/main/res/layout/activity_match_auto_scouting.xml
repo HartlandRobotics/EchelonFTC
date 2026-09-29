@@ -119,6 +119,10 @@
                 android:text="Tip"
                 android:textSize="30dp" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/hive_image"
@@ -135,7 +139,7 @@
                 android:layout_marginLeft="30dp"
                 android:textSize="32sp"
                 tools:text="0" />
-
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
