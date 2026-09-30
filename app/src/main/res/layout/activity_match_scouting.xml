@@ -1,321 +1,326 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".matchScouting.MatchScoutingAutoActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/column_one"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/column_two"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/nectar"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nectar"
-            android:textSize="30sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/nectar_image"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/nectar_red"
-            app:layout_constraintLeft_toLeftOf="@id/nectar"
-            app:layout_constraintTop_toBottomOf="@id/nectar" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/nectar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nectar"
+                android:textSize="30sp" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/nectar_text"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/nectar_image"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/nectar_red" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/nectar_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="32sp"
+                    tools:text="0" />
+            </LinearLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/pollen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pollen"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/pollen_image"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/pollen" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/pollen_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="32sp"
+                    tools:text="0" />
+            </LinearLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/missed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Missed"
+                android:textSize="32sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/missed_ball"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/missing_scoring_elements_red" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/missed_ball_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="32sp"
+                    tools:text="0" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:textSize="32sp"
-            app:layout_constraintLeft_toRightOf="@id/nectar_image"
-            app:layout_constraintTop_toTopOf="@id/nectar_image"
-            tools:text="0" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/pollen"
-            android:layout_width="wrap_content"
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/owned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Owned"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/owned_image"
+                    android:layout_width="30dp"
+                    android:layout_height="75dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/flower_empty" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/owned_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="32sp"
+                    tools:text="0" />
+            </LinearLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bottom"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/bottom_image"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:contentDescription="bottom image"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/flower_bottom_empty" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/bottom_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="32sp"
+                    tools:text="0" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Pollen"
-            android:textSize="30sp"
-            app:layout_constraintLeft_toLeftOf="@id/nectar"
-            app:layout_constraintTop_toBottomOf="@id/nectar_image" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/pollen_image"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/pollen"
-            app:layout_constraintLeft_toLeftOf="@id/pollen"
-            app:layout_constraintTop_toBottomOf="@id/pollen" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/hive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tip"
+                android:textSize="30dp" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/pollen_text"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/hive_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hive_red" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/hive_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="32sp"
+                    tools:text="0" />
+            </LinearLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/garden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Garden"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/garden_image"
+                    android:layout_width="100dp"
+                    android:layout_height="25dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/garden_red" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/garden_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="32sp"
+                    tools:text="0" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:textSize="32sp"
-            app:layout_constraintLeft_toRightOf="@id/pollen_image"
-            app:layout_constraintTop_toTopOf="@id/pollen_image"
-            tools:text="0" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/missed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Missed"
-            android:textSize="32sp"
-            app:layout_constraintLeft_toLeftOf="@id/nectar"
-            app:layout_constraintTop_toBottomOf="@id/pollen_image" />
-
-        <ImageButton
-            android:id="@+id/missed_ball"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/missing_scoring_elements_red"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="@id/missed"
-            app:layout_constraintTop_toBottomOf="@id/missed"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/missed_ball_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:textSize="32sp"
-            app:layout_constraintLeft_toRightOf="@id/missed_ball"
-            app:layout_constraintTop_toTopOf="@id/missed_ball"
-            tools:text="0" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/column_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/column_one"
-        app:layout_constraintRight_toLeftOf="@id/column_three"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/owned"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Owned"
-            android:textSize="30sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/owned_image"
-            android:layout_width="30dp"
-            android:layout_height="75dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/flower_empty"
-            app:layout_constraintLeft_toLeftOf="@id/owned"
-            app:layout_constraintTop_toBottomOf="@id/owned" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/owned_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:textSize="32sp"
-            app:layout_constraintLeft_toRightOf="@id/owned_image"
-            app:layout_constraintTop_toTopOf="@id/owned_image"
-            tools:text="0" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bottom"
-            android:textSize="30sp"
-            app:layout_constraintLeft_toLeftOf="@id/bottom_image"
-            app:layout_constraintTop_toBottomOf="@id/owned_image" />
-
-        <ImageButton
-            android:id="@+id/bottom_image"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@null"
-            android:contentDescription="bottom image"
-            android:scaleType="fitCenter"
-            android:src="@drawable/flower_bottom_empty"
-            app:layout_constraintLeft_toLeftOf="@id/bottom"
-            app:layout_constraintTop_toBottomOf="@id/bottom" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/column_three"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/column_two"
-        app:layout_constraintRight_toLeftOf="@id/column_four"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/hive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tip"
-            android:textSize="30dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/hive_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/hive_red"
-            app:layout_constraintLeft_toLeftOf="@id/hive"
-            app:layout_constraintTop_toBottomOf="@id/hive" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/hive_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:textSize="32sp"
-            app:layout_constraintLeft_toRightOf="@+id/hive_image"
-            app:layout_constraintTop_toTopOf="@id/hive_image"
-            tools:text="0" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/garden"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Garden"
-            android:textSize="30sp"
-            app:layout_constraintLeft_toLeftOf="@id/hive"
-            app:layout_constraintTop_toBottomOf="@id/hive_image" />
-
-        <ImageButton
-            android:id="@+id/garden_image"
-            android:layout_width="100dp"
-            android:layout_height="25dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/garden_red"
-            app:layout_constraintLeft_toLeftOf="@id/garden"
-            app:layout_constraintTop_toBottomOf="@id/garden" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/garden_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:textSize="32sp"
-            app:layout_constraintLeft_toRightOf="@+id/garden_image"
-            app:layout_constraintTop_toTopOf="@id/garden_image"
-            tools:text="0" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/hive_remaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remaining"
+                android:textSize="30dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/column_four"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/column_three"
-        app:layout_constraintRight_toRightOf="parent"
-        >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/hive_remaining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Remaining"
-            android:textSize="30dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <ImageButton
+                    android:id="@+id/hive_remaining_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hive_red_score"
+                    app:layout_constraintLeft_toLeftOf="@id/hive_remaining"
+                    app:layout_constraintTop_toBottomOf="@id/hive_remaining" />
 
-        <ImageButton
-            android:id="@+id/hive_remaining_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/hive_red_score"
-            android:background="@null"
-            app:layout_constraintTop_toBottomOf="@id/hive_remaining"
-            app:layout_constraintLeft_toLeftOf="@id/hive_remaining"
-            />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/hive_remaining_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="32sp"
+                    app:layout_constraintLeft_toRightOf="@+id/hive_remaining_image"
+                    app:layout_constraintTop_toTopOf="@id/hive_remaining_image"
+                    tools:text="0" />
+            </LinearLayout>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/hive_remaining_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            app:layout_constraintTop_toTopOf="@id/hive_remaining_image"
-            app:layout_constraintLeft_toRightOf="@+id/hive_remaining_image"
-            android:textSize="32sp"
-            tools:text="0"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/park"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Park"
+                android:textSize="30dp"
+                app:layout_constraintLeft_toLeftOf="@id/hive_remaining_image"
+                app:layout_constraintTop_toBottomOf="@id/hive_remaining_image" />
 
+            <ImageButton
+                android:id="@+id/park_image"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/park_red"
+                app:layout_constraintLeft_toLeftOf="@id/park"
+                app:layout_constraintTop_toBottomOf="@id/park" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/park"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Park"
-            android:textSize="30dp"
-            app:layout_constraintLeft_toLeftOf="@id/hive_remaining_image"
-            app:layout_constraintTop_toBottomOf="@id/hive_remaining_image" />
-
-        <ImageButton
-            android:id="@+id/park_image"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/park_red"
-            app:layout_constraintTop_toBottomOf="@id/park"
-            app:layout_constraintLeft_toLeftOf="@id/park"
-            />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Summary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
+    </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/teamKeyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
         android:padding="20px"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         tools:text="FTC 5290" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:text="Summary" />
+
+
+</FrameLayout>
 

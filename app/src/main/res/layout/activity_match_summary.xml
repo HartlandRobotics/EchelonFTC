@@ -1,568 +1,438 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginVertical="20dp"
-    tools:context=".matchScouting.MatchScoutingSummaryActivity">
+    android:orientation="vertical"
+    tools:context=".matchScouting.MatchScoutingAutoActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/additionalNotes"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:hint="Additional Notes"
-        android:paddingBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@id/autoLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".25"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="78dp"
+        android:orientation="horizontal">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/additionalNotes"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="78dp"
+            android:hint="Additional Notes"
+            android:paddingBottom="30dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/autoLayout"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/teleOpLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/additionalNotes"
-        android:background="@color/summaryBackground"
-        >
+        android:orientation="horizontal">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoLabel"
+        <LinearLayout
+            android:id="@+id/autoLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Auto:"
-            android:textSize="32sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            android:layout_weight="1"
+            android:background="@color/summaryBackground"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <!-- Auto Nectar -->
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoNectarLabel"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/autoLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Auto:"
+                android:textSize="32sp" />
+
+            <!-- Auto Nectar -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/autoNectarLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Nectar:" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/autoNectarDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/autoNectarValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/autoNectarIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+" />
+            </LinearLayout>
+
+
+            <!-- Auto Pollen -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/autoPollenLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Pollen:" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/autoPollenDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/autoPollenValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="2" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/autoPollenIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+" />
+            </LinearLayout>
+
+            <!-- Auto Missed -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/autoMissedLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Missed:" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/autoMissedDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/autoMissedValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="3" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/autoMissedIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+"
+
+                    />
+            </LinearLayout>
+
+            <!-- Auto Hive Tip-->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/autoHiveTipLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Hive Tip:" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/autoHiveTipDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/autoHiveTipValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="3" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/autoHiveTipIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+"
+
+                    />
+            </LinearLayout>
+
+            <!-- Auto Leave -->
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/autoLeaveCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:checked="true"
+                android:text="Leave:" />
+
+            <!-- Auto Park -->
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/autoParkCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:checked="true"
+                android:text="Park:" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/teleOpLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Nectar:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/autoNectarDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoNectarDecrement"
-            app:layout_constraintTop_toTopOf="@id/autoNectarDecrement"
-            />
+            android:layout_weight="1"
+            android:background="@color/summaryBackground"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoNectarDecrement"
-            android:layout_width="wrap_content"
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/teleOpLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TeleOp:"
+                android:textSize="32sp" />
+
+            <!-- TeleOp Nectar -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/teleOpNectarLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Nectar:" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpNectarDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpNectarValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpNectarIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+" />
+
+            </LinearLayout>
+
+            <!-- TeleOp Pollen -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/teleOpPollenLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Pollen:" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpPollenDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpPollenValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="2" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpPollenIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+" />
+            </LinearLayout>
+
+            <!-- TeleOp missed -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/teleOpMissedLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Missed:" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpMissedDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpMissedValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="2" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpMissedIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--
+        <LinearLayout
+            android:id="@+id/endLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/autoNectarValue"
-            app:layout_constraintStart_toEndOf="@id/autoNectarLabel"
-            app:layout_constraintTop_toBottomOf="@id/autoLabel" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoNectarValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/autoNectarDecrement"
-            app:layout_constraintEnd_toStartOf="@id/autoNectarIncrement"
-            app:layout_constraintStart_toEndOf="@id/autoNectarDecrement"
-            app:layout_constraintTop_toTopOf="@id/autoNectarDecrement"
-            tools:text="1" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoNectarIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/autoNectarValue"
-            app:layout_constraintTop_toBottomOf="@id/autoLabel"
-            android:layout_marginEnd="10dp"
-            />
-
-
-        <!-- Auto Pollen -->
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoPollenLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Pollen:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/autoPollenDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoPollenDecrement"
-            app:layout_constraintTop_toTopOf="@id/autoPollenDecrement"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoPollenDecrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/autoPollenValue"
-            app:layout_constraintStart_toEndOf="@id/autoPollenLabel"
-            app:layout_constraintTop_toBottomOf="@id/autoNectarDecrement"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoPollenValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/autoPollenDecrement"
-            app:layout_constraintEnd_toStartOf="@id/autoPollenIncrement"
-            app:layout_constraintTop_toTopOf="@id/autoPollenDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoPollenDecrement"
-            tools:text="2"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoPollenIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintStart_toEndOf="@id/autoPollenValue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/autoNectarDecrement"
-            android:layout_marginEnd="10dp"
-            />
-
-
-        <!-- Auto Missed -->
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoMissedLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Missed:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/autoMissedDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoMissedDecrement"
-            app:layout_constraintTop_toTopOf="@id/autoMissedDecrement"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoMissedDecrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/autoMissedValue"
-            app:layout_constraintStart_toEndOf="@id/autoMissedLabel"
-            app:layout_constraintTop_toBottomOf="@id/autoPollenDecrement"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoMissedValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/autoMissedDecrement"
-            app:layout_constraintEnd_toStartOf="@id/autoMissedIncrement"
-            app:layout_constraintTop_toTopOf="@id/autoMissedDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoMissedDecrement"
-            tools:text="3"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoMissedIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintStart_toEndOf="@id/autoMissedValue"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/autoPollenDecrement"
-            android:layout_marginEnd="10dp"
-
-            />
-
-       <!-- Auto Hive Tip-->
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoHiveTipLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Hive Tip:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/autoHiveTipDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoHiveTipDecrement"
-            app:layout_constraintTop_toTopOf="@id/autoHiveTipDecrement"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoHiveTipDecrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/autoHiveTipValue"
-            app:layout_constraintStart_toEndOf="@id/autoHiveTipLabel"
-            app:layout_constraintTop_toBottomOf="@id/autoMissedDecrement"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/autoHiveTipValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/autoHiveTipDecrement"
-            app:layout_constraintEnd_toStartOf="@id/autoHiveTipIncrement"
-            app:layout_constraintTop_toTopOf="@id/autoHiveTipDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/autoHiveTipDecrement"
-            tools:text="3"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/autoHiveTipIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintStart_toEndOf="@id/autoHiveTipValue"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/autoMissedDecrement"
-            android:layout_marginEnd="10dp"
-
-            />
-
-
-        <!-- Auto Leave -->
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/autoLeaveCheckbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Leave:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/autoHiveTipDecrement"
-            android:layout_marginTop="10dp"
-            />
-
-        <!-- Auto Park -->
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/autoParkCheckbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Park:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/autoLeaveCheckbox"
-            android:layout_marginTop="10dp"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/teleOpLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/endLayout"
-        app:layout_constraintStart_toEndOf="@id/autoLayout"
-        app:layout_constraintTop_toBottomOf="@+id/additionalNotes"
-        android:background="@color/summaryBackground"
-        >
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TeleOp:"
-            android:textSize="32sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
-        <!-- TeleOp Nectar -->
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpNectarLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Nectar:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/teleOpNectarDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpNectarDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpNectarDecrement"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpNectarDecrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/teleOpNectarValue"
-            app:layout_constraintStart_toEndOf="@id/teleOpNectarLabel"
-            app:layout_constraintTop_toBottomOf="@id/teleOpLabel"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpNectarValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpNectarDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpNectarIncrement"
-            app:layout_constraintStart_toEndOf="@id/teleOpNectarDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpNectarDecrement"
-            tools:text="1"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpNectarIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/teleOpNectarValue"
-            app:layout_constraintTop_toBottomOf="@id/teleOpLabel"
-            android:layout_marginEnd="10dp"
-            />
-
-
-        <!-- TeleOp Pollen -->
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpPollenLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Pollen:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/teleOpPollenDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpPollenDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpPollenDecrement"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpPollenDecrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/teleOpPollenValue"
-            app:layout_constraintStart_toEndOf="@id/teleOpPollenLabel"
-            app:layout_constraintTop_toBottomOf="@id/teleOpNectarDecrement"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpPollenValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/teleOpPollenDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpPollenIncrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpPollenDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpPollenDecrement"
-            tools:text="2"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpPollenIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintStart_toEndOf="@id/teleOpPollenValue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/teleOpNectarDecrement"
-            android:layout_marginEnd="10dp"
-            />
-
-        <!-- TeleOp missed -->
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpMissedLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Missed:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/teleOpMissedDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpMissedDecrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpMissedDecrement"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpMissedDecrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/teleOpMissedValue"
-            app:layout_constraintStart_toEndOf="@id/teleOpMissedLabel"
-            app:layout_constraintTop_toBottomOf="@id/teleOpPollenDecrement"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/teleOpMissedValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/teleOpMissedDecrement"
-            app:layout_constraintEnd_toStartOf="@id/teleOpMissedIncrement"
-            app:layout_constraintTop_toTopOf="@id/teleOpMissedDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/teleOpMissedDecrement"
-            tools:text="2"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/teleOpMissedIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintStart_toEndOf="@id/teleOpMissedValue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/teleOpPollenDecrement"
-            android:layout_marginEnd="10dp"
-            />
+            android:layout_weight="1"
+            android:background="@color/summaryBackground"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            >
 
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/endLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End:"
+                android:textSize="32sp"
+                />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/endLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/teleOpLayout"
-        app:layout_constraintTop_toBottomOf="@+id/additionalNotes"
-        android:background="@color/summaryBackground"
-        android:minWidth="200dp"
-        >
+            <!-- End Park -- >
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/endLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="End:"
-            android:textSize="32sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/endPark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Park"
+                />
 
-        <!-- End Park -->
+            <!--End Owned -- >
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/endPark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Park"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/endLabel"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/endOwnedLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Owned:"
+                />
 
-        <!--End Owned -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/endOwnedDecrement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/endOwnedLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Owned:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/endOwnedDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/endOwnedDecrement"
-            app:layout_constraintTop_toTopOf="@id/endOwnedDecrement"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/endOwnedValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                tools:text="3" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/endOwnedDecrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/endOwnedValue"
-            app:layout_constraintStart_toEndOf="@id/endOwnedLabel"
-            app:layout_constraintTop_toBottomOf="@id/endPark"
-            />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/endOwnedIncrement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="+"
+                />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/endOwnedValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/endOwnedDecrement"
-            app:layout_constraintEnd_toStartOf="@id/endOwnedIncrement"
-            app:layout_constraintTop_toTopOf="@id/endOwnedDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/endOwnedDecrement"
-            tools:text="3"
-            />
+            <!--End Bottom -- >
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/endOwnedIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintStart_toEndOf="@id/endOwnedValue"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/endOwnedDecrement"
-            android:layout_marginEnd="10dp"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/endBottomLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Bottom:"
+                />
 
-        <!--End Bottom -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/endBottomDecrement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/endBottomLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="80dp"
-            android:text="Bottom:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/endBottomDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/endBottomDecrement"
-            app:layout_constraintTop_toTopOf="@id/endBottomDecrement"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/endBottomValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                tools:text="3" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/endBottomDecrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintEnd_toStartOf="@id/endBottomValue"
-            app:layout_constraintStart_toEndOf="@id/endBottomLabel"
-            app:layout_constraintTop_toBottomOf="@id/endOwnedDecrement"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/endBottomValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintStart_toEndOf="@id/endBottomDecrement"
-            app:layout_constraintEnd_toStartOf="@id/endBottomIncrement"
-            app:layout_constraintTop_toTopOf="@id/endBottomDecrement"
-            app:layout_constraintBottom_toBottomOf="@id/endBottomDecrement"
-            tools:text="3"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/endBottomIncrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            app:layout_constraintStart_toEndOf="@id/endBottomValue"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/endBottomDecrement"
-            android:layout_marginEnd="10dp"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/endBottomIncrement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="+"
+                />
+    -->
+    </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/matchSummarySaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        android:layout_gravity="bottom|end"
+        android:text="Submit" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
