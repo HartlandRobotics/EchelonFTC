@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -28,16 +29,17 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/autoLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:background="@color/summaryBackground"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -55,7 +57,6 @@
                 android:layout_height="wrap_content"
                 android:minWidth="80dp"
                 android:text="Nectar:" />
-
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -82,7 +83,6 @@
                     android:layout_marginEnd="10dp"
                     android:text="+" />
             </LinearLayout>
-
 
             <!-- Auto Pollen -->
             <com.google.android.material.textview.MaterialTextView
@@ -211,11 +211,11 @@
 
         <LinearLayout
             android:id="@+id/teleOpLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:layout_weight="1"
             android:background="@color/summaryBackground"
-            android:gravity="center_horizontal"
             android:orientation="vertical">
 
 
@@ -330,18 +330,14 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!--
         <LinearLayout
             android:id="@+id/endLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/summaryBackground"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            >
-
-
+            android:background="@color/summaryBackground"
+            android:orientation="vertical">
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -349,83 +345,87 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="End:"
-                android:textSize="32sp"
-                />
+                android:textSize="32sp" />
 
-            <!-- End Park -- >
+            <!-- End Park -->
 
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/endPark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Park"
-                />
+                android:text="Park" />
 
-            <!--End Owned -- >
+            <!--End Owned -->
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/endOwnedLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="80dp"
-                android:text="Owned:"
-                />
+                android:text="Owned:" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/endOwnedDecrement"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-"
-                />
+                android:orientation="horizontal">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/endOwnedValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                tools:text="3" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/endOwnedDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/endOwnedIncrement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:text="+"
-                />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/endOwnedValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="3" />
 
-            <!--End Bottom -- >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/endOwnedIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+" />
+            </LinearLayout>
+
+            <!--End Bottom -->
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/endBottomLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="80dp"
-                android:text="Bottom:"
-                />
+                android:text="Bottom:" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/endBottomDecrement"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-"
-                />
+                android:orientation="horizontal">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/endBottomValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                tools:text="3" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/endBottomDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/endBottomIncrement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:text="+"
-                />
-    -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/endBottomValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="3" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/endBottomIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
