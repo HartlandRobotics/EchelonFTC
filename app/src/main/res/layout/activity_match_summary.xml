@@ -37,7 +37,7 @@
         <LinearLayout
             android:id="@+id/autoLayout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/summaryBackground"
             android:layout_weight="1"
             android:gravity="center_horizontal"
@@ -212,7 +212,7 @@
         <LinearLayout
             android:id="@+id/teleOpLayout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:layout_weight="1"
             android:background="@color/summaryBackground"
@@ -328,12 +328,80 @@
                     android:layout_marginEnd="10dp"
                     android:text="+" />
             </LinearLayout>
+
+            <!-- TeleOp hive tip -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/teleOpHiveTipLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Hive Tip:" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpHiveTipDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpHiveTipValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="2" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpHiveTipIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+" />
+            </LinearLayout>
+
+            <!-- TeleOp hive remaining -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/teleOpHiveRemainingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Hive Remaining:" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpHiveRemainingDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpHiveRemainingValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="2" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpHiveRemainingIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/endLayout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:background="@color/summaryBackground"
@@ -347,14 +415,6 @@
                 android:text="End:"
                 android:textSize="32sp" />
 
-            <!-- End Park -->
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/endPark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Park" />
 
             <!--End Owned -->
 
@@ -425,6 +485,50 @@
                     android:layout_marginEnd="10dp"
                     android:text="+" />
             </LinearLayout>
+
+            <!--End Garden -->
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/endGardenLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:text="Garden:" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/endGardenDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/endGardenValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="3" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/endGardenIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+" />
+            </LinearLayout>
+            <!-- End Park -->
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/endPark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Park" />
+
         </LinearLayout>
     </LinearLayout>
 
