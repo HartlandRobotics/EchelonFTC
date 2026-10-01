@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -35,6 +35,7 @@
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:background="@null"
+                    android:contentDescription="Nectar"
                     android:scaleType="fitXY"
                     android:src="@drawable/nectar_red" />
 
@@ -42,7 +43,7 @@
                     android:id="@+id/nectar_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     tools:text="0" />
             </LinearLayout>
@@ -53,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pollen"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -65,6 +66,7 @@
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:background="@null"
+                    android:contentDescription="Pollen"
                     android:scaleType="fitXY"
                     android:src="@drawable/pollen" />
 
@@ -72,7 +74,7 @@
                     android:id="@+id/pollen_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     tools:text="0" />
             </LinearLayout>
@@ -94,6 +96,7 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:background="@null"
+                    android:contentDescription="Missed Ball"
                     android:scaleType="fitXY"
                     android:src="@drawable/missing_scoring_elements_red" />
 
@@ -101,7 +104,7 @@
                     android:id="@+id/missed_ball_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     tools:text="0" />
             </LinearLayout>
@@ -119,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tip"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -131,6 +134,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@null"
+                android:contentDescription="Hive"
                 android:scaleType="fitXY"
                 android:src="@drawable/hive_red" />
 
@@ -138,7 +142,7 @@
                 android:id="@+id/hive_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:textSize="32sp"
                 tools:text="0" />
             </LinearLayout>
@@ -156,13 +160,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Park"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <ImageButton
                 android:id="@+id/park_image"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:background="@null"
+                android:contentDescription="Park"
                 android:scaleType="fitCenter"
                 android:src="@drawable/park_red" />
 
@@ -173,13 +178,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="Leave"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <ImageButton
                 android:id="@+id/leave"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:background="@null"
+                android:contentDescription="Leave"
                 android:scaleType="fitCenter"
                 android:src="@drawable/leave_red" />
 

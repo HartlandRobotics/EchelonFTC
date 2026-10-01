@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -35,6 +36,7 @@
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:background="@null"
+                    android:contentDescription="Nectar"
                     android:scaleType="fitXY"
                     android:src="@drawable/nectar_red" />
 
@@ -42,7 +44,7 @@
                     android:id="@+id/nectar_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     tools:text="0" />
             </LinearLayout>
@@ -64,6 +66,7 @@
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:background="@null"
+                    android:contentDescription="Pollen"
                     android:scaleType="fitXY"
                     android:src="@drawable/pollen" />
 
@@ -71,7 +74,7 @@
                     android:id="@+id/pollen_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     tools:text="0" />
             </LinearLayout>
@@ -93,6 +96,7 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:background="@null"
+                    android:contentDescription="Missed"
                     android:scaleType="fitXY"
                     android:src="@drawable/missing_scoring_elements_red" />
 
@@ -100,7 +104,7 @@
                     android:id="@+id/missed_ball_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     tools:text="0" />
             </LinearLayout>
@@ -131,6 +135,7 @@
                     android:layout_width="30dp"
                     android:layout_height="75dp"
                     android:background="@null"
+                    android:contentDescription="owned"
                     android:scaleType="fitXY"
                     android:src="@drawable/flower_empty" />
 
@@ -138,7 +143,7 @@
                     android:id="@+id/owned_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     tools:text="0" />
             </LinearLayout>
@@ -168,7 +173,7 @@
                     android:id="@+id/bottom_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     tools:text="0" />
             </LinearLayout>
@@ -186,7 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tip"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -198,6 +203,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@null"
+                    android:contentDescription="hive"
                     android:scaleType="fitXY"
                     android:src="@drawable/hive_red" />
 
@@ -205,7 +211,7 @@
                     android:id="@+id/hive_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     tools:text="0" />
             </LinearLayout>
@@ -215,7 +221,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Remaining"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -229,6 +235,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@null"
+                    android:contentDescription="hive remaining"
                     android:scaleType="fitXY"
                     android:src="@drawable/hive_red_score"
                     app:layout_constraintLeft_toLeftOf="@id/hive_remaining"
@@ -238,7 +245,7 @@
                     android:id="@+id/hive_remaining_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     app:layout_constraintLeft_toRightOf="@+id/hive_remaining_image"
                     app:layout_constraintTop_toTopOf="@id/hive_remaining_image"
@@ -272,6 +279,7 @@
                     android:layout_width="100dp"
                     android:layout_height="25dp"
                     android:background="@null"
+                    android:contentDescription="garden"
                     android:scaleType="fitXY"
                     android:src="@drawable/garden_red" />
 
@@ -279,7 +287,7 @@
                     android:id="@+id/garden_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     tools:text="0" />
             </LinearLayout>
@@ -289,7 +297,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Park"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 app:layout_constraintLeft_toLeftOf="@id/hive_remaining_image"
                 app:layout_constraintTop_toBottomOf="@id/hive_remaining_image" />
 
@@ -298,6 +306,7 @@
                 android:layout_width="100dp"
                 android:layout_height="60dp"
                 android:background="@null"
+                android:contentDescription="park"
                 android:scaleType="fitXY"
                 android:src="@drawable/park_red"
                 app:layout_constraintLeft_toLeftOf="@id/park"
@@ -311,8 +320,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
-        android:padding="20px"
-        android:textSize="20dp"
+        android:padding="20dp"
+        android:textSize="20sp"
         tools:text="FTC 5290" />
 
     <com.google.android.material.button.MaterialButton
