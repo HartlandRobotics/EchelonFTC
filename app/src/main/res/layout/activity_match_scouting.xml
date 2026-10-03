@@ -42,8 +42,8 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/nectar_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="8dp"
+                    android:layout_height="37dp"
                     android:layout_marginStart="30dp"
                     android:textSize="32sp"
                     tools:text="0" />
@@ -110,74 +110,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/owned"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Owned"
-                android:textSize="30sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/owned_image"
-                    android:layout_width="30dp"
-                    android:layout_height="75dp"
-                    android:background="@null"
-                    android:contentDescription="owned"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/flower_empty" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/owned_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:textSize="32sp"
-                    tools:text="0" />
-            </LinearLayout>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/bottom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bottom"
-                android:textSize="30sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/bottom_image"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@null"
-                    android:contentDescription="bottom image"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/flower_bottom_empty" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/bottom_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:textSize="32sp"
-                    tools:text="0" />
-            </LinearLayout>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -251,9 +183,9 @@
                     app:layout_constraintTop_toTopOf="@id/hive_remaining_image"
                     tools:text="0" />
             </LinearLayout>
-
-
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="0dp"
@@ -313,6 +245,76 @@
                 app:layout_constraintTop_toBottomOf="@id/park" />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/owned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Owned"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/owned_image"
+                    android:layout_width="30dp"
+                    android:layout_height="75dp"
+                    android:background="@null"
+                    android:contentDescription="owned"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/flower_empty" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/owned_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:textSize="32sp"
+                    tools:text="0" />
+            </LinearLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bottom"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/bottom_image"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@null"
+                    android:contentDescription="bottom image"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/flower_bottom_empty" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/bottom_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:textSize="32sp"
+                    tools:text="0" />
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView

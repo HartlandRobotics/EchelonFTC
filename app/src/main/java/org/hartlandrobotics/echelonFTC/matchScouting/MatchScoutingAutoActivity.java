@@ -131,28 +131,28 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         nectarText = findViewById(R.id.nectar_text);
         nectarButton = findViewById(R.id.nectar_image);
         nectarButton.setOnClickListener(v -> {
-            matchResult.setAutoInt7( matchResult.getAutoInt7() + 1);
+            matchResult.setAutoInt6( matchResult.getAutoInt6() + 1);
             populateControlsFromData();
         });
 
         pollenText = findViewById(R.id.pollen_text);
         pollenButton = findViewById(R.id.pollen_image);
         pollenButton.setOnClickListener(v -> {
-            matchResult.setAutoInt8( matchResult.getAutoInt8() + 1);
+            matchResult.setAutoInt7( matchResult.getAutoInt7() + 1);
             populateControlsFromData();
         });
 
         missedText = findViewById(R.id.missed_ball_text);
         missedButton = findViewById(R.id.missed_ball);
         missedButton.setOnClickListener(v -> {
-            matchResult.setAutoInt9( matchResult.getAutoInt9() + 1);
+            matchResult.setAutoInt8( matchResult.getAutoInt8() + 1);
             populateControlsFromData();
         });
 
         hiveText = findViewById(R.id.hive_text);
         hiveButton = findViewById(R.id.hive_image);
         hiveButton.setOnClickListener(v -> {
-            matchResult.setAutoInt10( matchResult.getAutoInt10() + 1 );
+            matchResult.setAutoInt9( matchResult.getAutoInt9() + 1 );
             populateControlsFromData();
         });
 

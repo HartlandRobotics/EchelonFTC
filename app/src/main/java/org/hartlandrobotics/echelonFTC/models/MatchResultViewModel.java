@@ -57,6 +57,7 @@ public class MatchResultViewModel extends AndroidViewModel {
         false,
         0,
                 0,
+                0,
 
 
         StringUtils.EMPTY,

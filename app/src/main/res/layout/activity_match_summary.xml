@@ -71,8 +71,8 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/autoNectarValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="12dp"
+                    android:layout_height="17dp"
                     android:layout_marginHorizontal="10dp"
                     tools:text="1" />
 
@@ -508,7 +508,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/endGardenValue"
-                    android:layout_width="wrap_content"
+                    android:layout_width="13dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     tools:text="3" />

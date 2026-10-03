@@ -137,19 +137,19 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         pollenText.setText(String.valueOf(matchResult.getTeleOpInt7()));
         missedText.setText(String.valueOf(matchResult.getTeleOpInt8()));
 
-        ownedText.setText(String.valueOf(matchResult.getTeleOpInt9()));
+        hiveText.setText(String.valueOf(matchResult.getTeleOpInt9()));
+        hiveRemainingText.setText(String.valueOf(matchResult.getTeleOpInt10()));
 
-        hiveText.setText(String.valueOf(matchResult.getTeleOpInt10()));
-        gardenText.setText(String.valueOf(matchResult.getTeleOpInt11()));
-        ;
-
-        hiveRemainingText.setText(String.valueOf(matchResult.getTeleOpInt12()));
-
+        gardenText.setText(String.valueOf(matchResult.getEndInt8()));
         if (matchResult.getEndFlag1()) {
             parkButton.setImageResource(R.drawable.park_green);
         } else {
             parkButton.setImageResource(parkDrawable);
         }
+
+        ownedText.setText(String.valueOf(matchResult.getEndInt6()));
+        bottomText.setText(String.valueOf(matchResult.getEndInt7()));
+
 
 
         //defensesText.setText(String.valueOf(matchResult.getDefenseCount()));
@@ -194,19 +194,20 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
-        gardenText = findViewById(R.id.garden_text);
-        gardenButton = findViewById(R.id.garden_image);
-        gardenButton.setOnClickListener(v -> {
+        hiveRemainingText = findViewById(R.id.hive_remaining_text);
+        hiveRemainingButton = findViewById(R.id.hive_remaining_image);
+        hiveRemainingButton.setOnClickListener(v -> {
             matchResult.setTeleOpInt10(matchResult.getTeleOpInt10() + 1);
             populateControlsFromData();
         });
 
-        hiveRemainingText = findViewById(R.id.hive_remaining_text);
-        hiveRemainingButton = findViewById(R.id.hive_remaining_image);
-        hiveRemainingButton.setOnClickListener(v -> {
-            matchResult.setTeleOpInt11(matchResult.getTeleOpInt11() + 1);
+        gardenText = findViewById(R.id.garden_text);
+        gardenButton = findViewById(R.id.garden_image);
+        gardenButton.setOnClickListener(v -> {
+            matchResult.setEndInt8(matchResult.getEndInt8() + 1);
             populateControlsFromData();
         });
+
 
         parkButton = findViewById(R.id.park_image);
         parkButton.setOnClickListener(v -> {
@@ -214,6 +215,19 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
+        ownedText = findViewById(R.id.owned_text);
+        ownedButton = findViewById(R.id.owned_image);
+        ownedButton.setOnClickListener(v -> {
+            matchResult.setEndInt6(matchResult.getEndInt6() + 1);
+            populateControlsFromData();
+        });
+
+        bottomText = findViewById(R.id.bottom_text);
+        bottomButton = findViewById(R.id.bottom_image);
+        bottomButton.setOnClickListener(v -> {
+            matchResult.setEndInt7(matchResult.getEndInt7() + 1);
+            populateControlsFromData();
+        });
 
         //defensesButton = findViewById(R.id.teleOpDefenses);
         //defensesButton.setImageResource(defenseDrawable);

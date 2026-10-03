@@ -460,12 +460,13 @@ public class ExportActivity extends EchelonActivity {
                 String EndFlag4 = columns[28];
                 String EndInt6 = columns[29];
                 String EndInt7 = columns[30];
+                String EndInt8 = columns[31];
 
 
                 String teleDef = "0";
                 //String matchResultKey = columns[26];
-                String Contribution = columns[31];
-                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[32]);
+                String Contribution = columns[32];
+                String AdditionalNotes = StringEscapeUtils.unescapeCsv(columns[33]);
 
                 MatchResult matchResult = new MatchResult(
                         matchResultKey,
@@ -504,6 +505,7 @@ public class ExportActivity extends EchelonActivity {
                         EndFlag4.equalsIgnoreCase("true"),
                         Integer.parseInt(EndInt6),
                         Integer.parseInt(EndInt7),
+                        Integer.parseInt(EndInt8),
 
                         AdditionalNotes,
                         //,
