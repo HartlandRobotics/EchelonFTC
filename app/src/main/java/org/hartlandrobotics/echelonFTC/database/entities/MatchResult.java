@@ -292,7 +292,7 @@ public class MatchResult {
     public void setEndInt6( int endInt6 ){ this.endInt6 = endInt6; }
     public int getEndInt7(){ return endInt7; }
     public void setEndInt7( int endInt7 ){ this.endInt7 = endInt7; }
-    public int getEndInt8(){ return endInt7; }
+    public int getEndInt8(){ return endInt8; }
     public void setEndInt8( int endInt8 ){ this.endInt8 = endInt8; }
 
     public String getAdditionalNotes(){ return additionalNotes; }
