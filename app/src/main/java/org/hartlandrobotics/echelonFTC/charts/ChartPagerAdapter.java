@@ -48,19 +48,27 @@ public class ChartPagerAdapter extends FragmentStateAdapter {
         switch (position){
             case AGGREGATE_AVERAGE_POSITION:
                 Log.i(TAG,"creating new Aggregate Average Fragment");
-                aggAverageFragment = new ChartAggAverageFragment();
+                if( aggAverageFragment == null ) {
+                    aggAverageFragment = new ChartAggAverageFragment();
+                }
                 return aggAverageFragment;
             case TREND_AUTO_POSITION:
                 Log.i(TAG,"creating new Auto Trend Fragment");
-                chartAutoTrendFragment = new ChartAutoTrendFragment();
+                if( chartAutoTrendFragment == null ) {
+                    chartAutoTrendFragment = new ChartAutoTrendFragment();
+                }
                 return chartAutoTrendFragment;
             case TREND_TELEOP_POSITION:
                 Log.i(TAG,"creating new TeleOp Trend Fragment");
-                chartTeleOpTrendFragment = new ChartTeleOpTrendFragment();
+                if( chartTeleOpTrendFragment == null ) {
+                    chartTeleOpTrendFragment = new ChartTeleOpTrendFragment();
+                }
                 return chartTeleOpTrendFragment;
             case TREND_ENDGAME_POSITION:
                 Log.i(TAG, "creating new EndGame Fragment");
-                chartEndGameTrendFragment = new ChartEndGameTrendFragment();
+                if( chartEndGameTrendFragment == null ) {
+                    chartEndGameTrendFragment = new ChartEndGameTrendFragment();
+                }
                 return chartEndGameTrendFragment;
             default:
                 throw new IllegalArgumentException("invalid tab selection for charts activity");
