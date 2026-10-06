@@ -1,5 +1,6 @@
 package org.hartlandrobotics.echelonFTC.charts;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -31,6 +32,12 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.hartlandrobotics.echelonFTC.R;
+import org.hartlandrobotics.echelonFTC.database.dao.TeamDao;
+import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
+import org.hartlandrobotics.echelonFTC.database.entities.Team;
+import org.hartlandrobotics.echelonFTC.database.repositories.MatchResultRepo;
+import org.hartlandrobotics.echelonFTC.database.repositories.TeamRepo;
+import org.hartlandrobotics.echelonFTC.ftcapi.status.FtcApiStatus;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -60,7 +67,23 @@ public class ChartAggAverageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_chart_agg_average, container, false);
+         View view =inflater.inflate(R.layout.fragment_chart_agg_average, container, false);
+
+         Application application = this.getActivity().getApplication();
+        FtcApiStatus apiStatus = new FtcApiStatus(application);
+        String currentEvent = apiStatus.getEventKey();
+
+        MatchResultRepo matchResultRepo = new MatchResultRepo(application);
+        matchResultRepo.getMatchResultsByEvent(currentEvent).observe(getViewLifecycleOwner(), matchResults -> {
+
+            TeamRepo teamRepo = new TeamRepo(application);
+            teamRepo.getEventsWithTeams(currentEvent).observe(getViewLifecycleOwner(), eventsWithTeams -> {
+                List<Team> teams = eventsWithTeams.teams;
+
+            });
+        });
+
+         return view;
     }
 
     @Override
