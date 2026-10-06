@@ -75,6 +75,7 @@ public class ChartAggAverageFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i(TAG, "onItemClick");
+                Log.i(TAG, "View Item Click: " + view.getClass().getName());
             }
         });
 
@@ -155,7 +156,7 @@ public class ChartAggAverageFragment extends Fragment {
         xLabels.setValueFormatter((value, axis) -> {
             int val = Math.min( Math.max(0, (int)Math.floor(value) ), visibleTeamData.size()-1);
             String label = String.valueOf( visibleTeamData.get(val).getTeamNumber() );
-            Log.e("CHARTLABEL", String.valueOf(val) + "-" +  String.valueOf(label));
+            //Log.e("CHARTLABEL", String.valueOf(val) + "-" +  String.valueOf(label));
             return label;
         });
 
@@ -242,6 +243,8 @@ public class ChartAggAverageFragment extends Fragment {
                     ListView listView =  (ListView) layoutViewParent.getParent();
                     int position = listView.getPositionForView(buttonView);
                     teamViewModels.get(position).setIsSelected(isChecked);
+
+                    String s = buttonView.getText().toString();
 
                     setVisibleTeams();
                     setupChartData();
