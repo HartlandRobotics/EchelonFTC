@@ -91,7 +91,7 @@ public class ChartPagerAdapter extends FragmentStateAdapter {
         if( allTeamNumbers == null ) return;
 
         if( aggAverageFragment != null ){
-            aggAverageFragment.setData(allTeamNumbers, allTeamData);
+            //aggAverageFragment.setData(allTeamNumbers, allTeamData);
         }
 
         if( chartAutoTrendFragment != null ){

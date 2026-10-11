@@ -2,6 +2,7 @@ package org.hartlandrobotics.echelonFTC.charts;
 
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import org.hartlandrobotics.echelonFTC.database.currentGame.CurrentGame;
 import org.hartlandrobotics.echelonFTC.database.entities.MatchResult;
 import org.hartlandrobotics.echelonFTC.database.repositories.MatchResultRepo;
 import org.hartlandrobotics.echelonFTC.ftcapi.status.*;
+import org.hartlandrobotics.echelonFTC.utilities.TeamDataUtilities;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -63,11 +65,14 @@ public class ChartsActivity extends EchelonActivity {
     }
 
     public void setupData(){
-        FtcApiStatus apiStatus = new FtcApiStatus(getApplicationContext());
+        Application application = this.getApplication();
+        FtcApiStatus apiStatus = new FtcApiStatus(application);
         String currentEvent = apiStatus.getEventKey();
 
         matchResultRepo = new MatchResultRepo(getApplication());
         matchResultRepo.getMatchResultsByEvent(currentEvent).observe(this, mr -> {
+            List<TeamData> x = TeamDataUtilities.toTeamDataList(application, mr);
+
             for( MatchResult matchResult : mr ){
                 String teamKey = matchResult.getTeamKey();
                 matchResultsByTeam.computeIfAbsent(teamKey,key -> new ArrayList<>());
@@ -76,7 +81,7 @@ public class ChartsActivity extends EchelonActivity {
 
             allTeamNumbers.addAll(
                     matchResultsByTeam.keySet().stream()
-                            .map( teamNumber -> new TeamListViewModel(teamNumber))
+                            .map(TeamListViewModel::new)
                             .sorted(Comparator.comparingInt(TeamListViewModel::getTeamInteger))
                             .collect(Collectors.toList()));
 
@@ -91,7 +96,7 @@ public class ChartsActivity extends EchelonActivity {
                 Map<Integer, Integer> teleOpScores = new HashMap<>();
                 Map<Integer, Integer> endGameScores = new HashMap<>();
                 Map<Integer, Integer> oprScores = new HashMap<>();
-                String key = entry.getKey();
+                //String key = entry.getKey();
                 int teamNumber = Integer.parseInt( entry.getKey() );
                 List<MatchResult> matchResults = entry.getValue();
                 for( MatchResult matchResult : matchResults ){
@@ -138,7 +143,7 @@ public class ChartsActivity extends EchelonActivity {
                 }
 
                 // size is only used to calculate averages.
-                // 1 is default since it is multiplicitive identity
+                // 1 is default since it is multiplicative identity
                 int size = matchResults.size();// == 0 ? 1 : matchResults.size();
                 TeamDataViewModel teamData = new TeamDataViewModel(
                         teamNumber,
