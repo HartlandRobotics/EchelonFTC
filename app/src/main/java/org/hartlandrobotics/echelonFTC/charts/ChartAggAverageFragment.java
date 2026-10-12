@@ -311,11 +311,18 @@ public class ChartAggAverageFragment extends Fragment {
             teamSelectedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    String teamNumber = buttonView.getText().toString();
+
                     ViewParent layoutViewParent = buttonView.getParent();
                     ListView listView = (ListView) layoutViewParent.getParent();
                     int position = listView.getPositionForView(buttonView);
-                    teamNumberViewModels.get(position).setIsSelected(isChecked);
 
+                    TeamNumberViewModel teamNumberViewModel = teamNumberViewModels.get(position);
+                    Integer tn = teamNumberViewModel.getTeamNumber();
+                    teamListViewModel.setIsSelected(isChecked);
+                    //teamNumberViewModels.get(position).setIsSelected(isChecked);
+                    allTeamData.stream().filter(teamData -> teamData.getTeamNumber().equals(tn) )
+                            .forEach(teamData -> teamData.setVisible(isChecked));
                     setupChartData();
                 }
             });
