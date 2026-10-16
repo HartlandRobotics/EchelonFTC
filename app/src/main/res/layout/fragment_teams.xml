@@ -23,7 +23,7 @@
         app:layout_constraintBottom_toTopOf="@+id/errorTextDisplay"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/list_item_team"
+        tools:listitem="@layout/list_item_team_description"
         />
 
     <TextView

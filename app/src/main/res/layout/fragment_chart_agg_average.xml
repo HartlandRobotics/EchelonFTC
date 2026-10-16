@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="100"
-    tools:context=".charts.ChartAggAverageFragment"
+    tools:context=".charts.events.ChartAveragePointsFragment"
     >
 
     <com.github.mikephil.charting.charts.BarChart
@@ -22,7 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="15"
-        tools:listitem="@layout/list_item_agg_chart"
+        tools:listitem="@layout/list_item_team_number_visibility"
         />
 
 </LinearLayout>

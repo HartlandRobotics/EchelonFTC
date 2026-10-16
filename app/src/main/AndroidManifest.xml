@@ -27,7 +27,7 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".charts.ChartsActivity"
+            android:name=".charts.events.EventChartsActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity

@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -17,7 +16,7 @@ import android.widget.AutoCompleteTextView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
-import org.hartlandrobotics.echelonFTC.charts.ChartsActivity;
+import org.hartlandrobotics.echelonFTC.charts.events.EventChartsActivity;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettings;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelonFTC.database.entities.Season;
@@ -113,8 +112,8 @@ public class MainActivity extends EchelonActivity {
     }
 
     private void setupChartsButton(){
-        chartsButton = findViewById(R.id.charts_button);
-        chartsButton.setOnClickListener( v -> ChartsActivity.launch(MainActivity.this));
+        chartsButton = findViewById(R.id.event_charts_button);
+        chartsButton.setOnClickListener( v -> EventChartsActivity.launch(MainActivity.this));
 
         if(RoleUtilities.isAdminTablet(deviceRole)){
             chartsButton.setVisibility(View.VISIBLE);

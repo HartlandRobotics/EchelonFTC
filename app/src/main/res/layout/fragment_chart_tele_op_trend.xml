@@ -6,7 +6,7 @@ android:orientation="vertical"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:weightSum="100"
-tools:context=".charts.ChartTeleOpTrendFragment"
+tools:context=".charts.teams.ChartTeleOpTrendFragment"
     >
 
 <com.google.android.material.textfield.TextInputLayout

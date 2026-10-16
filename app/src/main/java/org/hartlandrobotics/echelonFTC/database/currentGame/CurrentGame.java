@@ -272,4 +272,15 @@ public class CurrentGame {
         return result.getEndInt6() * 2;
     }
 
+    public int getScoringElementCount(){
+        return getItem1Counts() + getItem2Counts();
+    }
+
+    public int getItem1Counts(){
+        return getAuto6Counts() + getTeleOp6Counts();
+    }
+    public int getItem2Counts(){
+        return getAuto7Counts() + getTeleOp7Counts();
+    }
+
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="100"
-    tools:context=".charts.ChartEndGameTrendFragment"
+    tools:context=".charts.teams.ChartEndGameTrendFragment"
     >
 
     <com.google.android.material.textfield.TextInputLayout

@@ -189,7 +189,7 @@ public class TeamsFragment extends Fragment {
         @NonNull
         @Override
         public TeamViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView = inflater.inflate( R.layout.list_item_team, parent, false );
+            View itemView = inflater.inflate( R.layout.list_item_team_description, parent, false );
             return new TeamViewHolder( itemView );
         }
 
