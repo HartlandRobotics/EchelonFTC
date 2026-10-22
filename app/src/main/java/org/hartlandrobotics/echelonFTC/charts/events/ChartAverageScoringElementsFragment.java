@@ -176,7 +176,6 @@ public class ChartAverageScoringElementsFragment extends TeamNumberFragment {
         status.setInvisibleTeams(invisibleTemes);
 
         // need to notify the activity of the data change
-        eventChartsActivity.teamDataChanged();
     }
 
 

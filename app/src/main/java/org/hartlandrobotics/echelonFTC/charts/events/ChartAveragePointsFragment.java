@@ -87,6 +87,17 @@ public class ChartAveragePointsFragment extends TeamNumberFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (allTeamData != null) {
+            Log.i("ChartAveragePointsFragment", "drawing fragments");
+            drawFragment();
+        }
+
+    }
+
     public void setupFragment() {
 
         if (teamListAdapter == null) {
@@ -171,22 +182,15 @@ public class ChartAveragePointsFragment extends TeamNumberFragment {
                 .filter(teamData -> !teamData.getVisible())
                 .map(TeamData::getTeamNumber)
                 .map(Object::toString)
-                .collect(Collectors.joining("'"));
+                .collect(Collectors.joining(","));
         FtcApiStatus status = new FtcApiStatus(eventChartsActivity.getApplication());
         status.setInvisibleTeams(invisibleTemes);
 
         // need to notify the activity of the data change
-        eventChartsActivity.teamDataChanged();
     }
 
     public void drawFragment() {
         if (this.allTeamData == null) return;
-
-        // list of team numbers
-        List<TeamData> teamsSortedByNumber = this.allTeamData
-                .stream()
-                .sorted(Comparator.comparingInt(TeamData::getTeamNumber))
-                .collect(Collectors.toList());
 
         if (teamListAdapter == null) return;
 
@@ -216,6 +220,8 @@ public class ChartAveragePointsFragment extends TeamNumberFragment {
         l.setFormSize(8f);
         l.setFormToTextSpace(4f);
         l.setXEntrySpace(6f);
+
+        totalScoringChart.invalidate();
     }
 
     private int[] getChartColors() {

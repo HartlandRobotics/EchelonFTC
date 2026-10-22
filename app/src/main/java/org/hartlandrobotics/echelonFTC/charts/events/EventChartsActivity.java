@@ -44,9 +44,9 @@ public class EventChartsActivity extends EchelonActivity {
         new TabLayoutMediator(tabLayout, chartViewPager, (tab, position) -> tab.setText(eventChartPagerAdapter.getTabTitle(position))).attach();
     }
 
-    public void teamDataChanged() {
-        eventChartPagerAdapter.notifyDataSetChanged();
+    public void drawFragments() {
+        if( eventChartPagerAdapter != null ){
+            eventChartPagerAdapter.drawCharts();
+        }
     }
-
-
 }

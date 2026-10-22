@@ -27,7 +27,7 @@ public class EventChartPagerAdapter extends FragmentStateAdapter {
         super(fragmentManager, lifecycle);
     }
 
-    private Map<Integer, String> titleByPosition = new HashMap<>();
+    private final Map<Integer, String> titleByPosition = new HashMap<>();
 
     public String getTabTitle(int position) {
         if (titleByPosition.isEmpty()) {
@@ -68,4 +68,12 @@ public class EventChartPagerAdapter extends FragmentStateAdapter {
         return 2;
     }
 
+    public void drawCharts(){
+        if( aggAveragePointsFragment != null){
+            aggAveragePointsFragment.drawFragment();
+        }
+        if( aggAverageScoringElementsFragment != null){
+            aggAverageScoringElementsFragment.drawFragment();
+        }
+    }
 }
