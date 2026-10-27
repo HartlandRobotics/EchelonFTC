@@ -62,7 +62,6 @@ public class ChartAveragePointsFragment extends TeamNumberFragment {
         FtcApiStatus apiStatus = new FtcApiStatus(application);
         String currentEvent = apiStatus.getEventKey();
 
-        long start = System.nanoTime();
         MatchResultRepo matchResultRepo = new MatchResultRepo(application);
         matchResultRepo.getMatchResultsByEvent(currentEvent).observe(getViewLifecycleOwner(), matchResults -> {
             allTeamData = TeamDataUtilities.toTeamDataList(application, matchResults);
@@ -174,21 +173,6 @@ public class ChartAveragePointsFragment extends TeamNumberFragment {
 
     }
 
-    public void notifyActivity() {
-        EventChartsActivity eventChartsActivity = (EventChartsActivity) this.requireActivity();
-
-        // need to update the list of invisible teams in system preferences
-        String invisibleTemes = allTeamData.stream()
-                .filter(teamData -> !teamData.getVisible())
-                .map(TeamData::getTeamNumber)
-                .map(Object::toString)
-                .collect(Collectors.joining(","));
-        FtcApiStatus status = new FtcApiStatus(eventChartsActivity.getApplication());
-        status.setInvisibleTeams(invisibleTemes);
-
-        // need to notify the activity of the data change
-    }
-
     public void drawFragment() {
         if (this.allTeamData == null) return;
 
@@ -221,6 +205,8 @@ public class ChartAveragePointsFragment extends TeamNumberFragment {
         l.setFormToTextSpace(4f);
         l.setXEntrySpace(6f);
 
+        totalScoringChart.getData().notifyDataChanged();
+        totalScoringChart.notifyDataSetChanged();
         totalScoringChart.invalidate();
     }
 

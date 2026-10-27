@@ -19,11 +19,6 @@ public class TeamData {
     private int totalPoints = 0;
     private boolean isVisible = true;
 
-    //public boolean isVisible() {
-    //    return isVisible;
-    //}
-
-
     private int autoTotalPoints = 0;
     private final Map<Integer, Integer> autoScores = new HashMap<>();
 
@@ -38,6 +33,7 @@ public class TeamData {
 
     private int item1Counts = 0;
     private int item2Counts = 0;
+    private final Map<Integer, Integer> scoringElementCounts = new HashMap<>();
 
     public TeamData(Application application, Integer teamNumber, List<MatchResult> matchResults) {
         this.teamNumber = teamNumber;
@@ -55,6 +51,7 @@ public class TeamData {
 
             item1Counts += currentGame.getItem1Counts();
             item2Counts += currentGame.getItem2Counts();
+            scoringElementCounts.put(matchNumber, item1Counts + item2Counts);
 
             int matchAuto = 0;
             int matchTeleOp = 0;
@@ -138,6 +135,10 @@ public class TeamData {
 
     public void setVisible(boolean isVisible) {
         this.isVisible = isVisible;
+    }
+
+    public Map<Integer, Integer> getScoringElementCounts() {
+        return scoringElementCounts;
     }
 
     public int getItem1Counts() {

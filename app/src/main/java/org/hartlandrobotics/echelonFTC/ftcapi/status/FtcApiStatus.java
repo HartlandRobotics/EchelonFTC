@@ -16,7 +16,8 @@ public class FtcApiStatus {
     private final static String EVENT_KEY = "EventKey";
     private final static String EVENT_CODE = "EventCode";
 
-    private final static String INVISIBLE_TEAMS = "";
+    private final static String INVISIBLE_TEAMS = "InvisibleTeams";
+    private final static String CURRENT_TEAM = "CurrentTeam";
 
     private final Context appContext;
     private boolean online;
@@ -26,6 +27,7 @@ public class FtcApiStatus {
     private String eventKey;
     private String eventCode;
     private String invisibleTeams;
+    private String currentTeam;
 
 
 
@@ -82,6 +84,11 @@ public class FtcApiStatus {
         setPreferenceValue(INVISIBLE_TEAMS, invisibleTeams);
     }
 
+    public String getCurrentTeam(){ return currentTeam;}
+    public void setCurrentTeam( String currentTeam ){
+        this.currentTeam = currentTeam;
+        setPreferenceValue(CURRENT_TEAM, currentTeam);
+    }
 
     public void loadSettingsFromPrefs(){
         Log.i(TAG, "Loading BlueAllianceStatus from preferences");
@@ -92,7 +99,7 @@ public class FtcApiStatus {
         this.eventKey = getSharedPreferences().getString(EVENT_KEY, StringUtils.EMPTY );
         this.eventCode = getSharedPreferences().getString(EVENT_CODE, StringUtils.EMPTY );
         this.invisibleTeams = getSharedPreferences().getString(INVISIBLE_TEAMS, StringUtils.EMPTY );
-
+        this.currentTeam = getSharedPreferences().getString(CURRENT_TEAM, StringUtils.EMPTY );
     }
 
     private SharedPreferences getSharedPreferences(){

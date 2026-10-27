@@ -17,6 +17,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.hartlandrobotics.echelonFTC.charts.events.EventChartsActivity;
+import org.hartlandrobotics.echelonFTC.charts.teams.TeamChartsActivity;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettings;
 import org.hartlandrobotics.echelonFTC.configuration.AdminSettingsProvider;
 import org.hartlandrobotics.echelonFTC.database.entities.Season;
@@ -41,7 +42,8 @@ public class MainActivity extends EchelonActivity {
     private MaterialButton startScouting;
     private MaterialButton pitScouting;
     private MaterialButton matchSchedule;
-    private MaterialButton chartsButton;
+    private MaterialButton eventChartsButton;
+    private MaterialButton teamChartsButton;
     private MaterialButton accuracyButton;
 
 
@@ -112,11 +114,15 @@ public class MainActivity extends EchelonActivity {
     }
 
     private void setupChartsButton(){
-        chartsButton = findViewById(R.id.event_charts_button);
-        chartsButton.setOnClickListener( v -> EventChartsActivity.launch(MainActivity.this));
+        eventChartsButton = findViewById(R.id.event_charts_button);
+        eventChartsButton.setOnClickListener( v -> EventChartsActivity.launch(MainActivity.this));
+
+        teamChartsButton = findViewById(R.id.team_charts_button);
+        teamChartsButton.setOnClickListener( v -> TeamChartsActivity.launch(MainActivity.this));
 
         if(RoleUtilities.isAdminTablet(deviceRole)){
-            chartsButton.setVisibility(View.VISIBLE);
+            eventChartsButton.setVisibility(View.VISIBLE);
+            teamChartsButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -202,7 +208,8 @@ public class MainActivity extends EchelonActivity {
             pitScouting.setVisibility(View.VISIBLE);
         }
         matchSchedule.setEnabled(hasSelectedSeason);
-        chartsButton.setEnabled(hasSelectedSeason && RoleUtilities.isAdminTablet(deviceRole));
+        eventChartsButton.setEnabled(hasSelectedSeason && RoleUtilities.isAdminTablet(deviceRole));
+        teamChartsButton.setEnabled(hasSelectedSeason && RoleUtilities.isAdminTablet(deviceRole));
         accuracyButton.setEnabled(RoleUtilities.isAdminTablet(deviceRole));
     }
 }
