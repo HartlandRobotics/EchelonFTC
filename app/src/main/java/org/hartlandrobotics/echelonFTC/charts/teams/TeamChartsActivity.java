@@ -44,17 +44,3 @@ public class TeamChartsActivity extends EchelonActivity {
     }
 
 }
-
-/*
-
-public class EventChartsActivity extends EchelonActivity {
-
-
-
-    public void drawFragments() {
-        if( eventChartPagerAdapter != null ){
-            eventChartPagerAdapter.drawCharts();
-        }
-    }
-}
- */
