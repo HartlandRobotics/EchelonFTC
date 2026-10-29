@@ -31,6 +31,7 @@ import org.hartlandrobotics.echelonFTC.utilities.TeamDataUtilities;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ChartAverageScoringElementsFragment extends TeamNumberFragment {
@@ -62,7 +63,7 @@ public class ChartAverageScoringElementsFragment extends TeamNumberFragment {
         long start = System.nanoTime();
         MatchResultRepo matchResultRepo = new MatchResultRepo(application);
         matchResultRepo.getMatchResultsByEvent(currentEvent).observe(getViewLifecycleOwner(), matchResults -> {
-            allTeamData = TeamDataUtilities.toTeamDataList(application, matchResults);
+            allTeamData = TeamDataUtilities.toTeamDataList(matchResults);
 
             setupFragment();
             drawFragment();
@@ -85,6 +86,17 @@ public class ChartAverageScoringElementsFragment extends TeamNumberFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (allTeamData != null) {
+            Log.i("ChartAveragePointsFragment", "drawing fragments");
+            drawFragment();
+            scoringElementsChart.invalidate();
+        }
+
+    }
 
     public void setupFragment() {
         if (teamListAdapter == null) {
@@ -100,10 +112,11 @@ public class ChartAverageScoringElementsFragment extends TeamNumberFragment {
         }
 
         if (this.allTeamData == null) return;
+        Set<Integer> invisibleTeams = TeamDataUtilities.invisibleTeamNumbers(this.requireActivity());
 
         List<TeamData> visibleTeamsSortedByScoringElements = this.allTeamData
                 .stream()
-                .filter(TeamData::getVisible)
+                .filter(teamData -> !invisibleTeams.contains(teamData.getTeamNumber()))
                 .sorted(Comparator.comparingInt(
                         (TeamData team) -> team.getItem1Counts() + team.getItem2Counts()
                 ).reversed())
@@ -163,22 +176,6 @@ public class ChartAverageScoringElementsFragment extends TeamNumberFragment {
 
     }
 
-    public void notifyActivity() {
-        EventChartsActivity eventChartsActivity = (EventChartsActivity) this.requireActivity();
-
-        // need to update the list of invisible teams in system preferences
-        String invisibleTemes = allTeamData.stream()
-                .filter(teamData -> !teamData.getVisible())
-                .map(TeamData::getTeamNumber)
-                .map(Object::toString)
-                .collect(Collectors.joining("'"));
-        FtcApiStatus status = new FtcApiStatus(eventChartsActivity.getApplication());
-        status.setInvisibleTeams(invisibleTemes);
-
-        // need to notify the activity of the data change
-    }
-
-
     private int[] getChartColors() {
         return new int[]{Color.YELLOW, Color.RED};
     }
@@ -220,5 +217,7 @@ public class ChartAverageScoringElementsFragment extends TeamNumberFragment {
         l.setFormSize(8f);
         l.setFormToTextSpace(4f);
         l.setXEntrySpace(6f);
+
+        scoringElementsChart.invalidate();
     }
 }

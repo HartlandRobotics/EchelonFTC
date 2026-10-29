@@ -17,7 +17,7 @@ public class TeamData {
     private final Integer teamNumber;
     private final int size;
     private int totalPoints = 0;
-    private boolean isVisible = true;
+    //private boolean isVisible = true;
 
     private int autoTotalPoints = 0;
     private final Map<Integer, Integer> autoScores = new HashMap<>();
@@ -35,12 +35,9 @@ public class TeamData {
     private int item2Counts = 0;
     private final Map<Integer, Integer> scoringElementCounts = new HashMap<>();
 
-    public TeamData(Application application, Integer teamNumber, List<MatchResult> matchResults) {
+    public TeamData(Integer teamNumber, List<MatchResult> matchResults) {
         this.teamNumber = teamNumber;
         this.size = matchResults.size();
-        FtcApiStatus apiStatus = new FtcApiStatus(application);
-        List<String> currentInvisibleTeams = new ArrayList<>(Arrays.asList(StringUtils.defaultIfBlank(apiStatus.getInvisibleTeams(), StringUtils.EMPTY).split(",")));
-        this.isVisible = !currentInvisibleTeams.contains(String.valueOf(teamNumber));
 
         for (MatchResult matchResult : matchResults) {
             CurrentGame currentGame = MatchResult.toCurrentGamePoints(matchResult);
@@ -127,14 +124,6 @@ public class TeamData {
 
     public Map<Integer, Integer> getOprScores() {
         return oprScores;
-    }
-
-    public boolean getVisible() {
-        return isVisible;
-    }
-
-    public void setVisible(boolean isVisible) {
-        this.isVisible = isVisible;
     }
 
     public Map<Integer, Integer> getScoringElementCounts() {

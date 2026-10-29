@@ -6,14 +6,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -34,7 +32,9 @@ import org.hartlandrobotics.echelonFTC.utilities.TeamDataUtilities;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ChartAveragePointsFragment extends TeamNumberFragment {
@@ -43,6 +43,8 @@ public class ChartAveragePointsFragment extends TeamNumberFragment {
     private ListView teamNumberListView;
     private ListNumberAdapter teamListAdapter;
     List<TeamData> allTeamData;
+
+    private Set<Integer> currentInvisibleTeams = new HashSet<>();
 
     public ChartAveragePointsFragment() {
         // Required empty public constructor
@@ -64,7 +66,7 @@ public class ChartAveragePointsFragment extends TeamNumberFragment {
 
         MatchResultRepo matchResultRepo = new MatchResultRepo(application);
         matchResultRepo.getMatchResultsByEvent(currentEvent).observe(getViewLifecycleOwner(), matchResults -> {
-            allTeamData = TeamDataUtilities.toTeamDataList(application, matchResults);
+            allTeamData = TeamDataUtilities.toTeamDataList(matchResults);
 
             setupFragment();
             drawFragment();
@@ -93,6 +95,7 @@ public class ChartAveragePointsFragment extends TeamNumberFragment {
         if (allTeamData != null) {
             Log.i("ChartAveragePointsFragment", "drawing fragments");
             drawFragment();
+            totalScoringChart.invalidate();
         }
 
     }
@@ -113,9 +116,10 @@ public class ChartAveragePointsFragment extends TeamNumberFragment {
 
         if (this.allTeamData == null) return;
 
+        currentInvisibleTeams = TeamDataUtilities.invisibleTeamNumbers(this.requireContext());
         List<TeamData> visibleTeamsSortedByPoints = this.allTeamData
                 .stream()
-                .filter(TeamData::getVisible)
+                .filter(teamData -> !currentInvisibleTeams.contains(teamData.getTeamNumber()) )
                 .sorted(Comparator.comparingInt(TeamData::getTotalPoints).reversed())
                 .collect(Collectors.toList());
 

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.BaseAdapter;
 
 import com.google.android.material.checkbox.MaterialCheckBox;
@@ -14,15 +13,12 @@ import com.google.android.material.textview.MaterialTextView;
 import org.hartlandrobotics.echelonFTC.R;
 import org.hartlandrobotics.echelonFTC.charts.TeamData;
 import org.hartlandrobotics.echelonFTC.ftcapi.status.FtcApiStatus;
+import org.hartlandrobotics.echelonFTC.utilities.TeamDataUtilities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
-
-import kotlin.TuplesKt;
 
 public class ListNumberAdapter extends BaseAdapter {
 
@@ -76,30 +72,31 @@ public class ListNumberAdapter extends BaseAdapter {
         // this recycled row is used.
         holder.teamNumber.setText(String.valueOf(team.getTeamNumber()));
 
-        // Replace with your actual TeamData getter for the checkbox state.
-        boolean isChecked = team.getVisible();///* team.isVisible() */ false;
+        Context context = parent.getContext();
+        Set<Integer> invisibleTeamNumbers = TeamDataUtilities.invisibleTeamNumbers(context);
+        holder.teamSelectedCheckBox.setChecked( !invisibleTeamNumbers.contains(team.getTeamNumber()) );
 
         // Clear the old listener before setting state, so recycling a row
         // doesn't trigger a change for the previous item.
         holder.teamSelectedCheckBox.setOnCheckedChangeListener(null);
-        holder.teamSelectedCheckBox.setChecked(isChecked);
         holder.teamSelectedCheckBox.setOnCheckedChangeListener((button, checked) -> {
-            Context context = button.getContext();
-            FtcApiStatus status = new FtcApiStatus(context);
-            EventChartsActivity eventChartsActivity = (EventChartsActivity) context;
-            team.setVisible(checked);
 
-            // Update this TeamData item using your actual setter, for example:
-            // team.setVisible(checked);            String invisibleTeams = teamDataByNumber.stream()
-            //                    .filter( team -> !team.getVisible())
-            //                    .map(TeamData::getTeamNumber)
-            //                    .map(String::valueOf)
-            //                    .collect(Collectors.joining(","));
-            String invisibleTeams = teamDataByNumber.stream()
-                    .filter( t -> !t.getVisible())
-                    .map(TeamData::getTeamNumber)
+            EventChartsActivity eventChartsActivity = (EventChartsActivity) context;
+            Set<Integer> current = TeamDataUtilities.invisibleTeamNumbers(context);
+            Integer tn = Integer.parseInt( holder.teamNumber.getText().toString() );
+
+            if(checked){
+                current.remove(tn);
+            }
+            else {
+                current.add(tn);
+            }
+
+            String invisibleTeams = current.stream()
                     .map(String::valueOf)
                     .collect(Collectors.joining(","));
+
+            FtcApiStatus status= new FtcApiStatus(context);
             status.setInvisibleTeams(invisibleTeams);
             Log.i("ListNumberAdapter", "invisible teams: " + invisibleTeams);
 

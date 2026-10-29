@@ -1,7 +1,6 @@
 package org.hartlandrobotics.echelonFTC.charts.teams;
 
 import android.app.Application;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -65,7 +64,7 @@ public class ChartAutoTrendFragment extends Fragment {
 
         MatchResultRepo matchResultRepo = new MatchResultRepo(application);
         matchResultRepo.getMatchResultsByEvent(currentEvent).observe(getViewLifecycleOwner(), matchResults -> {
-            allTeamData = TeamDataUtilities.toTeamDataList(application, matchResults);
+            allTeamData = TeamDataUtilities.toTeamDataList(matchResults);
 
             sortedTeamNumbers = allTeamData.stream()
                     .map(TeamData::getTeamNumber)

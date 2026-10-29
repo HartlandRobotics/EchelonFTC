@@ -70,9 +70,11 @@ public class EventChartPagerAdapter extends FragmentStateAdapter {
 
     public void drawCharts(){
         if( aggAveragePointsFragment != null){
+            aggAveragePointsFragment.setupFragment();
             aggAveragePointsFragment.drawFragment();
         }
         if( aggAverageScoringElementsFragment != null){
+            aggAverageScoringElementsFragment.setupFragment();
             aggAverageScoringElementsFragment.drawFragment();
         }
     }
