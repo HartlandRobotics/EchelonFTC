@@ -42,11 +42,11 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/nectar_text"
-                    android:layout_width="8dp"
-                    android:layout_height="37dp"
-                    android:layout_marginStart="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:textSize="32sp"
                     tools:text="0" />
+
             </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
@@ -80,10 +80,10 @@
             </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/missed"
+                android:id="@+id/missed_pollen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Missed"
+                android:text="Missed Pollen"
                 android:textSize="32sp" />
 
             <LinearLayout
@@ -92,16 +92,46 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/missed_ball"
+                    android:id="@+id/missed_pollen_image"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:background="@null"
                     android:contentDescription="Missed"
                     android:scaleType="fitXY"
-                    android:src="@drawable/missing_scoring_elements_red" />
+                    android:src="@drawable/missed_pollen" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/missed_ball_text"
+                    android:id="@+id/missed_pollen_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:textSize="32sp"
+                    tools:text="0" />
+            </LinearLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/missed_nectar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Missed Nectar"
+                android:textSize="32sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/missed_nectar_image"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:background="@null"
+                    android:contentDescription="Missed"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/missed_red_nectar" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/missed_nectar_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"

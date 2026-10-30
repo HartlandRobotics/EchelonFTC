@@ -35,9 +35,13 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     private ImageButton pollenButton;
     private MaterialTextView pollenText;
 
-    private int missedDrawable = 0;
-    private ImageButton missedButton;
-    private MaterialTextView missedText;
+    private int missedPollenDrawable = 0;
+    private ImageButton missedPollenButton;
+    private MaterialTextView missedPollenText;
+
+    private int missedNectarDrawable = 0;
+    private ImageButton missedNectarButton;
+    private MaterialTextView missedNectarText;
 
 
     private int ownedDrawable = 0;
@@ -135,10 +139,11 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
     public void populateControlsFromData() {
         nectarText.setText(String.valueOf(matchResult.getTeleOpInt6()));
         pollenText.setText(String.valueOf(matchResult.getTeleOpInt7()));
-        missedText.setText(String.valueOf(matchResult.getTeleOpInt8()));
+        missedPollenText.setText(String.valueOf(matchResult.getTeleOpInt8()));
+        missedNectarText.setText(String.valueOf(matchResult.getTeleOpInt9()));
 
-        hiveText.setText(String.valueOf(matchResult.getTeleOpInt9()));
-        hiveRemainingText.setText(String.valueOf(matchResult.getTeleOpInt10()));
+        hiveText.setText(String.valueOf(matchResult.getTeleOpInt10()));
+        hiveRemainingText.setText(String.valueOf(matchResult.getTeleOpInt11()));
 
         gardenText.setText(String.valueOf(matchResult.getEndInt8()));
         if (matchResult.getEndFlag1()) {
@@ -180,9 +185,15 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
             populateControlsFromData();
 
         });
-        missedText = findViewById(R.id.missed_ball_text);
-        missedButton = findViewById(R.id.missed_ball);
-        missedButton.setOnClickListener(v -> {
+        missedPollenText = findViewById(R.id.missed_pollen_text);
+        missedPollenButton = findViewById(R.id.missed_pollen_image);
+        missedPollenButton.setOnClickListener(v -> {
+            matchResult.setTeleOpInt8(matchResult.getTeleOpInt8() + 1);
+            populateControlsFromData();
+        });
+        missedNectarText = findViewById(R.id.missed_nectar_text);
+        missedNectarButton = findViewById(R.id.missed_nectar_image);
+        missedNectarButton.setOnClickListener(v -> {
             matchResult.setTeleOpInt8(matchResult.getTeleOpInt8() + 1);
             populateControlsFromData();
         });
@@ -246,7 +257,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
         if (settings.getDeviceRole().startsWith("red")) {
             nectarDrawable = R.drawable.nectar_red;
-            missedDrawable = R.drawable.missing_scoring_elements_red;
+            missedNectarDrawable = R.drawable.missed_red_nectar;
 
             ownedDrawable = R.drawable.owned_red_flower;
             bottomDrawable = R.drawable.flower_bottom_red;
@@ -258,7 +269,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
             parkDrawable = R.drawable.park_red;
         } else if (settings.getDeviceRole().startsWith("blue")) {
             nectarDrawable = R.drawable.nectar_blue;
-            missedDrawable = R.drawable.missing_scoring_elements_blue;
+            missedNectarDrawable = R.drawable.missed_blue_nectar;
 
             ownedDrawable = R.drawable.owned_blue_flower;
             bottomDrawable = R.drawable.flower_bottom_blue;

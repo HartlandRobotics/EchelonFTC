@@ -91,6 +91,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="team charts"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/event_charts_button"
         app:layout_constraintBottom_toTopOf="@id/main_admin_accuracy_config"
         app:layout_constraintLeft_toLeftOf="parent"

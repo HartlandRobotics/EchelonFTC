@@ -51,17 +51,18 @@
                 android:textSize="32sp" />
 
             <!-- Auto Nectar -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/autoNectarLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Nectar:" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/autoNectarLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Nectar:" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/autoNectarDecrement"
@@ -85,17 +86,17 @@
             </LinearLayout>
 
             <!-- Auto Pollen -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/autoPollenLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Pollen:" />
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/autoPollenLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Pollen:" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/autoPollenDecrement"
@@ -118,34 +119,71 @@
                     android:text="+" />
             </LinearLayout>
 
-            <!-- Auto Missed -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/autoMissedLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Missed:" />
-
+            <!-- Auto Missed Pollen -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/autoPollenMissedLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Pollen:" />
+                    android:text="Missed Pollen :" />
+
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/autoMissedDecrement"
+                    android:id="@+id/autoMissedPollenDecrement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/autoMissedValue"
+                    android:id="@+id/autoMissedPollenValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     tools:text="3" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/autoMissedIncrement"
+                    android:id="@+id/autoMissedPollenIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+"
+
+                    />
+            </LinearLayout>
+
+            <!-- Auto Missed Nectar-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/autoMissedNectarLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Missed Nectar:" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/autoMissedNectarDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/autoMissedNectarValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="3" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/autoMissedNectarIncrement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -155,17 +193,19 @@
             </LinearLayout>
 
             <!-- Auto Hive Tip-->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/autoHiveTipLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Hive Tip:" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/autoHiveTipLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Pollen:" />
+                    android:text="Hive Tip:" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/autoHiveTipDecrement"
@@ -227,17 +267,18 @@
                 android:textSize="32sp" />
 
             <!-- TeleOp Nectar -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/teleOpNectarLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Nectar:" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpNectarLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Nectar:" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/teleOpNectarDecrement"
@@ -262,17 +303,18 @@
             </LinearLayout>
 
             <!-- TeleOp Pollen -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/teleOpPollenLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Pollen:" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpPollenLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Pollen:" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/teleOpPollenDecrement"
@@ -295,34 +337,68 @@
                     android:text="+" />
             </LinearLayout>
 
-            <!-- TeleOp missed -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/teleOpMissedLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Missed:" />
-
+            <!-- TeleOp Pollen missed -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpMissedPollenLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Missed Pollen:" />
+
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/teleOpMissedDecrement"
+                    android:id="@+id/teleOpMissedPollenDecrement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/teleOpMissedValue"
+                    android:id="@+id/teleOpMissedPollenValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     tools:text="2" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/teleOpMissedIncrement"
+                    android:id="@+id/teleOpMissedPollenIncrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="+" />
+            </LinearLayout>
+
+            <!-- TeleOp Nectar missed -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpMissedNectarLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Missed Nectar:" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpMissedNectarDecrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpMissedNectarValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    tools:text="2" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/teleOpMissedNectarIncrement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -330,17 +406,18 @@
             </LinearLayout>
 
             <!-- TeleOp hive tip -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/teleOpHiveTipLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Hive Tip:" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpHiveTipLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Hive Tip:" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/teleOpHiveTipDecrement"
@@ -364,17 +441,19 @@
             </LinearLayout>
 
             <!-- TeleOp hive remaining -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/teleOpHiveRemainingLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Hive Remaining:" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/teleOpHiveRemainingLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Hive Remaining:" />
+
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/teleOpHiveRemainingDecrement"
@@ -418,17 +497,18 @@
 
             <!--End Owned -->
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/endOwnedLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Owned:" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/endOwnedLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Owned:" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/endOwnedDecrement"
@@ -453,17 +533,18 @@
 
             <!--End Bottom -->
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/endBottomLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Bottom:" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/endBottomLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Bottom:" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/endBottomDecrement"
@@ -488,17 +569,18 @@
 
             <!--End Garden -->
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/endGardenLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="80dp"
-                android:text="Garden:" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/endGardenLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:text="Garden:" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/endGardenDecrement"

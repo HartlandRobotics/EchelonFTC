@@ -33,8 +33,11 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     private ImageButton pollenButton;
     private MaterialTextView pollenText;
 
-    private ImageButton missedButton;
-    private MaterialTextView missedText;
+    private ImageButton missedPollenButton;
+    private MaterialTextView missedPollenText;
+
+    private ImageButton missedNectarButton;
+    private MaterialTextView missedNectarText;
 
 
     private ImageButton hiveButton;
@@ -103,9 +106,10 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
 
         nectarText.setText(String.valueOf(matchResult.getAutoInt6()));
         pollenText.setText(String.valueOf(matchResult.getAutoInt7()));
-        missedText.setText(String.valueOf(matchResult.getAutoInt8()));
+        missedPollenText.setText(String.valueOf(matchResult.getAutoInt8()));
+        missedNectarText.setText(String.valueOf(matchResult.getAutoInt9()));
 
-        hiveText.setText(String.valueOf(matchResult.getAutoInt9()));
+        hiveText.setText(String.valueOf(matchResult.getAutoInt10()));
 
         if( matchResult.getAutoFlag1() ){
             leaveButton.setImageResource(R.drawable.leave_green);
@@ -142,17 +146,25 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
             populateControlsFromData();
         });
 
-        missedText = findViewById(R.id.missed_ball_text);
-        missedButton = findViewById(R.id.missed_ball);
-        missedButton.setOnClickListener(v -> {
+        missedPollenText = findViewById(R.id.missed_pollen_text);
+        missedPollenButton = findViewById(R.id.missed_pollen_image);
+        missedPollenButton.setOnClickListener(v -> {
             matchResult.setAutoInt8( matchResult.getAutoInt8() + 1);
             populateControlsFromData();
         });
 
+        missedNectarText = findViewById(R.id.missed_nectar_text);
+        missedNectarButton = findViewById(R.id.missed_nectar_image);
+        missedNectarButton.setOnClickListener(v -> {
+            matchResult.setAutoInt9( matchResult.getAutoInt9() + 1);
+            populateControlsFromData();
+        });
+
+
         hiveText = findViewById(R.id.hive_text);
         hiveButton = findViewById(R.id.hive_image);
         hiveButton.setOnClickListener(v -> {
-            matchResult.setAutoInt9( matchResult.getAutoInt9() + 1 );
+            matchResult.setAutoInt10( matchResult.getAutoInt10() + 1 );
             populateControlsFromData();
         });
 
@@ -178,18 +190,18 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
         int nectarDrawable = 0;
-        int missedDrawable = 0;
+        int missedNectarDrawable = 0;
         int hiveDrawable = 0;
 
         if (settings.getDeviceRole().startsWith("red")){
             nectarDrawable = R.drawable.nectar_red;
-            missedDrawable = R.drawable.missing_scoring_elements_red;
+            missedNectarDrawable = R.drawable.missed_red_nectar;
             hiveDrawable = R.drawable.hive_red;
             leaveDrawable = R.drawable.leave_red;
             parkDrawable = R.drawable.leave_red;
         } else {
             nectarDrawable = R.drawable.nectar_blue;
-            missedDrawable = R.drawable.missing_scoring_elements_blue;
+            missedNectarDrawable = R.drawable.missed_blue_nectar;
             hiveDrawable = R.drawable.hive_blue;
             leaveDrawable = R.drawable.leave_blue;
             parkDrawable = R.drawable.leave_blue;
