@@ -118,7 +118,8 @@ public class RegionsFragment extends Fragment {
                                 DistrictRepo regionRepo = new DistrictRepo(RegionsFragment.this.getActivity().getApplication());
                                 regionRepo.upsert(regions);
 
-                                for(Evt event : events ){
+                                List<Evt> mievents = events.stream().filter(evt -> evt.getRegionKey().equalsIgnoreCase("usmi")).collect(Collectors.toList());
+                                for(Evt event : mievents ){
                                     eventRepo.upsert(event.toRgnEvent(event.getRegionKey()));
                                 }
 

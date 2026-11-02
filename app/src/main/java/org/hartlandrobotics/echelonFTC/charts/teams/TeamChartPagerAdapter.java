@@ -16,11 +16,13 @@ import java.util.Map;
 public class TeamChartPagerAdapter extends FragmentStateAdapter {
     public static final String TAG = "TeamChartPagerAdapter";
     private static final int TREND_SCORING_ELEMENTS_POSITION = 0;
+    private static final int TREND_ACCURACY_POSITION = 4;
     private static final int TREND_AUTO_POSITION = 1;
     private static final int TREND_TELEOP_POSITION = 2;
     private static final int TREND_ENDGAME_POSITION = 3;
 
     private ChartScoringElementsTrendFragment chartScoringElementsTrendFragment;
+    private ChartAccuracyTrendFragment chartAccuracyTrendFragment;
     private ChartAutoTrendFragment chartAutoTrendFragment;
     private ChartTeleOpTrendFragment chartTeleOpTrendFragment;
     private ChartEndGameTrendFragment chartEndGameTrendFragment;
@@ -32,10 +34,11 @@ public class TeamChartPagerAdapter extends FragmentStateAdapter {
     private final Map<Integer, String> titleByPosition = new HashMap<>();
     public String getTabTitle(int position){
         if(titleByPosition.isEmpty()){
-            titleByPosition.put(0,"Trend Scoring Elements");
-            titleByPosition.put(1,"Trend Auto");
-            titleByPosition.put(2, "Trend TeleOp");
-            titleByPosition.put(3, "Trend EndGame");
+            titleByPosition.put(0,"Scoring Elements");
+            titleByPosition.put(1,"Auto");
+            titleByPosition.put(2, "TeleOp");
+            titleByPosition.put(3, "EndGame");
+            titleByPosition.put(4,"Accuracy");
         }
         return titleByPosition.get(position);
     }
@@ -50,6 +53,12 @@ public class TeamChartPagerAdapter extends FragmentStateAdapter {
                     chartScoringElementsTrendFragment = new ChartScoringElementsTrendFragment();
                 }
                 return chartScoringElementsTrendFragment;
+            case TREND_ACCURACY_POSITION:
+                Log.i(TAG,"creating new Accuracy Fragment");
+                if( chartAccuracyTrendFragment == null ) {
+                    chartAccuracyTrendFragment = new ChartAccuracyTrendFragment();
+                }
+                return chartAccuracyTrendFragment;
             case TREND_AUTO_POSITION:
                 Log.i(TAG,"creating new Auto Trend Fragment");
                 if( chartAutoTrendFragment == null ) {
@@ -80,7 +89,7 @@ public class TeamChartPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 5;
     }
 
 }

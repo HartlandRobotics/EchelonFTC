@@ -194,21 +194,21 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         missedNectarText = findViewById(R.id.missed_nectar_text);
         missedNectarButton = findViewById(R.id.missed_nectar_image);
         missedNectarButton.setOnClickListener(v -> {
-            matchResult.setTeleOpInt8(matchResult.getTeleOpInt8() + 1);
+            matchResult.setTeleOpInt9(matchResult.getTeleOpInt9() + 1);
             populateControlsFromData();
         });
 
         hiveText = findViewById(R.id.hive_text);
         hiveButton = findViewById(R.id.hive_image);
         hiveButton.setOnClickListener(v -> {
-            matchResult.setTeleOpInt9(matchResult.getTeleOpInt9() + 1);
+            matchResult.setTeleOpInt10(matchResult.getTeleOpInt10() + 1);
             populateControlsFromData();
         });
 
         hiveRemainingText = findViewById(R.id.hive_remaining_text);
         hiveRemainingButton = findViewById(R.id.hive_remaining_image);
         hiveRemainingButton.setOnClickListener(v -> {
-            matchResult.setTeleOpInt10(matchResult.getTeleOpInt10() + 1);
+            matchResult.setTeleOpInt11(matchResult.getTeleOpInt11() + 1);
             populateControlsFromData();
         });
 
