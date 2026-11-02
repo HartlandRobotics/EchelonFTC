@@ -79,7 +79,7 @@ public class EventsFragment extends Fragment {
         FtcApiStatus status = new FtcApiStatus(appContext);
 
         EventRepo eventRepo = new EventRepo(EventsFragment.this.getActivity().getApplication());
-        String currentRegion = status.getRegionKey();
+        String currentRegion = status.getRegionKey().toUpperCase();
         Log.e("FtcApiEventsFragment", "current Region " + currentRegion);
         eventRepo.getRegionWithEvents(currentRegion).observe(getViewLifecycleOwner(), regionWithEvents -> {
             if( regionWithEvents == null ) return;

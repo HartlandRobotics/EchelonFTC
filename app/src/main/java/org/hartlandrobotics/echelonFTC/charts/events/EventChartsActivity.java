@@ -30,7 +30,7 @@ public class EventChartsActivity extends EchelonActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events_charts);
 
-        setupToolbar("Charts");
+        setupToolbar("Event Charts");
 
         setupTabLayout();
     }

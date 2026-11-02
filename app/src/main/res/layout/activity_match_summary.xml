@@ -130,7 +130,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="100dp"
-                    android:text="Pollen:" />
                     android:text="Missed Pollen :" />
 
                 <com.google.android.material.button.MaterialButton
@@ -204,7 +203,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="100dp"
-                    android:text="Pollen:" />
                     android:text="Hive Tip:" />
 
                 <com.google.android.material.button.MaterialButton

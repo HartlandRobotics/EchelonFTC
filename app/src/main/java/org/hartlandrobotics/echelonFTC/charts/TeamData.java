@@ -35,6 +35,11 @@ public class TeamData {
     private int item2Counts = 0;
     private final Map<Integer, Integer> scoringElementCounts = new HashMap<>();
 
+    private int missedItem1Counts = 0;
+    private int missedItem2Counts = 0;
+    private final Map<Integer, Integer> missedCounts = new HashMap<>();
+
+
     public TeamData(Integer teamNumber, List<MatchResult> matchResults) {
         this.teamNumber = teamNumber;
         this.size = matchResults.size();
@@ -49,6 +54,7 @@ public class TeamData {
             item1Counts += currentGame.getItem1Counts();
             item2Counts += currentGame.getItem2Counts();
             scoringElementCounts.put(matchNumber, item1Counts + item2Counts);
+
 
             int matchAuto = 0;
             int matchTeleOp = 0;
@@ -137,4 +143,18 @@ public class TeamData {
     public int getItem2Counts() {
         return item2Counts;
     }
+
+    public Map<Integer, Integer> getMissedCounts() {
+        return scoringElementCounts;
+    }
+
+    public int getMissedItem1Counts() {
+        return missedItem1Counts;
+    }
+
+    public int getMissedItem2Counts() {
+        return missedItem2Counts;
+    }
+
+
 }

@@ -283,4 +283,17 @@ public class CurrentGame {
         return getAuto7Counts() + getTeleOp7Counts();
     }
 
+    public int getMissCount() {
+        return getItem1Missed() + getItem2Missed();
+    }
+
+    public int getItem1Missed(){
+        return getAuto8Counts() + getTeleOp8Counts();
+    }
+
+    public int getItem2Missed(){
+        return getAuto9Counts() + getTeleOp9Counts();
+    }
+
+
 }

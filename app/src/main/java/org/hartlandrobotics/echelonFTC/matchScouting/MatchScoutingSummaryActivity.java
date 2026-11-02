@@ -169,36 +169,36 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         autoMissedPollenValue = findViewById(R.id.autoMissedPollenValue);
         autoMissedPollenDecrement = findViewById(R.id.autoMissedPollenDecrement);
         autoMissedPollenDecrement.setOnClickListener(v -> {
-            matchResult.setAutoInt10(Math.max(matchResult.getAutoInt10() - 1, 0));
+            matchResult.setAutoInt8(Math.max(matchResult.getAutoInt8() - 1, 0));
             populateControlsFromData();
         });
         autoMissedPollenIncrement = findViewById(R.id.autoMissedPollenIncrement);
         autoMissedPollenIncrement.setOnClickListener(v -> {
-            matchResult.setAutoInt10(matchResult.getAutoInt10() + 1);
+            matchResult.setAutoInt8(matchResult.getAutoInt8() + 1);
             populateControlsFromData();
         });
 
         autoMissedNectarValue = findViewById(R.id.autoMissedNectarValue);
         autoMissedNectarDecrement = findViewById(R.id.autoMissedNectarDecrement);
         autoMissedNectarDecrement.setOnClickListener(v -> {
-            matchResult.setAutoInt10(Math.max(matchResult.getAutoInt10() - 1, 0));
+            matchResult.setAutoInt9(Math.max(matchResult.getAutoInt9() - 1, 0));
             populateControlsFromData();
         });
         autoMissedNectarIncrement = findViewById(R.id.autoMissedNectarIncrement);
         autoMissedNectarIncrement.setOnClickListener(v -> {
-            matchResult.setAutoInt10(matchResult.getAutoInt10() + 1);
+            matchResult.setAutoInt9(matchResult.getAutoInt10() + 1);
             populateControlsFromData();
         });
 
         autoHiveTipValue = findViewById(R.id.autoHiveTipValue);
         autoHiveTipDecrement = findViewById(R.id.autoHiveTipDecrement);
         autoHiveTipDecrement.setOnClickListener(v -> {
-            matchResult.setAutoInt8(Math.max(matchResult.getAutoInt8() - 1, 0));
+            matchResult.setAutoInt10(Math.max(matchResult.getAutoInt10() - 1, 0));
             populateControlsFromData();
         });
         autoHiveTipIncrement = findViewById(R.id.autoHiveTipIncrement);
         autoHiveTipIncrement.setOnClickListener(v -> {
-            matchResult.setAutoInt8(matchResult.getAutoInt8() + 1);
+            matchResult.setAutoInt10(matchResult.getAutoInt10() + 1);
             populateControlsFromData();
         });
 
@@ -255,19 +255,19 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         teleOpMissedNectarValue = findViewById(R.id.teleOpMissedNectarValue);
         teleOpMissedNectarDecrement = findViewById(R.id.teleOpMissedNectarDecrement);
         teleOpMissedNectarDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt8(Math.max(matchResult.getTeleOpInt8() - 1, 0));
+            matchResult.setTeleOpInt9(Math.max(matchResult.getTeleOpInt9() - 1, 0));
             populateControlsFromData();
         });
         teleOpMissedNectarIncrement = findViewById(R.id.teleOpMissedNectarIncrement);
         teleOpMissedNectarIncrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt8(matchResult.getTeleOpInt8() + 1);
+            matchResult.setTeleOpInt9(matchResult.getTeleOpInt9() + 1);
             populateControlsFromData();
         });
 
         teleOpHiveTipValue = findViewById(R.id.teleOpHiveTipValue);
         teleOpHiveTipDecrement = findViewById(R.id.teleOpHiveTipDecrement);
         teleOpHiveTipDecrement.setOnClickListener(v -> {
-            matchResult.setTeleOpInt9(Math.max(matchResult.getTeleOpInt9() - 1, 0));
+            matchResult.setTeleOpInt10(Math.max(matchResult.getTeleOpInt10() - 1, 0));
             populateControlsFromData();
         });
         teleOpHiveTipIncrement = findViewById(R.id.teleOpHiveTipIncrement);
@@ -391,7 +391,7 @@ public class MatchScoutingSummaryActivity extends AppCompatActivity {
         teleOpMissedPollenValue.setText(String.valueOf(matchResult.getTeleOpInt8()));
         teleOpMissedNectarValue.setText(String.valueOf(matchResult.getTeleOpInt9()));
         teleOpHiveTipValue.setText(String.valueOf(matchResult.getTeleOpInt10()));
-        teleOpHiveRemainingValue.setText(String.valueOf(matchResult.getTeleOpInt10()));
+        teleOpHiveRemainingValue.setText(String.valueOf(matchResult.getTeleOpInt11()));
 
 
         endParkCheckBox.setChecked(matchResult.getEndFlag1());

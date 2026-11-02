@@ -103,11 +103,11 @@ public abstract class EchelonDatabase extends RoomDatabase {
             //});
 
 
-            databaseWriteExecutor.execute(() -> {
-                Season intoTheDeepSeason = new Season("Into the Deep", 2024);
-                SeasonDao sd = _instance.seasonDao();
-                sd.insert(intoTheDeepSeason);
-            });
+            //databaseWriteExecutor.execute(() -> {
+            //    Season intoTheDeepSeason = new Season("Into the Deep", 2024);
+            //    SeasonDao sd = _instance.seasonDao();
+            //    sd.insert(intoTheDeepSeason);
+            //});
 
             databaseWriteExecutor.execute(() -> {
                 Season decodeSeason = new Season("Decode", 2025);
@@ -115,6 +115,11 @@ public abstract class EchelonDatabase extends RoomDatabase {
                 sd.insert(decodeSeason);
             });
 
+            databaseWriteExecutor.execute(() -> {
+                Season bioBuzzSesson = new Season("BioBuzz", 2026);
+                SeasonDao sd = _instance.seasonDao();
+                sd.insert(bioBuzzSesson);
+            });
         }
 
         @Override
