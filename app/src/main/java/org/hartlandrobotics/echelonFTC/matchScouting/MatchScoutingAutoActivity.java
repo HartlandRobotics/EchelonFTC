@@ -198,13 +198,13 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
             missedNectarDrawable = R.drawable.missed_red_nectar;
             hiveDrawable = R.drawable.hive_red;
             leaveDrawable = R.drawable.leave_red;
-            parkDrawable = R.drawable.leave_red;
+            parkDrawable = R.drawable.park_red;
         } else {
             nectarDrawable = R.drawable.nectar_blue;
             missedNectarDrawable = R.drawable.missed_blue_nectar;
             hiveDrawable = R.drawable.hive_blue;
             leaveDrawable = R.drawable.leave_blue;
-            parkDrawable = R.drawable.leave_blue;
+            parkDrawable = R.drawable.park_blue;
         }
 
 
