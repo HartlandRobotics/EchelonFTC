@@ -160,7 +160,7 @@ public class CurrentGame {
     }
     public int getTeleOp6Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt6() * 3;
+        return result.getTeleOpInt6() * 0;
     }
 
     public int getTeleOp7Counts(){
@@ -169,7 +169,7 @@ public class CurrentGame {
     }
     public int getTeleOp7Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt7() * 1;
+        return result.getTeleOpInt7() * 0;
     }
 
     public int getTeleOp8Counts(){
@@ -178,7 +178,7 @@ public class CurrentGame {
     }
     public int getTeleOp8Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt8() * 1;
+        return result.getTeleOpInt8() * 0;
     }
 
 
@@ -188,7 +188,7 @@ public class CurrentGame {
     }
     public int getTeleOp9Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt9() * 2;
+        return result.getTeleOpInt9() * 0;
     }
 
     public int getTeleOp10Counts(){
@@ -197,7 +197,7 @@ public class CurrentGame {
     }
     public int getTeleOp10Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt10() * 0;
+        return result.getTeleOpInt10() * 20;
     }
 
     public int getTeleOp11Counts(){
@@ -206,7 +206,7 @@ public class CurrentGame {
     }
     public int getTeleOp11Points(){
         if( result == null ) return 0;
-        return result.getTeleOpInt11() * 0;
+        return result.getTeleOpInt11() * 2;
     }
 
     public int getEndPoints() {
@@ -217,6 +217,8 @@ public class CurrentGame {
         endPoints += this.getEnd4Points();
 
         endPoints += this.getEnd6Points();
+        endPoints += this.getEnd7Points();
+        endPoints += this.getEnd8Points();
         return endPoints;
     }
     public int getEndCounts() {
@@ -226,6 +228,8 @@ public class CurrentGame {
         endCounts += this.getEnd3Counts();
         endCounts += this.getEnd4Counts();
         endCounts += this.getEnd6Counts();
+        endCounts += this.getEnd7Counts();
+        endCounts += this.getEnd8Counts();
         return endCounts;
     }
 
@@ -269,8 +273,26 @@ public class CurrentGame {
     }
     public int getEnd6Points(){
         if( result == null ) return 0;
-        return result.getEndInt6() * 2;
+        return result.getEndInt6() * 1;
     }
+    public int getEnd7Counts(){
+        if( result == null ) return 0;
+        return result.getEndInt7();
+    }
+    public int getEnd7Points(){
+        if( result == null ) return 0;
+        return result.getEndInt7() * 2;
+    }
+    public int getEnd8Counts(){
+        if( result == null ) return 0;
+        return result.getEndInt8();
+    }
+    public int getEnd8Points(){
+        if( result == null ) return 0;
+        return result.getEndInt8() * 5;
+    }
+
+
 
     public int getScoringElementCount(){
         return getItem1Counts() + getItem2Counts();
