@@ -51,7 +51,7 @@ public class CurrentGame {
     }
     public int getAuto1Points(){
         if( result == null ) return 0;
-        return result.getAutoFlag1()? 3:0;
+        return result.getAutoFlag1()? 5:0;
     }
 
     public int getAuto2Counts(){
@@ -60,7 +60,7 @@ public class CurrentGame {
     }
     public int getAuto2Points(){
         if( result == null ) return 0;
-        return result.getAutoFlag2() ? 5:0;
+        return result.getAutoFlag2() ? 3:0;
     }
 
     public int getAuto3Counts(){
@@ -141,6 +141,7 @@ public class CurrentGame {
         teleOpPoints += this.getTeleOp9Points();
         teleOpPoints += this.getTeleOp10Points();
         teleOpPoints += this.getTeleOp11Points();
+        teleOpPoints += this.getTeleOp12Points();
         return teleOpPoints;
     }
     public int getTeleOpCounts() {
@@ -150,7 +151,7 @@ public class CurrentGame {
         teleOpCounts += this.getTeleOp8Counts();
         teleOpCounts += this.getTeleOp9Counts();
         teleOpCounts += this.getTeleOp10Counts();
-        teleOpCounts += this.getTeleOp11Counts();
+        teleOpCounts += this.getTeleOp12Counts();
         return teleOpCounts;
     }
 
@@ -207,6 +208,15 @@ public class CurrentGame {
     public int getTeleOp11Points(){
         if( result == null ) return 0;
         return result.getTeleOpInt11() * 2;
+    }
+
+    public int getTeleOp12Counts(){
+        if( result == null ) return 0;
+        return result.getTeleOpInt12();
+    }
+    public int getTeleOp12Points(){
+        if( result == null ) return 0;
+        return result.getTeleOpInt12() * 2;
     }
 
     public int getEndPoints() {

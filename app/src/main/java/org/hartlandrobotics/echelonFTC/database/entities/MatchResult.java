@@ -70,6 +70,22 @@ public class MatchResult {
     @ColumnInfo(name="auto_string_11")
     private String autoString11;
 
+    @ColumnInfo(name="teleOp_flag_1")
+    private boolean teleOpFlag1;
+
+    @ColumnInfo(name = "teleOp_flag_2")
+    private boolean teleOpFlag2;
+
+    @ColumnInfo( name = "teleOp_flag_3")
+    private boolean teleOpFlag3 ;
+
+    @ColumnInfo( name = "teleOp_flag_4")
+    private boolean teleOpFlag4;
+
+    @ColumnInfo( name = "teleOp_flag_5")
+    private boolean teleOpFlag5;
+
+
     @ColumnInfo( name = "teleOp_int_6" )
     private int teleOpInt6;
 
@@ -145,6 +161,11 @@ public class MatchResult {
             int autoInt10,
             String autoString11,
 
+            boolean teleOpFlag1,
+            boolean teleOpFlag2,
+            boolean teleOpFlag3,
+            boolean teleOpFlag4,
+            boolean teleOpFlag5,
             int teleOpInt6,
             int teleOpInt7,
             int teleOpInt8,
@@ -187,13 +208,18 @@ public class MatchResult {
         this.autoString11 = autoString11;
 
 
+        this.teleOpFlag1 = teleOpFlag1;
+        this.teleOpFlag2 = teleOpFlag2;
+        this.teleOpFlag3 = teleOpFlag3;
+        this.teleOpFlag4 = teleOpFlag4;
+        this.teleOpFlag5 = teleOpFlag5;
         this.teleOpInt6 = teleOpInt6;
         this.teleOpInt7 = teleOpInt7;
         this.teleOpInt8 = teleOpInt8;
         this.teleOpInt9 = teleOpInt9;
         this.teleOpInt10 = teleOpInt10;
         this.teleOpInt11 = teleOpInt11;
-        this.teleOpInt12 = teleOpInt11;
+        this.teleOpInt12 = teleOpInt12;
         this.teleOpString6 = teleOpString6;
 
         this.endFlag1 = endFlag1;
@@ -261,7 +287,19 @@ public class MatchResult {
     public String getAutoString11() { return autoString11; }
     public void setAutoString11(String autoString11) { this.autoString11 = autoString11; }
 
-    public int getTeleOpInt6(){ return teleOpInt6; }
+    public boolean getTeleOpFlag1(){ return teleOpFlag1; }
+    public void setTeleOpFlag1(boolean teleOpFlag1){ this.teleOpFlag1 = teleOpFlag1; }
+     public boolean getTeleOpFlag2(){ return teleOpFlag2; }
+    public void setTeleOpFlag2(boolean teleOpFlag2){ this.teleOpFlag2 = teleOpFlag2; }
+     public boolean getTeleOpFlag3(){ return teleOpFlag3; }
+    public void setTeleOpFlag3(boolean teleOpFlag3){ this.teleOpFlag3 = teleOpFlag3; }
+     public boolean getTeleOpFlag4(){ return teleOpFlag4; }
+    public void setTeleOpFlag4(boolean teleOpFlag4){ this.teleOpFlag4 = teleOpFlag4; }
+     public boolean getTeleOpFlag5(){ return teleOpFlag5; }
+    public void setTeleOpFlag5(boolean teleOpFlag5){ this.teleOpFlag5 = teleOpFlag5; }
+
+
+    public int getTeleOpInt6(){ return teleOpInt6;}
     public void setTeleOpInt6(int teleOpInt6){ this.teleOpInt6 = teleOpInt6; }
     public int getTeleOpInt7(){ return teleOpInt7;}
     public void setTeleOpInt7( int teleOpInt7 )   { this.teleOpInt7 = teleOpInt7; }
