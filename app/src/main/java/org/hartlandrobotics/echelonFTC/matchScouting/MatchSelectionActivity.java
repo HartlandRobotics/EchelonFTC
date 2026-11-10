@@ -133,7 +133,7 @@ public class MatchSelectionActivity extends EchelonActivity {
                         .collect(Collectors.toList());
 
                 matchNumbers = matches.stream()
-                        .map(m -> String.valueOf(m.getMatchName()) + " - " + getTeamNumber(m, settings.getDeviceRole()))
+                        .map(m -> "Match " + String.valueOf(m.getMatchName()) + " - " + "Team "+ getTeamNumber(m, settings.getDeviceRole()))
                         .collect(Collectors.toList());
             }
 

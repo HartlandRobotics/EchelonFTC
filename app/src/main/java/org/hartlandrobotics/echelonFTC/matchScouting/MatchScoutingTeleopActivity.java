@@ -173,6 +173,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
         nectarText = findViewById(R.id.nectar_text);
         nectarButton = findViewById(R.id.nectar_image);
+        nectarButton.setImageResource(nectarDrawable);
         nectarButton.setOnClickListener(v -> {
             matchResult.setTeleOpInt6(matchResult.getTeleOpInt6() + 1);
             populateControlsFromData();
@@ -193,6 +194,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
         });
         missedNectarText = findViewById(R.id.missed_nectar_text);
         missedNectarButton = findViewById(R.id.missed_nectar_image);
+        missedNectarButton.setImageResource(missedNectarDrawable);
         missedNectarButton.setOnClickListener(v -> {
             matchResult.setTeleOpInt9(matchResult.getTeleOpInt9() + 1);
             populateControlsFromData();
@@ -200,6 +202,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
         hiveText = findViewById(R.id.hive_text);
         hiveButton = findViewById(R.id.hive_image);
+        hiveButton.setImageResource(hiveDrawable);
         hiveButton.setOnClickListener(v -> {
             matchResult.setTeleOpInt10(matchResult.getTeleOpInt10() + 1);
             populateControlsFromData();
@@ -207,6 +210,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
         hiveRemainingText = findViewById(R.id.hive_remaining_text);
         hiveRemainingButton = findViewById(R.id.hive_remaining_image);
+        hiveRemainingButton.setImageResource(hiveRemainingDrawable);
         hiveRemainingButton.setOnClickListener(v -> {
             matchResult.setTeleOpInt11(matchResult.getTeleOpInt11() + 1);
             populateControlsFromData();
@@ -214,6 +218,7 @@ public class MatchScoutingTeleopActivity extends AppCompatActivity {
 
         gardenText = findViewById(R.id.garden_text);
         gardenButton = findViewById(R.id.garden_image);
+        gardenButton.setImageResource(gardenDrawable);
         gardenButton.setOnClickListener(v -> {
             matchResult.setEndInt8(matchResult.getEndInt8() + 1);
             populateControlsFromData();

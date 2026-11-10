@@ -177,7 +177,7 @@ public class ChartAverageScoringElementsFragment extends TeamNumberFragment {
     }
 
     private int[] getChartColors() {
-        return new int[]{Color.YELLOW, Color.RED};
+        return new int[]{Color.RED, Color.YELLOW};
     }
 
     public void drawFragment() {

@@ -51,9 +51,13 @@ public class TeamData {
             );
 
 
-            item1Counts += currentGame.getItem1Counts();
-            item2Counts += currentGame.getItem2Counts();
+            item1Counts = currentGame.getItem1Counts();
+            item2Counts = currentGame.getItem2Counts();
             scoringElementCounts.put(matchNumber, item1Counts + item2Counts);
+
+            missedItem1Counts = currentGame.getItem1Missed();
+            missedItem2Counts = currentGame.getItem2Missed();
+            missedCounts.put(matchNumber, getMissedItem1Counts() + getMissedItem2Counts());
 
 
             int matchAuto = 0;
@@ -145,7 +149,7 @@ public class TeamData {
     }
 
     public Map<Integer, Integer> getMissedCounts() {
-        return scoringElementCounts;
+        return missedCounts;
     }
 
     public int getMissedItem1Counts() {

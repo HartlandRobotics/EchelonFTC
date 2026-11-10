@@ -33,13 +33,16 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     private ImageButton pollenButton;
     private MaterialTextView pollenText;
 
+    private int nectarDrawable = 0;
     private ImageButton missedPollenButton;
     private MaterialTextView missedPollenText;
 
+    private int missedNectarDrawable = 0;
     private ImageButton missedNectarButton;
     private MaterialTextView missedNectarText;
 
 
+    private int hiveDrawable = 0;
     private ImageButton hiveButton;
     private MaterialTextView hiveText;
 
@@ -134,6 +137,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
 
         nectarText = findViewById(R.id.nectar_text);
         nectarButton = findViewById(R.id.nectar_image);
+        nectarButton.setImageResource(nectarDrawable);
         nectarButton.setOnClickListener(v -> {
             matchResult.setAutoInt6( matchResult.getAutoInt6() + 1);
             populateControlsFromData();
@@ -155,6 +159,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
 
         missedNectarText = findViewById(R.id.missed_nectar_text);
         missedNectarButton = findViewById(R.id.missed_nectar_image);
+        missedNectarButton.setImageResource(missedNectarDrawable);
         missedNectarButton.setOnClickListener(v -> {
             matchResult.setAutoInt9( matchResult.getAutoInt9() + 1);
             populateControlsFromData();
@@ -163,6 +168,7 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
 
         hiveText = findViewById(R.id.hive_text);
         hiveButton = findViewById(R.id.hive_image);
+        hiveButton.setImageResource(hiveDrawable);
         hiveButton.setOnClickListener(v -> {
             matchResult.setAutoInt10( matchResult.getAutoInt10() + 1 );
             populateControlsFromData();
@@ -189,9 +195,6 @@ public class MatchScoutingAutoActivity extends AppCompatActivity {
     public void setupColor() {
         AdminSettings settings = AdminSettingsProvider.getAdminSettings(getApplicationContext());
 
-        int nectarDrawable = 0;
-        int missedNectarDrawable = 0;
-        int hiveDrawable = 0;
 
         if (settings.getDeviceRole().startsWith("red")){
             nectarDrawable = R.drawable.nectar_red;
