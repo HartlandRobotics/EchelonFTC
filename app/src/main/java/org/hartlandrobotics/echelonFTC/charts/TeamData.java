@@ -51,13 +51,13 @@ public class TeamData {
             );
 
 
-            item1Counts = currentGame.getItem1Counts();
-            item2Counts = currentGame.getItem2Counts();
-            scoringElementCounts.put(matchNumber, item1Counts + item2Counts);
+            item1Counts += currentGame.getItem1Counts();
+            item2Counts += currentGame.getItem2Counts();
+            scoringElementCounts.put(matchNumber, currentGame.getItem1Counts() + currentGame.getItem2Counts() );
 
-            missedItem1Counts = currentGame.getItem1Missed();
-            missedItem2Counts = currentGame.getItem2Missed();
-            missedCounts.put(matchNumber, getMissedItem1Counts() + getMissedItem2Counts());
+            missedItem1Counts += currentGame.getItem1Missed();
+            missedItem2Counts += currentGame.getItem2Missed();
+            missedCounts.put(matchNumber, currentGame.getItem1Missed() + currentGame.getItem2Missed());
 
 
             int matchAuto = 0;

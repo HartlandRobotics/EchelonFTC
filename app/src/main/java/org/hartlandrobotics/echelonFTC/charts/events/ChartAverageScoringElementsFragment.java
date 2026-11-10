@@ -142,7 +142,7 @@ public class ChartAverageScoringElementsFragment extends TeamNumberFragment {
         for (int teamIndex = 0; teamIndex < visibleTeamsSortedByScoringElements.size(); teamIndex++) {
             TeamData teamData = visibleTeamsSortedByScoringElements.get(teamIndex);
             yVals1.add(new BarEntry(0.5f + teamIndex,
-                    new float[]{teamData.getItem1Counts(), teamData.getItem2Counts()}
+                    new float[]{(float) teamData.getItem1Counts() /teamData.getSize(), (float) teamData.getItem2Counts() /teamData.getSize()}
             ));
         }
 
