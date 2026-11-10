@@ -143,7 +143,12 @@ public class ChartAveragePointsFragment extends TeamNumberFragment {
         for (int teamIndex = 0; teamIndex < visibleTeamsSortedByPoints.size(); teamIndex++) {
             TeamData aggAverageViewModel = visibleTeamsSortedByPoints.get(teamIndex);
             yVals1.add(new BarEntry(0.5f + teamIndex,
-                    new float[]{aggAverageViewModel.getAutoTotalPoints(), aggAverageViewModel.getTeleOpPoints(), aggAverageViewModel.getEndGamePoints(), aggAverageViewModel.getOprPoints()}
+                    new float[]{
+                            (float) aggAverageViewModel.getAutoTotalPoints() /aggAverageViewModel.getSize(),
+                            (float) aggAverageViewModel.getTeleOpPoints() / aggAverageViewModel.getSize(),
+                            (float) aggAverageViewModel.getEndGamePoints() / aggAverageViewModel.getSize(),
+                            (float) aggAverageViewModel.getOprPoints() / aggAverageViewModel.getSize()
+            }
             ));
         }
 
