@@ -80,7 +80,7 @@ public abstract class EchelonDatabase extends RoomDatabase {
                     _instance = Room.databaseBuilder(context.getApplicationContext(),
                             EchelonDatabase.class, "echelon_ftc_database.db")
                             .fallbackToDestructiveMigration()
-                            .setJournalMode(JournalMode.TRUNCATE)
+                            //.setJournalMode(JournalMode.TRUNCATE)
                             .addCallback(roomDatabaseCallback)
                             .build();
                 }

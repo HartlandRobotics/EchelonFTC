@@ -50,6 +50,8 @@ public class EventsFragment extends Fragment {
         errorTextDisplay = fragmentView.findViewById(R.id.errorTextDisplay);
         errorTextDisplay.setVisibility(View.GONE);
 
+        setupCurrentEvents();
+
         return fragmentView;
     }
 
@@ -86,6 +88,7 @@ public class EventsFragment extends Fragment {
             List<Evt> matchingEvents = regionWithEvents.events;
             Log.e("FtcApiEventsFragment","size: " + matchingEvents.size());
             eventListAdapter.setEvents(matchingEvents);
+            eventListAdapter.notifyDataSetChanged();
 
         });
 
