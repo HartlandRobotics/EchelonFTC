@@ -63,6 +63,9 @@ public class PitScoutPhotosFragment extends Fragment {
 
 
     public void setData(PitScout data){
+
+        if( data == null ) return;
+
         this.data = data;
 
         Log.e(TAG, "setData " + data.getTeamKey());
@@ -136,6 +139,7 @@ public class PitScoutPhotosFragment extends Fragment {
 
     private void SetupImagesArea(View view){
         cameraButton = view.findViewById(R.id.photoButton);
+       cameraButton.setOnClickListener(null);
         cameraButton.setOnClickListener(vw -> {
             try{
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
